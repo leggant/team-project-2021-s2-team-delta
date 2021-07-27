@@ -7,8 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Note;
-use App\addStudent;
-use App\Cohort;
+use App\Models\addStudent;
+use App\Models\Cohort;
 
 class PagesController extends Controller
 {

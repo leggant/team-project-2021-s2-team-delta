@@ -18,7 +18,7 @@
                     <a href="{{route('pages.notes')}}" class="nav-link">Notes</a>
                 </li>
                 <li class="nav-item" style="float:right">
-                    <a href="{{route('login')}}" class="nav-link">Log out</a>
+                    <a href="{{route('login')}}" class="nav-link">Log in</a>
                 </li>
             </ul>
         </div>

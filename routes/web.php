@@ -32,9 +32,9 @@ Route::get('/cohort', function () {
     return view('cohort');
 });
 */
-Route::get('/evidence', function () {return view('pages/evidence');})->name('evidence.index');
+// Route::get('/evidence', function () {return view('pages/evidence');})->name('evidence.index');
 
-Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name('evidence.destroy');;
+// Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name('evidence.destroy');
 
 //for storing evidence (need to create 'test' table in 'Laragon' database)
 Route::post('/evidence','EvidenceController@store')->name('evidence.store');
@@ -42,24 +42,17 @@ Route::post('/cohort', 'ApiController@createCohort');
 Route::post('/add-student', 'addStudentController@storeData')->name('addStudents.storeData');
 Route::post('/notes', 'ApiController@createNote');
 
-
-
 Route::get('/','PagesController@index')->name('pages.index');
 Route::get('/add-student','PagesController@addStudent')->name('pages.addStudent');
 Route::get('/cohort','PagesController@cohort')->name('pages.cohort');
 Route::get('/evidence','PagesController@evidence')->name('pages.evidence');
 Route::get('/notes','PagesController@notes')->name('pages.notes');
-//Route::get('/notes-observation','App\Http\Controllers\PagesController@notesObservation')->name('pages.notesObservation');
+Route::get('/notes-observation','App\Http\Controllers\PagesController@notesObservation')->name('pages.notesObservation');
 
 Route::get('/student/{id}', 'PagesController@getStudent');
-
-
-Route::get('dashboard', [authController::class, 'dashboard']); 
-Route::get('login', [authController::class, 'index'])->name('login');
-Route::post('custom-login', [authController::class, 'customLogin'])->name('login.custom'); 
-Route::get('registration', [authController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [authController::class, 'customRegistration'])->name('register.custom'); 
-Route::get('signOut', [authController::class, 'signOut'])->name('signOut');
-
 Route::get('/cohort/{id}', 'PagesController@getCohort');
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
