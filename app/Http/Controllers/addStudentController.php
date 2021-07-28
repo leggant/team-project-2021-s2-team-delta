@@ -18,8 +18,8 @@ class addStudentController extends Controller
         $student->save();
 
         $addStudent = DB::select('select * from student');
-        return view('pages.addStudent', ['addStudent'=>$addStudent]);
-    
+        
+        return redirect('/');
     }
     /*public function getAllStudents(){
         $addStudent = Student::all();
