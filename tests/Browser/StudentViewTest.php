@@ -18,7 +18,7 @@ class StudentViewTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/add-student')
-                ->assertSee('Add Student');
+                ->assertPathIs('/add-student');
         });
     }
 }
