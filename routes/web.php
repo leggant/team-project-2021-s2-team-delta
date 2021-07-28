@@ -56,3 +56,9 @@ Route::get('/cohort/{id}', 'PagesController@getCohort');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::get('logout', function () {
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');

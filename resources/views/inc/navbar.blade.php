@@ -18,7 +18,14 @@
                     <a href="{{route('pages.notes')}}" class="nav-link">Notes</a>
                 </li>
                 <li class="nav-item" style="float:right">
-                    <a href="{{route('login')}}" class="nav-link">Log in</a>
+                    @if(Auth::check())
+                        <form method="POST" action="{{ route('logout') }}">
+                            {{csrf_field()}}
+                            <a href="{{route('logout')}}" class="nav-link">Log out</a>
+                        </form>
+                    @else
+                        <a href="{{route('login')}}" class="nav-link">Log in</a>
+                    @endif
                 </li>
             </ul>
         </div>

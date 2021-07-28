@@ -19,8 +19,11 @@
 
 
             <div class = evidence>
-
-            <h1>Welcome</h1>                
+            @if(Auth::check())
+              <h1>Welcome {{$user->name}}</h1>
+            @else
+              <h1>Welcome</h1>
+            @endif       
 
             <div class = table>
             <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
