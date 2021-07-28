@@ -23,7 +23,7 @@
       <input type="text" id="name" name="name" class="formInput" required>
       
       <label for="mail">Email:</label>
-      <input type="email" id="mail" name="email" class="formInput" required>
+      <input type="text" id="mail" name="email" class="formInput" required>
       
       <label for="Github">Github:</label>
       <input type="text" id="github" name="github" class="formInput" required>     

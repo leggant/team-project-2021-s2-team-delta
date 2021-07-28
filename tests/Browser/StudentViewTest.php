@@ -18,6 +18,9 @@ class StudentViewTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/add-student')
+                ->type('#name','John Doe')
+                ->type('#email','John@gmail.com')
+                ->type('#github','JohnD')
                 ->assertPathIs('/add-student');
         });
     }
