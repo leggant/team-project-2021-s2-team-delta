@@ -17,6 +17,11 @@
                 <li class="nav-item">
                     <a href="{{route('pages.notes')}}" class="nav-link">Notes</a>
                 </li>
+                @if(Auth::check() && Auth::user()->isAdmin())
+                    <li class="nav-item">
+                        <a href="{{route('admin.admin-panel')}}">Admin Panel</a>
+                    </li>
+                @endif
                 <li class="nav-item" style="float:right">
                     @if(Auth::check())
                         <form method="POST" action="{{ route('logout') }}">

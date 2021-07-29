@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -58,4 +59,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected $attributes = [
+        'is_admin' => 0
+    ];
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }

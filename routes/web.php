@@ -49,6 +49,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/evidence','PagesController@evidence')->name('pages.evidence');
     Route::get('/notes','PagesController@notes')->name('pages.notes');
     Route::get('/notes-observation','App\Http\Controllers\PagesController@notesObservation')->name('pages.notesObservation');
+    Route::get('/admin-panel', function () {
+        return view('admin.admin_panel');
+    })->name('admin.admin-panel');
 
     Route::get('/student/{id}', 'PagesController@getStudent');
     Route::get('/cohort/{id}', 'PagesController@getCohort');
