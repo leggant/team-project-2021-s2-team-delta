@@ -25,11 +25,56 @@ class NavTest extends DuskTestCase
     }
     */
 
-    public function testNavLinks()
+    public function testHomeLink()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('lunch');
+                    ->assertSee('Welcome');
+                    
+        });
+    }
+
+    public function testNewStudentLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/add-student')
+                    ->assertSee('Add Student');
+                    
+        });
+    }
+
+    public function testCohortLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cohort')
+                    ->assertSee('Add Cohort');
+                    
+        });
+    }
+
+    public function testEvidenceLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/evidence')
+                    ->assertSee('Evidence');
+                    
+        });
+    }
+
+    public function testNotesLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/notes')
+                    ->assertSee('Notes');
+                    
+        });
+    }
+
+    public function testLogoutLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                    ->assertSee('Login');
                     
         });
     }
