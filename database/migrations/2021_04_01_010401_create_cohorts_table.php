@@ -19,7 +19,10 @@ class CreateCohortsTable extends Migration
             $table->string('year');
             $table->string('semester');
             $table->string('stream');
-            $table->string('students')->default(' ')->nullable();
+            $table
+                ->string('students')
+                ->default(' ')
+                ->nullable();
             $table->timestamps();
         });
     }

@@ -11,13 +11,15 @@ class addStudent extends Model
 
     protected $table = 'student';
     protected $fillable = ['name', 'email', 'github'];
-    protected $hidden=['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
-    public function evidence(){
+    public function evidence()
+    {
         return $this->hasMany(Evidence::class);
     }
-    
-    public function notes(){
+
+    public function notes()
+    {
         return $this->hasMany(Note::class);
     }
 }
