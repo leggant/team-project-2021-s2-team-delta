@@ -51,7 +51,7 @@ Route::get('/evidence','PagesController@evidence')->name('pages.evidence');
 Route::get('/notes','PagesController@notes')->name('pages.notes');
 //Route::get('/notes-observation','App\Http\Controllers\PagesController@notesObservation')->name('pages.notesObservation');
 
-Route::get('/student/{id}', 'PagesController@getStudent');
+Route::get('/student/{id}', 'PagesController@getStudent')->name('pages.getStudent');
 
 
 Route::get('dashboard', [authController::class, 'dashboard']); 
