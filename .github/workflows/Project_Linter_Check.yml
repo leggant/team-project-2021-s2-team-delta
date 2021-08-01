@@ -1,8 +1,8 @@
 ---
-name: PHP Linter Check
+name: Code Linter Check
 on: 
     push:
-        branches: [master, main, staging, sprint-*]
+        branches: [sprint-*]
     pull_request:
         branches: [master, main, staging]
 jobs:
@@ -11,4 +11,3 @@ jobs:
     steps:
         - uses: actions/checkout@v2
         - uses: michaelw90/PHP-Lint@master
-

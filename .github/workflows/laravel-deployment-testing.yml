@@ -1,8 +1,8 @@
-name: Laravel-Deployment-Testing
+name: Laravel Deployment Testing
 
 on:
     push:
-        branches: [master, staging, sprint-*]
+        branches: [sprint-*]
     pull_request:
         branches: [master, staging]
 
