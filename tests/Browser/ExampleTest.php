@@ -14,6 +14,11 @@ class ExampleTest extends DuskTestCase
      * @return void
      */
     
+    /*
+        ExampleTest.php can be removed if safe to do so
+        unknown if I just delete the file alone to remove this test
+    */
+
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
