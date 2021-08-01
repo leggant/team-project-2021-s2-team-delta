@@ -1,0 +1,14 @@
+---
+name: PHP Linter Check
+on: 
+    push:
+        branches: [master, main, staging, sprint-*]
+    pull_request:
+        branches: [master, main, staging]
+jobs:
+  phplint:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - uses: michaelw90/PHP-Lint@master
+
