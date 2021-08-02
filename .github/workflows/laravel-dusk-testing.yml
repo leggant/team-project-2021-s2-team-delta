@@ -1,4 +1,5 @@
 name: Laravel Dusk Testing
+on:
     push:
         branches: [sprint-*]
     pull_request:
