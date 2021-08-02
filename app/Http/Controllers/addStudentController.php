@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Http\Requests;
-use App\addStudent;
+use App\Models\addStudent;
 use Illuminate\Http\Request;
 
 class addStudentController extends Controller

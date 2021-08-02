@@ -62,4 +62,3 @@ Route::post('custom-registration', [authController::class, 'customRegistration']
 Route::get('signOut', [authController::class, 'signOut'])->name('signOut');
 
 Route::get('/cohort/{id}', 'PagesController@getCohort');
-
