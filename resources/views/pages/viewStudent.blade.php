@@ -8,7 +8,7 @@
         <title>Student</title>
 
 
-
+        <script type="text/javascript" src="{{ asset('js/viewStudent.js') }}"></script>
         <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
         <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
 
@@ -65,15 +65,5 @@
         </tr>
         @endforeach
          </table>
-    
-        <script>
-          $(document).ready(function() {
-            $('.image-link').magnificPopup({type:'image'});
-            });
-        </script>
     </body>
-
-
-
-
 </html>
