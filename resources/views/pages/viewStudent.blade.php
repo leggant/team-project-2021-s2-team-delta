@@ -22,7 +22,7 @@
                 </p>
                 <br>
                 <h3>Evidence</h3>
-                <div class=table>
+                <div class="table">
                     <table id="studentEvidence">
                         @foreach ($evidences as $evidence)
                             <tr>

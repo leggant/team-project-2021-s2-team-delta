@@ -14,13 +14,13 @@
 
 <body class="antialiased">
     @include('inc.navbar')
-    <div class=evidence>
+    <div class="evidence">
         <h1>Welcome</h1>
-        <div class=table>
+        <div class="table">
             <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
             <table cellspacing="0" id="studentTable">
                 <tr>
-                    <th onclick="sortTable(0)">Name</th>
+                    <th onclick="sortTable(0)">Name</th>""
                     <th onclick="sortTable(1)">Email</th>
                     <th onclick="sortTable(2)">Github</th>
                 </tr>
