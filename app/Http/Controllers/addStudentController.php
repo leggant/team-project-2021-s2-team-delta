@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Http\Requests;
-use App\addStudent;
+use App\Models\addStudent;
 use Illuminate\Http\Request;
 
 class addStudentController extends Controller
@@ -18,7 +18,8 @@ class addStudentController extends Controller
         $student->save();
 
         $addStudent = DB::select('select * from student');
-        return view('pages.addStudent', ['addStudent' => $addStudent]);
+        
+        return redirect('/');
     }
     /*public function getAllStudents(){
         $addStudent = Student::all();

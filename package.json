@@ -11,10 +11,18 @@
         "pretty": "@prettier/plugin-php --write ."
     },
     "devDependencies": {
+        "@tailwindcss/forms": "^0.3.1",
+        "@tailwindcss/typography": "^0.4.0",
+        "alpinejs": "^3.0.6",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "prettier": "^2.3.2"
+        "prettier": "^2.3.2",
+        "postcss-import": "^14.0.1",
+        "tailwindcss": "^2.2.2"
+    },
+    "dependencies": {
+        "npm": "^7.20.2"
     }
 }

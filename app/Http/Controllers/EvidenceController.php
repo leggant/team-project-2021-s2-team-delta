@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Evidence;
+use App\Models\Evidence;
 use Illuminate\Http\Request;
 
 class EvidenceController extends Controller

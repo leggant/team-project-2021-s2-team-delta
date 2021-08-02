@@ -7,22 +7,23 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Note;
-use App\addStudent;
-use App\Cohort;
+use App\Models\User;
+use App\Models\addStudent;
+use App\Models\Cohort;
 
 class PagesController extends Controller
 {
-    public function index()
-    {
-        $addStudent = DB::select('select * from student');
-        return view('pages.index', ['addStudent' => $addStudent]);
+    public function index(){
+        $user = auth()->user();
+        $addStudent = DB::select('select * from student'); 
+        return view('pages.index', ['addStudent'=>$addStudent], compact('user'));
+    }
+    
+    public function addStudent(){
+         $addStudent = DB::select('select * from student'); 
+         return view('pages.addStudent', ['addStudent'=>$addStudent]);
     }
 
-    public function addStudent()
-    {
-        $addStudent = DB::select('select * from student');
-        return view('pages.addStudent', ['addStudent' => $addStudent]);
-    }
 
     public function getStudent($id)
     {

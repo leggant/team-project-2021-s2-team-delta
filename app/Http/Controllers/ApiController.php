@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
-use App\Note;
-use App\Cohort;
+use App\Models\Note;
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 use Validator;
 

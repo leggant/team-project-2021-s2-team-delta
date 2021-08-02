@@ -40,6 +40,18 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
+        
+        /* 
+        Create a test database file in Laravels 'database' folder
+        that is used to accept migrations when tests are performed
+        This 'dusk_testing' connection is referenced in the .env.dusk.local file
+        */
+
+            'dusk_testing' => [
+                'driver' => 'sqlite',            
+                'database' => database_path('database.sqlite'),
+                'prefix' => '',            
+            ],
 
         'mysql' => [
             'driver' => 'mysql',
