@@ -1,67 +1,67 @@
-
-    h1 {
+h1 {
     font-weight: 400;
-    }
-    h4 {
+}
+h4 {
     margin: 15px 0 4px;
-    }
-    .testbox {
+}
+.testbox {
     display: flex;
     justify-content: center;
     align-items: center;
     height: inherit;
     padding: 3px;
-    }
+}
 
-    form {
+form {
     width: 100%;
     padding-left: 20%;
     padding-right: 20%;
-    }
+}
 
-    input {
+input {
     width: calc(100% - 85px);
     padding: 5px;
-    }
-    .email {
+}
+.email {
     display: block;
     width: 45%;
-    }
-    
-    th, td {
+}
+
+th,
+td {
     width: 15%;
     padding: 15px 0;
     border-bottom: 1px solid #ccc;
     text-align: center;
     vertical-align: unset;
     word-break: break-all;
-    }
-    .first-col {
+}
+.first-col {
     word-break: keep-all;
     width: 16%;
     text-align: left;
-    }
-    table {
+}
+table {
     width: 100%;
-    }
-    textarea {
+}
+textarea {
     width: calc(100% - 6px);
-    }
-    .btn-block {
+}
+.btn-block {
     margin-top: 20px;
     text-align: center;
-    }
-    button {
-        padding: 9px 29px 8px 29px;
-        color: #FFF;
-        background-color: #4CAF50;
-        font-size: 28px;
-        border-radius: 5px;
-        width: 30%;
-        border: 1px solid #4CAF50;
-        border-width: 1px 1px 3px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
+}
+button {
+    padding: 9px 29px 8px 29px;
+    color: #fff;
+    background-color: #4caf50;
+    font-size: 28px;
+    border-radius: 5px;
+    width: 30%;
+    border: 1px solid #4caf50;
+    border-width: 1px 1px 3px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}

@@ -1,37 +1,37 @@
-    /*Add Student Page*/
-    .studentForm {
-        border-radius: 8px;
-        display:flex;
-        flex-flow: row nowrap;
-        justify-content: space-evenly;
-        padding-left: 30%;
-        padding-right: 30%;
-    }
+/*Add Student Page*/
+.studentForm {
+    border-radius: 8px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    padding-left: 30%;
+    padding-right: 30%;
+}
 
-    .title {
+.title {
     text-align: center;
-    }
+}
 
-    .formInput {
+.formInput {
     font-size: 16px;
     padding: 15px;
     width: 100%;
     color: black;
     border: none;
-    margin-bottom: 30px;    
-    }
+    margin-bottom: 30px;
+}
 
-    .addBtn {
+.addBtn {
     padding: 9px 29px 8px 29px;
-    color: #FFF;
-    background-color: #4CAF50;
+    color: #fff;
+    background-color: #4caf50;
     font-size: 28px;
     border-radius: 5px;
     width: 30%;
-    border: 1px solid #4CAF50;
+    border: 1px solid #4caf50;
     border-width: 1px 1px 3px;
-    }
-    
-    .addBtn:hover{
+}
+
+.addBtn:hover {
     background-color: #45a049;
-    }
+}

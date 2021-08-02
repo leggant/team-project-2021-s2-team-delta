@@ -16,7 +16,6 @@ class EvidenceController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -36,26 +35,31 @@ class EvidenceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
-
-        if($request->hasFile('image')){ //file/image?
+    {
+        if ($request->hasFile('image')) {
+            //file/image?
 
             $request->validate([
-                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+                'image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
             ]);
 
-            ;
-            $student = DB::table('student')->where('name', 'LIKE', '%' . $request->student . '%')->get();
-            $evidence = new Evidence;
+            $student = DB::table('student')
+                ->where('name', 'LIKE', '%' . $request->student . '%')
+                ->get();
+            $evidence = new Evidence();
             $evidence->title = $request->title;
-            $evidence->image = $request->file('image')->store('public/images');//saves file locally at storage/public/images
+            $evidence->image = $request->file('image')->store('public/images'); //saves file locally at storage/public/images
             $evidence->student_id = $student[0]->id;
             $evidence->save(); // save it to the database.
 
             $evidences = DB::select('select * from evidence');
             $student = DB::select('select * from student');
-            return view('pages.evidence',['evidences'=>$evidences], ['student'=>$student]);
-        } 
+            return view(
+                'pages.evidence',
+                ['evidences' => $evidences],
+                ['student' => $student]
+            );
+        }
         //$request->image->store('images');
         return 'failed';
         //dd($request->hasFile('image'));
@@ -103,9 +107,9 @@ class EvidenceController extends Controller
      */
     public function destroy($id)
     {
-    //Delete the Todo
-    $evidence = Evidence::findOrFail($id);
-    $id = $evidence->student_id;
-    $evidence->delete();
+        //Delete the Todo
+        $evidence = Evidence::findOrFail($id);
+        $id = $evidence->student_id;
+        $evidence->delete();
     }
 }

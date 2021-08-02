@@ -18,7 +18,7 @@ class CreateAddStudentsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('email');
-            $table->string('github');//->unique(); //unique github needed
+            $table->string('github'); //->unique(); //unique github needed
         });
     }
 

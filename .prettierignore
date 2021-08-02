@@ -1,0 +1,12 @@
+public/index.php
+server.php
+app/Console/Kernel.php
+config/filesystems.php
+config/session.php
+config/*
+tests/CreatesApplication.php 
+app/Http/Middleware/*
+composer.json
+composer.lock
+package-lock.json
+package.json

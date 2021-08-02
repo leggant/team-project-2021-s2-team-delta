@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -29,7 +28,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => public_path(''),
@@ -37,7 +35,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root'   => public_path() . '/uploads',
+            'root' => public_path().'/uploads',
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
@@ -51,7 +49,6 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
-
     ],
 
     /*
@@ -68,5 +65,4 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
 ];
