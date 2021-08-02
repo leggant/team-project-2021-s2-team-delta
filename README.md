@@ -1,4 +1,3 @@
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 
@@ -14,4 +13,5 @@ See Teams Channel - [Teams Link](https://teams.microsoft.com/l/file/E7D3EE56-BA3
 ## Deployments: 
 [Test deployment](http://op-studio-testing.herokuapp.com)   
 [Production deployment](https://bit-studio-management.herokuapp.com)
+
 
