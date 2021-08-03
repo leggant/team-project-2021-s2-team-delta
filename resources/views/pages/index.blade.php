@@ -10,6 +10,7 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
 </head>
 
 <body class="antialiased">
