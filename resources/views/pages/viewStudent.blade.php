@@ -57,14 +57,6 @@
                             </tr>
                         @endforeach
                     </table>
-
-                    <script>
-                        $(document).ready(function() {
-                            $('.image-link').magnificPopup({
-                                type: 'image'
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>
