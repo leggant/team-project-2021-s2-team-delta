@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
+    Route::resource('users', UserController::Class)->name('*', 'users');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
