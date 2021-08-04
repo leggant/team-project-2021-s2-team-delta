@@ -77,7 +77,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -89,7 +89,24 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        Validator::make($request->all(), [
+            'Name' => 'required',
+            'Email' => 'required',
+        ])->validate();
+
+        $user->name = $request->input('Name');
+        $user->email = $request->input('Email');
+        if($request->has('Admin'))
+        {
+            $user->is_admin = 1;
+        }
+        else
+        {
+            $user->is_admin = 0;
+        }
+        $user->save();
+
+        return redirect('/users')->with('success', 'User Updated');
     }
 
     /**
@@ -100,6 +117,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/users')->with('success', 'User Deleted');
     }
 }
