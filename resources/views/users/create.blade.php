@@ -12,7 +12,7 @@
                 <br>
                 <div>
                     <h5>Enter Email:</h5>
-                    <input type="email" placeholder="Enter Email Here..." id="Email" name="EMail" required>
+                    <input type="email" placeholder="Enter Email Here..." id="Email" name="Email" required>
                 </div>
                 <br>
                 <div>
