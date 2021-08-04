@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $user = User::all();
+        $id = Auth::id();
+        return view('users.index', compact('user', 'id'));
     }
 
     /**
@@ -24,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -35,7 +38,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'Name' => 'required',
+            'Email' => 'required',
+            'Password' => 'required',
+        ]);
+
+        $user = new User;
+        $user->name = $request->input('Name');
+        $user->email = $request->input('Email');
+        $user->password = Hash::make($request['Password']);
+        if($request['admin'] == 'on')
+        {
+            $user->is_admin = 1;
+        }
+        else
+        {
+            $user->is_admin = 0;
+        }
+        $user->save();
+        return redirect('/users')->with('success', 'User was Created Successfully!');
     }
 
     /**
