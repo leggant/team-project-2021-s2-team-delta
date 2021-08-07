@@ -7,7 +7,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
         <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
-            
         <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
     </head>
     <body>

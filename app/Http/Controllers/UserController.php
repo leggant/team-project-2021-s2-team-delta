@@ -17,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        $id = Auth::id();
+        $user = User::all(); #Grabs all users
+        $id = Auth::id(); #Grabs id of logged in user
         return view('users.index', compact('user', 'id'));
     }
 
@@ -40,20 +40,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        #Validate the fields recieved
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
             'Password' => 'required',
         ])->validate();
 
+        #Create new User and save the given data into the correct db fields
         $user = new User;
         $user->name = $request->input('Name');
         $user->email = $request->input('Email');
-        $user->password = Hash::make($request['Password']);
+        $user->password = Hash::make($request['Password']); #Hash password to make it secure
+        #If the request contains Admin field then save is_admin as 1 otherwise it will just fill is_admin with default value which is 0
         if($request->has('Admin'))
         {
             $user->is_admin = 1;
         }
+        #Save the mew user
         $user->save();
         return redirect('/users')->with('success', 'User was Created Successfully!');
     }
@@ -89,11 +93,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        #Validate the fields recieved
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
         ])->validate();
 
+        #Change db field of user to new information provided
         $user->name = $request->input('Name');
         $user->email = $request->input('Email');
         if($request->has('Admin'))
@@ -104,6 +110,7 @@ class UserController extends Controller
         {
             $user->is_admin = 0;
         }
+        #Save the new information to exisitng user
         $user->save();
 
         return redirect('/users')->with('success', 'User Updated');
@@ -117,6 +124,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        #Delete a user
         $user->delete();
         return redirect('/users')->with('success', 'User Deleted');
     }

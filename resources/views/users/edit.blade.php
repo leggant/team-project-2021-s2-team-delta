@@ -1,6 +1,7 @@
 @extends('layouts.main-layout')
 
 @section('content')
+    <!-- Form that allows the user to edit a user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
             <a href="{{url('/users')}}">Back</a>

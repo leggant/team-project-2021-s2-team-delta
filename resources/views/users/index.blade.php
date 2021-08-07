@@ -1,7 +1,7 @@
 @extends('layouts.main-layout')
 
 @section('content')
-
+    <!-- A table of all users in the database -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
             <a style="margin-left:700px; color:white;" href="{{route('users.create')}}">Create</a>
@@ -20,12 +20,13 @@
                         <tr>
                             <td>{{$users->name}}</td>
                             <td>{{$users->email}}</td>
-                            @if($users->is_admin == 1)
+                            @if($users->is_admin == 1) <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
                                 <td>Yes</td>
                             @else
                                 <td>No</td>
                             @endif
                             <td>
+                                <!-- Form that allows the user to delete a user -->
                                 @if($id != $users->id)
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
                                             {{ csrf_field() }}

@@ -1,6 +1,7 @@
 @extends('layouts.main-layout')
 
 @section('content')
+    <!-- Form that allows user to create a new user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <form action="{{route('users.store')}}" method='POST'>
             {{csrf_field()}}
