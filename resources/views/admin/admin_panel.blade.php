@@ -1,47 +1,12 @@
+@extends('layouts.main-layout')
+
+@section('content')
+<!-- If user is admin and logged in it shows options -->
 @if(Auth::check() && Auth::user()->isAdmin())
-    <!DOCTYPE html>
-    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-
-            <title>Laravel</title>
-
-            <!-- Fonts -->
-            <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-            <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
-            
-            <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
-
-        </head>
-        <body class="antialiased">
-        @include('inc.navbar')
-
-        <h2>Admin stuff goes here</h2>
-        </body>
-    </html>
+    <a style="margin-left:700px; color:white;" href="{{route('users.index')}}">Manage Users</a>
+<!-- If not admin or logged in then user gets told they can't access page -->
 @else
-    <!DOCTYPE html>
-    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-
-            <title>Laravel</title>
-
-            <!-- Fonts -->
-            <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-            <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
-            
-            <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
-
-        </head>
-        <body class="antialiased">
-        @include('inc.navbar')
-
-        <h2>You do not have access to this page</h2>
-        </body>
-    </html>
+    <h2>You do not have access to this page</h2>
 @endif
+
+@endsection
