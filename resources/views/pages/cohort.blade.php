@@ -91,7 +91,7 @@
                                     <td>{{ $cohort->stream }}</td>
                                     
                                     <?php
-                                    /* (php only for comment). Below functionality TBD.
+/* (php only for comment). Below functionality TBD.
                                     <td>
                                         <a class="btn btn-sm btn-success" href="{{ action('ProductsController@edit', ['id' => $cohort->id]) }}">Edit</a>
 
@@ -103,7 +103,7 @@
                                         </form>
                                     </td>
                                     */
-                                    ?>
+?>
                                         
                                     </tr>
                                     @endforeach

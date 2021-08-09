@@ -18,9 +18,12 @@ class CreateNotesTable extends Migration
             $table->string('student_name');
             $table->string('notes');
             $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('student');
+            $table
+                ->foreign('student_id')
+                ->references('id')
+                ->on('student');
             $table->timestamps();
-            });
+        });
     }
 
     /**
