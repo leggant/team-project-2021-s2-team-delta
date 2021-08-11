@@ -20,20 +20,17 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: laravel
         ports:
-          # - 3306/tcp
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       redis:
         image: redis
         ports:
-          # - 6379/tcp
           - 6379:6379
         options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       fail-fast: false
       matrix:
-        # php-versions: ['7.4', '8.0']
-        php-versions: ['8.0']
+        php-versions: ['7.4', '8.0']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -82,12 +79,16 @@ jobs:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
       #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Start PHP Artisan Server
-        run: php artisan serve --port=8080
+        run: |
+            ./dock up
+            ./dock exec wait_for_mysql
+            ./dock exec wait_for_redis
+            ./dock exec php artisan serve --port=8080
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Run Dusk Tests
-        run: php artisan dusk
+        run: ./dock exec php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
