@@ -8,9 +8,10 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "pretty": "@prettier/plugin-php --write ."
+        "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}"
     },
     "devDependencies": {
+        "@prettier/plugin-php": "^0.17.3",
         "@tailwindcss/forms": "^0.3.1",
         "@tailwindcss/typography": "^0.4.0",
         "alpinejs": "^3.0.6",
@@ -18,8 +19,8 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "prettier": "^2.3.2",
         "postcss-import": "^14.0.1",
+        "prettier": "^2.3.2",
         "tailwindcss": "^2.2.2"
     },
     "dependencies": {
