@@ -14,10 +14,11 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
+            // This should come from the student table
             $table->string('student_name');
             $table->string('notes');
-            $table->integer('student_id')->unsigned();
+            $table->unsignedBigInteger('student_id');
             $table
                 ->foreign('student_id')
                 ->references('id')
