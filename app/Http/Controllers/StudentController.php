@@ -24,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.addStudent');
     }
 
     /**
@@ -35,12 +35,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = new Student();
-        $student->name = $request->name;
-        $student->email = $request->email;
-        $student->github = $request->github;
-        $student->save();
-        return redirect('/')->with()->success('Student added');
+        // $student = new Student();
+        // $student->name = $request->name;
+        // $student->email = $request->email;
+        // $student->github = $request->github;
+        // $student->save();
+        Student::create($request->all());
+        return redirect('students');
     }
 
     /**
@@ -49,9 +50,26 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Student $student, $id)
     {
-        //
+        $students = Student::query();
+        if ($students->where('id', $id)->exists()) {
+            $student = $students->where('id', $id)->first();
+            // $evidences = DB::table('evidence')
+            //     ->where('student_id', 'LIKE', '%' . $student->id . '%')
+            //     ->get();
+            // $notes = DB::table('notes')
+            //     ->where('student_id', 'LIKE', '%' . $student->id . '%')
+            //     ->get();
+            # Will also have to pass respective evidence and notes/observations rows here once they have proper relationships
+            return view('pages.viewStudent', [
+                'student' => $student,
+                // 'evidences' => $evidences,
+                // 'notes' => $notes,
+            ]);
+        } else {
+            return response()->json(['message' => 'Student not found.'], 404);
+        }
     }
 
     /**

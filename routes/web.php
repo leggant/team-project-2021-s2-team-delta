@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\UserController;
+// use App\Http\Controllers\StudentController;
+// use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +34,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/notes', 'ApiController@createNote');
 
     Route::get('/', 'PagesController@index')->name('pages.index');
-    Route::get('/add-student', 'PagesController@addStudent')->name(
-        'pages.addStudent'
-    );
     Route::get('/cohort', 'PagesController@cohort')->name('pages.cohort');
     Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
     Route::get('/notes', 'PagesController@notes')->name('pages.notes');
-    Route::get('/student/{id}', 'PagesController@getStudent')->name('pages.getStudent');
     Route::get('/cohort/{id}', 'PagesController@getCohort');
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');

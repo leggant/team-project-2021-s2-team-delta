@@ -14,11 +14,11 @@ class CreateAddStudentsTable extends Migration
     public function up()
     {
         Schema::create('student', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->id('id');
             $table->string('name');
             $table->string('email');
             $table->string('github'); //->unique(); //unique github needed
+            $table->timestamps();
         });
     }
 
