@@ -82,7 +82,7 @@ jobs:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
       #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Start PHP Artisan Server
-        run: php artisan serve
+        run: php artisan serve --port=6379
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
