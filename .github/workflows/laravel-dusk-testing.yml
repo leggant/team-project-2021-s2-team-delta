@@ -83,12 +83,12 @@ jobs:
             ./dock up
             ./dock exec wait_for_mysql
             ./dock exec wait_for_redis
-            ./dock exec php artisan serve --port=8080
+            ./dock exec artisan serve --port=8080
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Run Dusk Tests
-        run: ./dock exec php artisan dusk
+        run: ./dock exec artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
