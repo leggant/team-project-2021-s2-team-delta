@@ -73,18 +73,18 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Upgrade Chrome Driver
         run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
-      # - name: Start Chrome Driver
-      #   run: ./vendor/laravel/dusk/bin/chromedriver-linux &
-      #   env:
-      #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-      #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Start PHP Artisan Server
-        run: docker run --rm -v $(pwd):/app -w /app php:cli php artisan serve
+        run: php artisan serve > /dev/null 2>&1 &
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Run Dusk Tests
-        run: docker --rm -v $(pwd):/app -w /app php:cli php artisan dusk
+        run: php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
