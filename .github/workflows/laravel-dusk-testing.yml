@@ -4,14 +4,14 @@ jobs:
   laravel:
     name: Laravel (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
-    env:
-      DB_DATABASE: laravel
-      DB_USERNAME: root
-      DB_PASSWORD: password
-      BROADCAST_DRIVER: log
-      CACHE_DRIVER: redis
-      QUEUE_CONNECTION: redis
-      SESSION_DRIVER: redis    
+    # env:
+    #   DB_DATABASE: laravel
+    #   DB_USERNAME: root
+    #   DB_PASSWORD: password
+    #   BROADCAST_DRIVER: log
+    #   CACHE_DRIVER: redis
+    #   QUEUE_CONNECTION: redis
+    #   SESSION_DRIVER: redis    
     services:
       mysql:
         image: mysql:5.7
@@ -74,28 +74,13 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Upgrade Chrome Driver
         run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
-      - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      # - name: Start Chrome Driver
+      #   run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+      #   env:
+      #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+      #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Start PHP Artisan Server
         env: 
-          APP_URL: http://127.0.0.1:8080
-          DB_DATABASE: laravel
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          BROADCAST_DRIVER: log
-          CACHE_DRIVER: redis
-          QUEUE_CONNECTION: redis
-          SESSION_DRIVER: redis   
-        run: php artisan serve > /dev/null 2>&1 &
-          # env:
-          # DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          # REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-      - name: Run Dusk Tests
-        env: 
-          APP_URL: http://127.0.0.1:8080
           DB_DATABASE: laravel
           DB_USERNAME: root
           DB_PASSWORD: password
@@ -103,10 +88,21 @@ jobs:
           CACHE_DRIVER: redis
           QUEUE_CONNECTION: redis
           SESSION_DRIVER: redis  
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }} 
+        run: php artisan serve > /dev/null 2>&1 &
+      - name: Run Dusk Tests
+        env: 
+          DB_DATABASE: laravel
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          BROADCAST_DRIVER: log
+          CACHE_DRIVER: redis
+          QUEUE_CONNECTION: redis
+          SESSION_DRIVER: redis  
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
         run: php artisan dusk
-        # env:
-        #   DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-        #   REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
