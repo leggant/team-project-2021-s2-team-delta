@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class addStudent extends Model
+class Student extends Model
 {
     use HasFactory;
-
     protected $table = 'student';
+    protected $primaryKey = 'id';
     protected $fillable = ['name', 'email', 'github'];
     protected $hidden = ['created_at', 'updated_at'];
 
