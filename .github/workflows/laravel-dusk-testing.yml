@@ -79,16 +79,12 @@ jobs:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
       #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Start PHP Artisan Server
-        run: |
-            ./dock up
-            ./dock exec wait_for_mysql
-            ./dock exec wait_for_redis
-            ./dock exec artisan serve --port=8080
+        run: docker run --rm -v $(pwd):/app -w /app php:cli php artisan serve
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Run Dusk Tests
-        run: ./dock exec artisan dusk
+        run: docker --rm -v $(pwd):/app -w /app php:cli php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
