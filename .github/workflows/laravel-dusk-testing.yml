@@ -81,6 +81,11 @@ jobs:
       #   env:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
       #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Start PHP Artisan Server
+        run: php artisan serve
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Run Dusk Tests
         run: php artisan dusk
         env:
