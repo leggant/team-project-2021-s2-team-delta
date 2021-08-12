@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\DBAL\TimestampType;
 
 return [
     /*
@@ -126,6 +127,12 @@ return [
     */
 
     'migrations' => 'migrations',
+    // Package allows modification to timestamps in production migrations
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
