@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -14,7 +15,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $students = Student::all();
+        return view('pages.students', ['students'=>$students], compact('user'));
     }
 
     /**
@@ -35,11 +38,6 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // $student = new Student();
-        // $student->name = $request->name;
-        // $student->email = $request->email;
-        // $student->github = $request->github;
-        // $student->save();
         Student::create($request->all());
         return redirect('students');
     }
@@ -50,22 +48,23 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student, $id)
+    public function show(Student $student)
     {
+        $id = $student->id;
         $students = Student::query();
         if ($students->where('id', $id)->exists()) {
             $student = $students->where('id', $id)->first();
-            // $evidences = DB::table('evidence')
-            //     ->where('student_id', 'LIKE', '%' . $student->id . '%')
-            //     ->get();
-            // $notes = DB::table('notes')
-            //     ->where('student_id', 'LIKE', '%' . $student->id . '%')
-            //     ->get();
+            $evidences = DB::table('evidence')
+                ->where('student_id', 'LIKE', '%' . $student->id . '%')
+                ->get();
+            $notes = DB::table('notes')
+                ->where('student_id', 'LIKE', '%' . $student->id . '%')
+                ->get();
             # Will also have to pass respective evidence and notes/observations rows here once they have proper relationships
             return view('pages.viewStudent', [
                 'student' => $student,
-                // 'evidences' => $evidences,
-                // 'notes' => $notes,
+                'evidences' => $evidences,
+                'notes' => $notes,
             ]);
         } else {
             return response()->json(['message' => 'Student not found.'], 404);

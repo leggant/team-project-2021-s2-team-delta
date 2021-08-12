@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/notes', 'ApiController@createNote');
 
-    Route::get('/', 'PagesController@index')->name('pages.index');
     Route::get('/cohort', 'PagesController@cohort')->name('pages.cohort');
     Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
     Route::get('/notes', 'PagesController@notes')->name('pages.notes');

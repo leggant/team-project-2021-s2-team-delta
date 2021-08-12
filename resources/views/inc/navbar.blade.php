@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-list">
                 <li class="nav-item">
-                    <a href="{{route('pages.index')}}" class="nav-link">Home</a>
+                    <a href="{{route('students.index')}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('students.create')}}" class="nav-link">New Student</a>
