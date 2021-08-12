@@ -9,10 +9,10 @@ class CreateEvidenceTable extends Migration
     public function up()
     {
         Schema::create('evidence', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->string('title'); //unique title needed
             $table->mediumText('image'); //image file
-            $table->unsignedBigInteger('student_id');
+            $table->integer('student_id')->unsigned();
             $table
                 ->foreign('student_id')
                 ->references('id')
