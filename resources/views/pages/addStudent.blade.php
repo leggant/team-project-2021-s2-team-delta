@@ -6,6 +6,8 @@
             <h1 class="title">Add Student</h1>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" class="formInput" required>
+            <label for="id">Student ID:</label>
+            <input type="text" id="id" name="student_id" class="formInput" required>
             <label for="mail">Email:</label>
             <input type="email" id="mail" name="email" class="formInput" required>
             <label for="Github">Github:</label>

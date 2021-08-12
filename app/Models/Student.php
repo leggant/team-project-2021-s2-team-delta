@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
     protected $table = 'student';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'email', 'github'];
+    protected $fillable = ['student_id', 'name', 'email', 'github'];
     protected $hidden = ['created_at', 'updated_at'];
 
     public function evidence()
