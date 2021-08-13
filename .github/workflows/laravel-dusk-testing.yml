@@ -68,12 +68,12 @@ jobs:
       - name: Clear Config
         run: php artisan config:clear
       - name: Run Migration
-        run: |
-          php artisan migrate -v
-          php artisan tinker
-          DB::table('users')->insert(['name'=>'Admin','email'=>'admin@op.ac.nz','password'=>Hash::make('studioadmin')]);
-          exit
-          php artisan db:seed
+        run: php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Run Seeder
+        run: php artisan db:seed
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
