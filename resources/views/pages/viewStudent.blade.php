@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student</title>
-    <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('js/viewStudent.js') }}"></script>
-</head>
-
-<body>
-    @include('inc.navbar')
+@extends('layouts.main-layout')
+@section('content')
     <div class="mx-auto sm:px-6 lg:px-8" style="width:50%">
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
                 <h1>{{ $student->name }}</h1>
                 <p>
                     Email: {{ $student->email }}
-                    <br>
+                </p>
+                <p>
                     Github: {{ $student->github }}
                 </p>
-                <br>
                 <h3>Evidence</h3>
                 <div class="table">
                     <table id="studentEvidence">
@@ -48,13 +36,13 @@
                                 <td>
                                     {{ $note->notes }}
                                 </td>
-                                <td class="button">
+                                {{-- <td class="button">
                                     <form method="post" action="{{ route('notes.deleteNote', $note->id) }}">
                                         @csrf
                                         @method('delete')
                                         <!--<button class="deleteButton">Delete</button>-->
                                     </form>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </table>
@@ -62,6 +50,4 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection

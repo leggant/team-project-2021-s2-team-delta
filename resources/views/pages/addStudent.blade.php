@@ -9,7 +9,7 @@
             <label for="last_name">Last Name</label>
             <input type="text" id="last_name" name="last_name" class="formInput" required>
             <label for="id">Student ID:</label>
-            <input type="text" id="id" name="student_id" class="formInput" required>
+            <input type="text" id="id" name="idstudent" class="formInput" required>
             <label for="mail">Email:</label>
             <input type="email" id="mail" name="email" class="formInput" required>
             <label for="Github">Github:</label>

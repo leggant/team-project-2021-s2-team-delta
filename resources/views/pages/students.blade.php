@@ -20,7 +20,7 @@
                         <td><a id="studentLink"
                                 href="{{ route('students.show', $student) }}">{{ $student->name }}
                         </td></a>
-                        <td>{{ $student->student_id }}</td>
+                        <td>{{ $student->idstudent }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->github }}</td>
                     </tr>
