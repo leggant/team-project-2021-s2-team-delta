@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Models\User;
-use App\Models\addStudent;
 use App\Models\Cohort;
+use App\Models\Student;
+use App\Models\Evidence;
 
 class PagesController extends Controller
 {
@@ -32,23 +33,23 @@ class PagesController extends Controller
 
     public function evidence()
     {
-        $evidences = DB::select('select * from evidence');
-        $student = DB::select('select * from student');
+        $evidence = Evidence::all();
+        $students = Student::all();
         return view(
             'pages.evidence',
-            ['evidences' => $evidences],
-            ['student' => $student]
+            ['evidences' => $evidence],
+            ['student' => $students]
         );
     }
 
     public function notes()
     {
-        $notes = DB::select('select * from notes');
-        $student = DB::select('select * from student');
+        $notes = Note::all();
+        $students = Student::all();
         return view(
             'pages.notes',
             ['notes' => $notes],
-            ['student' => $student]
+            ['student' => $students]
         );
     }
 }

@@ -15,22 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 
 */
-Route::get('/evidence', function () {
-    return view('pages/evidence');
-})->name('evidence.index');
-
-Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name(
-    'evidence.destroy'
-);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('students', StudentController::class)->except(['delete']);
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class)->name('*', 'users');  
-
+    Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name(
+        'evidence.destroy'
+    );
+    Route::get('/evidence', function () {
+        return view('pages/evidence');
+    })->name('evidence.index');
     Route::post('/evidence', 'EvidenceController@store')->name('evidence.store');
     Route::post('/cohort', 'ApiController@createCohort');
-
     Route::post('/notes', 'ApiController@createNote');
 
     Route::get('/cohort', 'PagesController@cohort')->name('pages.cohort');
@@ -40,9 +37,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
+    // Return user to home any time a route is not found
+    Route::fallback(function () {
+        return redirect('/')->with('status', 'Error, Page Not Found');
+    });
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
@@ -51,8 +52,3 @@ Route::get('logout', function () {
     Session()->flush();
     return Redirect::to('/');
 })->name('logout');
-
-// Return user to home any time a route is not found
-Route::fallback(function () {
-    return redirect('/')->with('status', 'Error, Page Not Found');
-});

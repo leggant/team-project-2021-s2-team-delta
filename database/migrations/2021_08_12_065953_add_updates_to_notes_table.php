@@ -13,21 +13,14 @@ class AddUpdatesToNotesTable extends Migration
      */
     public function up()
     {
-        // Schema::table('notes', function (Blueprint $table) {
-        //     $table->id('id')->change();
-        //     $table->longText('notes')->change();
-        //     $table->dropColumn('student_name');
-        //     $table->renameColumn('student_id', 'idstudent');
-        // });
-        // Schema::table('notes', function (Blueprint $table) {
-        //     $table->unsignedBigInteger('idstudent')->change();
-        //     $table
-        //         ->foreign('idstudent')
-        //         ->references('id')
-        //         ->on('student')->change();
-        // });
+        Schema::table('notes', function (Blueprint $table) {
+            $table->id('id')->change();
+            $table->longText('notes')->change();
+            //$table->dropColumn('student_name');
+            $table->dropForeign('notes_student_id_foreign');
+        });
     }
-
+    
     /**
      * Reverse the migrations.
      *
@@ -35,8 +28,12 @@ class AddUpdatesToNotesTable extends Migration
      */
     public function down()
     {
-        // Schema::table('notes', function (Blueprint $table) {
-        //     Schema::dropIfExists('notes');
-        // });
+        Schema::table('notes', function (Blueprint $table) {
+            $table->unsignedBigInteger('student_id')->change();
+            $table->foreign('student_id')
+            ->references('id')
+            ->on('student')
+            ->onUpdate('cascade');
+        });
     }
 }

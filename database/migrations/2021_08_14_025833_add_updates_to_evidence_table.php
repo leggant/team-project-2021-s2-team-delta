@@ -13,15 +13,12 @@ class AddUpdatesToEvidenceTable extends Migration
      */
     public function up()
     {
-        // Schema::table('evidence', function (Blueprint $table) {
-        //     $table->id('id')->change();
-        //     $table->renameColumn('student_id', 'idstudent')->change();
-        // });
-        // Schema::table('evidence', function (Blueprint $table) {
-        //     $table->unsignedBigInteger('idstudent')->change();
-        // });
+        Schema::table('evidence', function (Blueprint $table) {
+            $table->id('id')->change(); 
+            $table->dropForeign('evidence_student_id_foreign');
+        });
     }
-
+    
     /**
      * Reverse the migrations.
      *
@@ -29,8 +26,12 @@ class AddUpdatesToEvidenceTable extends Migration
      */
     public function down()
     {
-        // Schema::table('evidence', function (Blueprint $table) {
-        //     Schema::dropIfExists('evidence');
-        // });
+        Schema::table('evidence', function (Blueprint $table) {
+            $table->unsignedBigInteger('student_id')->change(); 
+            $table->foreign('student_id')
+            ->references('id')
+            ->on('student')
+            ->onUpdate('cascade');
+        });
     }
 }

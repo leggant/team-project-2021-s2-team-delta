@@ -13,19 +13,14 @@ class AddUpdatesToCohortsTable extends Migration
      */
     public function up()
     {
-        // Schema::table('cohorts', function (Blueprint $table) {
-        //     $table->id('id')->change();
-        //     $table->renameColumn('students', 'idstudent')->change();
-        // });
-        // Schema::table('cohorts', function (Blueprint $table) {
-        //     $table->id('id')->change();
-        //     $table->renameColumn('students', 'idstudent')->change();
-        //     $table->unsignedBigInteger('idstudent')->change();
-        //     $table
-        //         ->foreign('idstudent')
-        //         ->references('id')
-        //         ->on('student')->change();
-        // });
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->id('id')->change();
+            $table->after('id', function ($table) {
+                $table->unsignedBigInteger('student_id');
+            });
+            // This will at some point need to be dropped. Students will be added via the relationship w/ student_id to student table.
+            //$table->dropColumn('students');
+        });
     }
 
     /**
@@ -35,8 +30,11 @@ class AddUpdatesToCohortsTable extends Migration
      */
     public function down()
     {
-        // Schema::table('cohorts', function (Blueprint $table) {
-        //     Schema::dropIfExists('cohorts');
-        // });
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->foreign('student_id')
+            ->references('id')
+            ->on('student')
+            ->onUpdate('cascade');
+        });
     }
 }

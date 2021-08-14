@@ -8,11 +8,11 @@
             <input type="text" id="first_name" name="first_name" class="formInput" required>
             <label for="last_name">Last Name</label>
             <input type="text" id="last_name" name="last_name" class="formInput" required>
-            <label for="id">Student ID:</label>
-            <input type="text" id="id" name="idstudent" class="formInput" required>
-            <label for="mail">Email:</label>
+            <label for="id">Student Username:</label>
+            <input type="text" id="id" name="username" class="formInput" required>
+            <label for="mail">Student Email:</label>
             <input type="email" id="mail" name="email" class="formInput" required>
-            <label for="Github">Github:</label>
+            <label for="Github">Github Username:</label>
             <input type="text" id="github" name="github" class="formInput">
             <button class="addBtn" type="submit">Save</button>
         </form>
