@@ -1,0 +1,17 @@
+name: Heroku Deployment Checker
+
+on:
+  schedule:
+    #- cron: "0 0/8 * 8-11 1-6"
+    - cron: "0 0 1 8 1"
+jobs:
+  Heroku Test Deployment:
+    name: "Heroku Test Deployment"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+  Heroku Production Deployment:
+    name: "Heroku Production Deployment"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
