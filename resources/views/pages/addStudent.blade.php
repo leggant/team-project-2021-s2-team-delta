@@ -15,7 +15,7 @@
             <input type="email" id="mail" name="email" class="formInput" required>
             <label for="Github">Github Username:</label>
             <input type="text" id="github" name="github" class="formInput">
-            <button class="addBtn" type="submit">Save</button>
+            <x-jet-button>Add New Student</x-jet-button>
         </form>
     </div>
 </x-app-layout>
