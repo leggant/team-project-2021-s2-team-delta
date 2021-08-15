@@ -1,11 +1,8 @@
-@extends('layouts.main-layout')
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }}</h2>
+    </x-slot>
     <div class="evidence">
-        @if (Auth::check())
-            <h1 class="capitalize">Welcome {{ Str::title($user->name) }}</h1>
-        @else
-            <h1>Welcome</h1>
-        @endif
         <div class="table">
             <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
             <table cellspacing="0" id="studentTable" class="mt-4">
@@ -28,4 +25,4 @@
             </table>
         </div>
     </div>
-@endsection
+</x-app-layout>
