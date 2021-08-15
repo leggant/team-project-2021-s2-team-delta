@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }}</h2>
+        <h1 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }}</h1>
     </x-slot>
     <div class="evidence">
         <div class="table">

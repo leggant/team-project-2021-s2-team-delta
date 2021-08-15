@@ -1,9 +1,9 @@
-@extends('layouts.main-layout')
-@section('content')
-    <div class="mx-auto sm:px-6 lg:px-8" style="width:50%">
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold">{{ $student->name }}</h1>
+    </x-slot>
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
-                <h1>{{ $student->name }}</h1>
                 <p>
                     Email: {{ $student->email }}
                 </p>
@@ -23,7 +23,7 @@
                                     <form method="post" action="{{ route('evidence.destroy', $evidence->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <!--<button class="deleteButton">Delete</button>-->
+                                        <x-jet-danger-button>Delete</x-jet-danger-button>
                                     </form>
                                 </td>
                             </tr>
@@ -36,18 +36,17 @@
                                 <td>
                                     {{ $note->notes }}
                                 </td>
-                                {{-- <td class="button">
+                                <td>
                                     <form method="post" action="{{ route('notes.deleteNote', $note->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <!--<button class="deleteButton">Delete</button>-->
+                                        <x-jet-danger-button>Delete</x-jet-danger-button>
                                     </form>
-                                </td> --}}
+                                </td>
                             </tr>
                         @endforeach
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+</x-app-layout>

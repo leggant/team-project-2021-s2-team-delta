@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold">Add Student</h2>
+        <h1 class="font-semibold">Add Student</h1>
     </x-slot>
     <div class="studentForm">
         <form action="{{ route('students.store') }}" method="post">
