@@ -15,6 +15,24 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
+                        {{ __('New Student') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.cohort') }}" :active="request()->routeIs('pages.cohort')">
+                        {{ __('Cohorts') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.evidence') }}" :active="request()->routeIs('pages.evidence')">
+                        {{ __('Uploads') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.notes') }}" :active="request()->routeIs('pages.notes')">
+                        {{ __('Notes') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('logout') }}" :active="request()->routeIs('logout')">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            {{ __('Log Out') }}
+                        </form>
+                    </x-jet-nav-link>
                 </div>
             </div>
 
