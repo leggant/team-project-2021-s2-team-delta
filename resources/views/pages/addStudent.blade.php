@@ -1,9 +1,10 @@
-@extends('layouts.main-layout')
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold">Add Student</h2>
+    </x-slot>
     <div class="studentForm">
         <form action="{{ route('students.store') }}" method="post">
             @csrf
-            <h1 class="title">Add Student</h1>
             <label for="first_name">First Name</label>
             <input type="text" id="first_name" name="first_name" class="formInput" required>
             <label for="last_name">Last Name</label>
@@ -17,4 +18,4 @@
             <button class="addBtn" type="submit">Save</button>
         </form>
     </div>
-@endsection
+</x-app-layout>
