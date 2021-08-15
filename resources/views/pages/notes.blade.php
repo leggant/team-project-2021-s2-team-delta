@@ -8,7 +8,7 @@
             <label for="student">Student: </label>
             <input name="student" list="student" />
             <datalist id="student">
-                @foreach ($students as $student)
+                @foreach ($student as $student)
                     <option value={{ $student->name }}>{{ $student->name }}</option>
                 @endforeach
             </datalist>
