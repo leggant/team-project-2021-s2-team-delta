@@ -5,6 +5,7 @@ on:
 
 jobs:
   add-reviewer:
+    name: Add Reviewer
     runs-on: ubuntu-latest
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.0
