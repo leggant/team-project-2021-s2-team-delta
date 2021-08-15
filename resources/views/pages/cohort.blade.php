@@ -1,9 +1,10 @@
-@extends('layouts.main-layout')
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold">Studio Cohorts</h2>
+    </x-slot>
     <div class="mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
-                <h1>Add Cohort</h1>
                 <form action="{{ route('pages.cohort') }}" method="post">
                     @csrf
                     <label for="subject">Subject: <input type="text" name="subject" id="subject"></label> 
@@ -12,12 +13,12 @@
                     <label for="stream">Stream: <input type="text" name="stream" id="stream"></label> 
                     <label for="students">Students:</label>
                     <textarea name="students" id="students" rows="10" cols="30"></textarea>
-                    <input type="submit" name="addCohort" value="Add" />
+                    <x-jet-button>Save</x-jet-button>
                 </form>
             </div>
         </div>
-        <div id="bottom-table">
-            <table id="tables">
+        <div>
+            <table>
                 <thead>
                     <th>Subject</th>
                     <th>Year</th>
@@ -39,4 +40,4 @@
             </table>
         </div>
     </div>
-@endsection
+</x-app-layout>
