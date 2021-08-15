@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold">Student Evidence Upload</h2>
+        <h1 class="font-semibold">Student Evidence Upload</h1>
     </x-slot>
     <div class=evidence>
         <form action="{{ route('evidence.store') }}" method="post" enctype="multipart/form-data">

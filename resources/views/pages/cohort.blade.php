@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold">Studio Cohorts</h2>
+        <h1 class="font-semibold">Studio Cohorts</h1>
     </x-slot>
     <div class="mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2">

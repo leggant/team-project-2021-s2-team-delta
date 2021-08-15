@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold">Student Notes</h2>
+        <h1 class="font-semibold">Student Notes</h1>
     </x-slot>
     <form action="{{ route('pages.notes') }}" method="post">
         @csrf
