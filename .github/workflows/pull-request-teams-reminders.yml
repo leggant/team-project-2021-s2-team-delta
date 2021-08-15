@@ -1,18 +1,17 @@
-# name: "Pull Request Reviews Reminder"
+name: Pull Request Reviews Reminder
 
-# on:
-#   schedule:
-#     # Every weekday every 2 hours during working hours, send notification
-#     - cron: "0 8-17/2 * * 1-5"
-
-# jobs:
-#   pr-reviews-reminder:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: davideviolante/pr-reviews-reminder-action@v1.5.1
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.DELTA_GITHUB_ACTIONS }}
-#       with:
-#         webhook-url: 'https://otagopoly.webhook.office.com/webhookb2/dff2c92e-097c-4d4c-a67d-1400199ddcbb@450e6824-88ab-4ad2-914d-b0f385da600c/IncomingWebhook/04b6124d8f7e4e828b66450c20971eb9/83ac2e7b-3d06-4f89-9775-232127186976' # Required
-#         provider: 'msteams'
-#         channel: '#Important Updates'
+on:
+  schedule:
+    - cron: "0 0 10 ? * MON,TUE,WED,THU,FRI,SAT *"
+jobs:
+  pr-reviews-reminder:
+    name: "Pull Request Reviews Reminder"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: davideviolante/pr-reviews-reminder-action@v1.5.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.DELTA_GITHUB_ACTIONS }}
+      with:
+        webhook-url: 'https://otagopoly.webhook.office.com/webhookb2/dff2c92e-097c-4d4c-a67d-1400199ddcbb@450e6824-88ab-4ad2-914d-b0f385da600c/IncomingWebhook/04b6124d8f7e4e828b66450c20971eb9/83ac2e7b-3d06-4f89-9775-232127186976'
+        provider: 'msteams'
+        channel: '#Important Updates'
