@@ -92,13 +92,7 @@ jobs:
           QUEUE_CONNECTION: redis
           SESSION_DRIVER: redis  
         run: php artisan serve > /dev/null 2>&1 &
-  Dusk-Test:
-    - name: Run Dusk Tests
-      runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2 
-      - name: Run PHP Artisan Dusk
+      - name: Run Dusk Tests
         run: php artisan dusk
       - name: Upload Screenshots
         if: failure()
