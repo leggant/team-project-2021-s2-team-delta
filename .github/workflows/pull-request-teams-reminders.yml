@@ -2,7 +2,7 @@ name: Pull Request Reviews Reminder
 
 on:
   schedule:
-    - cron: "0 0 10 ? * MON,TUE,WED,THU,FRI,SAT *"
+    - cron: "0 10 * 8-11 1-6"
 jobs:
   pr-reviews-reminder:
     name: "Pull Request Reviews Reminder"
