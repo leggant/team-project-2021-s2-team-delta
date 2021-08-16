@@ -1,6 +1,8 @@
-@extends('layouts.main-layout')
-@section('content')
-    <div class="mx-auto sm:px-6 lg:px-8" style="width:50%">
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold">Cohorts</h1>
+    </x-slot>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
                 <h1>{{ $cohort->subject }}</h1>
@@ -17,4 +19,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
