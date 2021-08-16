@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold">{{ $student->name }}</h1>
+        <h1 class="font-semibold capitalize">{{ $student->name }}</h1>
     </x-slot>
-        <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6">
                 <p>
                     Email: {{ $student->email }}
@@ -11,12 +11,12 @@
                     Github: {{ $student->github }}
                 </p>
                 <h3>Evidence</h3>
-                <div class="table">
+                <div>
                     <table id="studentEvidence">
                         @foreach ($evidences as $evidence)
                             <tr>
                                 <td>
-                                    <a class="image-link"
+                                    <a
                                         href="../public/images/{{ basename($evidence->image) }}">{{ $evidence->title }}</a>
                                 </td>
                                 <td class="button">

@@ -2,8 +2,8 @@
     <x-slot name="header">
         <h1 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }}</h1>
     </x-slot>
-    <div class="evidence">
-        <div class="table">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
+        <div>
             <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names..">
             <table cellspacing="0" id="studentTable" class="mt-4">
                 <tr>
