@@ -31,10 +31,7 @@ class AddUpdatesToCohortsTable extends Migration
     public function down()
     {
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->foreign('student_id')
-            ->references('id')
-            ->on('student')
-            ->onUpdate('cascade');
+            $table->dropForeign(['student_id']);
         });
     }
 }
