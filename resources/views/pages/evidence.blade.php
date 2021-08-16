@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1 class="font-semibold">Student Evidence Upload</h1>
     </x-slot>
-    <div class=evidence>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <form action="{{ route('evidence.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="student">Student</label>

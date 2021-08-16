@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1 class="font-semibold">Student Notes</h1>
     </x-slot>
-    <form action="{{ route('pages.notes') }}" method="post">
+    <form action="{{ route('pages.notes') }}" method="post" class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-6">
         @csrf
         <div>
             <label for="student">Student: </label>
