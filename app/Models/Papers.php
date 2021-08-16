@@ -13,7 +13,7 @@ class Papers extends Model
 
     protected $table = 'papers';
 
-    protected $fillable = ['paper_name']
+    protected $fillable = ['paper_name'];
 
     public function user()
     {
