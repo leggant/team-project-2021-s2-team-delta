@@ -9,7 +9,7 @@
                     <a href="{{route('students.create')}}" class="nav-link">New Student</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('pages.cohort')}}" class="nav-link">Cohort</a>
+                    <a href="{{route('cohorts.index')}}" class="nav-link">Cohort</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('pages.evidence')}}" class="nav-link">Evidence</a>

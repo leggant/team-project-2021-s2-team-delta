@@ -46,7 +46,7 @@
 
                                 <h1>Add Cohort</h1>
 
-                                <form action="{{route('pages.cohort')}}" method="post">
+                                <form action="{{route('cohorts.store')}}" method="post">
                                 @csrf
 
 
@@ -56,13 +56,19 @@
                                 <br>
                                 Semester: <input type="text" name="semester" id="semester">
                                 <br><br>
-                                Students:<br> <textarea name="students" id="students" rows="10" cols="30"></textarea>    
-                                <br>
+                                <!--Students:<br> <textarea name="students" id="students" rows="10" cols="30"></textarea>   
+                                <br>-->
                                 <!--
                                 <input type="submit" name="add_student" id="Add student">  
                                 -->
                                 <br>
                                 Stream: <input type="text" name="stream" id="stream">
+                                <br><br>
+                                Paper: <select id="paper" name="paper" required>
+                                    @foreach($papers as $paper)
+                                        <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                                    @endforeach
+                                </select>
                                 <br><br><br>
 
                                 <input type="submit" name="addCohort" value="Add" />
@@ -78,7 +84,6 @@
                                 <th>Subject</th>
                                 <th>Year</th>
                                 <th>Semester</th>
-                                <th>Students</th>
                                 <th>Stream</th>
                             </thead>
                             <tbody>
@@ -87,7 +92,6 @@
                                     <td><a href="/cohort/{{ $cohort->id }}">{{ $cohort->subject }}</a></td>
                                     <td>{{ $cohort->year }}</td>
                                     <td>{{ $cohort->semester }}</td>
-                                    <td>{{ $cohort->students }}</td>
                                     <td>{{ $cohort->stream }}</td>
                                     
                                     <?php
