@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('students.index') }}" :active="request()->routeIs('students.index')">
-                        {{ __('View Students') }}
+                        {{ __('Students') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('pages.evidence') }}" :active="request()->routeIs('pages.evidence')">
                         {{ __('Uploads') }}
@@ -24,9 +24,9 @@
                     <x-jet-nav-link href="{{ route('pages.notes') }}" :active="request()->routeIs('pages.notes')">
                         {{ __('Notes') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
+                    {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
                         {{ __('New Student') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
                     <x-jet-nav-link href="{{ route('pages.cohort') }}" :active="request()->routeIs('pages.cohort')">
                         {{ __('New Cohort') }}
                     </x-jet-nav-link>

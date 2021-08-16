@@ -25,4 +25,5 @@
             </table>
         </div>
     </div>
+    <x-student-form></x-student-form>
 </x-app-layout>
