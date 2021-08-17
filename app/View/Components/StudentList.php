@@ -7,13 +7,20 @@ use Illuminate\View\Component;
 class StudentList extends Component
 {
     /**
-     * Create a new component instance.
+     * The alert message.
      *
+     * @var array
+     */
+    public $students;
+    
+    /**
+     * Create a new component instance.
+     * @param  array  $students
      * @return void
      */
-    public function __construct()
+    public function __construct($students)
     {
-        //
+        $this->students = $students;
     }
 
     /**
