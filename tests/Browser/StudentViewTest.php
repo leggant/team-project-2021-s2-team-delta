@@ -23,22 +23,16 @@ class StudentViewTest extends DuskTestCase
         //have to be logged in as a user
 
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
-                //->visit('/login')
-                //->assertPathIs('/login')
-                //->type('email','admin@admin.com')
-                //->type('password','P@ssw0rd')
-                //->press('#log-in')
-                //->assertPathIs('/')
-                ->visit('/add-student')
-                ->type('name','John Doe')
-                ->type('email','John@gmail.com')
-                ->type('github','JohnD')
-                ->press('+')
-                ->assertPathIs('/')
-                ->assertSeeIn('#studentTable > tbody > tr:nth-child(2) > td:nth-child(1)','John Doe')
-                ->assertSeeIn('#studentTable > tbody > tr:nth-child(2) > td:nth-child(2)','John@gmail.com')
-                ->assertSeeIn('#studentTable > tbody > tr:nth-child(2) > td:nth-child(3)','JohnD');
+            $browser->visit('/add-student')
+                    ->assertPathIs('/add-student')
+                    ->type('#name','John Doe')
+                    ->type('#email','John@gmail.com')
+                    ->type('#github','JohnD')
+                    ->press('+')
+                    ->assertPathIs('/home')
+                    ->assertSee('John Doe')
+                    ->assertSee('John@gmail.com')
+                    ->assertSee('JohnD');
         });
     }
 }

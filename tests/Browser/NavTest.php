@@ -2,13 +2,15 @@
 
 namespace Tests\Browser;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Support\Facades\Hash;
 
 class NavTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    // use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -33,10 +35,43 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */
 
+    public function createadminuser()
+    {
+      $this->user = User::factory()->create([
+        'name' => 'admin',
+        'email' => 'admin@admin.com',
+        'password' => Hash::make('password'),
+        'is_admin' => 1,
+      ]);
+    }    
+     
+
+    public function testLogin()
+    {
+        
+        $this->createadminuser();
+
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                    ->assertPathIs('/login')              
+                    ->value('#email', 'admin@admin.com')                    
+                    ->type('@password', 'password')
+                    ->click('button[type="submit"]')
+                    ->assertPathIs('/home')                   
+                    ->visit('/add-student')
+                    ->assertSee('Github:')
+                    ->loginAs(User::find(1));          
+                    
+        });
+    }
+
+
     public function testHomeLink()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->loginAs(User::find(1)) 
+                    ->visit('/')
+                    ->assertPathIs('/')
                     ->assertSee('Welcome');                    
         });
     }
