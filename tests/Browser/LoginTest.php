@@ -9,39 +9,13 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
 
-
-class CohortViewTests extends DuskTestCase
+class LoginTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
      *
      * @return void
      */
-    /*
-    public function testExample()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel');
-        });
-    */
-
-    
-    // use HasFactory;
-    // use DatabaseMigrations;
-    
-    /* 
-    Create the tables of the database and 
-    seed the users to create an admin login
-    */
-    
-    /*
-    public function migrateandseed()
-    {
-        $this->artisan('migrate:fresh');
-        $this->artisan('db:seed');
-    }
-    */      
 
     public function createadminuser()
     {
@@ -56,19 +30,22 @@ class CohortViewTests extends DuskTestCase
             ]);
         }
     }    
-    
+
     public function testLogin()
-    {
-        $this->createadminuser();
+    {          
+        $this->createadminuser();        
 
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                    ->assertPathIs('/login')                   
+                    ->assertPathIs('/login')              
                     ->value('#email', 'admin@admin.com')                    
                     ->type('@password', 'password')
-                    ->click('button[type="submit"]')                    
-                    ->assertPathIs('/home');                    
+                    ->click('button[type="submit"]')
+                    ->assertPathIs('/home')                   
+                    ->visit('/add-student')
+                    ->assertSee('Github:');
+                    // ->loginAs(User::find(1));          
+                    
         });
     }
-    
 }
