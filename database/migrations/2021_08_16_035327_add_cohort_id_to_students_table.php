@@ -14,7 +14,7 @@ class AddCohortIdToStudentsTable extends Migration
     public function up()
     {
         Schema::table('student', function (Blueprint $table) {
-            $table->unsignedBigInteger('cohort_id');
+            $table->unsignedBigInteger('cohort_id')->nullable();
             $table->foreign('cohort_id')->references('id')->on('cohorts');
         });
     }

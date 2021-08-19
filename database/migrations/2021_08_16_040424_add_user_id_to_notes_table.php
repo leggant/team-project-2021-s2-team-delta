@@ -15,7 +15,7 @@ class AddUserIdToNotesTable extends Migration
     {
         Schema::table('notes', function (Blueprint $table) {
             $table->dropColumn('student_name');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
