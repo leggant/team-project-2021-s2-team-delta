@@ -14,7 +14,7 @@ class AddPaperIdToCohortsTable extends Migration
     public function up()
     {
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->dropColumn(['student_id', 'students']);
+            $table->dropColumn(['student_id', 'students', 'subject']);
             $table->unsignedBigInteger('paper_id');
             $table->foreign('paper_id')->references('id')->on('papers');
         });

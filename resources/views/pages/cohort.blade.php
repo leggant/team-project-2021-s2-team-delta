@@ -49,9 +49,14 @@
                                 <form action="{{route('cohorts.store')}}" method="post">
                                 @csrf
 
-
-                                Subject: <input type="text" name="subject" id="subject">
+                                Paper: <select id="paper" name="paper" required>
+                                    @foreach($papers as $paper)
+                                        <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                                    @endforeach
+                                </select>
                                 <br><br>
+                                <!--Subject: <input type="text" name="subject" id="subject">
+                                <br><br>-->
                                 Year: <input type="text" name="year" id="year">
                                 <br>
                                 Semester: <input type="text" name="semester" id="semester">
@@ -63,12 +68,6 @@
                                 -->
                                 <br>
                                 Stream: <input type="text" name="stream" id="stream">
-                                <br><br>
-                                Paper: <select id="paper" name="paper" required>
-                                    @foreach($papers as $paper)
-                                        <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
-                                    @endforeach
-                                </select>
                                 <br><br><br>
 
                                 <input type="submit" name="addCohort" value="Add" />
@@ -81,7 +80,7 @@
                     <div id="bottom-table">
                         <table id="tables">
                             <thead>
-                                <th>Subject</th>
+                                <th>Paper</th>
                                 <th>Year</th>
                                 <th>Semester</th>
                                 <th>Stream</th>
@@ -89,7 +88,7 @@
                             <tbody>
                                 @foreach ($cohorts as $cohort)
                                 <tr>
-                                    <td><a href="/cohort/{{ $cohort->id }}">{{ $cohort->subject }}</a></td>
+                                    <td><a>Studio {{ $cohort->paper_id }}</a></td>
                                     <td>{{ $cohort->year }}</td>
                                     <td>{{ $cohort->semester }}</td>
                                     <td>{{ $cohort->stream }}</td>

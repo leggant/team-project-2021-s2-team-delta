@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cohort;
 use App\Models\Papers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CohortController extends Controller
 {
@@ -39,12 +40,18 @@ class CohortController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-            'subject' => 'required',
+            'paper' => 'required',
             'year' => 'required',
             'semester' => 'required',
             'stream' => 'required',
-            'paper' => 'required',
         ])->validate();
+        $cohort = new Cohort;
+        $cohort->paper_id = $request->input('paper');
+        $cohort->year = $request->input('year');
+        $cohort->semester = $request->input('semester');
+        $cohort->stream = $request->input('stream');
+        $cohort->save();
+        return redirect('/cohorts')->with('success', 'Cohort was Created Successfully!');
     }
 
     /**
