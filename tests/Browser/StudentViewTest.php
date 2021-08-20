@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class StudentViewTest extends DuskTestCase
 {
@@ -19,9 +21,8 @@ class StudentViewTest extends DuskTestCase
 
     public function createadminuser()
     {
-        $user = User::where('email', '=', 'admin@admin.com');
-        if ($user === null)
-        {
+        $user = User::where('email', '=', 'admin@admin.com')->first();
+        if ($user === null) {
             $this->user = User::factory()->create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',

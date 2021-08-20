@@ -33,9 +33,8 @@ class CohortViewTests extends DuskTestCase
 
     public function createadminuser()
     {
-        $user = User::where('email', '=', 'admin@admin.com');
-        if ($user === null)
-        {
+        $user = User::where('email', '=', 'admin@admin.com')->first();
+        if ($user === null) {
             $this->user = User::factory()->create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
@@ -45,7 +44,7 @@ class CohortViewTests extends DuskTestCase
         }
     }    
     
-    public function testFindPage()
+    public function testFindCohortPage()
     {
         $this->createadminuser();
 

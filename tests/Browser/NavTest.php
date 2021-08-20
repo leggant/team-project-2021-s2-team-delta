@@ -4,30 +4,15 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class NavTest extends DuskTestCase
 {
-    // use DatabaseMigrations;
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-
-     /* Commented out to keep for future reference of function layout
-
-        public function testExample()
-        {
-            $this->browse(function (Browser $browser) {
-                $browser->visit('/')
-                        ->assertSee('Laravel');
-            });
-        }
-    */
-
+    
     /* 
         Functions to test each link used in the navigation bar of the app
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
@@ -35,11 +20,12 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
+    // use DatabaseMigrations;
+
     public function createadminuser()
     {
-        $user = User::where('email', '=', 'admin@admin.com');
-        if ($user === null)
-        {
+        $user = User::where('email', '=', 'admin@admin.com')->first();
+        if ($user === null) {
             $this->user = User::factory()->create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
