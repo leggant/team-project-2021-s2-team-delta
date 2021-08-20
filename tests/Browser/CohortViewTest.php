@@ -55,5 +55,34 @@ class CohortViewTests extends DuskTestCase
                     ->assertSee('Add');                    
         });
     }
+
+    public function testAllFieldsEmpty()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cohort')
+                    ->assertPathIs('/cohort')                   
+                    ->press('Add')
+                    ->assertTitle('Add Cohort');                                
+        });
+    }
+
+    /* Enter a string of 192 chars into the student field */
+    
+    public function testOverloadStudents()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cohort')
+                    ->assertPathIs('/cohort')
+                    ->type('#subject', 'Studio 4')
+                    ->type('#year', '2021')
+                    ->type('#semester', '1')
+                    ->type('#stream', 'A') 
+                    ->type('#students', 'ugRZiYXP2gEmkf66NINrE6hYMfs6MzvC607MlApY39Uvat2s3qsSgVdMDJ2hNU5AdYyYAqOfnWzXaXZgxI8MRrX09mg28vCUTxWcxGMsjCTXECwAYCXnRfNN5Chz17UKkEwZqdqYrwjUrdcnrPtfAOy5KkT29I8NNrTl9P7MJujusTnNj57XhPpRXqOoAQj5
+                    ')              
+                    ->press('Add')
+                    ->assertTitle('Add Cohort');                                
+        });
+    }
+    
     
 }
