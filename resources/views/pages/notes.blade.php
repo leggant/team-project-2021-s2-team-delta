@@ -1,36 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <link href="{{ asset('css/notes-styles.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/navbar-styles.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/general-styles.css') }}" rel="stylesheet">
-  
-    <title>Student Note Form</title>
-  </head>
-  <body>
-  @include('inc.navbar')
-    <div class="testbox">
-      <form action="{{route('pages.notes')}}" method="post">
-      @csrf
-        <h1>Notes</h1>
-        <p>Add note for a student</p>
-        <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-            <label for="student">Student: </label>
-            <input name="student" list="student" />
-            <datalist id="student">
-            @foreach($student as $student)        
-            <option value={{$student->name}}>{{$student->name}}</option>
-            @endforeach
-            </datalist>
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold">Student Notes</h1>
+    </x-slot>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <form action="{{ route('pages.notes') }}" method="post">
+                @csrf
+                <label for="student">Student: </label>
+                <input name="student" list="student" placeholder="Select Student" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1"/>
+                <datalist id="student">
+                    @foreach ($student as $student)
+                        <option value={{ $student->name }} >{{ $student->name }}</option>
+                    @endforeach
+                </datalist>
+                <textarea rows="5" name="notes" required class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 mt-8"></textarea>
+                <x-jet-button>Save Note</x-jet-button>
+            </form>
         </div>
-        <hr />
-
-        <h4>Notes:</h4>
-        <textarea style="font-family: sans-serif;" rows="5" name="notes" required></textarea>
-        <div class="btn-block">
-          <button type="submit" name="addNotes" value="Add" >Submit Note</button>
-        </div>
-      </form>
     </div>
-  </body>
-</html>
+</x-app-layout>
