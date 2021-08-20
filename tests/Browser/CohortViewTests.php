@@ -17,19 +17,7 @@ class CohortViewTests extends DuskTestCase
      *
      * @return void
      */
-    /*
-    public function testExample()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel');
-        });
-    */
-
-    
-    // use HasFactory;
-    // use DatabaseMigrations;
-    
+        
     /* 
     Create the tables of the database and 
     seed the users to create an admin login
@@ -57,17 +45,15 @@ class CohortViewTests extends DuskTestCase
         }
     }    
     
-    public function testLogin()
+    public function testFindPage()
     {
         $this->createadminuser();
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                    ->assertPathIs('/login')                   
-                    ->value('#email', 'admin@admin.com')                    
-                    ->type('@password', 'password')
-                    ->click('button[type="submit"]')                    
-                    ->assertPathIs('/home');                    
+            $browser->loginAs(User::find(1))
+                    ->visit('/cohort')
+                    ->assertPathIs('/cohort')                   
+                    ->assertSee('Add');                    
         });
     }
     

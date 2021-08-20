@@ -17,6 +17,8 @@ class LoginTest extends DuskTestCase
      * @return void
      */
 
+    // use DatabaseMigrations;
+
     public function createadminuser()
     {
         $user = User::where('email', '=', 'admin@admin.com');
@@ -43,9 +45,7 @@ class LoginTest extends DuskTestCase
                     ->click('button[type="submit"]')
                     ->assertPathIs('/home')                   
                     ->visit('/add-student')
-                    ->assertSee('Github:');
-                    // ->loginAs(User::find(1));          
-                    
+                    ->assertSee('Github:');                    
         });
     }
 }
