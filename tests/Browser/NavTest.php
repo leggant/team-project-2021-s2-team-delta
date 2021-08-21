@@ -90,6 +90,14 @@ class NavTest extends DuskTestCase
         });
     }
 
+    public function testAdminLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin-panel')
+                    ->assertSee('Manage');                    
+        });
+    }
+
     public function testLogoutLink()
     {
         $this->browse(function (Browser $browser) {

@@ -10,7 +10,7 @@ use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
 
 
-class CohortViewTests extends DuskTestCase
+class CohortViewTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -81,6 +81,23 @@ class CohortViewTests extends DuskTestCase
                     ')              
                     ->press('Add')
                     ->assertTitle('Add Cohort');                                
+        });
+    }
+
+    public function testViewCohort()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cohort')
+                    ->assertPathIs('/cohort')
+                    ->type('#subject', 'Snake Charming')
+                    ->type('#year', '2025')
+                    ->type('#semester', '1')
+                    ->type('#stream', 'A')
+                    ->type('#students', 'Bill Murray, David Smith')                 
+                    ->press('Add')
+                    ->assertTitle('Add Cohort')
+                    ->clickLink('Snake Charming')
+                    ->assertTitle('View Cohort');                                
         });
     }
     
