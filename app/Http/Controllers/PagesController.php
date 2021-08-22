@@ -14,22 +14,22 @@ use App\Models\Evidence;
 
 class PagesController extends Controller
 {
-    public function getCohort($id)
-    {
-        $cohorts = Cohort::query();
-        if ($cohorts->where('id', $id)->exists()) {
-            $cohort = $cohorts->where('id', $id)->first();
-            return view('pages.viewCohort', ['cohort' => $cohort]);
-        } else {
-            return response()->json(['message' => 'Cohort not found.'], 404);
-        }
-    }
+    // public function getCohort($id)
+    // {
+    //     $cohorts = Cohort::query();
+    //     if ($cohorts->where('id', $id)->exists()) {
+    //         $cohort = $cohorts->where('id', $id)->first();
+    //         return view('pages.viewCohort', ['cohort' => $cohort]);
+    //     } else {
+    //         return response()->json(['message' => 'Cohort not found.'], 404);
+    //     }
+    // }
 
-    public function cohort()
-    {
-        $cohorts = DB::select('select * from cohorts');
-        return view('pages.cohort')->with('cohorts', $cohorts);
-    }
+    // public function cohort()
+    // {
+    //     $cohorts = DB::select('select * from cohorts');
+    //     return view('pages.cohort')->with('cohorts', $cohorts);
+    // }
 
     public function evidence()
     {
