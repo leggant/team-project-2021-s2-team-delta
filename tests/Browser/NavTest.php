@@ -35,6 +35,11 @@ class NavTest extends DuskTestCase
         }
     }    
 
+    /* 
+    Methods for testing each link on the navigation bar
+    to ensure the links point to the right places and the pages exist
+    */
+    
     public function testBypassLogin()
     {
         $this->createadminuser();

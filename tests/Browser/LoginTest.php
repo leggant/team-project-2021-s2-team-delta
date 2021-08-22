@@ -32,6 +32,13 @@ class LoginTest extends DuskTestCase
         }
     }    
 
+
+    /*
+    Testing the login process by creating an admin user
+    and entering the email and password into the card/form. The submit
+    button is pressed and the path is checked to ensure login has occurred.
+    */
+
     public function testLogin()
     {          
         $this->createadminuser();        
@@ -47,13 +54,21 @@ class LoginTest extends DuskTestCase
                     ->assertSee('Github:');
                     // ->logout();
 
-             /* Test if another browser instance is logged in with the first - should not be */
+            /*
+            Test if another browser instance is also logged in with the first - should NOT be able to.
+            Only one browser window should be logged in at a time.
+            */
+
             $second->visit('/login')
                     ->assertPathIs('/login');
         });
     }
 
-    /* Attempt to replicate an issue where admin user stays logged in if logout button is not pressed */
+    /*
+    Attempt to replicate an issue where admin user stays logged in if logout button is not pressed
+    (even if browser window is closed and app reloaded)
+    */
+
     public function testIsLoggedOut()
     {
         $this->browse(function (Browser $newbrowser) {

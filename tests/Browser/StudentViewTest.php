@@ -34,8 +34,10 @@ class StudentViewTest extends DuskTestCase
             
     public function testStudentUpload()
     {
-        //make sure a user is created on your local enviroment before running this test
-        //have to be logged in as a user ????
+        // an admin user is created and logged in
+        // the test visits the add-student page and enters data into the fields
+        // the Add/+ button is pressed to submit the data. Success submit is tested
+        // by checking the path and looking for entered data on the page.
 
         $this->createadminuser();
 
