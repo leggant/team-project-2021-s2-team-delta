@@ -1,9 +1,9 @@
-@extends('layouts.main-layout')
-@section('content')
-    <div class="mx-auto sm:px-6 lg:px-8" style="width:50%">
-        <div class="grid grid-cols-1 md:grid-cols-2">
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold capitalize">{{ $student->name }}</h1>
+    </x-slot>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6">
-                <h1>{{ $student->name }}</h1>
                 <p>
                     Email: {{ $student->email }}
                 </p>
@@ -11,19 +11,19 @@
                     Github: {{ $student->github }}
                 </p>
                 <h3>Evidence</h3>
-                <div class="table">
+                <div>
                     <table id="studentEvidence">
                         @foreach ($evidences as $evidence)
                             <tr>
                                 <td>
-                                    <a class="image-link"
+                                    <a
                                         href="../public/images/{{ basename($evidence->image) }}">{{ $evidence->title }}</a>
                                 </td>
                                 <td class="button">
                                     <form method="post" action="{{ route('evidence.destroy', $evidence->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <!--<button class="deleteButton">Delete</button>-->
+                                        <x-jet-danger-button>Delete</x-jet-danger-button>
                                     </form>
                                 </td>
                             </tr>
@@ -36,18 +36,17 @@
                                 <td>
                                     {{ $note->notes }}
                                 </td>
-                                {{-- <td class="button">
+                                <td>
                                     <form method="post" action="{{ route('notes.deleteNote', $note->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <!--<button class="deleteButton">Delete</button>-->
+                                        <x-jet-danger-button>Delete</x-jet-danger-button>
                                     </form>
-                                </td> --}}
+                                </td>
                             </tr>
                         @endforeach
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+</x-app-layout>
