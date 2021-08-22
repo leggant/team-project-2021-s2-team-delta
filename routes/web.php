@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('students', StudentController::class)->except(['delete']);
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class)->name('*', 'users');  
-    Route::resource('cohorts', CohortController::class)->name('*', 'cohorts');
+    Route::resource('cohorts', CohortController::class);
     Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name(
         'evidence.destroy'
     );
