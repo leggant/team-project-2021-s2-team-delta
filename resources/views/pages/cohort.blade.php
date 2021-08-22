@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div>
             <div class="p-6">
-                <form action="{{ route('cohort.store') }}" method="post">
+                <form action="{{ route('cohorts.store') }}" method="post">
                     @csrf
                     <label for="paper">Paper:
                         <select id="paper" name="paper" required>

@@ -28,11 +28,11 @@
                         {{ __('New Student') }}
                     </x-jet-nav-link> --}}
                     <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                        {{ __('View Cohorts') }}
+                        {{ __('Cohorts') }}
                     </x-jet-nav-link>
-                     <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
+                     {{-- <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('View Cohorts') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
                     <x-jet-nav-link href="{{ route('logout') }}" :active="request()->routeIs('logout')">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
