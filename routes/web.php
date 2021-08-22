@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'], function(){
         return view('pages/evidence');
     })->name('evidence.index');
     Route::post('/evidence', 'EvidenceController@store')->name('evidence.store');
-    //Route::post('/cohort', 'ApiController@createCohort');
     Route::post('/notes', 'ApiController@createNote');
     Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
     Route::get('/notes', 'PagesController@notes')->name('pages.notes');
