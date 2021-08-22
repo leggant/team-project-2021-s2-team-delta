@@ -27,7 +27,7 @@
                     {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
                         {{ __('New Student') }}
                     </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('cohort.index') }}" :active="request()->routeIs('cohort.index')">
+                    <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
                         {{ __('View Cohorts') }}
                     </x-jet-nav-link>
                      <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
