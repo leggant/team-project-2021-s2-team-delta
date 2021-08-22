@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Cohort;
+use App\Models\Evidence;
+use App\Models\Note;
 
 class Student extends Model
 {
     use HasFactory;
     protected $table = 'student';
     protected $primaryKey = 'id';
-    protected $fillable = ['student_id', 'first_name', 'last_name', 'username', 'email', 'github'];
+    protected $fillable = ['student_id', 'first_name', 'last_name', 'username', 'email', 'github', 'cohort_id'];
     protected $hidden = ['created_at', 'updated_at'];
 
     public function evidence()
@@ -21,6 +24,11 @@ class Student extends Model
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function cohort()
+    {
+        return $this->belongsTo(Cohort::class, 'foreign_key');
     }
 
     /**

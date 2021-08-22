@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUpdatesToCohortsTable extends Migration
+class AddPaperIdToCohortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,9 @@ class AddUpdatesToCohortsTable extends Migration
     public function up()
     {
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->id('id')->change();
-            $table->after('id', function ($table) {
-                $table->unsignedBigInteger('student_id');
-            });
-            // This will at some point need to be dropped. Students will be added via the relationship w/ student_id to student table.
-            //$table->dropColumn('students');
+            $table->dropColumn(['student_id', 'students', 'subject']);
+            $table->unsignedBigInteger('paper_id');
+            $table->foreign('paper_id')->references('id')->on('papers');
         });
     }
 
@@ -31,7 +28,9 @@ class AddUpdatesToCohortsTable extends Migration
     public function down()
     {
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->dropForeign(['student_id']);
+            $table->dropForeign(['paper_id']);
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->string('students')->default(' ')->nullable();
         });
     }
 }
