@@ -36,15 +36,29 @@ class LoginTest extends DuskTestCase
     {          
         $this->createadminuser();        
 
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
+        $this->browse(function ($first, $second) {
+            $first->visit('/login')
                     ->assertPathIs('/login')              
                     ->value('#email', 'admin@admin.com')                    
                     ->type('@password', 'password')
                     ->click('button[type="submit"]')
                     ->assertPathIs('/home')                   
                     ->visit('/add-student')
-                    ->assertSee('Github:');                    
+                    ->assertSee('Github:');
+                    // ->logout();
+
+             /* Test if another browser instance is logged in with the first - should not be */
+            $second->visit('/login')
+                    ->assertPathIs('/login');
+        });
+    }
+
+    /* Attempt to replicate an issue where admin user stays logged in if logout button is not pressed */
+    public function testIsLoggedOut()
+    {
+        $this->browse(function (Browser $newbrowser) {
+            $newbrowser->visit('/login')                    
+                    ->assertPathIs('/login');                    
         });
     }
 }
