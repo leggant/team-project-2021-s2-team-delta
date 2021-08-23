@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Student;
 
 class Note extends Model
 {
@@ -13,15 +11,5 @@ class Note extends Model
 
     protected $table = 'notes';
 
-    protected $fillable = ['notes', 'student_id', 'user_id'];
-
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'foreign_key');
-    }
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class,'foreign_key');
-    }
+    protected $fillable = ['student_name', 'notes'];
 }

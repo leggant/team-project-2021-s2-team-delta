@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 <x-app-layout>
+=======
+@extends('layouts.main-layout')
+
+@section('content')
+>>>>>>> master
     <!-- Form that allows user to create a new user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <form action="{{route('users.store')}}" method='POST'>
@@ -25,6 +31,7 @@
                 </div>
                 <br>
                 <div>
+<<<<<<< HEAD
                     <h5>Select Paper:</h5>
                     <select id="paper" name="Paper" required>
                         @foreach($papers as $paper)
@@ -34,6 +41,8 @@
                 </div>
                 <br>
                 <div>
+=======
+>>>>>>> master
                     <input type='submit' name='submit' value='Submit'>
                 </div>
             </fieldset>
@@ -41,4 +50,8 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
+<<<<<<< HEAD
 </x-app-layout>
+=======
+@endsection
+>>>>>>> master

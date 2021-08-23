@@ -1,6 +1,10 @@
 {
     "trailingComma": "none",
     "tabWidth": 4,
+<<<<<<< HEAD
     "semi": true,
+=======
+    "semi": false,
+>>>>>>> master
     "singleQuote": true
 }
