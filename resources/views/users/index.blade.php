@@ -1,18 +1,8 @@
-<<<<<<< HEAD
 <x-app-layout>
     <!-- A table of all users in the database -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
         <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
-=======
-@extends('layouts.main-layout')
-
-@section('content')
-    <!-- A table of all users in the database -->
-    @if(Auth::check() && Auth::user()->isAdmin())
-        <div>
-            <a style="margin-left:700px; color:white;" href="{{route('users.create')}}">Create</a>
->>>>>>> master
         </div>
         <br>
         <div style="margin-left: 600px;">
@@ -21,10 +11,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-<<<<<<< HEAD
                         <th>Papers</th>
-=======
->>>>>>> master
                         <th>Is Admin</th>
                         <th>Actions</th>
                     </tr>
@@ -32,10 +19,7 @@
                         <tr>
                             <td>{{$users->name}}</td>
                             <td>{{$users->email}}</td>
-<<<<<<< HEAD
                             <td>{{$users->paper_id}}</td>
-=======
->>>>>>> master
                             @if($users->is_admin == 1) <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
                                 <td>Yes</td>
                             @else
@@ -47,20 +31,12 @@
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE')}}
-<<<<<<< HEAD
                                             <x-jet-danger-button><input type="submit" name="delete" value="Delete"></x-jet-danger-button>
                                     </form>
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
                             </td>
                             
-=======
-                                            <input type="submit" class="btn btn-danger" name="delete" value="Delete">
-                                    </form>
-                                @endif   
-                                <a class="btn btn-primary" href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a>
-                            </td>
->>>>>>> master
                         </tr>
                     @endforeach
                 </tbody>
@@ -70,8 +46,4 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
-<<<<<<< HEAD
 </x-app-layout>
-=======
-@endsection
->>>>>>> master
