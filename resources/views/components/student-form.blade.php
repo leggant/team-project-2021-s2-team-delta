@@ -13,7 +13,7 @@
         <label for="email">Student Email:</label>
         <input type="email" id="email" name="email" 
         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1" required>
-        <label for="Github">Github Username:</label>
+        <label for="github">Github Username:</label>
         <input type="text" id="github" name="github" 
         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
         <x-jet-button>Add New Student</x-jet-button>
