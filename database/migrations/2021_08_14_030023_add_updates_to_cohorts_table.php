@@ -16,7 +16,7 @@ class AddUpdatesToCohortsTable extends Migration
         Schema::table('cohorts', function (Blueprint $table) {
             $table->id('id')->change();
             $table->after('id', function ($table) {
-                $table->unsignedBigInteger('student_id');
+                $table->unsignedBigInteger('student_id')->nullable();
             });
             // This will at some point need to be dropped. Students will be added via the relationship w/ student_id to student table.
             //$table->dropColumn('students');
