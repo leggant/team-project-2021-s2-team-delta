@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Papers;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $papers = Papers::all(); #Grabs all papers
+        return view('users.create', compact('papers'));
     }
 
     /**
@@ -45,6 +47,7 @@ class UserController extends Controller
             'Name' => 'required',
             'Email' => 'required',
             'Password' => 'required',
+            'Paper' => 'required',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
@@ -57,7 +60,8 @@ class UserController extends Controller
         {
             $user->is_admin = 1;
         }
-        #Save the mew user
+        $user->paper_id = $request->input('Paper');
+        #Save the new user
         $user->save();
         return redirect('/users')->with('success', 'User was Created Successfully!');
     }
@@ -81,7 +85,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $papers = Papers::all();
+        return view('users.edit', compact('user', 'papers'));
     }
 
     /**
@@ -97,6 +102,7 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
+            'Paper' => 'required'
         ])->validate();
 
         #Change db field of user to new information provided
@@ -110,6 +116,7 @@ class UserController extends Controller
         {
             $user->is_admin = 0;
         }
+        $user->paper_id = $request->input('Paper');
         #Save the new information to exisitng user
         $user->save();
 

@@ -1,6 +1,4 @@
-@extends('layouts.main-layout')
-
-@section('content')
+<x-app-layout>
     <!-- Form that allows the user to edit a user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
@@ -30,6 +28,15 @@
                 </div>
                 <br>
                 <div>
+                    <h5>Select Paper:</h5>
+                    <select id="paper" name="Paper" required>
+                        @foreach($papers as $paper)
+                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+                <div>
                     <input type='submit' name='submit' value='Submit'>
                 </div>
             </fieldset>
@@ -37,4 +44,4 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
-@endsection
+</x-app-layout>
