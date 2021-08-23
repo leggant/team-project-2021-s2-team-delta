@@ -26,10 +26,10 @@
                     @if(Auth::check())
                         <form method="POST" action="{{ route('logout') }}">
                             {{csrf_field()}}
-                            <a href="{{route('logout')}}" class="nav-link">Log out</a>
+                            <a href="{{route('logout')}}" class="nav-link" dusk="loginout">Log out</a>
                         </form>
                     @else
-                        <a href="{{route('login')}}" class="nav-link">Log in</a>
+                        <a href="{{route('login')}}" class="nav-link" dusk="loginout">Log in</a>
                     @endif
                 </li>
             </ul>

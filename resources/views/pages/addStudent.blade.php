@@ -22,10 +22,10 @@
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" class="formInput" required>
       
-      <label for="mail">Email:</label>
-      <input type="email" id="mail" name="email" class="formInput" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" class="formInput" required>
       
-      <label for="Github">Github:</label>
+      <label for="github">Github:</label>
       <input type="text" id="github" name="github" class="formInput" required>     
 
 
