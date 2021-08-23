@@ -1,10 +1,8 @@
-@extends('layouts.main-layout')
-
-@section('content')
+<x-app-layout>
     <!-- A table of all users in the database -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
-            <a style="margin-left:700px; color:white;" href="{{route('users.create')}}">Create</a>
+        <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
         </div>
         <br>
         <div style="margin-left: 600px;">
@@ -33,11 +31,12 @@
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE')}}
-                                            <input type="submit" class="btn btn-danger" name="delete" value="Delete">
+                                            <x-jet-danger-button><input type="submit" name="delete" value="Delete"></x-jet-danger-button>
                                     </form>
                                 @endif   
-                                <a class="btn btn-primary" href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a>
+                                <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
@@ -47,4 +46,4 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
-@endsection
+</x-app-layout>

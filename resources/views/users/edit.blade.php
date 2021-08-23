@@ -1,6 +1,4 @@
-@extends('layouts.main-layout')
-
-@section('content')
+<x-app-layout>
     <!-- Form that allows the user to edit a user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <div>
@@ -46,4 +44,4 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
-@endsection
+</x-app-layout>

@@ -1,6 +1,4 @@
-@extends('layouts.main-layout')
-
-@section('content')
+<x-app-layout>
     <!-- Form that allows user to create a new user -->
     @if(Auth::check() && Auth::user()->isAdmin())
         <form action="{{route('users.store')}}" method='POST'>
@@ -43,4 +41,4 @@
     @else
         <h2>You do not have access to this page</h2>
     @endif
-@endsection
+</x-app-layout>
