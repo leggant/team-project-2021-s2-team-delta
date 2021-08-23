@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Papers;
+use App\Models\Evidence;
+use App\Models\Note;
 
 class User extends Authenticatable
 {
@@ -67,5 +70,20 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->is_admin;
+    }
+
+    public function papers()
+    {
+        return $this->belongsToMany(Papers::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function evidence()
+    {
+        return $this->hasMany(Evidence::class);
     }
 }

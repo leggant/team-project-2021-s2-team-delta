@@ -27,6 +27,15 @@
                 </div>
                 <br>
                 <div>
+                    <h5>Select Paper:</h5>
+                    <select id="paper" name="Paper" required>
+                        @foreach($papers as $paper)
+                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+                <div>
                     <input type='submit' name='submit' value='Submit'>
                 </div>
             </fieldset>
