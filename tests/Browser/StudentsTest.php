@@ -36,8 +36,8 @@ class StudentsTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
-                    ->visit('/student')
-                    ->assertPathIs('/student')                   
+                    ->visit('/students')
+                    ->assertPathIs('/students')                   
                     ;                    
         });
     }

@@ -50,56 +50,75 @@ class CohortViewTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
-                    ->visit('/cohort')
-                    ->assertPathIs('/cohort')                   
-                    ->assertSee('Add');                    
+                    ->visit('/cohorts')
+                    ->assertPathIs('/cohorts')                   
+                    ->assertSee('Studio Cohorts');                    
         });
     }
 
     public function testAllFieldsEmpty()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/cohort')
-                    ->assertPathIs('/cohort')                   
-                    ->press('Add')
-                    ->assertTitle('Add Cohort');                                
+            $browser->visit('/cohorts')
+                    ->assertPathIs('/cohorts')                   
+                    ->press('SAVE')
+                    ->assertPathIs('/cohorts');                                
         });
     }
 
-    /* Enter a string of 192 chars into the student field */
+    /* Enter a string of 192 chars into the student field
+    NOT CURRENTLY APPLICABLE */
     
+    /*
     public function testOverloadStudents()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/cohort')
-                    ->assertPathIs('/cohort')
-                    ->type('#subject', 'Studio 4')
+            $browser->visit('/cohorts')
+                    ->assertPathIs('/cohorts')
+                    ->select('paper', '1')
                     ->type('#year', '2021')
                     ->type('#semester', '1')
                     ->type('#stream', 'A') 
                     ->type('#students', 'ugRZiYXP2gEmkf66NINrE6hYMfs6MzvC607MlApY39Uvat2s3qsSgVdMDJ2hNU5AdYyYAqOfnWzXaXZgxI8MRrX09mg28vCUTxWcxGMsjCTXECwAYCXnRfNN5Chz17UKkEwZqdqYrwjUrdcnrPtfAOy5KkT29I8NNrTl9P7MJujusTnNj57XhPpRXqOoAQj5
-                    ')              
-                    ->press('Add')
-                    ->assertTitle('Add Cohort');                                
+                    ')             
+                    ->press('SAVE')
+                    ->assertPathIs('/cohorts');                                
+        });
+    }
+    */
+
+    public function testMakeCohort()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/cohorts')
+                    ->assertPathIs('/cohorts')
+                    ->select('paper', '1')
+                    ->type('#year', '2021')
+                    ->type('#semester', '1')
+                    ->type('#stream', 'A')                               
+                    ->press('SAVE')
+                    ->assertPathIs('/cohorts');                                
         });
     }
 
+    /* Feature not on current site */
+
+    /*
     public function testViewCohort()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/cohort')
-                    ->assertPathIs('/cohort')
-                    ->type('#subject', 'Snake Charming')
+            $browser->visit('/cohorts')
+                    ->assertPathIs('/cohorts')
+                    ->select('paper', '4')
                     ->type('#year', '2025')
                     ->type('#semester', '1')
-                    ->type('#stream', 'A')
-                    ->type('#students', 'Bill Murray, David Smith')                 
-                    ->press('Add')
-                    ->assertTitle('Add Cohort')
+                    ->type('#stream', 'A')                                    
+                    ->press('SAVE')
+                    ->assertPathIs('/cohorts')
                     ->clickLink('Snake Charming')
                     ->assertTitle('View Cohort');                                
         });
     }
-    
+    */  
     
 }

@@ -41,7 +41,7 @@
                      {{-- <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('View Cohorts') }}
                     </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('logout') }}" :active="request()->routeIs('logout')">
+                    <x-jet-nav-link dusk="loginout" href="{{ route('logout') }}" :active="request()->routeIs('logout')">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             {{ __('Log Out') }}
@@ -144,7 +144,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                <x-jet-dropdown-link dusk="logoutdropdown" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}

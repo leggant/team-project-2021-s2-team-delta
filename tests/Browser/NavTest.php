@@ -66,16 +66,16 @@ class NavTest extends DuskTestCase
     public function testNewStudentLink()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/add-student')
-                    ->assertSee('Add Student');                    
+            $browser->visit('/students')
+                    ->assertSee('Student Admin');                    
         });
     }
 
     public function testCohortLink()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/cohort')
-                    ->assertSee('Add Cohort');                    
+            $browser->visit('/cohorts')
+                    ->assertSee('Studio Cohorts');                    
         });
     }
 
@@ -94,7 +94,8 @@ class NavTest extends DuskTestCase
                     ->assertSee('Notes');                    
         });
     }
-
+    
+    /*
     public function testAdminLink()
     {
         $this->browse(function (Browser $browser) {
@@ -102,6 +103,7 @@ class NavTest extends DuskTestCase
                     ->assertSee('Manage');                    
         });
     }
+    */
 
     public function testLogoutLink()
     {

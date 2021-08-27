@@ -43,16 +43,38 @@ class StudentViewTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
-                    ->visit('/add-student')
-                    ->assertPathIs('/add-student')
-                    ->type('#name','John Doe')
+                    ->visit('/students')
+                    ->assertPathIs('/students')
+                    ->type('#first_name','John')
+                    ->type('#last_name', 'Doe')
+                    ->type('#id', '666666666')
                     ->type('#email','John@gmail.com')
                     ->type('#github','JohnD')
-                    ->press('+')
-                    ->assertPathIs('/')
+                    ->press('ADD NEW STUDENT')
+                    ->assertPathIs('/students')
                     ->assertSee('John Doe')
+                    ->assertSee('666666666')
                     ->assertSee('John@gmail.com')
                     ->assertSee('JohnD');
+        });
+    }
+
+    public function testDuplicateEmail()
+    {
+        /* Test for bug with non-unique email address e.g use the same email address again for a new record */
+
+        $this->browse(function (Browser $browser) {
+            $browser
+                    ->visit('/students')
+                    ->assertPathIs('/students')
+                    ->type('#first_name','John')
+                    ->type('#last_name', 'Doe')
+                    ->type('#id', '666666666')
+                    ->type('#email','John@gmail.com')
+                    ->type('#github','JohnD')
+                    ->press('ADD NEW STUDENT')
+                    ->assertPathIs('/students');
+                    
         });
     }
 }
