@@ -38,8 +38,8 @@ class EvidenceTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                     ->visit('/evidence')
-                    ->assertPathIs('/evidence')                   
-                    ;                    
+                    ->assertPathIs('/evidence');
+                                        
         });
     }
 }

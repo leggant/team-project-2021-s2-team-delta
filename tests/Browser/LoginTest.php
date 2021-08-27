@@ -49,31 +49,28 @@ class LoginTest extends DuskTestCase
                     ->value('#email', 'admin@admin.com')                    
                     ->type('@password', 'password')
                     ->click('button[type="submit"]')
-                    ->assertPathIs('/home')                   
-                    ->visit('/add-student')
-                    ->assertSee('Github:');
-                    // ->logout();
+                    ->assertPathIs('/')                   
+                    ->visit('/students')
+                    ->assertSee('Github');
+                    
 
             /*
             Test if another browser instance is also logged in with the first - should NOT be able to.
             Only one browser window should be logged in at a time.
+            REMOVED: Simplified log in tests for now
             */
-
-            $second->visit('/login')
-                    ->assertPathIs('/login');
+            /*
+            $second->visit('/')
+                    ->assertPathIs('/');
+            */
         });
     }
 
     /*
     Attempt to replicate an issue where admin user stays logged in if logout button is not pressed
     (even if browser window is closed and app reloaded)
+    REMOVED: Simplified log in tests for now
     */
 
-    public function testIsLoggedOut()
-    {
-        $this->browse(function (Browser $newbrowser) {
-            $newbrowser->visit('/login')                    
-                    ->assertPathIs('/login');                    
-        });
-    }
+    
 }
