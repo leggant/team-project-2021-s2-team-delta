@@ -63,6 +63,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "update-chrome-driver": [
+            "php artisan dusk:chrome-driver --detect"
         ]
     }
 }

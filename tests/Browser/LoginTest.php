@@ -3,9 +3,11 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use database\factories\UserFactory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Laravel\Dusk\Browser;
+use Laravel\Dusk\Chrome;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,22 +19,8 @@ class LoginTest extends DuskTestCase
      * @return void
      */
 
-    // use DatabaseMigrations;
-
-    public function createadminuser()
-    {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'is_admin' => 1,
-            ]);
-        }
-    }    
-
-
+    use RefreshDatabase;
+  
     /*
     Testing the login process by creating an admin user
     and entering the email and password into the card/form. The submit
@@ -41,16 +29,19 @@ class LoginTest extends DuskTestCase
 
     public function testLogin()
     {          
-        $this->createadminuser();        
-
-        $this->browse(function ($first, $second) {
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'is_admin' => 1,
+            'password' => Hash::make('admin')
+        ]);
+        $this->browse(function ($first, $second) use ($user) {
             $first->visit('/login')
-                    ->assertPathIs('/login')              
-                    ->value('#email', 'admin@admin.com')                    
-                    ->type('@password', 'password')
-                    ->click('button[type="submit"]')
-                    ->assertPathIs('/home')                   
-                    ->visit('/add-student')
+                    ->assertPathIs('/login') 
+                    ->loginAs($user)             
+                    // ->press(' Log In ')
+                    ->visit('/')
+                    ->assertPathIs('/')                  
                     ->assertSee('Github:');
                     // ->logout();
 
@@ -71,8 +62,14 @@ class LoginTest extends DuskTestCase
 
     public function testIsLoggedOut()
     {
-        $this->browse(function (Browser $newbrowser) {
-            $newbrowser->visit('/login')                    
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'is_admin' => 1,
+            'password' => Hash::make('admin')
+        ]);
+        $this->browse(function ($browser) {
+            $browser->visit('/login')                    
                     ->assertPathIs('/login');                    
         });
     }
