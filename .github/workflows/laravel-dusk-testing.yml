@@ -61,7 +61,7 @@ jobs:
             npm run dev
       - name: Prepare the application
         run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php -r "file_exists('.env') || copy('.env.dusk.local', '.env');"
           php artisan key:generate
       - name: Clear Config
         run: php artisan config:clear
@@ -76,9 +76,11 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Upgrade Chrome Driver
-        run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+        run: php artisan dusk:chrome-driver --detect
       - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+        run: |
+          chmod -R 0755 vendor/laravel/dusk/bin/
+          ./vendor/laravel/dusk/bin/chromedriver-linux &
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
@@ -94,6 +96,11 @@ jobs:
         run: php artisan serve > /dev/null 2>&1 &
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Test with Dusk
+        run: php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
