@@ -15,9 +15,9 @@ class Papers extends Model
 
     protected $fillable = ['paper_name'];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'users_papers', 'paper_id', 'user_id',);
     }
 
     public function cohort()

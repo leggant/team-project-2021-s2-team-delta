@@ -47,7 +47,6 @@ class UserController extends Controller
             'Name' => 'required',
             'Email' => 'required',
             'Password' => 'required',
-            'Paper' => 'required',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
@@ -60,7 +59,6 @@ class UserController extends Controller
         {
             $user->is_admin = 1;
         }
-        $user->paper_id = $request->input('Paper');
         #Save the new user
         $user->save();
         return redirect('/users')->with('success', 'User was Created Successfully!');
@@ -102,7 +100,7 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
-            'Paper' => 'required'
+            'Papers' => 'required|array',
         ])->validate();
 
         #Change db field of user to new information provided
@@ -116,7 +114,7 @@ class UserController extends Controller
         {
             $user->is_admin = 0;
         }
-        $user->paper_id = $request->input('Paper');
+        $user->papers()->attach($request->input('Papers'));
         #Save the new information to exisitng user
         $user->save();
 
@@ -133,6 +131,7 @@ class UserController extends Controller
     {
         #Delete a user
         $user->delete();
+        $user->papers()->detach();
         return redirect('/users')->with('success', 'User Deleted');
     }
 }

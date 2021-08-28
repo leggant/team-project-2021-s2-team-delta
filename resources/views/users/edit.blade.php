@@ -28,8 +28,18 @@
                 </div>
                 <br>
                 <div>
-                    <h5>Select Paper:</h5>
-                    <select id="paper" name="Paper" required>
+                    <h5>Select Papers:</h5>
+                    <select id="paper" name="Papers[]" required>
+                        @foreach($papers as $paper)
+                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                        @endforeach
+                    </select>
+                    <select id="paper" name="Papers[]" required>
+                        @foreach($papers as $paper)
+                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                        @endforeach
+                    </select>
+                    <select id="paper" name="Papers[]" required>
                         @foreach($papers as $paper)
                             <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
                         @endforeach
@@ -37,6 +47,7 @@
                 </div>
                 <br>
                 <div>
+                    <input type="hidden" value="{{$user->id}}" id="userID" name="userID">
                     <input type='submit' name='submit' value='Submit'>
                 </div>
             </fieldset>
