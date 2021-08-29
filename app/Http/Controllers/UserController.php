@@ -114,7 +114,7 @@ class UserController extends Controller
         {
             $user->is_admin = 0;
         }
-        $user->papers()->attach($request->input('Papers'));
+        $user->papers()->sync($request->input('Papers'));
         #Save the new information to exisitng user
         $user->save();
 
@@ -131,7 +131,7 @@ class UserController extends Controller
     {
         #Delete a user
         $user->delete();
-        $user->papers()->detach();
+        $user->papers()->detach($user->id);
         return redirect('/users')->with('success', 'User Deleted');
     }
 }
