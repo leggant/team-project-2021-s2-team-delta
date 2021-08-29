@@ -52,7 +52,7 @@ class StudentViewTest extends DuskTestCase
                     ->type('#github','JohnD')
                     ->press('ADD NEW STUDENT')
                     ->assertPathIs('/students')
-                    ->assertSee('John Doe')
+                    ->assertSee('Doe')
                     ->assertSee('666666666')
                     ->assertSee('John@gmail.com')
                     ->assertSee('JohnD');
