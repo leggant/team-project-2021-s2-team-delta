@@ -114,6 +114,7 @@ class UserController extends Controller
         {
             $user->is_admin = 0;
         }
+        #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
         $user->papers()->sync($request->input('Papers'));
         #Save the new information to exisitng user
         $user->save();
@@ -131,6 +132,7 @@ class UserController extends Controller
     {
         #Delete a user
         $user->delete();
+        #Deletes data relevant to the user in the pivot table
         $user->papers()->detach($user->id);
         return redirect('/users')->with('success', 'User Deleted');
     }
