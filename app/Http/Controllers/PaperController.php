@@ -75,10 +75,9 @@ class PaperController extends Controller
      * @param  \App\Models\Papers  $papers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Papers $papers)
+    public function edit(Papers $paper)
     {
-        dd($papers);
-        return view('papers.edit', compact('papers'));
+        return view('papers.edit', compact('paper'));
     }
 
     /**
@@ -88,7 +87,7 @@ class PaperController extends Controller
      * @param  \App\Models\Papers  $papers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Papers $papers)
+    public function update(Request $request, Papers $paper)
     {
         #Validate the fields recieved
         Validator::make($request->all(), [
@@ -103,8 +102,8 @@ class PaperController extends Controller
             return redirect('/papers')->with('duplicate', 'Paper Already Exists');
         }
         else {
-            $papers->paper_name = $request->input('paper');
-            $papers->save();
+            $paper->paper_name = $request->input('paper');
+            $paper->save();
             return redirect('/papers')->with('success', 'Paper Updated Successfully');
 
         }
@@ -116,10 +115,9 @@ class PaperController extends Controller
      * @param  \App\Models\Papers  $papers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Papers $papers)
+    public function destroy(Papers $paper)
     {
-        dd($papers);
-        $papers->delete();
+        $paper->delete();
         return redirect('/papers')->with('success', 'Paper Deleted');
     }
 }
