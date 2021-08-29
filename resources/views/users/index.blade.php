@@ -35,7 +35,7 @@
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE')}}
-                                            <x-jet-danger-button><input type="submit" name="delete" value="Delete"></x-jet-danger-button>
+                                            <x-jet-danger-button type="submit" name="delete">Delete</x-jet-danger-button>
                                     </form>
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>

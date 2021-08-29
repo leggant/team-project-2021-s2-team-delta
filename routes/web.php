@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function(){
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class)->name('*', 'users');  
     Route::resource('cohorts', CohortController::class);
+    Route::resource('papers', PaperController::class);
     Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name(
         'evidence.destroy'
     );

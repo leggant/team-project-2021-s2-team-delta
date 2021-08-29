@@ -12,6 +12,7 @@ class Papers extends Model
     use HasFactory;
 
     protected $table = 'papers';
+    public $timestamps = false;
 
     protected $fillable = ['paper_name'];
 
