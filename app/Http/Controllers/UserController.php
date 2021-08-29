@@ -84,7 +84,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $papers = Papers::all();
-        return view('users.edit', compact('user', 'papers'));
+        $id = Auth::id(); #Grabs id of logged in user
+        return view('users.edit', compact('user', 'papers', 'id'));
     }
 
     /**
