@@ -33,6 +33,6 @@ class CreateUserPapersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_papers');
+        Schema::dropIfExists('user_papers');
     }
 }
