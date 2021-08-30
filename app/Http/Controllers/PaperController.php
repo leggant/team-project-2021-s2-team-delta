@@ -117,7 +117,7 @@ class PaperController extends Controller
      */
     public function destroy(Papers $paper)
     {
-        $paper->delete();
-        return redirect('/papers')->with('success', 'Paper Deleted');
+        //$paper->delete();
+        //return redirect('/papers')->with('success', 'Paper Deleted');
     }
 }
