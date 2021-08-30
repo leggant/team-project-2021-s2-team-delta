@@ -11,9 +11,7 @@
                 <x-jet-button type='submit' name='submit'>Add a new paper</x-jet-button>
             </fieldset>
         </form>
-        <br>
         <hr>
-        <br>
         <table class="table-fixed w-full">
             <thead>
                 <tr class="bg-gray-100">
