@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\StudentController;
-// use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +21,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('cohorts', CohortController::class);
     Route::resource('evidence', EvidenceController::class);
     Route::resource('notes', NoteController::class);
-    // Route::post('/evidence', 'EvidenceController@store')->name('evidence.store');
-    // Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
-    //Route::get('/notes', 'PagesController@notes')->name('pages.notes');
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
