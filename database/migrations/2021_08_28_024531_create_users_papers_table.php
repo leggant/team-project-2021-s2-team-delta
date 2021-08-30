@@ -13,7 +13,7 @@ class CreateUserPapersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_papers', function (Blueprint $table) {
+        Schema::create('user_papers', function (Blueprint $table) {
             $table->bigIncrements('id');        
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
