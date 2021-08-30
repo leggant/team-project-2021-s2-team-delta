@@ -21,16 +21,11 @@ Route::group(['middleware' => 'auth'], function(){
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class)->name('*', 'users');  
     Route::resource('cohorts', CohortController::class);
-    Route::delete('/evidence/{id}', 'EvidenceController@destroy')->name(
-        'evidence.destroy'
-    );
-    Route::get('/evidence', function () {
-        return view('pages/evidence');
-    })->name('evidence.index');
-    Route::post('/evidence', 'EvidenceController@store')->name('evidence.store');
-    Route::post('/notes', 'ApiController@createNote');
-    Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
-    Route::get('/notes', 'PagesController@notes')->name('pages.notes');
+    Route::resource('evidence', EvidenceController::class);
+    Route::resource('notes', NoteController::class);
+    // Route::post('/evidence', 'EvidenceController@store')->name('evidence.store');
+    // Route::get('/evidence', 'PagesController@evidence')->name('pages.evidence');
+    //Route::get('/notes', 'PagesController@notes')->name('pages.notes');
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
@@ -41,8 +36,13 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+    return view('pages.students');
+})->name('home');
+
+// Dashboard route needs to be kept so this can be re-deployed later.
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 Route::get('logout', function () {
     auth()->logout();
