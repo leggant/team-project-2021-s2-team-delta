@@ -24,11 +24,11 @@
                     <tr>
                         <td class="border px-4 py-2">{{$p->paper_name}}</td>
                         <td class="border px-4 py-2">
-                            <form action="{{route('papers.destroy', $p->id)}}" method="POST">       
+                            <!--<form action="{{route('papers.destroy', $p->id)}}" method="POST">       
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
                                 <x-jet-danger-button type="submit" name="delete">Delete</x-jet-danger-button>
-                            </form>
+                            </form>-->
                             <x-jet-button><a href="{{route('papers.edit', $p->id)}}" name="edit-papers">Edit</a></x-jet-button>
                         </td>
                     </tr>
