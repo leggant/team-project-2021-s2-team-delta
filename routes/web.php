@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('students', StudentController::class)->except(['delete']);
     // wildcard name not needed, it's the default given in the first set of round brackets
-    Route::resource('users', UserController::Class)->name('*', 'users');  
+    Route::resource('users', UserController::Class);  
     Route::resource('cohorts', CohortController::class);
     Route::resource('evidence', EvidenceController::class);
     Route::resource('notes', NoteController::class);
+    Route::resource('papers', PaperController::class);
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
@@ -29,7 +30,6 @@ Route::group(['middleware' => 'auth'], function(){
         return redirect('/')->with('status', 'Error, Page Not Found');
     });
 });
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('pages.students');
 })->name('home');
