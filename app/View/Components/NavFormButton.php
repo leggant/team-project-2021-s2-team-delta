@@ -4,16 +4,21 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class nav-link-form-btn extends Component
+class NavFormButton extends Component
 {
     /**
+     * @var string
+     */
+    public $action;
+
+    /**
      * Create a new component instance.
-     *
+     * @param string $action
      * @return void
      */
-    public function __construct()
+    public function __construct($action)
     {
-        //
+        $this->action = $action;
     }
 
     /**
@@ -23,6 +28,6 @@ class nav-link-form-btn extends Component
      */
     public function render()
     {
-        return view('components.nav-link-form-btn');
+        return view('components.nav-form-button');
     }
 }
