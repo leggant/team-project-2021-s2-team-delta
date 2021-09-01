@@ -61,7 +61,7 @@ class LoginTest extends DuskTestCase
     public function testIsLoggedOut()
     {
         $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) {
+        $this->browse(function ($browser) use ($user) {
         $browser->loginAs($user)->visit('/')
                 ->assertPathIs('/');
         $browser->screenshot('home-page');

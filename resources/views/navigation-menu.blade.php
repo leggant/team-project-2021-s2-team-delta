@@ -33,12 +33,12 @@
                      {{-- <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
                         {{ __('View Cohorts') }}
                     </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('logout') }}" :active="request()->routeIs('logout')">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-jet-nav-link>
                             {{ __('Log Out') }}
-                        </form>
-                    </x-jet-nav-link>
+                        </x-jet-nav-link>
+                    </form>
                 </div>
             </div>
 

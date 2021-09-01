@@ -45,6 +45,7 @@ class NavTest extends DuskTestCase
 
     public function testHomeLink()
     {
+        $user = User::where('name', 'admin')->first(); 
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/')
                 ->assertPathIs('/login')              
