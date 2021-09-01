@@ -17,7 +17,6 @@ class CohortViewTest extends DuskTestCase
 
     public function createUser()
     {
-        Artisan::call('migrate:fresh');
         $user = User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
