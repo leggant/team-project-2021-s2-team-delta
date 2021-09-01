@@ -1,9 +1,9 @@
 name: Laravel Dusk Testing
 on:
   push:
-    branches: [sprint-*, master, main] 
+    branches: [sprint-*] 
   pull_request:
-    branches: [staging-*, master, main]
+    branches: [staging, master, main]
 
 jobs:
   Laravel-Set-Up:
@@ -47,15 +47,16 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: '12.x'
+      - run: |
+            npm install
+            npm run production
       - name: Install Composer dependencies
         run: |
-            composer install --no-progress --prefer-dist --optimize-autoloader
+            composer install --no-progress --prefer-dist --no-ansi --no-interactions --no-scripts
             chmod -R 777 storage bootstrap/cache
-            npm install
-            npm run dev
       - name: Prepare the application
         run: |
           chmod -R 777 storage bootstrap/cache
