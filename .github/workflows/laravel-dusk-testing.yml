@@ -89,7 +89,16 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
         run: php artisan serve > /dev/null 2>&1 &
-      - name: Test with phpunit
+      - name: Run Dusk Tests
+        run: |
+          php artisan config:cache
+          php artisan dusk
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+          DB_DATABASE: dusktest
+          DB_USERNAME: root      
+      - name: Run PHPUnit Tests
         run: |
           php artisan config:cache
           vendor/bin/phpunit --coverage-text
@@ -98,8 +107,6 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
           DB_DATABASE: dusktest
           DB_USERNAME: root
-      - name: Test with Dusk
-        run: php artisan dusk
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
