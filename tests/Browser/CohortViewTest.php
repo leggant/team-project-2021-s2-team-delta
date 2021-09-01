@@ -46,15 +46,17 @@ class CohortViewTest extends DuskTestCase
 
     public function testAllFieldsEmpty()
     {
-        $user = User::where('id', 1)->first();
+        $user = User::where('name', 'admin')->first();
         $this->browse(function ($browser) use ($user) {
             $browser
                 ->visit('/login')
-                ->loginAs($user)
-                ->visit('/cohorts')
+                ->loginAs($user);
+            $browser->screenshot('home');
+            $browser->visit('/cohorts')
                 ->assertPathIs('/cohorts')
                 ->assertTitle('Studio Management')
                 ->assertSee('Studio');
+            $browser->screenshot('cohort-page');
         });
     }
 
@@ -62,7 +64,7 @@ class CohortViewTest extends DuskTestCase
 
     public function testOverloadStudents()
     {
-        $user = User::where('id', 1)->first();
+        $user = User::where('name', 'admin')->first();
         $this->browse(function ($browser) use ($user) {
             $browser
                 ->visit('/login')
@@ -82,7 +84,7 @@ class CohortViewTest extends DuskTestCase
 
     public function testViewCohort()
     {
-        $user = User::where('id', 1)->first();
+        $user = User::where('name', 'admin')->first();
         $this->browse(function ($browser) use ($user) {
             $browser
                 ->loginAs($user)

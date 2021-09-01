@@ -11,27 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-
-    // use DatabaseMigrations;
-
-    public function createadminuser()
+    public function createUser()
     {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'is_admin' => 1,
-            ]);
-        }
-    }    
-
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+    }
 
     /*
     Testing the login process by creating an admin user
@@ -41,18 +29,20 @@ class LoginTest extends DuskTestCase
 
     public function testLogin()
     {          
-        $this->createadminuser();        
+        $user = User::where('name', 'admin')->first();       
 
-        $this->browse(function ($first, $second) {
-            $first->visit('/login')
+        $this->browse(function ($first, $second) use ($user) {
+                $first->visit('/login')
                     ->assertPathIs('/login')              
-                    ->value('#email', 'admin@admin.com')                    
-                    ->type('@password', 'password')
-                    ->click('button[type="submit"]')
-                    ->assertPathIs('/home')                   
-                    ->visit('/add-student')
-                    ->assertSee('Github:');
-                    // ->logout();
+                    ->type('email', $user->email)
+                    ->type('password', 'password');
+                $first->screenshot('form-filled');
+                $first->press('LOG IN')
+                        ->loginAs($user)
+                        ->pause(3000)
+                        ->visit('/')
+                        ->assertPathIs('/');
+                $first->screenshot('home');
 
             /*
             Test if another browser instance is also logged in with the first - should NOT be able to.
@@ -71,9 +61,22 @@ class LoginTest extends DuskTestCase
 
     public function testIsLoggedOut()
     {
-        $this->browse(function (Browser $newbrowser) {
-            $newbrowser->visit('/login')                    
-                    ->assertPathIs('/login');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) {
+            $browser->visit('/login')
+            ->assertPathIs('/login')              
+            ->type('email', $user->email)
+            ->type('password', 'password');
+        $browser->screenshot('form-filled');
+        $browser->press('LOG IN')
+                ->loginAs($user)
+                ->pause(3000)
+                ->visit('/')
+                ->assertPathIs('/');
+        $browser->screenshot('home-page');
+        $browser->press('Log Out')                    
+                ->assertPathIs('/login');
+        $browser->screenshot('browser logged out');                   
         });
     }
 }
