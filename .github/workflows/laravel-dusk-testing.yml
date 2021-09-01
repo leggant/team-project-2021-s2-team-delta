@@ -86,10 +86,8 @@ jobs:
         env: 
           DB_DATABASE: dusktest
           DB_USERNAME: root
-          BROADCAST_DRIVER: log
-          CACHE_DRIVER: redis
-          QUEUE_CONNECTION: redis
-          SESSION_DRIVER: redis  
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
         run: php artisan serve > /dev/null 2>&1 &
       - name: Test with phpunit
         run: |
@@ -100,10 +98,6 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
           DB_DATABASE: dusktest
           DB_USERNAME: root
-          BROADCAST_DRIVER: log
-          CACHE_DRIVER: redis
-          QUEUE_CONNECTION: redis
-          SESSION_DRIVER: redis  
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
