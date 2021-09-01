@@ -3,6 +3,7 @@
 namespace Tests\Browser;
 
 use App\Models\User;
+use App\Models\Student;
 use database\factories\UserFactory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -28,17 +29,73 @@ class StudentsTest extends DuskTestCase
                 'is_admin' => 1,
             ]);
         }
-    }    
+    }
     
-    public function testMakeStudent()
+    /*
+    public function createstudent()
+    {        
+        $this->user = Student::create([
+            'first_name' => 'Jesus',
+            'last_name' => 'Christ',
+            'username' => 'usemyname',
+            'email' => 'jdog@hmail.com',
+            'github' => 'jezzy123',
+        ]);
+        
+    }
+    */
+    
+    /* 
+    Currently one placeholder test while waiting
+    for CRUD features to be added. 
+    Tests for create student and create with duplicate email address
+    can be found in file StudentViewTest.php
+    Will test delete, update, view/read when those features are available
+    */
+
+    public function testCreateStudent()
     {
         $this->createadminuser();
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                     ->visit('/students')
-                    ->assertPathIs('/students')                   
-                    ;                    
+                    ->assertPathIs('/students');                    
         });
     }
+
+    /*
+    public function testReadStudent()
+    {
+        $this->createadminuser();
+
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                    ->visit('/students')
+                    ->assertPathIs('/students');                    
+        });
+    }
+
+    public function testUpdateStudent()
+    {
+        $this->createadminuser();
+
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                    ->visit('/students')
+                    ->assertPathIs('/students');                    
+        });
+    }
+
+    public function testDeleteStudent()
+    {
+        $this->createadminuser();
+
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                    ->visit('/students')
+                    ->assertPathIs('/students');                    
+        });
+    }
+    */
 }

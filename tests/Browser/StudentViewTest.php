@@ -32,7 +32,7 @@ class StudentViewTest extends DuskTestCase
         }
     }    
             
-    public function testStudentUpload()
+    public function testMakeStudent()
     {
         // an admin user is created and logged in
         // the test visits the add-student page and enters data into the fields
@@ -51,6 +51,7 @@ class StudentViewTest extends DuskTestCase
                     ->type('#email','John@gmail.com')
                     ->type('#github','JohnD')
                     ->press('ADD NEW STUDENT')
+                    ->assertTitle('Studio Management')
                     ->assertPathIs('/students')
                     ->assertSee('Doe')
                     ->assertSee('666666666')
@@ -61,7 +62,10 @@ class StudentViewTest extends DuskTestCase
 
     public function testDuplicateEmail()
     {
-        /* Test for bug with non-unique email address e.g use the same email address again for a new record */
+        /* 
+        Test for bug with non-unique email address e.g use the same email address again for a new record
+        This test is expected to fail if checks aren't done on the email address field
+         */
 
         $this->browse(function (Browser $browser) {
             $browser
@@ -73,8 +77,7 @@ class StudentViewTest extends DuskTestCase
                     ->type('#email','John@gmail.com')
                     ->type('#github','JohnD')
                     ->press('ADD NEW STUDENT')
-                    ->assertPathIs('/students');
-                    
+                    ->assertTitle('Studio Management');                    
         });
     }
 }

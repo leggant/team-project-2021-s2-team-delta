@@ -8,8 +8,8 @@
             <label for="student">Student</label>
             <input name="student" id="studentname" dusk="studentname" list="student" placeholder="Enter Student...">
             <datalist id="student">
-                @foreach ($student as $student)
-                    <option value={{ $student->name }}>{{ $student->name }}</option>
+                @foreach ($student as $student_name)
+                    <option value="{{ $student_name->first_name }} {{ $student_name->last_name }}"></option>
                 @endforeach
             </datalist>
             <label for="title">Description</label>
