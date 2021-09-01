@@ -73,7 +73,7 @@ class LoginTest extends DuskTestCase
                 ->visit('/')
                 ->assertPathIs('/');
         $browser->screenshot('home-page');
-        $browser->press('Log Out')                    
+        $browser->click('Log Out')                    
                 ->assertPathIs('/login');
         $browser->screenshot('browser logged out');                   
         });
