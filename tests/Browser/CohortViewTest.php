@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class CohortViewTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
 
     public function createUser()
     {
