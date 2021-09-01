@@ -35,9 +35,8 @@
                     </x-jet-nav-link> --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <x-jet-nav-link>
+                        <x-jet-nav-link-form-btn :active="request()->routeIs('logout')">{{ __('Log Out') }}</x-jet-nav-link-form-btn>
                             {{ __('Log Out') }}
-                        </x-jet-nav-link>
                     </form>
                 </div>
             </div>
