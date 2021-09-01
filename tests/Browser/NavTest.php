@@ -66,7 +66,7 @@ class NavTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/students')
-                ->assertSee('Add Student');
+                ->assertSee('Students');
             $browser->screenshot('students page');                    
         });
     }
@@ -77,7 +77,7 @@ class NavTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/cohorts')
-                ->assertSee('Add Cohort');
+                ->assertSee('Cohorts');
             $browser->screenshot('cohort page');                    
         });
     }
@@ -110,7 +110,7 @@ class NavTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/admin-panel')
-                ->assertSee('Manage');   
+                ->assertPathIs('/admin-panel');  
             $browser->screenshot('admin page');                 
         });
     }

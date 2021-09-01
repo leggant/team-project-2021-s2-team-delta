@@ -77,8 +77,8 @@ class CohortViewTest extends DuskTestCase
                 // ->type('#stream', 'A')
                 // ->type('#students', 'ugRZiYXP2gEmkf66NINrE6hYMfs6MzvC607MlApY39Uvat2s3qsSgVdMDJ2hNU5AdYyYAqOfnWzXaXZgxI8MRrX09mg28vCUTxWcxGMsjCTXECwAYCXnRfNN5Chz17UKkEwZqdqYrwjUrdcnrPtfAOy5KkT29I8NNrTl9P7MJujusTnNj57XhPpRXqOoAQj5
                 // ')
-                ->assertTitle('Studio Management')
-                ->click('@save');
+                ->assertTitle('Studio Management');
+                // ->press('SAVE');
         });
     }
 
@@ -90,11 +90,11 @@ class CohortViewTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit('/cohorts')
                 ->assertPathIs('/cohorts')
-                // ->type('#year', '2025')
-                // ->type('#semester', '1')
-                // ->type('#stream', 'A')
+                ->type('#semester', '1')
+                ->type('#stream', 'A')
+                ->assertSee('Cohorts')
                 ->assertTitle('Studio Management')
-                ->click('@save');
+                ->press('SAVE');
         });
     }
 }
