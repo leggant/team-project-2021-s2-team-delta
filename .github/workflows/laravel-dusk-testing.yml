@@ -98,6 +98,8 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
           DB_DATABASE: dusktest
           DB_USERNAME: root
+      - name: Test with Dusk
+        run: php artisan dusk
       - name: Upload Screenshots
         if: failure()
         uses: actions/upload-artifact@v2
