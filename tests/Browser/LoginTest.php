@@ -62,15 +62,7 @@ class LoginTest extends DuskTestCase
     {
         $user = User::where('name', 'admin')->first(); 
         $this->browse(function ($browser) {
-            $browser->visit('/login')
-            ->assertPathIs('/login')              
-            ->type('email', $user->email)
-            ->type('password', 'password');
-        $browser->screenshot('form-filled');
-        $browser->press('LOG IN')
-                ->loginAs($user)
-                ->pause(3000)
-                ->visit('/')
+        $browser->loginAs($user)->visit('/')
                 ->assertPathIs('/');
         $browser->screenshot('home-page');
         $browser->click('Log Out')                    

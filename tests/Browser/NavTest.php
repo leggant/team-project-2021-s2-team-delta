@@ -120,7 +120,7 @@ class NavTest extends DuskTestCase
         $user = User::where('name', 'admin')->first(); 
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/')
-                    ->press('Log Out')
+                    ->click('Log Out')
                     ->assertPathIs('/login')
                     ->assertSee('Password');        
             $browser->screenshot('Log Out Clicked');             

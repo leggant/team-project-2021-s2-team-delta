@@ -30,11 +30,13 @@ class StudentViewTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)->visit('/students')
                     ->assertPathIs('/students')
-                    ->type('#name','John Doe')
-                    ->type('#email','John@gmail.com')
-                    ->type('#github','JohnD');
+                    ->type('first_name','John')
+                    ->type('last_name','Doe')
+                    ->type('username','JD1234')
+                    ->type('email','John@gmail.com')
+                    ->type('github','JohnD');
             $browser->screenshot('Student Form Filled');
-            $browser->press('SAVE')
+            $browser->press('ADD NEW STUDENT')
                     ->assertPathIs('/students')
                     ->assertSee('John Doe')
                     ->assertSee('John@gmail.com')
