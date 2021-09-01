@@ -19,7 +19,11 @@
                         <tr>
                             <td>{{$users->name}}</td>
                             <td>{{$users->email}}</td>
-                            <td>{{$users->paper_id}}</td>
+                            <td>
+                                @foreach($users->papers as $paper)
+                                    {{$paper->paper_name}}<br>
+                                @endforeach
+                            </td>
                             @if($users->is_admin == 1) <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
                                 <td>Yes</td>
                             @else
@@ -31,7 +35,7 @@
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE')}}
-                                            <x-jet-danger-button><input type="submit" name="delete" value="Delete"></x-jet-danger-button>
+                                            <x-jet-danger-button type="submit" name="delete">Delete</x-jet-danger-button>
                                     </form>
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
