@@ -3,12 +3,9 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use database\factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 
 class NavTest extends DuskTestCase
 {
@@ -20,20 +17,16 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
-    // use DatabaseMigrations;
 
-    public function createadminuser()
+    public function createUser()
     {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'is_admin' => 1,
-            ]);
-        }
-    }    
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+    }
 
     /* 
     Methods for testing each link on the navigation bar
@@ -42,70 +35,90 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        $this->createadminuser();
-
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1)) 
-                    ->visit('/')
-                    ->assertPathIs('/');
-                                       
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit('/')
+                    ->assertPathIs('/login')
+                    ->assertSee('LOG IN');                    
         });
-        
     }
 
     public function testHomeLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit('/')
+                ->assertPathIs('/login')              
+                ->type('email', $user->email)
+                ->type('password', 'password');
+            $browser->screenshot('form-filled');
+            $browser->press('LOG IN')
+                    ->loginAs($user)
+                    ->pause(3000)
                     ->visit('/')
-                    ->assertPathIs('/')
-                    ->assertSee('Welcome');                    
+                    ->assertPathIs('/');
+            $browser->screenshot('home');
         });
     }
 
     public function testNewStudentLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/add-student')
-                    ->assertSee('Add Student');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/students')
+                ->assertSee('Add Student');
+            $browser->screenshot('students page');                    
         });
     }
 
     public function testCohortLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/cohort')
-                    ->assertSee('Add Cohort');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/cohorts')
+                ->assertSee('Add Cohort');
+            $browser->screenshot('cohort page');                    
         });
     }
 
     public function testEvidenceLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/evidence')
-                    ->assertSee('Evidence');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/uploads')
+                ->assertSee('Evidence');  
+            $browser->screenshot('evidence page');                  
         });
     }
 
     public function testNotesLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/notes')
-                    ->assertSee('Notes');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/notes')
+                ->assertSee('Notes'); 
+            $browser->screenshot('notes page');                   
         });
     }
 
     public function testAdminLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin-panel')
-                    ->assertSee('Manage');                    
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/admin-panel')
+                ->assertSee('Manage');   
+            $browser->screenshot('admin page');                 
         });
     }
 
     public function testLogoutLink()
     {
-        $this->browse(function (Browser $browser) {
+        $user = User::where('name', 'admin')->first(); 
+        $this->browse(function ($browser) use ($user) {
             $browser->visit('/')
                     ->click('@loginout')
                     ->assertPathIs('/login')
