@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Evidence;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class EvidenceController extends Controller
@@ -16,6 +17,13 @@ class EvidenceController extends Controller
      */
     public function index()
     {
+        $evidence = Evidence::all();
+        $students = Student::all();
+        return view(
+            'pages.evidence',
+            ['evidences' => $evidence],
+            ['student' => $students]
+        );
     }
 
     /**

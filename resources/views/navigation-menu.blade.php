@@ -5,23 +5,26 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
+                    {{-- <a href="{{ route('dashboard') }}">
+                        <x-jet-application-mark class="block h-9 w-auto" />
+                    </a> --}}
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('students.index') }}" :active="request()->routeIs('students.index')">
+                    </x-jet-nav-link> --}}
+                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Students') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('pages.evidence') }}" :active="request()->routeIs('pages.evidence')">
+                    <x-jet-nav-link href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
                         {{ __('Uploads') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('pages.notes') }}" :active="request()->routeIs('pages.notes')">
+                    <x-jet-nav-link href="{{ route('notes.index') }}" :active="request()->routeIs('notes.index')">
                         {{ __('Notes') }}
                     </x-jet-nav-link>
                     {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
