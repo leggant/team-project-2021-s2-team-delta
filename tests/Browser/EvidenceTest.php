@@ -38,7 +38,7 @@ class EvidenceTest extends DuskTestCase
     {
         //$student = Student::where('email', '=', 'admin@admin.com')->first();
         //if ($user === null) {
-            $this->student = Student::create([                
+            $student = Student::create([                
                 'first_name' => 'Jesus',
                 'last_name' => 'Christ',
                 'username' => 'HolyGhost',
