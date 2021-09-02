@@ -68,10 +68,9 @@ class EvidenceTest extends DuskTestCase
 
     public function testCreateEvidence()
     {
-        $this->createstudent();
-
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+        $user = User::where('name', 'admin')->first();
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/evidence')
                     ->type('@studentname', 'Jesus Christ')
                     // ->select('student', '1') Choose the first name in the dropdown
