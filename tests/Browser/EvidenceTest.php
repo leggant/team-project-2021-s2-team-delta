@@ -8,15 +8,11 @@ use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EvidenceTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-
+    use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -36,20 +32,24 @@ class EvidenceTest extends DuskTestCase
 
     public function createstudent()
     {
-        //$student = Student::where('email', '=', 'admin@admin.com')->first();
-        //if ($user === null) {
             $student = Student::create([                
                 'first_name' => 'Jesus',
                 'last_name' => 'Christ',
                 'username' => 'HolyGhost',
                 'email' => 'jesus@hmail.com',
                 'github' => 'imagithub'
-            ]);
-        //}
+            ]);        
     }    
 
     public function testEvidenceExists()
     {
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
         $user = User::where('name', 'admin')->first();   
 
         $this->browse(function ($browser) use($user) {
@@ -68,7 +68,15 @@ class EvidenceTest extends DuskTestCase
 
     public function testCreateEvidence()
     {
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
         $user = User::where('name', 'admin')->first();
+        
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
                     ->visit('/evidence')

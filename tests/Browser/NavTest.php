@@ -9,6 +9,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class NavTest extends DuskTestCase
 {
@@ -20,7 +21,7 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
-    // use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -42,10 +43,15 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        $this->createadminuser();
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
 
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1)) 
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user) 
                     ->visit('/')
                     ->assertPathIs('/');
                                        
@@ -55,8 +61,15 @@ class NavTest extends DuskTestCase
 
     public function testHomeLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
                     ->assertSee('Welcome');                    
@@ -65,32 +78,64 @@ class NavTest extends DuskTestCase
 
     public function testNewStudentLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/students')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/students')
                     ->assertSee('Student Admin');                    
         });
     }
 
     public function testCohortLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/cohorts')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/cohorts')
                     ->assertSee('Studio Cohorts');                    
         });
     }
 
     public function testEvidenceLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/evidence')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/evidence')
                     ->assertSee('Evidence');                    
         });
     }
 
     public function testNotesLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/notes')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/notes')
                     ->assertSee('Notes');                    
         });
     }
@@ -107,8 +152,16 @@ class NavTest extends DuskTestCase
 
     public function testLogoutLink()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/')
                     ->click('@loginout')
                     ->assertPathIs('/login')
                     ->assertSee('Password');                    
