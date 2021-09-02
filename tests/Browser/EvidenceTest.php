@@ -50,7 +50,7 @@ class EvidenceTest extends DuskTestCase
 
     public function testEvidenceExists()
     {
-        $this->createadminuser();
+        $user = User::where('name', 'admin')->first();   
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
