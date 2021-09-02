@@ -8,16 +8,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 
 class CohortViewTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-        
     /* 
     Create the tables of the database and 
     seed the users to create an admin login
@@ -30,6 +25,8 @@ class CohortViewTest extends DuskTestCase
         $this->artisan('db:seed');
     }
     */      
+
+    use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -46,10 +43,15 @@ class CohortViewTest extends DuskTestCase
     
     public function testFindCohortPage()
     {
-        $this->createadminuser();
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
 
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/cohorts')
                     ->assertPathIs('/cohorts')                   
                     ->assertSee('Studio Cohorts');                    
@@ -58,8 +60,16 @@ class CohortViewTest extends DuskTestCase
 
     public function testAllFieldsEmpty()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/cohorts')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/cohorts')
                     ->assertPathIs('/cohorts')                   
                     ->press('SAVE')
                     ->assertPathIs('/cohorts');                                
@@ -89,8 +99,16 @@ class CohortViewTest extends DuskTestCase
 
     public function testMakeCohort()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/cohorts')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/cohorts')
                     ->assertPathIs('/cohorts')
                     ->select('paper', '1')
                     ->type('#year', '2021')

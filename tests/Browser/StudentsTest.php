@@ -8,14 +8,12 @@ use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentsTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
+    
+    use RefreshDatabase;
     
     public function createadminuser()
     {
@@ -54,10 +52,15 @@ class StudentsTest extends DuskTestCase
 
     public function testCreateStudent()
     {
-        $this->createadminuser();
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
 
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/students')
                     ->assertPathIs('/students');                    
         });

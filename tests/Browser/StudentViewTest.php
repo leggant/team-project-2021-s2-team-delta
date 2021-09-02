@@ -8,16 +8,11 @@ use Tests\DuskTestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentViewTest extends DuskTestCase
 {
-    // use DatabaseMigrations;
-
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -39,10 +34,15 @@ class StudentViewTest extends DuskTestCase
         // the Add/+ button is pressed to submit the data. Success submit is tested
         // by checking the path and looking for entered data on the page.
 
-        $this->createadminuser();
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
 
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/students')
                     ->assertPathIs('/students')
                     ->type('#first_name','John')
@@ -67,8 +67,15 @@ class StudentViewTest extends DuskTestCase
         This test is expected to fail if checks aren't done on the email address field
          */
 
-        $this->browse(function (Browser $browser) {
-            $browser
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/students')
                     ->assertPathIs('/students')
                     ->type('#first_name','John')

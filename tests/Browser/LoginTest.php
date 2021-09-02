@@ -8,16 +8,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-
-    // use DatabaseMigrations;
+    
+    use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -41,10 +37,16 @@ class LoginTest extends DuskTestCase
 
     public function testLogin()
     {          
-        $this->createadminuser();        
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+            'is_admin' => 1,
+        ]);
 
-        $this->browse(function ($first, $second) {
-            $first->visit('/login')
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/login')
                     ->assertPathIs('/login')              
                     ->value('#email', 'admin@admin.com')                    
                     ->type('@password', 'password')
