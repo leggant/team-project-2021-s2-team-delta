@@ -53,7 +53,7 @@ class EvidenceTest extends DuskTestCase
         $this->createadminuser();
 
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs($user)
                     ->visit('/evidence')
                     ->assertPathIs('/evidence');                                        
         });
