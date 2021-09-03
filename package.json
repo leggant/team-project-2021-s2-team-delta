@@ -10,18 +10,20 @@
         "production": "mix --production",
         "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}"
     },
-    "dependencies": {
-        "npm": "^7.20.2",
+    "devDependencies": {
         "@prettier/plugin-php": "^0.17.3",
         "@tailwindcss/forms": "^0.3.1",
         "@tailwindcss/typography": "^0.4.0",
-        "alpinejs": "^3.0.6",
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "postcss-import": "^14.0.1",
+        "tailwindcss": "^2.2.2",
         "prettier": "^2.3.2",
-        "tailwindcss": "^2.2.2"
+        "alpinejs": "^3.0.6",
+        "lodash": "^4.17.19"
+    },
+    "dependencies": {
+        "npm": "^7.22.0",
+        "laravel-mix": "^6.0.6"
     }
 }
