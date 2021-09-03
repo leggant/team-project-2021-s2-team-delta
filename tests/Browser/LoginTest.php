@@ -13,7 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LoginTest extends DuskTestCase
 {
     
-    use RefreshDatabase;
+    
 
     public function createadminuser()
     {
@@ -43,6 +43,8 @@ class LoginTest extends DuskTestCase
             'password' => 'password',
             'is_admin' => 1,
         ]);
+
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)

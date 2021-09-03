@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-class CreateUserPapersTable extends Migration
+class AddJoiningTableForUsersAndPapers extends Migration
 {
     /**
      * Run the migrations.
@@ -25,7 +24,6 @@ class CreateUserPapersTable extends Migration
                   ->on('papers')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *
