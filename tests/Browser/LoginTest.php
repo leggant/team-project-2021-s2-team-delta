@@ -12,9 +12,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends DuskTestCase
 {
-    
-    
-
     public function createadminuser()
     {
         $user = User::where('email', '=', 'admin@admin.com')->first();
@@ -37,13 +34,15 @@ class LoginTest extends DuskTestCase
 
     public function testLogin()
     {          
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
-
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
         $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {

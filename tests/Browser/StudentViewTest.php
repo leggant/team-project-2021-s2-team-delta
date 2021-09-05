@@ -12,16 +12,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentViewTest extends DuskTestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function createadminuser()
     {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
+                'password' => 'password',
                 'is_admin' => 1,
             ]);
         }
@@ -34,12 +33,16 @@ class StudentViewTest extends DuskTestCase
         // the Add/+ button is pressed to submit the data. Success submit is tested
         // by checking the path and looking for entered data on the page.
 
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -67,12 +70,16 @@ class StudentViewTest extends DuskTestCase
         This test is expected to fail if checks aren't done on the email address field
          */
 
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)

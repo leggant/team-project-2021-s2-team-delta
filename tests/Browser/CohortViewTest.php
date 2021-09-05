@@ -26,7 +26,7 @@ class CohortViewTest extends DuskTestCase
     }
     */      
 
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -43,12 +43,16 @@ class CohortViewTest extends DuskTestCase
     
     public function testFindCohortPage()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -60,12 +64,16 @@ class CohortViewTest extends DuskTestCase
 
     public function testAllFieldsEmpty()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -99,12 +107,16 @@ class CohortViewTest extends DuskTestCase
 
     public function testMakeCohort()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)

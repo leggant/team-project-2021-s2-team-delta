@@ -21,7 +21,7 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function createadminuser()
     {
@@ -43,12 +43,16 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user) 
@@ -61,12 +65,16 @@ class NavTest extends DuskTestCase
 
     public function testHomeLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -78,12 +86,16 @@ class NavTest extends DuskTestCase
 
     public function testNewStudentLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -94,12 +106,16 @@ class NavTest extends DuskTestCase
 
     public function testCohortLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -110,12 +126,16 @@ class NavTest extends DuskTestCase
 
     public function testEvidenceLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -126,12 +146,16 @@ class NavTest extends DuskTestCase
 
     public function testNotesLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
@@ -152,12 +176,16 @@ class NavTest extends DuskTestCase
 
     public function testLogoutLink()
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
