@@ -7,6 +7,7 @@
 </p>
 
 [![Code Formatted Check](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml)
+[![Laravel Dusk Testing](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/laravel-dusk-testing.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/laravel-dusk-testing.yml)
 
 ## Deployments
 
