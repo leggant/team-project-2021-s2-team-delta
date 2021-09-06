@@ -6,7 +6,7 @@ use App\Models\User;
 use database\factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
+use Laravel\Dusk\Chrome;
 
 
 class CohortViewTest extends DuskTestCase
