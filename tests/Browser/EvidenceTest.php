@@ -11,8 +11,6 @@ use Tests\DuskTestCase;
 
 class EvidenceTest extends DuskTestCase
 {
-    
-
     public function createadminuser()
     {
         $user = User::factory()->create([
