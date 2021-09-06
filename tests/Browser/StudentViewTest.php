@@ -6,6 +6,7 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 
 
