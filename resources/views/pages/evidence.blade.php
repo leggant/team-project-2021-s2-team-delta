@@ -1,4 +1,5 @@
 <x-app-layout>
+@can('upload evidence')
     <x-slot name="header">
         <h1 class="font-semibold">Student Evidence Upload</h1>
     </x-slot>
@@ -19,4 +20,9 @@
             <x-jet-button>Upload Files</x-jet-button>
         </form>
     </div>
+@else
+    <div>
+        <h2>You do not have access to this page</h2>
+    </div>
+@endcan
 </x-app-layout>

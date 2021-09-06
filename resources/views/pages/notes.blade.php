@@ -1,4 +1,5 @@
 <x-app-layout>
+@can('create notes')
     <x-slot name="header">
         <h1 class="font-semibold">Student Notes</h1>
     </x-slot>
@@ -20,4 +21,9 @@
             </form>
         </div>
     </div>
+@else
+    <div>
+        <h2>You do not have access to this page</h2>
+    </div>
+@endcan
 </x-app-layout>
