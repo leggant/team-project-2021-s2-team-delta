@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use database\factories\UserFactory;
+use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
