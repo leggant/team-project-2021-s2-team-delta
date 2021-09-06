@@ -30,14 +30,13 @@ class LoginTest extends DuskTestCase
         $user = User::where('name', 'admin')->first();
 
         $this->browse(function ($browser) use($user) {
-            $browser
-                    ->visit('/login')
+            $browser->visit('/login')
                     ->assertPathIs('/login')              
                     ->value('#email', 'admin@admin.com')                    
                     ->type('@password', 'password')
                     ->click('button[type="submit"]')
                     ->assertPathIs('/')                   
-                    ->visit('/students')
+                    ->visit('/')
                     ->assertSee('Github');
                     
 
