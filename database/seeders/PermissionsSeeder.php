@@ -20,17 +20,30 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         //Permissions
+        Permission::create(['name' => 'create students']);
         Permission::create(['name' => 'edit students']);
         Permission::create(['name' => 'delete students']);
+        Permission::create(['name' => 'create cohorts']);
         Permission::create(['name' => 'edit cohorts']);
         Permission::create(['name' => 'delete cohorts']);
+        Permission::create(['name' => 'create notes']);
         Permission::create(['name' => 'edit notes']);
         Permission::create(['name' => 'delete notes']);
+        Permission::create(['name' => 'upload evidence']);
         Permission::create(['name' => 'edit evidence']);
         Permission::create(['name' => 'delete evidence']);
 
         //create roles and assign permissions
         $regular = Role::create(['name' => 'Regular']);
-        $admin = Role:create(['name' => 'Super-Admin']);
+        $regular->givePermissionTo('create students');
+        $regular->givePermissionTo('edit students');
+        $regular->givePermissionTo('create cohorts');
+        $regular->givePermissionTo('edit cohorts');
+        $regular->givePermissionTo('create notes');
+        $regular->givePermissionTo('edit notes');
+        $regular->givePermissionTo('upload evidence');
+        $regular->givePermissionTo('edit evidence');
+
+        $admin = Role::create(['name' => 'Super-Admin']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Papers;
 use Illuminate\Http\Request;
@@ -58,6 +60,10 @@ class UserController extends Controller
         if($request->has('Admin'))
         {
             $user->is_admin = 1;
+            $user->assignRole('Super-Admin');
+        }
+        else {
+            $user->assignRole('Regular');
         }
         #Save the new user
         $user->save();
@@ -110,10 +116,19 @@ class UserController extends Controller
         if($request->has('Admin'))
         {
             $user->is_admin = 1;
+            $user->syncRoles('Super-Admin');
         }
         else
         {
-            $user->is_admin = 0;
+            if($request->input('Email') == 'admin@admin.com')
+            {
+                $user->is_admin = 1;
+                $user->syncRoles('Super-Admin');
+            }
+            else{
+                $user->is_admin = 0;
+                $user->syncRoles('Regular');
+            }
         }
         #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
         $user->papers()->sync($request->input('Papers'));

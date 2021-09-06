@@ -10,12 +10,15 @@
             <fieldset>
                 <div>
                     <h5>Enter Name:</h5>
-                    <input type="text" placeholder="{{$user->name}}" id="Name" name="Name" required>
+                    <input type="text" value="{{$user->name}}" id="Name" name="Name" required>
                 </div>
                 <br>
                 <div>
                     <h5>Enter Email:</h5>
-                    <input type="email" placeholder="{{$user->email}}" id="Email" name="Email" required>
+                    @if($user->email == "admin@admin.com")
+                        <p><i>Changing this from admin@admin.com will remove admin permissions</i></p>
+                    @endif
+                    <input type="email" value="{{$user->email}}" id="Email" name="Email" required>
                 </div>
                 <br>
                 @if($id != $user->id)

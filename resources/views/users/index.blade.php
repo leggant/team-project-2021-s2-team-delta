@@ -7,7 +7,7 @@
         <br>
         <div style="margin-left: 600px;">
             <table>
-                <tbody>
+                <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
@@ -15,6 +15,8 @@
                         <th>Is Admin</th>
                         <th>Actions</th>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach($user as $users)
                         <tr>
                             <td>{{$users->name}}</td>
@@ -40,7 +42,6 @@
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
                             </td>
-                            
                         </tr>
                     @endforeach
                 </tbody>
