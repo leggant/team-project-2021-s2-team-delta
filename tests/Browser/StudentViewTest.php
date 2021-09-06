@@ -2,17 +2,17 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
+
 
 class StudentViewTest extends DuskTestCase
 {
-    // use RefreshDatabase;
+    
 
     public function createadminuser()
     {

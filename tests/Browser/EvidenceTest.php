@@ -7,12 +7,11 @@ use App\Models\Student;
 use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 class EvidenceTest extends DuskTestCase
 {
-    // use RefreshDatabase;
+    
 
     public function createadminuser()
     {

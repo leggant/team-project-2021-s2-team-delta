@@ -4,11 +4,9 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use database\factories\UserFactory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 
 class CohortViewTest extends DuskTestCase
@@ -26,7 +24,7 @@ class CohortViewTest extends DuskTestCase
     }
     */      
 
-    // use RefreshDatabase;
+    
 
     public function createadminuser()
     {

@@ -3,13 +3,9 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 class NavTest extends DuskTestCase
 {
@@ -21,7 +17,7 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
-    // use RefreshDatabase;
+    
 
     public function createadminuser()
     {
