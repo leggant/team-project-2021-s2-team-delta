@@ -17,7 +17,11 @@ class LoginTest extends DuskTestCase
     */
 
     public function testLogin()
-    {          
+    {    
+        // WARNING : The password needs(?) to be hashed before the 
+        // 'type' command is used into the login screen
+        // the loginAs() command doesn't seem to mind if a user is hashed
+            
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
             $user = User::factory()->create([
                 'name' => 'admin',
