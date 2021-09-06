@@ -1,5 +1,8 @@
 <x-app-layout>
-    @if(Auth::check() && Auth::user()->isAdmin())
+    @role('Super-Admin')
+        <div class="pt-6 flex justify-center gap-4 md:justify-between">
+            <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
+        </div>
         <form action="{{route('papers.store')}}" method='POST'>
             {{ csrf_field() }}
             <fieldset>
@@ -11,6 +14,7 @@
                 <x-jet-button type='submit' name='submit'>Add a new paper</x-jet-button>
             </fieldset>
         </form>
+        <br>
         <hr>
         <table class="table-fixed w-full">
             <thead>
@@ -24,11 +28,6 @@
                     <tr>
                         <td class="border px-4 py-2">{{$p->paper_name}}</td>
                         <td class="border px-4 py-2">
-                            <!--<form action="{{-- route('papers.destroy', $p->id) --}}" method="POST">       
-                                {{-- csrf_field() --}}
-                                {{-- method_field('DELETE') --}}
-                                <x-jet-danger-button type="submit" name="delete">Delete</x-jet-danger-button>
-                            </form>-->
                             <x-jet-button><a href="{{route('papers.edit', $p->id)}}" name="edit-papers">Edit</a></x-jet-button>
                         </td>
                     </tr>
@@ -37,5 +36,5 @@
         </table>
     @else
         <h2>You do not have access to this page</h2>
-    @endif
+    @endrole
 </x-app-layout>

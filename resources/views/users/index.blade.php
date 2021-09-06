@@ -1,37 +1,38 @@
 <x-app-layout>
     <!-- A table of all users in the database -->
-    @if(Auth::check() && Auth::user()->isAdmin())
-        <div>
-        <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
+    @role('Super-Admin')
+        <div class="pt-6 flex justify-center gap-4 md:justify-between">
+            <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
+            <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
         <br>
-        <div style="margin-left: 600px;">
-            <table>
+        <div>
+            <table class="table-fixed w-full">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Papers</th>
-                        <th>Is Admin</th>
-                        <th>Actions</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Papers</th>
+                        <th class="px-4 py-2 w-20">Is Admin</th>
+                        <th class="px-4 py-2 w-20">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($user as $users)
                         <tr>
-                            <td>{{$users->name}}</td>
-                            <td>{{$users->email}}</td>
-                            <td>
+                            <td class="border px-4 py-2">{{$users->name}}</td>
+                            <td class="border px-4 py-2">{{$users->email}}</td>
+                            <td class="border px-4 py-2">
                                 @foreach($users->papers as $paper)
                                     {{$paper->paper_name}}<br>
                                 @endforeach
                             </td>
                             @if($users->is_admin == 1) <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
-                                <td>Yes</td>
+                                <td class="border px-4 py-2">Yes</td>
                             @else
-                                <td>No</td>
+                                <td class="border px-4 py-2">No</td>
                             @endif
-                            <td>
+                            <td class="border px-4 py-2">
                                 <!-- Form that allows the user to delete a user -->
                                 @if($id != $users->id)
                                     <form action="{{route('users.destroy', $users->id)}}" method="POST">       
@@ -50,5 +51,5 @@
 
     @else
         <h2>You do not have access to this page</h2>
-    @endif
+    @endrole
 </x-app-layout>
