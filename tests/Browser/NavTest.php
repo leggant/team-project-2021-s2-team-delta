@@ -15,22 +15,7 @@ class NavTest extends DuskTestCase
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
-    */   
-
-    
-
-    public function createadminuser()
-    {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'is_admin' => 1,
-            ]);
-        }
-    }    
+    */     
 
     /* 
     Methods for testing each link on the navigation bar

@@ -11,16 +11,6 @@ use Tests\DuskTestCase;
 
 class EvidenceTest extends DuskTestCase
 {
-    public function createadminuser()
-    {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
-    }    
-    
     /* 
     Method to create a new student need to test evidence uploads
     Used to add the student directly to the database rather than

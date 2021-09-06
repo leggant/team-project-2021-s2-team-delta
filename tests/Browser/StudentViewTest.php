@@ -13,20 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentViewTest extends DuskTestCase
 {
-    
-
-    public function createadminuser()
-    {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-    }    
-            
+                
     public function testMakeStudent()
     {
         // an admin user is created and logged in
