@@ -11,9 +11,6 @@ use Tests\DuskTestCase;
 
 class StudentsTest extends DuskTestCase
 {
-    
-    
-    
     public function createadminuser()
     {
         $user = User::where('email', '=', 'admin@admin.com')->first();
