@@ -6,7 +6,7 @@
         <div>
             <x-student-form :cohorts="$cohorts" />
         </div>
-        <div>
+        <div class="px-6">
             <x-student-list :students="$students" />
         </div>
     </div>
