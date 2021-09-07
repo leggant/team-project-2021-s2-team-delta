@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('students', StudentController::class)->except(['delete']);
+    Route::resource('students', StudentController::class)->except(['delete', 'index']);
+    Route::get('/', [StudentController::class, 'index'])->name('home');
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class);  
     Route::resource('cohorts', CohortController::class);
@@ -32,14 +34,14 @@ Route::group(['middleware' => 'auth'], function(){
         return redirect('/')->with('status', 'Error, Page Not Found');
     });
 });
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('pages.students');
-})->name('home');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//     return view('pages.students');
+// })->name('home');
 
 // Dashboard route needs to be kept so this can be re-deployed later.
- Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('dashboard');
- })->name('dashboard');
+//  Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//     return view('dashboard');
+//  })->name('dashboard');
 
 Route::get('logout', function () {
     auth()->logout();

@@ -1,9 +1,9 @@
 <x-app-layout>
     @if(Auth::check() && Auth::user()->isAdmin())
-        <div class="pt-6 flex justify-center gap-4 md:justify-between">
+        <div class="pt-6 flex justify-center gap-4">
             <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
-        <form action="{{route('papers.store')}}" method='POST'>
+        <form action="{{route('papers.store')}}" method='POST' class="flex justify-center">
             {{ csrf_field() }}
             <fieldset>
                 <div class="form-group">
@@ -16,7 +16,7 @@
         </form>
         <br>
         <hr>
-        <table class="table-fixed w-full">
+        <table class="table-fixed w-3/4">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-2">Paper Name</th>
