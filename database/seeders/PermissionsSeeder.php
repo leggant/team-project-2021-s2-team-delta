@@ -45,5 +45,14 @@ class PermissionsSeeder extends Seeder
         $regular->givePermissionTo('edit evidence');
 
         $admin = Role::create(['name' => 'Super-Admin']);
+
+        $adminUser = DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
+            'is_admin' => 1,
+        ]);
+
+        $adminUser->assignRole('Super-Admin')
     }
 }
