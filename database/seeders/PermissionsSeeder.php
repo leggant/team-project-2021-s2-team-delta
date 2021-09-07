@@ -49,7 +49,7 @@ class PermissionsSeeder extends Seeder
         $admin = Role::create(['name' => 'Super-Admin']);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'admin',
+            'name' => 'admin1',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
             'is_admin' => 1,
