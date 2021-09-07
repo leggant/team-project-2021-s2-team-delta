@@ -53,6 +53,6 @@ class PermissionsSeeder extends Seeder
             'is_admin' => 1,
         ]);
 
-        $adminUser->assignRole('Super-Admin')
+        $adminUser->assignRole('Super-Admin');
     }
 }
