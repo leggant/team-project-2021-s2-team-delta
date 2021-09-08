@@ -28,7 +28,7 @@ class Student extends Model
 
     public function cohort()
     {
-        return $this->belongsTo(Cohort::class, 'foreign_key');
+        return $this->belongsTo(Cohort::class, 'id');
     }
 
     /**

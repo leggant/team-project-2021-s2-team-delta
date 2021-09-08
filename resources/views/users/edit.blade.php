@@ -1,8 +1,8 @@
 <x-app-layout>
     <!-- Form that allows the user to edit a user -->
     @if(Auth::check() && Auth::user()->isAdmin())
-        <div>
-            <a href="{{url('/users')}}">Back</a>
+        <div class="pt-6 flex justify-center gap-4 md:justify-between">
+            <x-jet-button><a href="{{url('/users')}}">Back</a></x-jet-button>
         </div>
         <form action="{{route('users.update', $user->id)}}" method='POST'>
             {{csrf_field()}}
@@ -10,12 +10,15 @@
             <fieldset>
                 <div>
                     <h5>Enter Name:</h5>
-                    <input type="text" placeholder="{{$user->name}}" id="Name" name="Name" required>
+                    <input type="text" value="{{$user->name}}" id="Name" name="Name" required>
                 </div>
                 <br>
                 <div>
                     <h5>Enter Email:</h5>
-                    <input type="email" placeholder="{{$user->email}}" id="Email" name="Email" required>
+                    @if($user->email == "admin@admin.com")
+                        <p><i>Changing this from admin@admin.com will remove admin permissions</i></p>
+                    @endif
+                    <input type="email" value="{{$user->email}}" id="Email" name="Email" required>
                 </div>
                 <br>
                 @if($id != $user->id)

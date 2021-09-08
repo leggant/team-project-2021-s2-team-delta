@@ -22,7 +22,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('cohorts', CohortController::class);
     Route::resource('evidence', EvidenceController::class);
     Route::resource('notes', NoteController::class);
-    Route::resource('papers', PaperController::class);
+    Route::resource('papers', PaperController::class)->except(['delete']);
+    Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
+    Route::resource('roles', RoleController::class)->except(['update', 'delete']);
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
@@ -32,11 +34,14 @@ Route::group(['middleware' => 'auth'], function(){
         return redirect('/')->with('status', 'Error, Page Not Found');
     });
 });
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//     return view('pages.students');
+// })->name('home');
 
 // Dashboard route needs to be kept so this can be re-deployed later.
-// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//  Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
 //     return view('dashboard');
-// })->name('dashboard');
+//  })->name('dashboard');
 
 Route::get('logout', function () {
     auth()->logout();

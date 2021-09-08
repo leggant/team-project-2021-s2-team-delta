@@ -4,10 +4,9 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class StudentForm extends Component
+class StudentCohortSelectInput extends Component
 {
     /**
-     * The alert message.
      *
      * @var array
      */
@@ -30,6 +29,6 @@ class StudentForm extends Component
      */
     public function render()
     {
-        return view('components.student-form');
+        return view('components.student-cohort-select-input');
     }
 }

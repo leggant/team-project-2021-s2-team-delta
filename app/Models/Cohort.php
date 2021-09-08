@@ -16,7 +16,7 @@ class Cohort extends Model
 
     public function papers()
     {
-        return $this->hasOne(Paper::class, 'foreign_key');
+        return $this->hasOne(Papers::class, 'id');
     }
 
     public function student()

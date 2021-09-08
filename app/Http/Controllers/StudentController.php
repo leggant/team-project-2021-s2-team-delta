@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,8 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $students = Student::all();
-        return view('pages.students', ['students'=>$students], compact('user'));
+        $cohorts = Cohort::all();
+        return view('pages.students', ['students'=>$students], compact('user', 'cohorts'));
     }
 
     /**
