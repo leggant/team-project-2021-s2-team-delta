@@ -36,7 +36,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
-    Route::get('/', [StudentController::class, 'index'])->name('home');
     // Return user to home any time a route is not found
     Route::fallback(function () {
         return redirect('/')->with('status', 'Error, Page Not Found');
