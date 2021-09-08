@@ -23,6 +23,7 @@ use App\Http\Controllers\ {
 */
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', [StudentController::class, 'index'])->name('home');
     Route::resource('students', StudentController::class)->except(['delete', 'index']);
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class);  
