@@ -3,9 +3,9 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use database\factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+
 
 class NavTest extends DuskTestCase
 {
@@ -15,18 +15,7 @@ class NavTest extends DuskTestCase
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
-    */   
-
-
-    public function createUser()
-    {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
-    }
+    */     
 
     /* 
     Methods for testing each link on the navigation bar
@@ -35,96 +24,156 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
-            $browser->visit('/')
-                    ->assertPathIs('/login')
-                    ->assertSee('LOG IN');                    
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user) 
+                    ->visit('/')
+                    ->assertPathIs('/');
+                                       
         });
+        
     }
 
     public function testHomeLink()
     {
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
         $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
-            $browser->visit('/')
-                ->assertPathIs('/login')              
-                ->type('email', $user->email)
-                ->type('password', 'password');
-            $browser->screenshot('form-filled');
-            $browser->press('LOG IN')
-                    ->loginAs($user)
-                    ->pause(3000)
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
                     ->visit('/')
-                    ->assertPathIs('/');
-            $browser->screenshot('home');
+                    ->assertPathIs('/')
+                    ->assertSee('Welcome');                    
         });
     }
 
     public function testNewStudentLink()
     {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
+
+        $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                ->visit('/students')
-                ->assertSee('Students');
-            $browser->screenshot('students page');                    
+                    ->visit('/students')
+                    ->assertSee('Student Admin');                    
         });
     }
 
     public function testCohortLink()
     {
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
         $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
+
+        $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                ->visit('/cohorts')
-                ->assertSee('Cohorts');
-            $browser->screenshot('cohort page');                    
+                    ->visit('/cohorts')
+                    ->assertSee('Studio Cohorts');                    
         });
     }
 
     public function testEvidenceLink()
     {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
+
+        $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                ->visit('/uploads')
-                ->assertSee('Evidence');  
-            $browser->screenshot('evidence page');                  
+                    ->visit('/evidence')
+                    ->assertSee('Evidence');                    
         });
     }
 
     public function testNotesLink()
     {
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
         $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
+
+        $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                ->visit('/notes')
-                ->assertSee('Notes'); 
-            $browser->screenshot('notes page');                   
+                    ->visit('/notes')
+                    ->assertSee('Notes');                    
         });
     }
-
+    
+    /*
     public function testAdminLink()
     {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
-            $browser->loginAs($user)
-                ->visit('/admin-panel')
-                ->assertPathIs('/admin-panel');  
-            $browser->screenshot('admin page');                 
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin-panel')
+                    ->assertSee('Manage');                    
         });
     }
+    */
 
     public function testLogoutLink()
     {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
-            $browser->visit('/')
-                    ->click('Log Out')
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->press('Log Out')
                     ->assertPathIs('/login')
-                    ->assertSee('Password');        
-            $browser->screenshot('Log Out Clicked');             
+                    ->assertSee('Password');                    
         });
     }
 }

@@ -25,7 +25,6 @@ class AddJoiningTableForUsersAndPapers extends Migration
                   ->on('papers')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *

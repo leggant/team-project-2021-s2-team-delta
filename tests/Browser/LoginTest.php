@@ -3,23 +3,13 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use database\factories\UserFactory;
+use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
+
 
 class LoginTest extends DuskTestCase
 {
-    public function createUser()
-    {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password',
-            'is_admin' => 1,
-        ]);
-    }
-
     /*
     Testing the login process by creating an admin user
     and entering the email and password into the card/form. The submit
@@ -27,47 +17,50 @@ class LoginTest extends DuskTestCase
     */
 
     public function testLogin()
-    {          
-        $user = User::where('name', 'admin')->first();       
+    {    
+        // WARNING : The password needs(?) to be hashed before the 
+        // 'type' command is used into the login screen
+        // the loginAs() command doesn't seem to mind if a user is hashed
+            
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first();
 
-        $this->browse(function ($first, $second) use ($user) {
-                $first->visit('/login')
+        $this->browse(function ($browser) use($user) {
+            $browser->visit('/login')
                     ->assertPathIs('/login')              
-                    ->type('email', $user->email)
-                    ->type('password', 'password');
-                $first->screenshot('form-filled');
-                $first->press('LOG IN')
-                        ->loginAs($user)
-                        ->pause(3000)
-                        ->visit('/')
-                        ->assertPathIs('/');
-                $first->screenshot('home');
+                    ->value('#email', 'admin@admin.com')                    
+                    ->type('@password', 'password')
+                    ->click('button[type="submit"]')
+                    ->assertPathIs('/')                   
+                    ->visit('/')
+                    ->assertSee('Github');
+                    
 
             /*
             Test if another browser instance is also logged in with the first - should NOT be able to.
             Only one browser window should be logged in at a time.
+            REMOVED: Simplified log in tests for now
             */
-
-            $second->visit('/login')
-                    ->assertPathIs('/login');
+            /*
+            $second->visit('/')
+                    ->assertPathIs('/');
+            */
         });
     }
 
     /*
     Attempt to replicate an issue where admin user stays logged in if logout button is not pressed
     (even if browser window is closed and app reloaded)
+    REMOVED: Simplified log in tests for now
     */
 
-    public function testIsLoggedOut()
-    {
-        $user = User::where('name', 'admin')->first(); 
-        $this->browse(function ($browser) use ($user) {
-        $browser->loginAs($user)->visit('/')
-                ->assertPathIs('/');
-        $browser->screenshot('home-page');
-        $browser->click('Log Out')                    
-                ->assertPathIs('/login');
-        $browser->screenshot('browser logged out');                   
-        });
-    }
+    
 }
