@@ -14,7 +14,7 @@
                 </td>
                 <td class="border px-8 py-2">{{ $student->email }}</td>
                 <td class="border px-4 py-2">{{ $student->github }}</td>
-                <td class="border px-4 py-2">Studio {{ $student->cohort->paper_id }} | {{ $student->cohort->year }} | {{ $student->cohort->semester }}</td>
+                <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->username }}</td>
             </tr>
         @endforeach
     </table>
