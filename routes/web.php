@@ -8,6 +8,7 @@ use App\Http\Controllers\ {
     NoteController,
     PermissionController,
     RoleController,
+    PaperController,
 }; 
 
 /*
