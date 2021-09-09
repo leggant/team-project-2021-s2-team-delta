@@ -1,7 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ {
+    StudentController,
+    UserController,
+    CohortController,
+    EvidenceController,
+    NoteController,
+    PermissionController,
+    RoleController,
+    PaperController,
+}; 
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +24,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', [StudentController::class, 'index'])->name('home');
     Route::resource('students', StudentController::class)->except(['delete', 'index']);
     // wildcard name not needed, it's the default given in the first set of round brackets
     Route::resource('users', UserController::Class);  
@@ -28,7 +37,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin-panel', function () {
         return view('admin.admin_panel');
     })->name('admin.admin-panel');
-    Route::get('/', [StudentController::class, 'index'])->name('home');
     // Return user to home any time a route is not found
     Route::fallback(function () {
         return redirect('/')->with('status', 'Error, Page Not Found');

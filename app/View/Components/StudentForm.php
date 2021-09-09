@@ -12,15 +12,18 @@ class StudentForm extends Component
      * @var array
      */
     public $cohorts;
+    public $students;
 
     /**
      * Create a new component instance.
      * @param  array  $cohorts
+     * @param  array  $students
      * @return void
      */
-    public function __construct($cohorts)
+    public function __construct($cohorts, $students)
     {
         $this->cohorts = $cohorts;
+        $this->students = $students;
     }
 
     /**
