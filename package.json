@@ -1,5 +1,12 @@
 
 {
+    "name": "studio_management_app",
+    "description": "app",
+    "version": "1.0.0",
+    "engines": {
+      "node": "12.x",
+      "npm": "7.x"
+    },
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -9,7 +16,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}"
+        "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}",
+        "heroku-postbuild": "npm run production"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.17.3",
