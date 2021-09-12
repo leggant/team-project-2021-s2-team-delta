@@ -1,12 +1,10 @@
 <?php
 
 namespace Tests\Browser;
-
 use App\Models\User;
 use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
 
 class LoginTest extends DuskTestCase
 {
@@ -42,8 +40,6 @@ class LoginTest extends DuskTestCase
                     ->assertPathIs('/')                   
                     ->visit('/')
                     ->assertSee('Github');
-                    
-
             /*
             Test if another browser instance is also logged in with the first - should NOT be able to.
             Only one browser window should be logged in at a time.
@@ -55,12 +51,9 @@ class LoginTest extends DuskTestCase
             */
         });
     }
-
     /*
     Attempt to replicate an issue where admin user stays logged in if logout button is not pressed
     (even if browser window is closed and app reloaded)
     REMOVED: Simplified log in tests for now
     */
-
-    
 }

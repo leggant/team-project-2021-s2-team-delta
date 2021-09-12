@@ -1,7 +1,6 @@
 @can('create students')
 <form action="{{ route('students.store') }}" method="post">
     @csrf
-    {{-- THIS REPLACES --}}
     <div class="grid grid-cols-4 mt-4 gap-4">
         <x-jet-input type="text" id="first_name" name="first_name" placeholder="Student First Name" required aria-label="Student First Name"></x-jet-input>
         <x-jet-input type="text" id="last_name" name="last_name" required placeholder="Student Last Name" aria-label="Student Last Name"></x-jet-input>

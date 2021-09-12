@@ -49,6 +49,7 @@ class UserController extends Controller
             'Name' => 'required',
             'Email' => 'required',
             'Password' => 'required',
+            'Paper' => 'required',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
@@ -134,7 +135,6 @@ class UserController extends Controller
         $user->papers()->sync($request->input('Papers'));
         #Save the new information to exisitng user
         $user->save();
-
         return redirect('/users')->with('success', 'User Updated');
     }
 

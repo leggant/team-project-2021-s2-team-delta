@@ -5,7 +5,8 @@ namespace Tests\Browser;
 use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class NavTest extends DuskTestCase
 {
@@ -15,7 +16,20 @@ class NavTest extends DuskTestCase
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
-    */     
+    */   
+
+    public function createadminuser()
+    {
+        $user = User::where('email', '=', 'admin@admin.com')->first();
+        if ($user === null) {
+            $this->user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+                'is_admin' => 1,
+            ]);
+        }
+    }    
 
     /* 
     Methods for testing each link on the navigation bar
@@ -24,19 +38,10 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-        
-        $user = User::where('name', 'admin')->first();
+        $this->createadminuser();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user) 
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1)) 
                     ->visit('/')
                     ->assertPathIs('/');
                                        
@@ -46,19 +51,8 @@ class NavTest extends DuskTestCase
 
     public function testHomeLink()
     {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-        
-        $user = User::where('name', 'admin')->first(); 
-
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
+        $this->browse(function (Browser $browser) {
+            $browser
                     ->visit('/')
                     ->assertPathIs('/')
                     ->assertSee('Welcome');                    
@@ -155,6 +149,14 @@ class NavTest extends DuskTestCase
     }
     */
 
+    public function testAdminLink()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin-panel')
+                    ->assertSee('Manage');                    
+        });
+    }
+
     public function testLogoutLink()
     {
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
@@ -167,7 +169,6 @@ class NavTest extends DuskTestCase
         }
         
         $user = User::where('name', 'admin')->first();
-
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
                     ->visit('/')
