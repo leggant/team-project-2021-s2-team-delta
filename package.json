@@ -15,8 +15,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}",
-        "heroku-postbuild": "npm run prod"
+        "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}"
     },
     "devDependencies": {
         "prettier": "^2.3.2"
