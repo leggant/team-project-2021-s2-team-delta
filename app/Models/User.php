@@ -78,7 +78,7 @@ class User extends Authenticatable
 
     public function papers()
     {
-        return $this->belongsToMany(Papers::class, 'users_papers', 'user_id', 'paper_id');
+        return $this->belongsToMany(Papers::class, 'user_papers', 'user_id', 'paper_id');
     }
 
     public function notes()
