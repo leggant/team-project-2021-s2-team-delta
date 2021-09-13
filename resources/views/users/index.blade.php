@@ -43,6 +43,7 @@
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>

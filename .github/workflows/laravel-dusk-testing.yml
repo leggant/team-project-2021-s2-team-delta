@@ -73,6 +73,11 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Run Seeder
+        run: php artisan db:seed
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Upgrade Chrome Driver
         run: |
           php artisan dusk:chrome-driver --detect `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
