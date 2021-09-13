@@ -18,7 +18,7 @@ class Papers extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_papers', 'paper_id', 'user_id',);
+        return $this->belongsToMany(User::class, 'user_papers', 'paper_id', 'user_id',);
     }
 
     public function cohort()
