@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Evidence;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvidenceController extends Controller
 {
@@ -50,13 +51,14 @@ class EvidenceController extends Controller
                 'image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
             ]);
 
-            $student = DB::table('student')
-                ->where('name', 'LIKE', '%' . $request->student . '%')
-                ->get();
+            // $student = DB::table('student')
+            //     ->where('name', 'LIKE', '%' . $request->student . '%')
+            //     ->get();
             $evidence = new Evidence();
             $evidence->title = $request->title;
             $evidence->image = $request->file('image')->store('public/images'); //saves file locally at storage/public/images
-            $evidence->student_id = $student[0]->id;
+            $evidence->student_id = $request->input('student');
+            $evidence->user_id = Auth::id();
             $evidence->save(); // save it to the database.
 
             $evidences = DB::select('select * from evidence');
@@ -67,9 +69,7 @@ class EvidenceController extends Controller
                 ['student' => $student]
             );
         }
-        //$request->image->store('images');
         return 'failed';
-        //dd($request->hasFile('image'));
     }
 
     /**
