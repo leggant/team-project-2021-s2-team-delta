@@ -7,12 +7,11 @@
         <form action="{{ route('evidence.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="student">Student</label>
-            <input name="student" id="studentname" dusk="studentname" list="student" placeholder="Enter Student...">
-            <datalist id="student">
-                @foreach ($student as $student_name)
-                    <option value="{{ $student_name->first_name }} {{ $student_name->last_name }}"></option>
+            <select id="student" name="student">
+                @foreach ($student as $s)
+                    <option value="{{$s->id}}">{{ $s->first_name }} {{ $s->last_name }}</option>
                 @endforeach
-            </datalist>
+            </select>
             <label for="title">Description</label>
             <input type="text" name="title" id="title" placeholder="Enter Description..." required>
             {{-- MULTIPLE ALLOWS MULTIPLE FILES TO BE UPLOADED. CHECK BACKEND CAN HANDLE THIS IN THE HTTP REQUEST --}}
