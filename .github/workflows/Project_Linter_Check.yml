@@ -1,8 +1,7 @@
----
 name: Code Linter Check
 on: 
     push:
-        branches: [sprint-*]
+        branches: [sprint-*, development]
     pull_request:
         branches: [master, staging]
 jobs:
