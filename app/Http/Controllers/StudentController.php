@@ -46,18 +46,19 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'first_name' => 'required|unique:student|max:25|min:3',
+            'first_name' => 'required|alpha_dash|max:25|min:3',
             'last_name' => 'required|alpha_dash|max:25|min:3',
             'email' => 'email:rfc|unique:student|required',
-            'username' => 'required|alpha|unique:student|required|max:15',
+            'username' => 'required|alpha_num|unique:student|required|max:15',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
             'cohort_id' => 'nullable|integer'
         ];
         $messages = [
             'first_name.required' => 'Student First name is required',
         ];
-        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror')->withInput();
-        
+        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror');
+        $student = Student::create($request->all());
+        return redirect('home')->with('success', 'Student Created');
     }
 
     /**
@@ -66,7 +67,7 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Student $student, $id)
     {
         $id = $student->id;
         $students = Student::query();
