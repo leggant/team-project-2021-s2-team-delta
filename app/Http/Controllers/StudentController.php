@@ -6,7 +6,10 @@ use App\Models\Student;
 use App\Models\Cohort;
 use App\Models\Papers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -42,8 +45,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        Student::create($request->all());
-        return redirect('students');
+        $rules = [
+            'first_name' => 'required|unique:student|max:25|min:3',
+            'last_name' => 'required|alpha_dash|max:25|min:3',
+            'email' => 'email:rfc|unique:student|required',
+            'username' => 'required|alpha|unique:student|required|max:15',
+            'github' => 'alpha_dash|unique:student|nullable|max:15',
+            'cohort_id' => 'nullable|integer'
+        ];
+        $messages = [
+            'first_name.required' => 'Student First name is required',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror')->withInput();
+        
     }
 
     /**

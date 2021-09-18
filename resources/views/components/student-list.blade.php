@@ -3,7 +3,7 @@
             <th class="px-4 py-2" onclick="sortTable(0)">Student Name</th>
             <th class="px-8 py-2" onclick="sortTable(2)">Email</th>
             <th class="px-4 py-2" onclick="sortTable(3)">Github</th>
-            <th class="px-4 py-2" onclick="sortTable(4)">Cohort + Paper</th>
+            <th class="px-4 py-2" onclick="sortTable(4)">Paper + Stream</th>
         </tr>
         @foreach ($students as $student)
             <tr>
@@ -14,7 +14,7 @@
                 </td>
                 <td class="border px-8 py-2">{{ $student->email }}</td>
                 <td class="border px-4 py-2">{{ $student->github }}</td>
-                <td class="border px-4 py-2">Studio {{ $student->cohort->paper_id }} | {{ $student->cohort->year }} | {{ $student->cohort->semester }}</td>
+                {{-- <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->year }} | {{ $student->cohort->semester }}</td> --}}
             </tr>
         @endforeach
     </table>
