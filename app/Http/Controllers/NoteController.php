@@ -113,14 +113,10 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy(Request $request, Note $note)
     {
-        $notes = Note::query();
-        if ($notes->where('id', $id)->exists()) {
-            $note = $notes->find($id);
-            $note->delete();
-        } else {
-            //return response()->json(['message' => 'note not found.'], 404);
-        }
+        $student = $note->student_id;
+        $note->delete();
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 }
