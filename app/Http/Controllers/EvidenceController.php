@@ -109,14 +109,13 @@ class EvidenceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Evidence  $evidence
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Evidence $evidence)
     {
-        //Delete the Todo
-        $evidence = Evidence::findOrFail($id);
-        $id = $evidence->student_id;
+        $student = $evidence->student_id;
         $evidence->delete();
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 }
