@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\StudentController;
 
 class NoteController extends Controller
 {
@@ -32,7 +33,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.notes');
     }
 
     /**
@@ -43,16 +44,15 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $student = DB::table('student')
-            ->where('name', 'LIKE', '%' . $request->student . '%')
-            ->get();
-        $note = new Note();
-        $note->student_name = $request->student;
-        $note->notes = $request->notes;
-        $note->student_id = $student[0]->id;
-        $note->save(); // save it to the database.
-        $students = DB::select('select * from student');
-        return view('pages.notes', ['student' => $student]);
+        
+        $student = Student::where('id', $request->student_id)->first();
+        Note::create(
+            [
+                'student_id' => $request->student,
+                'notes' => $request->notes,
+            ]
+        );
+        return redirect()->action([StudentController::class, 'show'], ['student' => $request->student]);
     }
 
     /**

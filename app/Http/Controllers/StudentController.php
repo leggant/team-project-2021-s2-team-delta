@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -50,7 +51,7 @@ class StudentController extends Controller
         $rules = [
             'first_name' => 'required|alpha_dash|max:25|min:3',
             'last_name' => 'required|alpha_dash|max:25|min:3',
-            'username' => 'required|alpha_num|unique:student|required|max:15',
+            'username' => 'required|alpha_num|unique:student|required|max:10',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
             'cohort_id' => 'nullable|integer'
         ];
@@ -59,14 +60,14 @@ class StudentController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror');
         $student = Student::create([
-            'first_name' => $request->first_name,    
-            'last_name' => $request->last_name,    
+            'first_name' => Str::title($request->first_name),    
+            'last_name' => Str::title($request->last_name),    
             'email' => $request->username . "@student.op.ac.nz",    
-            'username' => $request->username,    
-            'github' => $request->github,  
+            'username' => Str::lower($request->username),    
+            'github' => Str::lower($request->github),  
             'cohort_id' => $request->cohort_id  
         ]);
-        return redirect('home')->with('success', 'Student Created');
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student->id]);
     }
 
     /**
