@@ -24,7 +24,7 @@
                             uppercase tracking-widest hover:bg-indigo-600 focus:outline-none 
                             focus:bg-indigo-300 focus:ring active:bg-indigo-500 
                             disabled:opacity-25 transition'"
-                                href="../public/files/{{ basename($file->filepath) }}"
+                                href="../public/files/{{ $student->id }}/{{ basename($file->filepath) }}"
                                 target="_blank">{{ $file->title }}</a>
                             <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                                 @csrf
