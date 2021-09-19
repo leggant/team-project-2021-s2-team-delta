@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Cohort;
 use App\Models\Papers;
+use App\Models\Note;
+use App\Models\Evidence;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +50,6 @@ class StudentController extends Controller
         $rules = [
             'first_name' => 'required|alpha_dash|max:25|min:3',
             'last_name' => 'required|alpha_dash|max:25|min:3',
-            'email' => 'email:rfc|unique:student|required',
             'username' => 'required|alpha_num|unique:student|required|max:15',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
             'cohort_id' => 'nullable|integer'
@@ -57,7 +58,14 @@ class StudentController extends Controller
             'first_name.required' => 'Student First name is required',
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror');
-        $student = Student::create($request->all());
+        $student = Student::create([
+            'first_name' => $request->first_name,    
+            'last_name' => $request->last_name,    
+            'email' => $request->username . "@student.op.ac.nz",    
+            'username' => $request->username,    
+            'github' => $request->github,  
+            'cohort_id' => $request->cohort_id  
+        ]);
         return redirect('home')->with('success', 'Student Created');
     }
 
@@ -67,22 +75,16 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student, $id)
+    public function show(Student $student)
     {
-        $id = $student->id;
-        $students = Student::query();
-        if ($students->where('id', $id)->exists()) {
-            $student = $students->where('id', $id)->first();
-            $evidences = DB::table('evidence')
-                ->where('student_id', 'LIKE', '%' . $student->id . '%')
-                ->get();
-            $notes = DB::table('notes')
-                ->where('student_id', 'LIKE', '%' . $student->id . '%')
-                ->get();
+        $student = Student::where('id', $student->id)->first();
+        if ($student->exists()) {
+            $uploads = Evidence::where('student_id', $student->id)->get();
+            $notes = Note::where('student_id', $student->id)->get();
             # Will also have to pass respective evidence and notes/observations rows here once they have proper relationships
             return view('pages.viewStudent', [
                 'student' => $student,
-                'evidences' => $evidences,
+                'uploads' => $uploads,
                 'notes' => $notes,
             ]);
         } else {

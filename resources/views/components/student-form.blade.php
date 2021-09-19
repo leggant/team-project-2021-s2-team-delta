@@ -8,9 +8,9 @@
         <x-jet-input type="text" id="github" name="github" value="{{ old('github') }}" placeholder="Github Username" aria-label="Github Username"></x-jet-input>
     </div>
     <div class="grid grid-cols-4 mt-4 mb-4 gap-4">
-        <x-jet-input type="email" id="email" name="email" required
+        {{-- <x-jet-input type="email" id="email" name="email" required
             class="col-span-2" placeholder="student@student.op.ac.nz"
-            aria-placeholder="Enter Student Email" value="{{ old('email') }}" aria-label="Enter Student Email"></x-jet-input>
+            aria-placeholder="Enter Student Email" value="{{ old('email') }}" aria-label="Enter Student Email"></x-jet-input> --}}
         <x-student-cohort-select-input :cohorts="$cohorts" class="col-span-2"/>
     </div>
     <x-jet-button>Add New Student</x-jet-button>
