@@ -13,10 +13,11 @@
                         <option value="{{ $s->id }}">{{ $s->first_name }} {{ $s->last_name }}</option>
                     @endforeach
                 </select>
-                <label for="title">Description</label>
-                <input type="text" name="title" id="title" placeholder="Enter Description..." required>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" placeholder="Enter Title" required>
+                <textarea name="description" id="description" cols="30" rows="5"></textarea>
                 {{-- MULTIPLE ALLOWS MULTIPLE FILES TO BE UPLOADED. CHECK BACKEND CAN HANDLE THIS IN THE HTTP REQUEST --}}
-                <input type="file" name="image" id="image" dusk="image" accept="image/*,.pdf,.doc,.docx,.md,.html" multiple
+                <input type="file" name="filepath" id="image" dusk="image" accept="image/*,.pdf,.doc,.docx,.md,.html" multiple
                     required />
                 <x-jet-button>Upload Files</x-jet-button>
             </form>

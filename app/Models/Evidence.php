@@ -11,7 +11,7 @@ class Evidence extends Model
 {
     protected $table = 'evidence';
 
-    protected $fillable = ['title', 'image', 'student_id', 'user_id'];
+    protected $fillable = ['title', 'description', 'filepath', 'student_id', 'user_id'];
 
     public function users()
     {

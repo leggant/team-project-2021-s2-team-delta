@@ -7,6 +7,7 @@ use App\Models\Evidence;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\StudentController;
 
 class EvidenceController extends Controller
 {
@@ -44,32 +45,19 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            //file/image?
-
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-            ]);
-
-            // $student = DB::table('student')
-            //     ->where('name', 'LIKE', '%' . $request->student . '%')
-            //     ->get();
-            $evidence = new Evidence();
-            $evidence->title = $request->title;
-            $evidence->image = $request->file('image')->store('public/images'); //saves file locally at storage/public/images
-            $evidence->student_id = $request->input('student');
-            $evidence->user_id = Auth::id();
-            $evidence->save(); // save it to the database.
-
-            $evidences = DB::select('select * from evidence');
-            $student = DB::select('select * from student');
-            return view(
-                'pages.evidence',
-                ['evidences' => $evidences],
-                ['student' => $student]
-            );
-        }
-        return 'failed';
+        $student = $request->student;
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required|max:8000', //max 8mb
+        ]);
+        $evidence = Evidence::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'filepath' => $request->file('filepath')->store('public/files'),
+            'student_id' => $request->student,
+            'user_id' => Auth::id()
+        ]);
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 
     /**
