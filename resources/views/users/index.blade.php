@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- A table of all users in the database -->
-    @if(Auth::check() && Auth::user()->isAdmin())
+    @role('Super-Admin')
         <div class="pt-6 flex justify-center gap-4 md:justify-between">
             <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
             <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
@@ -51,6 +51,6 @@
         </div>
 
     @else
-        <h2>You do not have access to this page</h2>
-    @endif
+        <h2>You do not have permission to access this page</h2>
+    @endrole
 </x-app-layout>
