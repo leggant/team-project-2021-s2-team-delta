@@ -17,7 +17,7 @@ class UpdateFieldNamesInEvidenceTable extends Migration
             $table->mediumText('title', 50)->change();
             $table->renameColumn('image', 'filepath');
             $table->after('title', function ($table) {
-                $table->text('description')->default('')->nullable();
+                $table->text('description')->nullable();
             });
         });
     }
