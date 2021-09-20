@@ -6,8 +6,8 @@
             <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
         <br>
-        <div>
-            <table class="table-fixed w-full">
+        <div class="flex justify-center">
+            <table class="table-fixed w-3/4">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Name</th>
@@ -42,14 +42,12 @@
                                     </form>
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
-                            </td>
-                            
+                            </td> 
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
     @else
         <h2>You do not have permission to access this page</h2>
     @endrole
