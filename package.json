@@ -16,7 +16,13 @@
         "prod": "npm run production",
         "production": "mix --production",
         "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}",
-        "version": "auto-changelog -p && git add CHANGELOG.md"
+        "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md"
+    },
+    "auto-changelog": {
+        "output": "CHANGELOG.md",
+        "template": "keepachangelog",
+        "unreleased": true,
+        "commitLimit": true
     },
     "devDependencies": {
         "auto-changelog": "^2.3.0",
