@@ -1,9 +1,7 @@
 name: Laravel Dusk Testing
 on:
-  push:
-    branches: [sprint-*] 
   pull_request:
-    branches: [staging, master, main]
+    branches: [staging, master, main, development]
 
 jobs:
   Laravel-Set-Up:
