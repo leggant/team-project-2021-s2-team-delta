@@ -46,7 +46,7 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $student = $request->student;
-        $path = 'public/files/'.$student.'/';
+        $path = 'uploads/'.$student.'/';
         $request->validate([
             'title' => 'required|string|max:50',
             'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required|max:8000', //max 8mb
@@ -56,8 +56,9 @@ class EvidenceController extends Controller
             'description' => $request->description,
             'filepath' => $request->file('filepath')->store($path, 's3'),
             'student_id' => $request->student,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ]);
+
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 
