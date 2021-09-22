@@ -1,9 +1,7 @@
 name: Laravel Security Checks + PHPUnit Tests
 on:
-  push:
-    branches: [sprint-*, development] 
   pull_request:
-    branches: [staging, master, main]
+    branches: [staging, master, main, development]
 
 jobs:
   Run-Consecutive-Tests:
