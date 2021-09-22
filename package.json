@@ -16,7 +16,8 @@
         "prod": "npm run production",
         "production": "mix --production",
         "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}",
-        "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md"
+        "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md",
+        "cx": "cz"
     },
     "auto-changelog": {
         "output": "CHANGELOG.md",
