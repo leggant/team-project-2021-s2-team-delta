@@ -54,7 +54,7 @@ class EvidenceController extends Controller
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
-            'filepath' => $request->file('filepath')->store( $path ),
+            'filepath' => $request->file('filepath')->store($path, 's3'),
             'student_id' => $request->student,
             'user_id' => Auth::id()
         ]);
