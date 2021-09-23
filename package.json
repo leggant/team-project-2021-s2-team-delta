@@ -16,14 +16,24 @@
         "prod": "npm run production",
         "production": "mix --production",
         "prettier": "@prettier/plugin-php --write **/*.{js,php,css,json,md}",
-        "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md",
+        "changeLog": "auto-changelog --template changelog-template.hbs -p",
+        "fullLog": "auto-changelog --template commitlog-template.hbs -p",
         "cx": "cz"
     },
-    "auto-changelog": {
+    "auto-changelog2": {
+        "template": "changelog-template.hbs",
         "output": "CHANGELOG.md",
-        "template": "keepachangelog",
         "unreleased": true,
-        "commitLimit": true
+        "commitLimit": true,
+        "releaseSummary":true
+    },
+    "auto-changelog": {
+        "template": "commitlog-template.hbs",
+        "output": "COMMITLOG.md",
+        "unreleased": true,
+        "commitLimit": false,
+        "releaseSummary":true,
+        "hideCredit": false
     },
     "devDependencies": {
         "auto-changelog": "^2.3.0",
@@ -36,7 +46,7 @@
         "@tailwindcss/forms": "^0.3.1",
         "@tailwindcss/typography": "^0.4.0",
         "alpinejs": "^3.0.6",
-        "axios": "^0.21",
+        "axios": ">=0.21.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "npm": "^7.20.2",

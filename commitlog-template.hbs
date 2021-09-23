@@ -1,0 +1,34 @@
+
+{{#each releases}}
+  # Delta Team - Studio Management Commit Log :calendar:{{niceDate}}
+
+  {{#if summary}}
+    {{summary}}
+  {{/if}}
+
+  {{#if commits}}
+    ## Commits :heavy_check_mark:
+    {{#each commits}}
+      ### [`#{{shorthash}}`]({{href}}) {{ email }} 
+      {{ message }} 
+
+    {{/each}}
+  {{/if}}
+
+  {{#if merges}}
+    ## Merged :heavy_check_mark:
+    {{#each merges}}
+      ### [`#{{id}}`]({{href}}) {{message}}
+      {{ email }}
+    {{/each}}
+  {{/if}}
+
+  {{#if fixes}}
+    ## Fixed :heavy_check_mark:
+    {{#each fixes}}
+      ### {{commit.subject}} [`#{{id}}`]({{href}}) {{commit}}
+    {{/each}}
+  {{/if}}
+{{/each}}
+
+---
