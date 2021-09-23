@@ -29,4 +29,5 @@ options:
     - NOT READY TO MERGE
     - NOT FOR MERGE
     - In Progress
+    - Not Merge Ready
   enable_group_assignment: false

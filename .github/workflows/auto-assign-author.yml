@@ -1,8 +1,5 @@
 name: Auto Assign Author
-
 on:
-  issues:
-    types: [opened]
   pull_request:
     types: [opened, reopened]
 
