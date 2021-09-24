@@ -17,7 +17,7 @@ class EvidenceTest extends DuskTestCase
     via the students page
     */
 
-    public function testEvidenceStudent()
+    public function testEvidenceMakeStudent()
     {
         // Can create a user here but get warning about a risky file containing no tests
         if (Student::where('email', 'jesus@hmail.com')->first() === null) 
@@ -31,7 +31,6 @@ class EvidenceTest extends DuskTestCase
             ]); 
         }       
     }
-
     
     public function testEvidenceRouting()
     {   
