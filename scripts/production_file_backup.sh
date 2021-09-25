@@ -23,3 +23,31 @@ if [ $? -ne 0 ]; then
 else
         echo "Download completed." >> $log
 fi
+
+
+if [ ! -z $path ];then
+        cd $path
+        count=$(find . -name "*production*" -type d -mtime +$retentionDays | wc -l)
+
+        if [ $count -lt 1 ];then
+                echo "no expired backups are present in the production file backup directory. Exiting..." >> $log
+                exit 0
+        else
+                echo "Found $count backups to be deleted." >> $log
+                echo "The Following directories and files within them  will be deleted." >> $log
+                find . -name "*production*" -type d -mtime +$retentionDays >> $log
+                find . -name "*production*" -type d -mtime +$retentionDays -exec rm -rf {} +
+
+                if [ $? -ne 0 ]; then
+                        echo "File(s) not deleted, something went wrong. Error code $?." >> $log
+                        exit 0
+                else
+                        echo "$count File(s) were delted." >> $log
+                        exit 0
+                fi
+
+        fi
+else
+        echo "Production capture directory not found. Error code $?. Exiting..." >> $log
+        exit 0
+fi
