@@ -53,7 +53,7 @@ class EvidenceTest extends DuskTestCase
     on the evidence blade. Chooses the first student in the dropdown (select statement)
     and attaches a file stored in 'app/public/testing/'    
     */    
-    
+    // https://www.codegrepper.com/code-examples/php/laravel+get+root+path
     public function testCreateEvidence()
     {        
         $this->browse(function ($browser) 
@@ -62,7 +62,7 @@ class EvidenceTest extends DuskTestCase
                     ->select('#student', 1)                    
                     ->type('#title', 'Some Evidence')
                     ->type('#description', 'This is a description of the evidence uploaded which has been typed into a textarea box')
-                    ->attach('@image', 'tests/Browser/testupload/test_upload_file.PNG')
+                    ->attach('@image', base_path('tests/Browser/testupload/test_upload_file.PNG'))
                     ->click('button[type="submit"]')
                     ->assertPathIs('/students/*')
                     ->assertSee('Created:');                               
