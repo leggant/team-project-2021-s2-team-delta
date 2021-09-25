@@ -62,7 +62,7 @@ class EvidenceTest extends DuskTestCase
                     ->select('#student', 1)                    
                     ->type('#title', 'Some Evidence')
                     ->type('#description', 'This is a description of the evidence uploaded which has been typed into a textarea box')
-                    ->attach('@image', __DIR__.('/testupload/test_upload_file.PNG'))
+                    ->attach('@image', realpath('.').'/tests/Browser/testupload/test_upload_file.png')
                     ->click('button[type="submit"]')
                     ->assertPathIs('/students/*')
                     ->assertSee('Created:');                               
