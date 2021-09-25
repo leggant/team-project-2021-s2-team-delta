@@ -15,7 +15,7 @@ fi
 
 echo "Beginning file downloads..." >> $log
 
-aws s3 sync s3://studio4managementfiles2021 $path >> $log
+aws s3 sync s3://studio4managementfiles2021 $path/production_files_$currentDate >> $log
 
 if [ $? -ne 0 ]; then
         echo "Download failed. Error code $?. Exiting..." >> $log
@@ -23,7 +23,6 @@ if [ $? -ne 0 ]; then
 else
         echo "Download completed." >> $log
 fi
-
 
 if [ ! -z $path ];then
         cd $path
