@@ -67,11 +67,15 @@ class EvidenceController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        // not currently returning a file to the browser
+        $file = Evidence::find($id);
+        $student = Student::find($file->student_id);
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student, 'file' => $file]);
     }
 
     /**
