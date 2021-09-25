@@ -45,17 +45,17 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->student;
-        $path = 'public/files/'.$student.'/';
+        $student = $request->student_id;
+        $path = 'files/'.$student.'/';
         $request->validate([
             'title' => 'required|string|max:50',
-            'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required|max:8000', //max 8mb
+            // 'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required', //max 8mb
         ]);
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
             'filepath' => $request->file('filepath')->store( $path ),
-            'student_id' => $request->student,
+            'student_id' => $request->student_id,
             'user_id' => Auth::id()
         ]);
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
