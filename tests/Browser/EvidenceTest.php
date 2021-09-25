@@ -49,29 +49,23 @@ class EvidenceTest extends DuskTestCase
     }
 
     /* 
-    Attempt to upload a file using a full student name (first, last)
-    and a file stored in 'app/public/testing/'
-    ---Currently failing due changes to name field to first,last_name
-    (unknown column 'name')
-    */
-
-    /* Temporarily commented out - bug in name dropdown - also file not found in github actions
-    when running dusk tests */
+    Attempt to upload a file using a student from the dropdown selector
+    on the evidence blade. Chooses the first student in the dropdown (select statement)
+    and attaches a file stored in 'app/public/testing/'    
+    */    
     
-    /*
     public function testCreateEvidence()
-    {
-        $user = User::where('email', 'admin@admin.com')->first();
-        
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->type('@studentname', 'Jesus Christ')                    
+    {        
+        $this->browse(function ($browser) 
+        {            
+            $browser->visit('/evidence')
+                    ->select('#student', 1)                    
                     ->type('#title', 'Some Evidence')
+                    ->type('#description', 'This is a description of the evidence uploaded which has been typed into a textarea box')
                     ->attach('@image', storage_path('app/public/testing/test_upload.PNG'))
                     ->click('button[type="submit"]')
-                    ->assertTitle('Studio Management');                                
+                    ->assertPathIs('/students/*')
+                    ->assertSee('Created:');                               
         });
-    }
-    */
+    }    
 }

@@ -10,7 +10,7 @@
 
                     {{--
                     <label for="student">Student: </label>
-                    <input name="student" list="student" placeholder="Select Student" required
+                    <input name="student" list="student" placeholder="Select Student"
                         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1" />
                     <datalist id="student">
                         @foreach ($student as $student)
@@ -26,6 +26,7 @@
                             <option value="{{ $s->id }}" selected>{{ $s->first_name }} {{ $s->last_name }}</option>
                         @endforeach
                     </select>
+                    
                     <textarea rows="5" name="notes" required
                         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-8"></textarea>
                     <x-jet-button>Save Note</x-jet-button>
