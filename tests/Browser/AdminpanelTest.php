@@ -21,4 +21,60 @@ class AdminpanelTest extends DuskTestCase
                     ->assertSee('MANAGE USERS');                    
         });
     }
+
+    public function testManageUsers()
+    {    
+        $this->browse(function ($browser) 
+        {
+            $browser
+                    ->visit('/admin-panel')
+                    ->pause(2000)
+                    ->assertPathIs('/admin-panel')                   
+                    ->press('MANAGE USERS')
+                    ->pause(2000)
+                    ->assertPathIs('/users');                    
+        });
+    }
+
+    public function testManagePapers()
+    {    
+        $this->browse(function ($browser) 
+        {
+            $browser
+                    ->visit('/admin-panel')
+                    ->pause(2000)
+                    ->assertPathIs('/admin-panel')                   
+                    ->press('MANAGE PAPERS')
+                    ->pause(2000)
+                    ->assertPathIs('/papers');                    
+        });
+    }
+
+    public function testManagePermissions()
+    {    
+        $this->browse(function ($browser) 
+        {
+            $browser
+                    ->visit('/admin-panel')
+                    ->pause(2000)
+                    ->assertPathIs('/admin-panel')                   
+                    ->press('MANAGE PERMISSIONS')
+                    ->pause(2000)
+                    ->assertPathIs('/permissions');                    
+        });
+    }
+
+    public function testManageRoles()
+    {    
+        $this->browse(function ($browser) 
+        {
+            $browser
+                    ->visit('/admin-panel')
+                    ->pause(2000)
+                    ->assertPathIs('/admin-panel')                   
+                    ->press('MANAGE ROLES')
+                    ->pause(2000)
+                    ->assertPathIs('/roles');                    
+        });
+    }
 }

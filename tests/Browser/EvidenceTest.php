@@ -51,9 +51,11 @@ class EvidenceTest extends DuskTestCase
     /* 
     Attempt to upload a file using a student from the dropdown selector
     on the evidence blade. Chooses the first student in the dropdown (select statement)
-    and attaches a file stored in 'app/public/testing/'    
-    */    
+    and attaches a file stored in '/tests/Browser/testupload/'    
+    */ 
+
     // https://www.codegrepper.com/code-examples/php/laravel+get+root+path
+    
     public function testCreateEvidence()
     {        
         $this->browse(function ($browser) 
