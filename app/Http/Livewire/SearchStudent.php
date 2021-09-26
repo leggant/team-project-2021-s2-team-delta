@@ -11,10 +11,12 @@ class SearchStudent extends Component
     public $query = '';
     public $searchResultsCount = 0;
     public $searchResultsLimit = 10;
-    public $searchFields = ['student_id', 'first_name', 'last_name', 'email', 'github', 'paper'];
-    public $searchField = 2;
+    public $searchFields = ['first_name', 'last_name', 'email', 'github', 'paper'];
+    public $searchField = 1;
     public $sortBy = '';
     public $sortDirection = 'asc';
+
+    // does the initial search
     public function render()
     {
         $students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query . '%')->get();
@@ -22,6 +24,8 @@ class SearchStudent extends Component
             'students' => $students,
         ]);
     }
+
+    // updates the search results each time the input filter changes
     public function hydrate() {
         $students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query . '%')->get();
         return view('livewire.search-student', [

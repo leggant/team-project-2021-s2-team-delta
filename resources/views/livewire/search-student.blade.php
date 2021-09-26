@@ -1,9 +1,10 @@
 <div>
     <div>
         <x-jet-input type="search" wire:model="query" placeholder="Search Students"/>
-        <div>
-            {{-- <input type="radio" wire:model="query"> --}}
-        </div>
+        @foreach ($searchFields as $index => $field)
+            <label>{{ $field }}
+            <input type="radio" name="field" wire:model="searchField" value="{{ $index }}"></label>
+        @endforeach
     </div>
     <table cellspacing="0" id="studentTable" class="table-fixed w-full">
         <th class="px-4 py-2" onclick="sortTable(0)">Student Name</th>
