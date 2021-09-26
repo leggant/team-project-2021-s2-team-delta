@@ -28,25 +28,18 @@
                                     focus:bg-indigo-300 focus:ring active:bg-indigo-500 
                                     disabled:opacity-25 text-left break-normal whitespace-nowrap">{{ $file->short_title }}</button>
                                 </form>
-                                
                             </div>
                             {{-- <form method="post" action="{{ route('evidence.edit', $file->id) }}" class="mx-6"> --}}
                             <div class="flex gap-4 space-evenly align-content-center">
                                 <form method="#" action="#" class="self-start">
                                     @csrf
                                     @method('put')
-                                    <button type="submit"
-                                        class="px-4 py-2 w-auto bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-600 focus:outline-none focus:bg-indigo-300 focus:ring active:bg-indigo-500 
-                                        disabled:opacity-25">Edit</button>
+                                    <x-edit-button />
                                 </form>
                                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit"
-                                        class="px-4 py-2 w-auto bg-red-600 border border-transparent rounded-md font-semibold text-xs 
-                                        text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none 
-                                        focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 
-                                        disabled:opacity-25 transition">Delete</button>
+                                    <x-delete-button />
                                 </form>
                                 <p class="leading-relaxed py-1">Created: {{ date('d-m-Y', strtotime($file->created_at)) }}</p>
                                 @if ($file->created_at != $file->updated_at)
@@ -71,8 +64,7 @@
                             <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                                 @csrf
                                 @method('delete')
-                                <button type="submit"
-                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">Delete</button>
+                                <x-delete-button />
                             </form>
                         </div>
                     </div>
@@ -81,7 +73,7 @@
                 <p class="mt-2">No notes found</p>
             @endif
         </div>
-        <div x-data="{ open: false }">
+        {{-- <div x-data="{ open: false }">
             <button x-on:click="open = ! open">Upload New Evidence</button>
             <div x-show="open">
                 Add new upload form here
@@ -92,6 +84,6 @@
             <div x-show="open">
                 create new note
             </div>
-        </div>
+        </div> --}}
     </div>
 </x-app-layout>

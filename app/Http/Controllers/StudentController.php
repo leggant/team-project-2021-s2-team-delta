@@ -101,10 +101,10 @@ class StudentController extends Controller
      */
     public function edit(Request $request, Student $student)
     {
-        $student = Student::where('id', $student->id)->first();
+        $student = Student::where('id', $student->id)->get();
+        dd($student);
         return view('pages.editStudent', [
             'student' => $student,
-
         ]);
     }
 
