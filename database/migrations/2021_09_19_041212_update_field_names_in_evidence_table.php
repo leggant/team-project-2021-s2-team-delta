@@ -30,7 +30,9 @@ class UpdateFieldNamesInEvidenceTable extends Migration
     public function down()
     {
         Schema::table('evidence', function (Blueprint $table) {
-            //
+            $table->string('title')->change();
+            $table->renameColumn('filepath', 'image');
+            $table->dropColumn('description');
         });
     }
 }

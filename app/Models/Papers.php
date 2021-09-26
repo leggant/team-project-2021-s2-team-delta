@@ -11,7 +11,7 @@ class Papers extends Model
 {
     use HasFactory;
 
-    protected $table = 'papers';
+    protected $table = 'courses';
     public $timestamps = false;
 
     protected $fillable = ['paper_name'];
