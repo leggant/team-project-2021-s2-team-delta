@@ -30,7 +30,7 @@ class Evidence extends Model
     */
     public function getShortTitleAttribute()
     {
-        return Str::of($this->title)->limit(17,'...');
+        return Str::of($this->title)->limit(25,'...');
     }
     /**
      * get shortend version of title to use as button text.
