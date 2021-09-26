@@ -1,9 +1,10 @@
 <div>
-    <div>
-        <x-jet-input type="search" wire:model="query" placeholder="Search Students"/>
+    <div class="grid grid-cols-7 w-3/4">
+        <x-jet-input type="search" wire:model="query" placeholder="Search Students" class="col-span-3"/>
         @foreach ($searchFields as $index => $field)
-            <label>{{ $field }}
-            <input type="radio" name="field" wire:model="searchField" value="{{ $index }}"></label>
+        <div class="flex justify-evenly items-center mx-5 place-self-center self-center">
+            <label class="hover:cursor-pointer">{{ $labels[$index] }}<input type="radio" name="field" wire:model="searchField" value="{{ $index }}" class="mx-1 hover:cursor-pointer"></label>
+        </div>
         @endforeach
     </div>
     <table cellspacing="0" id="studentTable" class="table-fixed w-full">
