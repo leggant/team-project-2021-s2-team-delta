@@ -22,11 +22,7 @@
                             <div class="flex gap-4">
                                 <form action="{{ route('evidence.show', $file->id) }}" method="get">
                                     @csrf
-                                    <button type="submit" class="px-4 py-2 w-min
-                                    bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white 
-                                    uppercase tracking-widest hover:bg-indigo-600 focus:outline-none 
-                                    focus:bg-indigo-300 focus:ring active:bg-indigo-500 
-                                    disabled:opacity-25 text-left break-normal whitespace-nowrap">{{ $file->short_title }}</button>
+                                    <x-jet-button type="submit">{{ $file->short_title }}</x-jet-button>
                                 </form>
                             </div>
                             {{-- <form method="post" action="{{ route('evidence.edit', $file->id) }}" class="mx-6"> --}}
