@@ -19,13 +19,14 @@
                 @if ($uploads->count() > 0)
                     @foreach ($uploads as $file)
                         <div class="flex mt-3 items-center gap-2">
-                            <a class="inline-flex items-center justify-center px-4 py-2 
-                            bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white 
-                            uppercase tracking-widest hover:bg-indigo-600 focus:outline-none 
-                            focus:bg-indigo-300 focus:ring active:bg-indigo-500 
-                            disabled:opacity-25 transition'"
-                                href="../public/{{ $file->filepath }}"
-                                target="_blank">{{ $file->title }}</a>
+                            <form action="{{ route('evidence.show', $file->id) }}" method="get">
+                                @csrf
+                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 
+                                bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white 
+                                uppercase tracking-widest hover:bg-indigo-600 focus:outline-none 
+                                focus:bg-indigo-300 focus:ring active:bg-indigo-500 
+                                disabled:opacity-25 transition">{{ $file->title }}</button>
+                            </form>
                             <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                                 @csrf
                                 @method('delete')
@@ -63,6 +64,18 @@
             @else
                 <p class="mt-2">No notes found</p>
             @endif
+        </div>
+        <div x-data="{ open: false }">
+            <button x-on:click="open = ! open">Upload New Evidence</button>
+            <div x-show="open">
+                Add new upload form here
+            </div>
+        </div>
+        <div x-data="{ open: false }">
+            <button x-on:click="open = ! open">Create New Note</button>
+            <div x-show="open">
+                create new note
+            </div>
         </div>
     </div>
 </x-app-layout>

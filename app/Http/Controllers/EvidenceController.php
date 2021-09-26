@@ -18,11 +18,11 @@ class EvidenceController extends Controller
      */
     public function index()
     {
-        $evidence = Evidence::all();
+        $uploads = Evidence::all();
         $students = Student::all();
         return view(
             'pages.evidence',
-            ['evidences' => $evidence],
+            ['uploads' => $uploads],
             ['student' => $students]
         );
     }

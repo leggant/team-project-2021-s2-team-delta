@@ -10,8 +10,8 @@ use App\Models\Student;
 class Evidence extends Model
 {
     protected $table = 'evidence';
-
-    protected $fillable = ['title', 'description', 'filepath', 'student_id', 'user_id'];
+    
+    protected $fillable = ['title', 'description', 'filepath', 'student_id', 'user_id', 'updated_at', 'created_at'];
 
     public function users()
     {
