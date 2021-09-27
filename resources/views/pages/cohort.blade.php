@@ -8,7 +8,7 @@
                 <div class="p-6">
                     <form action="{{ route('cohorts.store') }}" method="post">
                         @csrf
-                        <label for="paper">Paper:
+                        <label for="paper">Course:
                             <select id="paper" name="paper" required>
                                 @foreach ($papers as $paper)
                                     <option value="{{ $paper->id }}">{{ $paper->paper_name }}</option>
@@ -28,8 +28,8 @@
         </div>
     @endcan
     @can('view cohorts')
-        <div>
-            <table class="table-fixed w-full">
+        <div class="flex justify-center">
+            <table class="table-fixed w-3/4">
                 <thead>
                     <th class="px-4 py-2">Paper</th>
                     <th class="px-4 py-2">Year</th>
@@ -39,7 +39,7 @@
                 <tbody>
                     @foreach ($cohorts as $cohort)
                         <tr>
-                            <td class="border px-4 py-2">Studio {{ $cohort->paper_id }}</td>
+                            <td class="border px-4 py-2">{{ $cohort->papers->paper_name }}</td>
                             <td class="border px-4 py-2">{{ $cohort->year }}</td>
                             <td class="border px-4 py-2">{{ $cohort->semester }}</td>
                             <td class="border px-4 py-2">{{ $cohort->stream }}</td>

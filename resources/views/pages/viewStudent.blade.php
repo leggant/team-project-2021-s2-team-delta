@@ -1,5 +1,8 @@
 <x-app-layout>
     @can('view students')
+        <div class="pt-6 flex justify-center gap-4">
+            <x-jet-button><a href="{{url('/')}}">Back</a></x-jet-button>
+        </div>
         <x-slot name="header">
             <h1 class="font-semibold capitalize">{{ $student->name }}</h1>
         </x-slot>
@@ -14,7 +17,7 @@
                 <h3>Evidence</h3>
                 <div>
                     <table id="studentEvidence">
-                        @foreach ($evidences as $evidence)
+                        @foreach ($uploads as $evidence)
                             <tr>
                                 <td>
                                     <a

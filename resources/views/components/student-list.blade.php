@@ -4,7 +4,7 @@
             <th class="px-4 py-2" onclick="sortTable(0)">Student Name</th>
             <th class="px-8 py-2" onclick="sortTable(2)">Email</th>
             <th class="px-4 py-2" onclick="sortTable(3)">Github</th>
-            <th class="px-4 py-2" onclick="sortTable(4)">Paper + Stream</th>
+            <th class="px-4 py-2" onclick="sortTable(4)">Course + Stream</th>
         </tr>
         @foreach ($students as $student)
             <tr>
@@ -17,7 +17,7 @@
                 @if ($student->github)
                 <td class="border px-4 py-2"><a class="hover:underline" href="http://github.com/{{ $student->github }}" target="_blank">github.com/{{ $student->github }}</td>
                 @endif
-                {{-- <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->year }} | {{ $student->cohort->semester }}</td> --}}
+                <td class="border px-4 py-2">{{$student->cohort->papers->paper_name}} | Stream {{$student->cohort->stream}}</td>
             </tr>
         @endforeach
     </table>
