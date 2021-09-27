@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Form that allows user to create a new user -->
-    @if(Auth::check() && Auth::user()->isAdmin())
+    @role('Super-Admin')
         <div class="pt-6 flex justify-center gap-4 md:justify-between">
             <x-jet-button><a href="{{url('/users')}}">Back</a></x-jet-button>
         </div>
@@ -28,20 +28,11 @@
                 </div>
                 <br>
                 <div>
-                    <h5>Select Paper:</h5>
-                    <select id="paper" name="Paper" required>
-                        @foreach($papers as $paper)
-                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <br>
-                <div>
                     <input type='submit' name='submit' value='Submit'>
                 </div>
             </fieldset>
         </form>
     @else
-        <h2>You do not have access to this page</h2>
-    @endif
+        <h2>You do not have permission to access this page</h2>
+    @endrole
 </x-app-layout>

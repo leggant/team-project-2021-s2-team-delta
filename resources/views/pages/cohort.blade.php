@@ -25,7 +25,9 @@
                     </form>
                 </div>
             </div>
-        @endcan
+        </div>
+    @endcan
+    @can('view cohorts')
         <div>
             <table class="table-fixed w-full">
                 <thead>
@@ -46,5 +48,6 @@
                 </tbody>
             </table>
         </div>
+    @endcan
     </div>
 </x-app-layout>

@@ -49,7 +49,6 @@ class UserController extends Controller
             'Name' => 'required',
             'Email' => 'required',
             'Password' => 'required',
-            'Paper' => 'required',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
@@ -62,9 +61,6 @@ class UserController extends Controller
         {
             $user->is_admin = 1;
             $user->assignRole('Super-Admin');
-        }
-        else {
-            $user->assignRole('Regular');
         }
         #Save the new user
         $user->save();
@@ -110,7 +106,7 @@ class UserController extends Controller
             'Email' => 'required',
             'Papers' => 'required|array',
         ])->validate();
-
+        $roles = Role::select('id')->get();
         #Change db field of user to new information provided
         $user->name = $request->input('Name');
         $user->email = $request->input('Email');
@@ -128,7 +124,28 @@ class UserController extends Controller
             }
             else{
                 $user->is_admin = 0;
-                $user->syncRoles('Regular');
+                $selected = array();
+                foreach($request->input('Papers') as $item)
+                {
+                    switch($item)
+                    {
+                        case 1:
+                            $selected[] = "Studio 1";
+                            break;
+                        case 2:
+                            $selected[] = "Studio 2";
+                            break;
+                        case 3:
+                            $selected[] = "Studio 3";
+                            break;
+                        case 4:
+                            $selected[] = "Studio 4";
+                            break;
+                        default:
+                            return redirect()->back()->with('error', 'Select Course that does not have a role');
+                    }
+                }
+                $user->syncRoles([$selected]);
             }
         }
         #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
