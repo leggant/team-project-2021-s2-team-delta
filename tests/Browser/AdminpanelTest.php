@@ -32,7 +32,8 @@ class AdminpanelTest extends DuskTestCase
                     ->assertPathIs('/admin-panel')                   
                     ->press('MANAGE USERS')
                     ->pause(2000)
-                    ->assertPathIs('/users');                    
+                    ->assertPathIs('/users')
+                    ->pause(2000);                   
         });
     }
 
@@ -77,4 +78,6 @@ class AdminpanelTest extends DuskTestCase
                     ->assertPathIs('/roles');                    
         });
     }
+
+
 }
