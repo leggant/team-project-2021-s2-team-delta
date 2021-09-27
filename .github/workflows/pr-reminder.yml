@@ -2,7 +2,8 @@ name: Pull Request Reminder-Teams Channel
 on:
   schedule:
   # runs weekdays at 10am - Monday to Friday if a pr is open for more than 1 day
-    - cron: "0 10 * * 1-5"
+  # actions run on utc time, this will now run at 10am and not 11pm(daylight savings time)
+    - cron: "0 22 * * 1-5"
 jobs:
   pr-review-reminder:
     runs-on: ubuntu-latest
