@@ -8,6 +8,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
+use Illuminate\Support\Facades\Storage;
 
 class EvidenceController extends Controller
 {
@@ -46,15 +47,21 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $student = $request->student;
-        $path = 'uploads/'.$student.'/';
+      
         $request->validate([
             'title' => 'required|string|max:50',
             'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required|max:8000', //max 8mb
         ]);
+
+        $path = $request->file('filepath')->store('uploads/'.$student.'/', 's3'); // file is stored within a folder of the student id in s3. 
+
+        //Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
+
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
-            'filepath' => $request->file('filepath')->store($path, 's3'),
+            'filepath' => basename($path), // This gets the filename. I tried changing the 'filepath' within the migration, form and model to 'filename' however this for some reason broke the upload.
+            'url' => Storage::disk('s3')->url($path),    //retrieving the specffic path that points to the file uploaded. 
             'student_id' => $request->student,
             'user_id' => Auth::id(),
         ]);
