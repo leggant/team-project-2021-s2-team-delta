@@ -1,7 +1,7 @@
 <x-app-layout>
     @role('Super-Admin')
-        <div class="pt-6 flex justify-center gap-4 md:justify-between">
-            <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
+        <div class="pt-6 flex justify-center gap-4">
+            <x-jet-button class="px-6"><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
         <br>
         <form action="{{route('roles.store')}}" method='POST' class="flex justify-center">
@@ -25,20 +25,22 @@
         </form>
         <br>
         <hr>
-        <table class="table-fixed w-3/4">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="px-4 py-2">Roles</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($roles as $r)
-                    <tr class="text-center">
-                        <td class="border px-4 py-2">{{$r->name}}</td>
+        <div class="flex justify-center">
+            <table class="table-fixed w-3/4">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2">Roles</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($roles as $r)
+                        <tr class="text-center">
+                            <td class="border px-4 py-2">{{$r->name}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @else
         <h2>You do not have permission to access this page</h2>
     @endrole

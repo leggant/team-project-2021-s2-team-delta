@@ -12,17 +12,15 @@ class StudentList extends Component
      * @var array
      */
     public $students;
-    public $cohorts;
     
     /**
      * Create a new component instance.
      * @param  array  $students
      * @return void
      */
-    public function __construct($students, $cohorts)
+    public function __construct($students)
     {
         $this->students = $students;
-        $this->cohorts = $cohorts;
     }
 
     /**

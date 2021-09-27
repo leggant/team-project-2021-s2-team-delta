@@ -30,9 +30,6 @@
                     {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
                         {{ __('New Student') }}
                     </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                        {{ __('Cohorts') }}
-                    </x-jet-nav-link>
                     @if (Auth::check() && Auth::user()->isAdmin())
                         <x-jet-nav-link href="{{ route('admin.admin-panel') }}" :active="request()->routeIs('admin.admin-panel')">
                             {{ __('Admin-Panel') }}

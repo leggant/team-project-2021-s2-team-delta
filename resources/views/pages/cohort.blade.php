@@ -1,3 +1,4 @@
+{{-- NOT BEING USED --}}
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold">Studio Cohorts</h1>

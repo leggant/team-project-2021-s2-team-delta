@@ -11,7 +11,6 @@
         {{-- <x-jet-input type="email" id="email" name="email" required
             class="col-span-2" placeholder="student@student.op.ac.nz"
             aria-placeholder="Enter Student Email" value="{{ old('email') }}" aria-label="Enter Student Email"></x-jet-input> --}}
-        <x-student-cohort-select-input :cohorts="$cohorts" class="col-span-2"/>
     </div>
     <x-jet-button>Add New Student</x-jet-button>
     

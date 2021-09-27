@@ -14,7 +14,7 @@
                 <h3>Evidence</h3>
                 <div>
                     <table id="studentEvidence">
-                        @foreach ($evidences as $evidence)
+                        @foreach ($uploads as $evidence)
                             <tr>
                                 <td>
                                     <a

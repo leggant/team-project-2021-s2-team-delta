@@ -11,7 +11,6 @@ class StudentForm extends Component
      *
      * @var array
      */
-    public $cohorts;
     public $students;
 
     /**
@@ -20,9 +19,8 @@ class StudentForm extends Component
      * @param  array  $students
      * @return void
      */
-    public function __construct($cohorts, $students)
+    public function __construct($students)
     {
-        $this->cohorts = $cohorts;
         $this->students = $students;
     }
 
