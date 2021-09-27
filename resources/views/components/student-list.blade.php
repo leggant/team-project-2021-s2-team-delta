@@ -1,3 +1,4 @@
+@can('view students')    
     <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." class="w-1/2">
     <table cellspacing="0" id="studentTable" class="table-fixed w-full">
             <th class="px-4 py-2" onclick="sortTable(0)">Student Name</th>
@@ -21,3 +22,4 @@
             </tr>
         @endforeach
     </table>
+@endcan

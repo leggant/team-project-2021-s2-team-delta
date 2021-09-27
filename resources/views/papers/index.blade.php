@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if(Auth::check() && Auth::user()->isAdmin())
+    @role('Super-Admin')
         <div class="pt-6 flex justify-center gap-4">
             <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
@@ -35,6 +35,6 @@
             </tbody>
         </table>
     @else
-        <h2>You do not have access to this page</h2>
-    @endif
+        <h2>You do not have permission to access this page</h2>
+    @endrole
 </x-app-layout>

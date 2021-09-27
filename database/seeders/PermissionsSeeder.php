@@ -34,17 +34,10 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'upload evidence']);
         Permission::create(['name' => 'edit evidence']);
         Permission::create(['name' => 'delete evidence']);
-
-        //create roles and assign permissions
-        $regular = Role::create(['name' => 'Regular']);
-        $regular->givePermissionTo('create students');
-        $regular->givePermissionTo('edit students');
-        $regular->givePermissionTo('create cohorts');
-        $regular->givePermissionTo('edit cohorts');
-        $regular->givePermissionTo('create notes');
-        $regular->givePermissionTo('edit notes');
-        $regular->givePermissionTo('upload evidence');
-        $regular->givePermissionTo('edit evidence');
+        Permission::create(['name' => 'view evidence']);
+        Permission::create(['name' => 'view notes']);
+        Permission::create(['name' => 'view students']);
+        Permission::create(['name' => 'view cohorts']);
 
         $admin = Role::create(['name' => 'Super-Admin']);
 
