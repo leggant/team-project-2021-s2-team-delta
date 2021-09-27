@@ -26,7 +26,7 @@
             <tbody>
                 @foreach($paper as $p)
                     <tr>
-                        <td class="border px-4 py-2">{{$p->paper_name}}</td>
+                        <td class="border px-4 py-2">{{$p->subject}}</td>
                         <td class="border px-4 py-2">
                             <x-jet-button><a href="{{route('papers.edit', $p->id)}}" name="edit-papers">Edit</a></x-jet-button>
                         </td>

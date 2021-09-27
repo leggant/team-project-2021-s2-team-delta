@@ -42,7 +42,7 @@
                             @endforeach
                         </option>
                         @foreach($papers as $paper)
-                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
+                            <option value="{{$paper->id}}">{{$paper->subject}}</option>
                         @endforeach
                     </select>
                     (For now press ctrl while clicking options to select multiple)

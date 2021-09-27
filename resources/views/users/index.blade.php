@@ -24,7 +24,7 @@
                             <td class="border px-4 py-2">{{$users->email}}</td>
                             <td class="border px-4 py-2">
                                 @foreach($users->papers as $paper)
-                                    {{$paper->paper_name}}<br>
+                                    {{$paper->subject}}<br>
                                 @endforeach
                             </td>
                             @if($users->is_admin == 1) <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
