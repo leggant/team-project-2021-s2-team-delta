@@ -41,7 +41,7 @@ if [ ! -z $path ];then
                         echo "File(s) not deleted, something went wrong. Error code $?." >> $log
                         exit 0
                 else
-                        echo "$count File(s) were delted." >> $log
+                        echo "$count File(s) were deleted." >> $log
                         exit 0
                 fi
 
