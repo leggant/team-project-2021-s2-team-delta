@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class EvidenceController extends Controller
 {
@@ -19,11 +21,11 @@ class EvidenceController extends Controller
      */
     public function index()
     {
-        $evidence = Evidence::all();
+        $uploads = Evidence::all();
         $students = Student::all();
         return view(
             'pages.evidence',
-            ['evidences' => $evidence],
+            ['uploads' => $uploads],
             ['student' => $students]
         );
     }
@@ -46,24 +48,37 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->student;
-      
-        $request->validate([
-            'title' => 'required|string|max:50',
-            'filepath' => '|file|required', //max 8mb
-        ]);
-
         $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
         Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-      
-
+        $student = $request->student_id;
+        $path = 'files/'.$student;
+        $rules = [
+            'title' => 'required|string|max:50',
+            'student_id' => 'required|integer',
+            'filepath' => 'required|required_if:filelink,null|file|unique:evidence',
+            'originalFileName' => 'required|string|max:100',
+            'user_id' => 'required|integer',
+            'url' => 'required|string|unique:evidence,url',
+            'description' => 'nullable|string'
+        ];
+        $messages = [
+            'title.required' => 'File/Upload Title Field Is Required',
+            'title.max' => 'Max Title Length is 50 Chars',
+            'student_id.required' => 'Student Name Must Be Selected',
+            'filepath.unique' => 'File Must Have A Unique Path',
+            'url.unique' => 'File URL must be unique',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+        
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
-            'filepath' => basename($path), // This gets the filename. I tried changing the 'filepath' within the migration, form and model to 'filename' however this for some reason broke the upload.
-            'url' => Storage::disk('s3')->url($path),    //retrieving the specific path that points to the file uploaded.
-            'student_id' => $request->student,
-            'user_id' => Auth::id(),
+            'filepath' => $request->file('filepath')->store( $path ),
+            'originalFileName' => $request->file('filepath')->getClientOriginalName(),
+            // 'filelink' => $request->filelink ? $request->filelink : null,
+            'url' => Storage::disk('s3')->url($path),
+            'student_id' => $request->student_id,
+            'user_id' => Auth::id()
         ]);
 
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
@@ -73,11 +88,15 @@ class EvidenceController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        // not currently returning a file to the browser
+        $file = Evidence::find($id);
+        $student = Student::find($file->student_id);
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student, 'file' => $file]);
     }
 
     /**

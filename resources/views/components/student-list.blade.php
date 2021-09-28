@@ -1,3 +1,4 @@
+@can('view students')    
     <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." class="w-1/2">
     <table cellspacing="0" id="studentTable" class="table-fixed w-full">
             <th class="px-4 py-2" onclick="sortTable(0)">Student Name</th>
@@ -16,7 +17,9 @@
                 @if ($student->github)
                 <td class="border px-4 py-2"><a class="hover:underline" href="http://github.com/{{ $student->github }}" target="_blank">github.com/{{ $student->github }}</td>
                 @endif
+                <td class="border px-4 py-2"></td>
                 {{-- <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->year }} | {{ $student->cohort->semester }}</td> --}}
             </tr>
         @endforeach
     </table>
+@endcan

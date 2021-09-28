@@ -1,13 +1,13 @@
 <x-app-layout>
     <!-- A table of all users in the database -->
-    @if(Auth::check() && Auth::user()->isAdmin())
+    @role('Super-Admin')
         <div class="pt-6 flex justify-center gap-4 md:justify-between">
             <x-jet-button><a href="{{route('users.create')}}">Create User</a></x-jet-button>
             <x-jet-button><a href="{{route('admin.admin-panel')}}">Back</a></x-jet-button>
         </div>
         <br>
-        <div>
-            <table class="table-fixed w-full">
+        <div class="flex justify-center">
+            <table class="table-fixed w-3/4">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Name</th>
@@ -42,15 +42,13 @@
                                     </form>
                                 @endif   
                                 <x-jet-button><a href="{{route('users.edit', $users->id)}}" name="edit-users">Edit</a></x-jet-button>
-                            </td>
-                            
+                            </td> 
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
     @else
-        <h2>You do not have access to this page</h2>
-    @endif
+        <h2>You do not have permission to access this page</h2>
+    @endrole
 </x-app-layout>

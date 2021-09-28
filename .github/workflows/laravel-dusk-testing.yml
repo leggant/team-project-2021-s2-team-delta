@@ -1,9 +1,7 @@
 name: Laravel Dusk Testing
 on:
-  push:
-    branches: [sprint-*] 
   pull_request:
-    branches: [staging, master, main]
+    branches: [staging, master, main, development]
 
 jobs:
   Laravel-Set-Up:
@@ -47,9 +45,11 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: Run Package Install Using HTTPS Instead of SSH
+        run: git config --global url."https://${{ secrets.PAT }}@github.com/".insteadOf ssh://git@github.com/
       - name: Install Composer dependencies
         run: |
             composer install --no-progress --prefer-dist --optimize-autoloader
