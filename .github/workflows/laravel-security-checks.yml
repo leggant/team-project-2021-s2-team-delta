@@ -1,0 +1,53 @@
+name: Laravel Security Checks + PHPUnit Tests
+on:
+  pull_request:
+    branches: [staging, master, main, development]
+
+jobs:
+  Run-Consecutive-Tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: mktcode/consecutive-workflow-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+  Laravel-Composer-Security-Test:
+    name: Laravel Composer Security Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      id: cache-db
+      with:
+        path: ~/.symfony/cache
+        key: db
+    - name: Display Security Vulnerabilities
+      uses: symfonycorp/security-checker-action@v2
+  Laravel-NPM-Security-Test:
+    name: Laravel Node Security Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: luisfontes19/npm-audit-action@v0.1.0
+      with:
+        project-path: "."
+        json: true
+        only: prod
+        level: high
+        package-lock-only: false
+        github-token: ${{ secrets.GITHUB_TOKEN }} 
+  Laravel-phpUnit-Test:
+    name: Laravel PHPUnit Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: nathanheffley/laravel-phpunit-action@master
+  psalm:
+    name: Psalm PHP Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Psalm Security Scan
+        uses: docker://ghcr.io/psalm/psalm-security-scan    
