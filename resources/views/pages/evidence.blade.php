@@ -9,8 +9,12 @@
                 <label for="student">Student</label>
                 <select id="student" name="student">
                     <option disabled selected>Select a student</option>
-                    @foreach ($student as $s)
-                        <option value="{{ $s->id }}">{{ $s->first_name }} {{ $s->last_name }}</option>
+                    @foreach ($students as $s)
+                        @foreach($user->papers as $up)
+                            @if($up->pivot->paper_id == $s->cohort->paper_id)
+                                <option value="{{ $s->id }}">{{ $s->first_name }} {{ $s->last_name }}</option>
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
                 <label for="title">Title</label>

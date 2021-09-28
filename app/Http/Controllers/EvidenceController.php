@@ -20,11 +20,8 @@ class EvidenceController extends Controller
     {
         $evidence = Evidence::all();
         $students = Student::all();
-        return view(
-            'pages.evidence',
-            ['evidences' => $evidence],
-            ['student' => $students]
-        );
+        $user = auth()->user();
+        return view('pages.evidence', compact('evidence', 'students', 'user'));
     }
 
     /**

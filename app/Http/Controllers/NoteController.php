@@ -19,11 +19,8 @@ class NoteController extends Controller
     {
         $notes = Note::all();
         $students = Student::all();
-        return view(
-            'pages.notes',
-            ['notes' => $notes],
-            ['student' => $students]
-        );
+        $user = auth()->user();
+        return view('pages.notes', compact('notes', 'students', 'user'));
     }
 
     /**

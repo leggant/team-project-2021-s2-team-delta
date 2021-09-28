@@ -18,7 +18,8 @@ class CohortController extends Controller
     {
         $cohorts = Cohort::all();
         $papers = Papers::all();
-        return view('pages.cohort', compact('cohorts', 'papers'));
+        $user = auth()->user();
+        return view('pages.cohort', compact('cohorts', 'papers', 'user'));
     }
 
     /**
