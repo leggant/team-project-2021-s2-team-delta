@@ -50,7 +50,7 @@ class EvidenceController extends Controller
       
         $request->validate([
             'title' => 'required|string|max:50',
-            'filepath' => 'mimes:jpeg,bmp,png,jpg,pdf,doc,docx,md,html|file|required|max:8000', //max 8mb
+            'filepath' => '|file|required', //max 8mb
         ]);
 
         $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
