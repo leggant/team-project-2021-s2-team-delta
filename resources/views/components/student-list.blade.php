@@ -17,6 +17,7 @@
                 @if ($student->github)
                 <td class="border px-4 py-2"><a class="hover:underline" href="http://github.com/{{ $student->github }}" target="_blank">github.com/{{ $student->github }}</td>
                 @endif
+                <td class="border px-4 py-2"></td>
                 {{-- <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->year }} | {{ $student->cohort->semester }}</td> --}}
             </tr>
         @endforeach

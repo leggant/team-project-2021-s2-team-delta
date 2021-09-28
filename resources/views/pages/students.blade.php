@@ -6,6 +6,6 @@
         <x-student-form :cohorts="$cohorts" :students="$students" />
     </div>
     <div class="mx-auto w-3/4 sm:px-6 lg:px-8 grid grid-rows-1 gap-4 mt-8">
-        <x-student-list :students="$students" :cohorts="$cohorts"/>
+        <livewire:search-student :cohorts="$cohorts" />
     </div>
 </x-app-layout>
