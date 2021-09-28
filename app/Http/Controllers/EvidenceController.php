@@ -8,6 +8,8 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class EvidenceController extends Controller
 {
@@ -47,16 +49,29 @@ class EvidenceController extends Controller
     {
         $student = $request->student_id;
         $path = 'files/'.$student;
-        $request->validate([
+        $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'filepath' => 'required|file',
-            'user_id' => 'required|integer'
-        ]);
+            'filepath' => 'nullable|required_if:filelink,null|file|unique:evidence',
+            'originalFileName' => 'nullable|string|max:100',
+            'filelink' => 'sometimes|required|string|unique:evidence,filelink',
+            'user_id' => 'required|integer',
+            'description' => 'nullable|string'
+        ];
+        $messages = [
+            'title.required' => 'File/Upload Title Field Is Required',
+            'title.max' => 'Max Title Length is 50 Chars',
+            'student_id.required' => 'Student Name Must Be Selected',
+            'filepath.unique' => 'File Must Have A Unique Path',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+        
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
-            'filepath' => $request->file('filepath')->store( $path ),
+            'filepath' => $request->file('filepath') ? $request->file('filepath')->store( $path ) : null,
+            'originalFileName' => $request->file('filepath') ? $request->file('filepath')->getClientOriginalName() : null,
+            'filelink' => $request->filelink ? $request->filelink : null,
             'student_id' => $request->student_id,
             'user_id' => Auth::id()
         ]);
