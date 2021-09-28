@@ -19,13 +19,13 @@
                     </datalist>
                     --}}
 
-                    <label for="student">Student: </label>
-                    <select id="student" name="student">
-                        <option disabled>Select a student</option>
-                        @foreach ($student as $s)
-                            <option value="{{ $s->id }}" selected>{{ $s->first_name }} {{ $s->last_name }}</option>
-                        @endforeach
-                    </select>
+                <x-jet-label for="student" class="text-lg">Select Student</x-jet-label>
+                <select id="student" name="student" required
+                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-3">
+                    @foreach ($student as $student)
+                        <option value={{ $student->id }}>{{ $student->first_name }} {{ $student->last_name }}</option>
+                    @endforeach
+                </select>
                     
                     <textarea rows="5" name="notes" required
                         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-8"></textarea>
