@@ -9,7 +9,7 @@
                 <x-jet-label for="student" class="text-lg">Select Student</x-jet-label>
                 <select id="student" name="student" required
                     class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-3">
-                    @foreach ($student as $student)
+                    @foreach ($students as $student)
                         <option value={{ $student->id }}>{{ $student->first_name }} {{ $student->last_name }}</option>
                     @endforeach
                 </select>

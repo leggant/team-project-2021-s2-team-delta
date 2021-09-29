@@ -17,18 +17,20 @@ class PapersSeeder extends Seeder
     {
         $papers = [
             [
-                'paper_name' => 'Studio 1'
+                'paper_name' => 'None Selected',
             ],
             [
-                'paper_name' => 'Studio 2'
+                'paper_name' => 'Studio 1',
             ],
             [
-                'paper_name' => 'Studio 3'
+                'paper_name' => 'Studio 2',
             ],
             [
-                'paper_name' => 'Studio 4'
-            ]
-
+                'paper_name' => 'Studio 3',
+            ],
+            [
+                'paper_name' => 'Studio 4',
+            ],
         ];
 
         Papers::insert($papers);

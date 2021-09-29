@@ -108,37 +108,34 @@ class UserController extends Controller
         ])->validate();
         $roles = Role::select('id')->get();
         #Change db field of user to new information provided
-        $user->name = $request->input('Name');
-        $user->email = $request->input('Email');
-        if($request->has('Admin'))
+        $user->name = $request->input('Name') ? $request->input('Name') : $user->name;
+        $user->email = $request->input('Email') ? $request->input('Email') : $user->email;
+        $user->is_admin = $request->input('Admin') ? $request->input('Admin') : $user->is_admin;
+        $user->save();
+        if($user->is_admin)
         {
-            $user->is_admin = 1;
             $user->syncRoles('Super-Admin');
-        }
-        else
-        {
-            if($request->input('Email') == 'admin@admin.com')
-            {
-                $user->is_admin = 1;
-                $user->syncRoles('Super-Admin');
-            }
-            else{
-                $user->is_admin = 0;
-                $selected = array();
+        } 
+        else {
+            $user->syncRoles('Lecturer');
+            $selected = array();
                 foreach($request->input('Papers') as $item)
                 {
                     switch($item)
                     {
                         case 1:
-                            $selected[] = "Studio 1";
+                            $selected[] = "Non-Lecturer";
                             break;
                         case 2:
-                            $selected[] = "Studio 2";
+                            $selected[] = "Studio 1";
                             break;
                         case 3:
-                            $selected[] = "Studio 3";
+                            $selected[] = "Studio 2";
                             break;
                         case 4:
+                            $selected[] = "Studio 3";
+                            break;
+                        case 5:
                             $selected[] = "Studio 4";
                             break;
                         default:
@@ -146,7 +143,6 @@ class UserController extends Controller
                     }
                 }
                 $user->syncRoles([$selected]);
-            }
         }
         #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
         $user->papers()->sync($request->input('Papers'));

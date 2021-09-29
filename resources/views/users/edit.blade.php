@@ -33,7 +33,7 @@
                         @endforeach
                     </div>
                     <label for="paper">Select Papers:</label>
-                    <select id="paper" name="Papers[]" multiple required class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <select id="paper" name="Papers[]" multiple {{ !$user->is_admin ? 'required' : ''}} class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                         @foreach($papers as $paper)
                             <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
                         @endforeach

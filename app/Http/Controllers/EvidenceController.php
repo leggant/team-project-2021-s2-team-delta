@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Evidence;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
@@ -23,8 +24,12 @@ class EvidenceController extends Controller
     {
         $uploads = Evidence::all();
         $students = Student::all();
-        $user = auth()->user();
-        return view('pages.evidence', compact('uploads', 'students', 'user'));
+        $user = Auth::id();
+        return view(
+            'pages.evidence',
+            ['uploads' => $uploads, 'students' => $students],
+            compact('user')
+        );
     }
 
     /**
@@ -45,10 +50,10 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
+        $student = $request->student_id;
         $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
         Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-        $student = $request->student_id;
-        $path = 'files/'.$student;
+        // $path = 'files/'.$student;
         $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
