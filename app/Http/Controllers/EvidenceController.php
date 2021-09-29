@@ -23,11 +23,8 @@ class EvidenceController extends Controller
     {
         $uploads = Evidence::all();
         $students = Student::all();
-        return view(
-            'pages.evidence',
-            ['uploads' => $uploads],
-            ['student' => $students]
-        );
+        $user = auth()->user();
+        return view('pages.evidence', compact('uploads', 'students', 'user'));
     }
 
     /**

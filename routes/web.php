@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('cohorts', CohortController::class);
         Route::resource('evidence', EvidenceController::class);
         Route::resource('notes', NoteController::class);
-        Route::resource('papers', PaperController::class)->except(['delete']);
+        Route::resource('papers', PaperController::class)->except(['delete', 'update', 'store']);
         Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
         Route::resource('roles', RoleController::class)->except(['update', 'delete']);
         Route::get('/admin-panel', function () {
