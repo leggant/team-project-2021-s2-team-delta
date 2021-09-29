@@ -1,11 +1,11 @@
 <x-app-layout>
     <!-- Form that allows user to create a new user -->
     @role('Super-Admin')
-        <div class="pt-6 flex justify-center gap-4 md:justify-between">
-            <x-jet-button><a href="{{url('/users')}}">Back</a></x-jet-button>
-        </div>
+        <form action="{{ route('users.index') }}" method="GET" class="pt-6 flex justify-center gap-4 md:justify-between">
+            <x-jet-button type="submit">Back</x-jet-button>
+        </form>
         <form action="{{route('users.store')}}" method='POST'>
-            {{csrf_field()}}
+            @csrf
             <fieldset>
                 <div>
                     <h5>Enter Name:</h5>
@@ -28,7 +28,7 @@
                 </div>
                 <br>
                 <div>
-                    <input type='submit' name='submit' value='Submit'>
+                    <x-jet-button type="submit">Submit</x-jet-button>
                 </div>
             </fieldset>
         </form>
