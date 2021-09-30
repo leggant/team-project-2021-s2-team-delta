@@ -1,12 +1,15 @@
 <x-app-layout>
     <!-- A table of all users in the database -->
     @role('Super-Admin')
-    <form action="{{ route('users.create') }}" method="get" class="pt-6 flex justify-center gap-4">
-        @csrf
-        <x-jet-button type="submit">Create User</x-jet-button>
-    </form>
-    <div class="flex justify-center">
-        <table class="w-1/2">
+    <div class="grid-rows-2 max-w-screen-lg mt-6  mx-auto gap-6">
+        <div class="flex">
+            <h2 class="text-3xl leading-9 text-gray-900">Current Registered Users</h2>
+            <form action="{{ route('users.create') }}" method="get" class="mx-auto">
+                @csrf
+                <x-jet-button type="submit">Create New User</x-jet-button>
+            </form>
+        </div>
+        <table class="max-w-full mx-auto mt-6">
             <thead>
                 <tr>
                     <th class="px-4 py-2 w-max">Name</th>
@@ -53,8 +56,8 @@
                 @endforeach
             </tbody>
         </table>
+    @else
+        <h2>You do not have permission to access this page</h2>
+        @endrole
     </div>
-@else
-    <h2>You do not have permission to access this page</h2>
-    @endrole
 </x-app-layout>

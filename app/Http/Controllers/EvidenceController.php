@@ -96,6 +96,7 @@ class EvidenceController extends Controller
     {
         // not currently returning a file to the browser
         $file = Evidence::find($id);
+        // somehow need to access the download from amazon s3?
         $url = $file->url;
         $student = Student::find($file->student_id);
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);

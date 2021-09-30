@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -53,8 +54,8 @@ class UserController extends Controller
 
         #Create new User and save the given data into the correct db fields
         $user = new User;
-        $user->name = $request->input('Name');
-        $user->email = $request->input('Email');
+        $user->name = Str::title($request->input('Name'));
+        $user->email = Str::lower($request->input('Email'));
         $user->password = Hash::make($request['Password']); #Hash password to make it secure
         #If the request contains Admin field then save is_admin as 1 otherwise it will just fill is_admin with default value which is 0
         if($request->has('Admin'))
