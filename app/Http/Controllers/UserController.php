@@ -104,15 +104,17 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
-            'Papers' => 'required|array',
+            'Papers' => 'sometimes|array'
         ])->validate();
         $roles = Role::select('id')->get();
         #Change db field of user to new information provided
         $user->name = $request->input('Name') ? $request->input('Name') : $user->name;
         $user->email = $request->input('Email') ? $request->input('Email') : $user->email;
-        $user->is_admin = $request->input('Admin') ? $request->input('Admin') : $user->is_admin;
+        if($request->has('Admin')){
+            $user->is_admin = !$user->is_admin;
+        }
         $user->save();
-        if($user->is_admin)
+        if($user->is_admin == 1)
         {
             $user->syncRoles('Super-Admin');
         } 
@@ -124,7 +126,7 @@ class UserController extends Controller
                     switch($item)
                     {
                         case 1:
-                            $selected[] = "Non-Lecturer";
+                            $selected[] = "Lecturer";
                             break;
                         case 2:
                             $selected[] = "Studio 1";
