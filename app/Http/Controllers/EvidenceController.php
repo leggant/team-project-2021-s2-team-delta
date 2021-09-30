@@ -58,9 +58,9 @@ class EvidenceController extends Controller
        $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'filepath' => 'required|file',
-            'originalFileName' => 'required|string|max:100',
-            'user_id' => 'required|integer',
+            //'filepath' => 'required|file',
+            //'originalFileName' => 'required|string|max:100',
+            //'user_id' => 'required|integer',
             'description' => 'nullable|string'
         ];
         $messages = [
