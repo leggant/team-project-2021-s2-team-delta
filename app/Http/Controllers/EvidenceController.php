@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use League\Flysystem\AwsS3v3\AwsS3V3Adapter;
+use League\Flysystem\Filesystem;
 
 class EvidenceController extends Controller
 {
@@ -50,39 +52,36 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->student_id;
-        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-        // $path = 'files/'.$student;
         $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'filepath' => 'required|required_if:filelink,null|file|unique:evidence',
-            'originalFileName' => 'required|string|max:100',
+            'filepath' => 'file|unique:evidence',
+            'originalFileName' => 'string|max:100',
             'user_id' => 'required|integer',
-            'url' => 'required|string|unique:evidence,url',
+            'url' => 'string|unique:evidence,url',
             'description' => 'nullable|string'
         ];
         $messages = [
             'title.required' => 'File/Upload Title Field Is Required',
             'title.max' => 'Max Title Length is 50 Chars',
-            'student_id.required' => 'Student Name Must Be Selected',
-            'filepath.unique' => 'File Must Have A Unique Path',
-            'url.unique' => 'File URL must be unique',
+            'student_id.required' => 'Student Name Must Be Selected'
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
-        
+        $student = $request->student_id;
+        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); 
+        // file is stored within a folder of the student id in s3. 
+        Storage::disk('s3')->setVisibility($path, 'public'); 
+        //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
+        // $path = 'files/'.$student;
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->description,
             'filepath' => $request->file('filepath')->store( $path ),
             'originalFileName' => $request->file('filepath')->getClientOriginalName(),
-            // 'filelink' => $request->filelink ? $request->filelink : null,
             'url' => Storage::disk('s3')->url($path),
             'student_id' => $request->student_id,
             'user_id' => Auth::id()
         ]);
-
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 

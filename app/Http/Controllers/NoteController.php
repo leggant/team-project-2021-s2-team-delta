@@ -41,7 +41,6 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        
         $student = Student::where('id', $request->student_id)->first();
         Note::create(
             [
@@ -60,12 +59,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        if ($notes->where('id', $id)->exists()) {
-            $note = $notes->where('id', $id)->get();
-            return response($note, 200);
-        } else {
-            return response()->json(['message' => 'note not found.'], 404);
-        }
+
     }
 
     /**
@@ -88,20 +82,7 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        $notes = Note::query();
-        if ($notes->where('id', $id)->exists()) {
-            $note = $notes->find($id);
-            $note->student_name = is_null($request->student_name)
-                ? $note->student_name
-                : $request->student_name;
-            $note->notes = is_null($request->notes)
-                ? $note->notes
-                : $request->notes;
-            $note->save();
-            return response()->json(['message' => 'note updated.'], 200);
-        } else {
-            return response()->json(['message' => 'note not found.'], 404);
-        }
+
     }
 
     /**
