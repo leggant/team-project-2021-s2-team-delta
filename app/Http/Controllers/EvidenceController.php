@@ -48,27 +48,26 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
+        $student = $request->student_id;
+        
+        $path = 'files/'.$student;
         $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
         Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-        $student = $request->student_id;
-        $path = 'files/'.$student;
-        $rules = [
+       
+       /* $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
             'filepath' => 'required|required_if:filelink,null|file|unique:evidence',
             'originalFileName' => 'required|string|max:100',
             'user_id' => 'required|integer',
-            'url' => 'required|string|unique:evidence,url',
             'description' => 'nullable|string'
         ];
         $messages = [
             'title.required' => 'File/Upload Title Field Is Required',
             'title.max' => 'Max Title Length is 50 Chars',
             'student_id.required' => 'Student Name Must Be Selected',
-            'filepath.unique' => 'File Must Have A Unique Path',
-            'url.unique' => 'File URL must be unique',
         ];
-        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');*/
         
         $evidence = Evidence::create([
             'title' => $request->title,

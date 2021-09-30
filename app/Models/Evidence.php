@@ -17,11 +17,11 @@ class Evidence extends Model
         'description',
         'filepath',
         'originalFileName',
-        'filelink',
         'student_id',
         'user_id',
         'updated_at',
         'created_at',
+        'url',
     ];
 
     public function users()
