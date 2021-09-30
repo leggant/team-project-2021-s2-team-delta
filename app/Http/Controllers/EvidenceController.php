@@ -12,8 +12,7 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use League\Flysystem\AwsS3v3\AwsS3V3Adapter;
-use League\Flysystem\Filesystem;
+use Illuminate\Support\Facades\Crypt;
 
 class EvidenceController extends Controller
 {
@@ -52,6 +51,11 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
+        $student = $request->student_id;
+        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); 
+        // file is stored within a folder of the student id in s3. 
+        Storage::disk('s3')->setVisibility($path, 'public'); 
+        //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
         $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
@@ -67,20 +71,15 @@ class EvidenceController extends Controller
             'student_id.required' => 'Student Name Must Be Selected'
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
-        $student = $request->student_id;
-        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); 
-        // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); 
-        //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-        // $path = 'files/'.$student;
         $evidence = Evidence::create([
             'title' => $request->title,
-            'description' => $request->description,
+            'description' => $request->has('description') ? $request->description : null,
             'filepath' => $request->file('filepath')->store( $path ),
             'originalFileName' => $request->file('filepath')->getClientOriginalName(),
             'url' => Storage::disk('s3')->url($path),
             'student_id' => $request->student_id,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'fileAccessKey' => Crypt::encryptString($request->url)
         ]);
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
@@ -89,15 +88,17 @@ class EvidenceController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param string $access_link
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         // not currently returning a file to the browser
         $file = Evidence::find($id);
+        $url = $file->url;
         $student = Student::find($file->student_id);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student, 'file' => $file]);
+        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 
     /**
