@@ -11,14 +11,21 @@
                     <select id="student" name="student_id" aria-label="Select Student" aria-
                         class='border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm row-span-1'
                         required aria-multiselectable="false" value="{{ old('student') }}">
-                        @foreach ($student as $s)
-                            <option value="{{ $s->id }}" 
-                                class='border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
-                                {{ $s->first_name }} {{ $s->last_name }}</option>
+                        @foreach ($students as $s)
+                        <option value="{{ $s->id }}" 
+                            class='border-gray-300 focus:border-indigo-300 focus:ring 
+                            focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
+                            {{ $s->first_name }} {{ $s->last_name }}
+                        </option>
+                        {{-- CODE BELOW CAUSED ERRORS --}}
+                            {{-- @foreach($user->papers as $up)
+                                @if($up->pivot->paper_id == $s->cohort->paper_id)
+                                @endif
+                            @endforeach --}}
                         @endforeach
                     </select>
                     <x-jet-input type="text" name="title" id="title" value="{{ old('title') }}" required aria-label="Upload Title" aria-placeholder="Enter A Upload Title" placeholder="Enter A Upload Title" class="focus:placeholder-gray-400" ></x-jet-input>
-                    <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image" accept="image/*,.pdf,.doc,.docx,.md,.html"
+                    <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image" accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip"
                         multiple class='w-full border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-xl py-2 px-2 place-self-center'></x-jet-input>
                     <textarea class="col-span-2 resize-none border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm focus:placeholder-gray-400 overscroll-auto" name="description" id="description" cols="30" rows="5" placeholder="Optional Description, Context">{{ old('description') }}</textarea>
                     {{-- MULTIPLE ALLOWS MULTIPLE FILES TO BE UPLOADED. CHECK BACKEND CAN HANDLE THIS IN THE HTTP REQUEST --}}

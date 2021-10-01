@@ -1,6 +1,6 @@
 <x-app-layout>
     @role('Super-Admin')
-        <div class="pt-6 flex justify-center gap-4 md:justify-between">
+        <div class="pt-6 flex justify-center gap-4">
             <x-jet-button><a href="{{url('/papers')}}">Back</a></x-jet-button>
         </div>
         <br>
