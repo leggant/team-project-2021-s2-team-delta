@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateFieldNamesInEvidenceTable extends Migration
+class AddIsActiveToStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class UpdateFieldNamesInEvidenceTable extends Migration
      */
     public function up()
     {
-        Schema::table('evidence', function (Blueprint $table) {
-            $table->mediumText('title', 50)->change();
-            $table->renameColumn('image', 'filepath'); 
-            $table->after('title', function ($table) {
-                $table->text('description')->nullable();
+        Schema::table('student', function (Blueprint $table) {
+            $table->after('github', function ($table) {
+                $table->boolean('is_active')->default(true);
             });
         });
     }
@@ -29,7 +27,7 @@ class UpdateFieldNamesInEvidenceTable extends Migration
      */
     public function down()
     {
-        Schema::table('evidence', function (Blueprint $table) {
+        Schema::table('student', function (Blueprint $table) {
             //
         });
     }

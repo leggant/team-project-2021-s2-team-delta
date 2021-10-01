@@ -6,12 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Student;
+use Illuminate\Support\Str;
 
 class Evidence extends Model
 {
     protected $table = 'evidence';
 
-    protected $fillable = ['title', 'description', 'filepath', 'student_id', 'user_id'];
+    protected $fillable = [
+        'title',
+        'description',
+        'filepath',
+        'originalFileName',
+        'filelink',
+        'student_id',
+        'user_id',
+        'updated_at',
+        'created_at',
+    ];
 
     public function users()
     {
@@ -22,4 +33,18 @@ class Evidence extends Model
     {
         return $this->belongsTo(Student::class, 'student_id');
     }
+    /**
+     * shortened button text.
+     *
+     * @return string
+     */
+    public function getShortTitleAttribute()
+    {
+        return Str::of($this->title)->limit(25, '...');
+    }
+    /**
+     * get shortend version of title to use as button text.
+     * @var string
+     */
+    protected $appends = 'short_title';
 }
