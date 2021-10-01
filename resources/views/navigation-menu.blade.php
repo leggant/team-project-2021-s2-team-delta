@@ -27,20 +27,13 @@
                     <x-jet-nav-link href="{{ route('notes.index') }}" :active="request()->routeIs('notes.index')">
                         {{ __('Notes') }}
                     </x-jet-nav-link>
-                    {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
-                        {{ __('New Student') }}
-                    </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                        {{ __('Cohorts') }}
-                    </x-jet-nav-link>
-                    @if (Auth::check() && Auth::user()->isAdmin())
-                        <x-jet-nav-link href="{{ route('admin.admin-panel') }}" :active="request()->routeIs('admin.admin-panel')">
-                            {{ __('Admin-Panel') }}
-                        </x-jet-nav-link>
-                    @endif
-                     {{-- <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
-                        {{ __('View Cohorts') }}
-                    </x-jet-nav-link> --}}
+                    @role('Super-Admin')
+                        @if (Auth::check() && Auth::user()->isAdmin())
+                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                                {{ __('User Admin Panel') }}
+                            </x-jet-nav-link>
+                        @endif
+                    @endrole
                     <x-nav-form-button 
                         :active="request()->routeIs('logout')" 
                         action='logout'>{{ __('Log Out') }}

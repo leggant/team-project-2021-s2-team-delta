@@ -4,9 +4,6 @@
 @role('Super-Admin')
     <div class="py-6 px-8 flex justify-center gap-4">
         <x-jet-button><a href="{{route('users.index')}}">Manage Users</a></x-jet-button>
-        <x-jet-button><a href="{{route('papers.index')}}">Manage Papers</a></x-jet-button>
-        <x-jet-button><a href="{{route('permissions.index')}}">Manage Permissions</a></x-jet-button>
-        <x-jet-button><a href="{{route('roles.index')}}">Manage Roles</a></x-jet-button>
     </div>
 <!-- If not admin or logged in then user gets told they can't access page -->
 @else

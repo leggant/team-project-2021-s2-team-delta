@@ -12,19 +12,16 @@
                 aria-label="Github Username"></x-jet-input>
         </div>
         <div class="grid grid-cols-4 mt-4 mb-4 gap-4">
-            {{-- <x-jet-input type="email" id="email" name="email" required
-            class="col-span-2" placeholder="student@student.op.ac.nz"
-            aria-placeholder="Enter Student Email" value="{{ old('email') }}" aria-label="Enter Student Email"></x-jet-input> --}}
-            <x-student-cohort-select-input :cohorts="$cohorts" class="col-span-2" />
-        </div>
-        <x-jet-button>Add New Student</x-jet-button>
-
-    </form>
-    @if ($errors->studenterror->any())
-        <ul>
-            @foreach ($errors->studenterror->all() as $error)
-                <li class="text-red-500 list-none">{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+        <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" class="col-span-2"/>
+    </div>
+    <x-jet-button>Add New Student</x-jet-button>
+    
+</form>
+@if ($errors->studenterror->any())
+    <ul>
+        @foreach ( $errors->studenterror->all() as $error)
+            <li class="text-red-500 list-none">{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
 @endcan
