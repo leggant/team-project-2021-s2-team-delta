@@ -50,10 +50,10 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->student_username;
+        $student = $request->student_id;
         $path = 'files/'.$student;
         $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line 
+        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. 
        
        $rules = [
             'title' => 'required|string|max:50',

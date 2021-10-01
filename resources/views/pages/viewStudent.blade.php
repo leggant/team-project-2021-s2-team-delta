@@ -20,12 +20,16 @@
             <h3 class="text-3xl">Evidence</h3>
             @if ($uploads->count() > 0)
                 @foreach ($uploads as $file)
-                    <div class="grid grid-rows-2 mt-3 items-center gap-2">
-                        <form method="POST" action="{{ route('evidence.show', $file->id) }}" class="flex gap-4">
-                            @csrf
-                            @method('get')
-                            <x-jet-button type="submit">{{ $file->title }}</x-jet-button>
-                        </form>
+                <div class="grid grid-rows-2 mt-3 items-center gap-2">
+                    <div class="flex gap-4">
+                        <a class="inline-flex items-center justify-center px-4 py-2 
+                        bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white 
+                        uppercase tracking-widest hover:bg-indigo-600 focus:outline-none 
+                        focus:bg-indigo-300 focus:ring active:bg-indigo-500 
+                        disabled:opacity-25 transition'"
+                            href="{{ $file->url}}" {{-- points to the url associated with the upload --}}
+                            target="_blank">{{ $file->originalFileName }}</a>
+                    </div>
                         <div class="flex gap-4 space-evenly align-content-center">
                             {{-- <form method="post" action="{{ route('evidence.edit', $file->id) }}" class="mx-6"> --}}
                             <form method="#" action="#" class="self-start">
