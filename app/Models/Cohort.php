@@ -16,7 +16,7 @@ class Cohort extends Model
 
     public function papers()
     {
-        return $this->hasOne(Papers::class, 'paper_id');
+        return $this->belongsTo(Papers::class, 'paper_id');
     }
 
     public function student()

@@ -4,8 +4,12 @@
     focus:outline-none focus:shadow-outline col-span-2">
     <option disabled selected>Pick a Cohort for the Student</option>
     @foreach ($cohorts as $cohort)
-        <option  value="{{ $cohort->id }}">Studio {{ $cohort->paper_id }} | {{ $cohort->year }} |
-            {{ $cohort->semester }}
-        </option>
+        @foreach($user->papers as $up)
+            @if($up->pivot->paper_id == $cohort->paper_id)
+                <option  value="{{ $cohort->id }}">{{ $cohort->papers->paper_name }} | Stream {{ $cohort->stream }} |
+                    {{ $cohort->semester }}
+                </option>
+            @endif
+        @endforeach
     @endforeach
 </select>

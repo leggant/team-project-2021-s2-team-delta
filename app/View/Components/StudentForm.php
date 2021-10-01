@@ -13,6 +13,7 @@ class StudentForm extends Component
      */
     public $cohorts;
     public $students;
+    public $user;
 
     /**
      * Create a new component instance.
@@ -20,10 +21,11 @@ class StudentForm extends Component
      * @param  array  $students
      * @return void
      */
-    public function __construct($cohorts, $students)
+    public function __construct($cohorts, $students, $user)
     {
         $this->cohorts = $cohorts;
         $this->students = $students;
+        $this->user = $user;
     }
 
     /**

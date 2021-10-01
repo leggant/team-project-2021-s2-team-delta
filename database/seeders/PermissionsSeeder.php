@@ -40,14 +40,21 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'view cohorts']);
 
         $admin = Role::create(['name' => 'Super-Admin']);
+        $lecturer = Role::create(['name' => 'Lecturer']);
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'admin1',
-            'email' => 'admin@admin.com',
+        $user1 = \App\Models\User::factory()->create([
+            'name' => 'test administrator',
+            'email' => 'admin@op.ac.nz',
             'password' => Hash::make('password'),
             'is_admin' => 1,
         ]);
-
-        $user->assignRole('Super-Admin');
+        $user2 = \App\Models\User::factory()->create([
+            'name' => 'test lecturer',
+            'email' => 'lecturer@op.ac.nz',
+            'password' => Hash::make('password'),
+            'is_admin' => 0,
+        ]);
+        $user1->assignRole('Super-Admin');
+        $user2->assignRole('Lecturer');
     }
 }
