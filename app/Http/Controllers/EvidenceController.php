@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Crypt;
 
 class EvidenceController extends Controller
@@ -52,17 +54,16 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $student = $request->student_id;
-        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); 
-        // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); 
-        //all files in the bucket aren't public, only for this request they are temporarily set. Comment out this line to deny access. 
-        $rules = [
+        $path = 'files/'.$student;
+        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
+        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. 
+       
+       $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'filepath' => 'file|unique:evidence',
-            'originalFileName' => 'string|max:100',
-            'user_id' => 'required|integer',
-            'url' => 'string|unique:evidence,url',
+            //'filepath' => 'required|file',
+            //'originalFileName' => 'required|string|max:100',
+            //'user_id' => 'required|integer',
             'description' => 'nullable|string'
         ];
         $messages = [
@@ -94,7 +95,6 @@ class EvidenceController extends Controller
      */
     public function show($id, Request $request)
     {
-        // not currently returning a file to the browser
         $file = Evidence::find($id);
         // somehow need to access the download from amazon s3?
         $url = $file->url;

@@ -17,7 +17,6 @@ class AddUrlFilenameToEvidenceTable extends Migration
             $table->mediumText('filepath')->nullable()->change();
             $table->after('filepath', function ($table) {
                 $table->string('originalFileName', 100)->nullable();
-                $table->string('filelink')->nullable();
             });
         });
     }

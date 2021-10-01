@@ -14,7 +14,7 @@ class AddUrlFieldToEvidenceTable extends Migration
     public function up()
     {
         Schema::table('evidence', function (Blueprint $table) {
-            $table->string('url')->unique();
+            $table->string('url');
         });
     }
 
