@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class NavTest extends DuskTestCase
-{
-    
+{    
     /* 
         Functions to test each link used in the navigation bar of the app
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
@@ -18,6 +17,7 @@ class NavTest extends DuskTestCase
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */   
 
+    /*
     public function createadminuser()
     {
         $user = User::where('email', '=', 'admin@admin.com')->first();
@@ -29,7 +29,8 @@ class NavTest extends DuskTestCase
                 'is_admin' => 1,
             ]);
         }
-    }    
+    }
+    */   
 
     /* 
     Methods for testing each link on the navigation bar
@@ -38,29 +39,34 @@ class NavTest extends DuskTestCase
     
     public function testBypassLogin()
     {
-        $this->createadminuser();
+        // $this->createadminuser();
 
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1)) 
+        $user = User::where('email', 'admin@admin.com')->first();
+
+        $this->browse(function (Browser $browser) use($user)
+        {
+            // Should only need to loginAs once per test file
+            $browser->loginAs($user) 
                     ->visit('/')
-                    ->assertPathIs('/');
-                                       
+                    ->assertPathIs('/');                                       
         });
         
     }
 
     public function testHomeLink()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) 
+        {
             $browser
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertSee('Welcome');                    
+                    ->assertSee('ADD NEW STUDENT');                    
         });
     }
 
     public function testNewStudentLink()
     {
+        /*
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
             $user = User::factory()->create([
                 'name' => 'admin',
@@ -71,36 +77,20 @@ class NavTest extends DuskTestCase
         }
         
         $user = User::where('name', 'admin')->first();
+        */
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/students')
+        $this->browse(function ($browser) 
+        {
+            $browser//->loginAs($user)
+                    ->visit('/')
                     ->assertSee('Student Admin');                    
-        });
-    }
-
-    public function testCohortLink()
-    {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-        
-        $user = User::where('name', 'admin')->first(); 
-
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/cohorts')
-                    ->assertSee('Studio Cohorts');                    
         });
     }
 
     public function testEvidenceLink()
     {
+        // Also known as 'Uploads'
+        /*
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
             $user = User::factory()->create([
                 'name' => 'admin',
@@ -111,16 +101,20 @@ class NavTest extends DuskTestCase
         }
         
         $user = User::where('name', 'admin')->first();
+        */
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
+        $this->browse(function ($browser) 
+        {
+            $browser//->loginAs($user)
                     ->visit('/evidence')
-                    ->assertSee('Evidence');                    
+                    ->assertPathIs('/evidence')
+                    ->assertSee('UPLOAD');                    
         });
     }
 
     public function testNotesLink()
     {
+        /*
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
             $user = User::factory()->create([
                 'name' => 'admin',
@@ -131,34 +125,54 @@ class NavTest extends DuskTestCase
         }
         
         $user = User::where('name', 'admin')->first(); 
+        */
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
+        $this->browse(function ($browser) 
+        {
+            $browser//->loginAs($user)
                     ->visit('/notes')
-                    ->assertSee('Notes');                    
+                    ->assertPathIs('/notes')
+                    ->assertSee('SAVE NOTE');                    
         });
     }
-    
-    /*
-    public function testAdminLink()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin-panel')
-                    ->assertSee('Manage');                    
-        });
-    }
-    */
 
+    public function testCohortLink()
+    {
+        /*
+        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+            $user = User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => 'password',
+                'is_admin' => 1,
+            ]);
+        }
+        
+        $user = User::where('name', 'admin')->first(); 
+        */
+
+        $this->browse(function ($browser) 
+        {
+            $browser//->loginAs($user)
+                    ->visit('/cohorts')
+                    ->assertPathIs('/cohorts')
+                    ->assertSee('Studio Cohorts');                    
+        });
+    }    
+    
     public function testAdminLink()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) 
+        {
             $browser->visit('/admin-panel')
-                    ->assertSee('Manage');                    
+                    ->assertPathIs('/admin-panel')
+                    ->assertSee('MANAGE');                    
         });
-    }
+    }    
 
     public function testLogoutLink()
     {
+        /*
         if (User::where('email', '=', 'admin@admin.com')->first() === null) {
             $user = User::factory()->create([
                 'name' => 'admin',
@@ -169,8 +183,11 @@ class NavTest extends DuskTestCase
         }
         
         $user = User::where('name', 'admin')->first();
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
+        */
+
+        $this->browse(function ($browser) 
+        {
+            $browser//->loginAs($user)
                     ->visit('/')
                     ->press('Log Out')
                     ->assertPathIs('/login')
