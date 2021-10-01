@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateFieldNamesInEvidenceTable extends Migration
+class AddAccessKeyColumnInEvidenceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,7 @@ class UpdateFieldNamesInEvidenceTable extends Migration
     public function up()
     {
         Schema::table('evidence', function (Blueprint $table) {
-            $table->mediumText('title', 50)->change();
-            $table->renameColumn('image', 'filepath'); 
-            $table->after('title', function ($table) {
-                $table->text('description')->nullable();
-            });
+            $table->mediumText('fileAccessKey')->unique();
         });
     }
 

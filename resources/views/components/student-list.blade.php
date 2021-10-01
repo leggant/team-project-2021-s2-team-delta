@@ -22,6 +22,9 @@
                         <td class="border px-4 py-2">{{$student->cohort->papers->paper_name}} | Stream {{$student->cohort->stream}}</td>
                     </tr>
                 @endif
+                <td class="border px-4 py-2"></td>
+                {{-- <td class="border px-4 py-2">Studio {{ $student->cohort_id }} | {{ $student->year }} | {{ $student->cohort->semester }}</td> --}}
+            </tr>
             @endforeach
         @endforeach
     </table>

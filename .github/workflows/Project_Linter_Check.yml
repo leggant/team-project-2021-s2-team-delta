@@ -4,7 +4,7 @@ on:
     push:
         branches: [sprint-*]
     pull_request:
-        branches: [master, staging]
+        branches: [master, staging, development]
 jobs:
   phplint:
     runs-on: ubuntu-latest
