@@ -1,16 +1,19 @@
 @can('view students')
     <div>
-        <div class="grid grid-cols-7 w-3/4">
-            <x-jet-input type="search" wire:model="query" placeholder="Search Students" class="col-span-3" />
-            @foreach ($searchFields as $index => $field)
-                <div class="flex justify-evenly items-center mx-5 place-self-center self-center">
-                    <label class="hover:cursor-pointer">{{ $labels[$index] }}<input type="radio" name="field"
-                            wire:model="searchField" value="{{ $index }}" class="mx-1 hover:cursor-pointer">
+        <div class="grid grid-cols-4 w-3/4">
+            <x-jet-input type="search" wire:model="query" placeholder="Search Students" class="col-span-2" />
+            <div class="flex justify-evenly items-center whitespace-nowrap col-span-2">
+                @foreach ($searchFields as $index => $field)
+                    <label class="hover:cursor-pointer flex justify-evenly items-center whitespace-nowrap">{{ $labels[$index] }}
+                        <input type="radio" name="field"
+                            wire:model="searchField" 
+                            value="{{ $index }}" 
+                            class="mx-1 hover:cursor-pointer" />
                     </label>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-        <table class="table-fixed w-full">
+        <table class="table-fixed w-full mt-5">
             <tr>
                 <th class="px-4 py-2">Student Name</th>
                 <th class="px-8 py-2">Email</th>
@@ -44,6 +47,7 @@
                         @endif
                     </tr>
                 @endforeach
+            @endforeach
         </table>
     </div>
 @endcan
