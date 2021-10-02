@@ -14,7 +14,7 @@ class AddAccessKeyColumnInEvidenceTable extends Migration
     public function up()
     {
         Schema::table('evidence', function (Blueprint $table) {
-            $table->mediumText('fileAccessKey')->unique();
+            $table->string('fileAccessKey')->unique();
         });
     }
 
