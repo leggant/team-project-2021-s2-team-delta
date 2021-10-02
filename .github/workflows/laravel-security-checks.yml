@@ -36,18 +36,4 @@ jobs:
         only: prod
         level: high
         package-lock-only: false
-        github-token: ${{ secrets.GITHUB_TOKEN }} 
-  Laravel-phpUnit-Test:
-    name: Laravel PHPUnit Test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: nathanheffley/laravel-phpunit-action@master
-  psalm:
-    name: Psalm PHP Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Psalm Security Scan
-        uses: docker://ghcr.io/psalm/psalm-security-scan    
+        github-token: ${{ secrets.GITHUB_TOKEN }}
