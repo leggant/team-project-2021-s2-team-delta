@@ -23,13 +23,6 @@
                     <div class="grid grid-rows-2 mt-3 items-center gap-2">
                         <div class="flex gap-4">
                             @if ($file->permitted)
-                            {{-- <form action="{{ route('evidence.show', $file->id) }}" method="POST">
-                                @csrf
-                                @method('get')
-                                <x-jet-button type="submit">
-                                    {{ $file->title }}
-                                </x-jet-button>
-                            </form> --}}
                             <a href="{{ $file->url }}">
                                 <x-jet-button>
                                     {{ $file->title }}
@@ -87,16 +80,4 @@
             @endif
         </div>
     </div>
-    {{-- <div x-data="{ open: false }">
-            <button x-on:click="open = ! open">Upload New Evidence</button>
-            <div x-show="open">
-                Add new upload form here
-            </div>
-        </div>
-        <div x-data="{ open: false }">
-            <button x-on:click="open = ! open">Create New Note</button>
-            <div x-show="open">
-                create new note
-            </div>
-        </div> --}}
 </x-app-layout>
