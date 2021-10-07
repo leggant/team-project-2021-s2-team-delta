@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Builder;
 
 class StudentController extends Controller
 {
@@ -24,10 +26,15 @@ class StudentController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $students = Student::all();
+        $taught = $user->load('papers')->papers;
+        $students = array();
+        for ($i=0; $i < count($taught); $i++) { 
+            $sClass = DB::table('student')->where('cohort_id', $taught[$i]->key)->get();
+            array_unshift($students, ['paper_id' => $taught[$i]->id, 'paper_name' => $taught[$i]->paper_name, 'classList' => $sClass]);
+        }
+        asort($students);
         $cohorts = Cohort::all();
-        $papers = Papers::all();
-        return view('pages.students', ['students'=>$students, 'cohorts' => $cohorts], compact('user', 'papers'));
+        return view('pages.students', ['students'=>$students, 'cohorts' => $cohorts, 'papers' => $taught], compact('user'));
     }
 
     /**

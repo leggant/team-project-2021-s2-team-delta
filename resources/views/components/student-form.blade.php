@@ -12,7 +12,7 @@
                 aria-label="Github Username"></x-jet-input>
         </div>
         <div class="grid grid-cols-4 mt-4 mb-4 gap-4">
-            <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" class="col-span-2" />
+            <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" :papers="$papers" class="col-span-2" />
         </div>
         <x-jet-button>Add New Student</x-jet-button>
     </form>

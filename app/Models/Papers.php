@@ -25,4 +25,9 @@ class Papers extends Model
     {
         return $this->hasOne(Cohort::class);
     }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'cohort_id');
+    }
 }

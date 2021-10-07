@@ -13,9 +13,15 @@
             </div>
         </div>
         <div class="grid">
-            @foreach ($papers as $index => $paper)
-                <div class="bg-gray-100 rounded-md shadow-lg bg-blend-multiply gap-5" wire:key="{{ $paper->id }}">
-                    <h2 class="text-2xl text-center">{{ $paper->paper_name }}</h2>
+            {{-- STUDENTS IS NOW A COMPLETE OBJECT WHICH CONTAINS ARRAYS FOR EACH CLASS A LECTURER --}}
+            {{-- TEACHES + A LIST OF ALL STUDENTS IN EACH CLASS --}}
+            {{-- THIS IS GENERATED IN THE STUDENT CONTROLLER INDEX METHOD --}}
+            @foreach ($students as $i => $student)
+            {{-- {{ dd($student['paper_id']);}} --}}
+            {{-- {{ dd($student['paper_name']);}} --}}
+            {{-- {{ dd($student['classList']);}} --}}
+                <div class="bg-gray-100 rounded-md shadow-lg bg-blend-multiply gap-5" wire:key="{{ $student->id }}">
+                    <h2 class="text-2xl text-center">{{ $student }}</h2>
                     <table class="table-fixed w-full shadow-inner">
                         <thead>
                             <tr>
@@ -44,15 +50,13 @@
                                     @else
                                         <td class="border px-4 py-2"></td>
                                     @endif
-                                    {{-- {{dd($student->cohort_id);}}
-                                    @if ($pivot[$i]->paper_id === $student->cohort_id)
-                                        <td class="border px-4 py-2">{{ $student->papers->paper_name }} | Stream
-                                            {{ $student->cohort->stream }}
+                                    @if ($cohorts->stream)
+                                        <td class="border px-4 py-2">{{ $student[$i] }} | Stream
+                                            {{ $cohorts[$i]->stream }}
                                         </td>
                                     @else
                                         <td class="border px-4 py-2"></td>
-                                        @endif --}}
-                                        <td class="border px-4 py-2"></td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

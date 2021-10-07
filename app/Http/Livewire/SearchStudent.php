@@ -16,26 +16,28 @@ class SearchStudent extends Component
     public $labels = ['First Name', 'Last Name', 'Email', 'Github'];
     public $searchField = 1;
     public $sortBy = '';
-    public $papers;
     public $user;
-    public $students = [];
-    public $pivot;
+    public $students;
+    public $cohorts;
+    public $papers;
 
-    public function mount() 
+    public function mount($students, $cohorts, $user, $papers) 
     {
-        $this->user = auth()->user();
-        $this->papers = auth()->user()->papers;
-        $this->pivot = DB::table('user_papers')->where('user_id', $this->user->id)->get();
-        // $students = DB::table('student')->where('cohort_id', $this->pivot->paper_id)->get();
-        $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query . '%')->get();
+        $this->user = $user;
+        $this->students = $students;
+        $this->cohorts = $cohorts;
+        $this->papers = $papers;
         return view('livewire.search-student', [
-            'students' => $this->students
+            'students' => $this->students,
+            'cohorts' => $this->cohorts,
+            'user' => $this->user,
+            'papers' => $this->papers
         ]);
     }
     // does the initial search
     public function render()
     {
-        $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
+        // $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
         return view('livewire.search-student', [
             'students' => $this->students
         ]);
@@ -43,9 +45,9 @@ class SearchStudent extends Component
 
     // updates the search results each time the input filter changes
     public function hydrate() {
-        $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
-        return view('livewire.search-student', [
-            'students' => $this->students
-        ]);
+        // $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
+        // return view('livewire.search-student', [
+        //     'students' => $this->students
+        // ]);
     }
 }
