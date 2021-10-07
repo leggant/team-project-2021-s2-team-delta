@@ -32,7 +32,9 @@ class StudentController extends Controller
             $sClass = DB::table('student')->where('cohort_id', $taught[$i]->key)->get();
             array_unshift($students, ['paper_id' => $taught[$i]->id, 'paper_name' => $taught[$i]->paper_name, 'classList' => $sClass]);
         }
-        asort($students);
+        $students = array_values(Arr::sort($students, function ($value) {
+            return $value['paper_name'];
+        }));
         $cohorts = Cohort::all();
         return view('pages.students', ['students'=>$students, 'cohorts' => $cohorts, 'papers' => $taught], compact('user'));
     }

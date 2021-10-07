@@ -20,8 +20,8 @@
             {{-- {{ dd($student['paper_id']);}} --}}
             {{-- {{ dd($student['paper_name']);}} --}}
             {{-- {{ dd($student['classList']);}} --}}
-                <div class="bg-gray-100 rounded-md shadow-lg bg-blend-multiply gap-5" wire:key="{{ $student->id }}">
-                    <h2 class="text-2xl text-center">{{ $student }}</h2>
+                <div class="bg-gray-100 rounded-md shadow-lg bg-blend-multiply gap-5" wire:key="{{ $student['paper_id'] }}">
+                    <h2 class="text-2xl text-center">{{ $student['paper_name'] }}</h2>
                     <table class="table-fixed w-full shadow-inner">
                         <thead>
                             <tr>
@@ -32,31 +32,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $i => $student)
+                            @foreach ($student['classList'] as $i => $x_student)
                                 <tr>
                                     <td class="border px-4 py-2 cursor-pointer">
                                         <a id="studentLink"
-                                            href="{{ route('students.show', $student) }}">{{ $student->name }}
+                                            href="{{ route('students.show', $x_student->id) }}">{{ $x_student->first_name }} {{ $x_student->last_name}}
                                         </a>
                                     </td>
                                     <td class="border px-8 py-2"><a class="hover:underline"
-                                            href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->username }}@student.op.ac.nz</a>
+                                            href="mailto:{{ $x_student->username }}@student.op.ac.nz">{{ $x_student->username }}@student.op.ac.nz</a>
                                     </td>
-                                    @if ($student->github)
+                                    @if ($x_student->github)
                                         <td class="border px-4 py-2"><a class="hover:underline"
-                                                href="http://github.com/{{ $student->github }}"
-                                                target="_blank">github.com/{{ $student->github }}
+                                                href="http://github.com/{{ $x_student->github }}"
+                                                target="_blank">github.com/{{ $x_student->github }}
                                         </td>
                                     @else
                                         <td class="border px-4 py-2"></td>
                                     @endif
-                                    @if ($cohorts->stream)
+                                    <td></td>
+                                    {{-- @if ($cohorts[]->stream)
                                         <td class="border px-4 py-2">{{ $student[$i] }} | Stream
                                             {{ $cohorts[$i]->stream }}
                                         </td>
                                     @else
                                         <td class="border px-4 py-2"></td>
-                                    @endif
+                                    @endif --}}
                                 </tr>
                             @endforeach
                         </tbody>
