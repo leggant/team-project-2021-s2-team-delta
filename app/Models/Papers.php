@@ -10,9 +10,8 @@ use App\Models\Cohort;
 class Papers extends Model
 {
     use HasFactory;
-
+    // added timestamps back so that dates can be used to separate papers/students
     protected $table = 'papers';
-    public $timestamps = false;
 
     protected $fillable = ['paper_name'];
 
@@ -28,6 +27,6 @@ class Papers extends Model
 
     public function students()
     {
-        return $this->hasMany(Student::class, 'cohort_id');
+        return $this->hasMany(Student::class, 'paper_id');
     }
 }

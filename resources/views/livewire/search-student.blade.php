@@ -22,13 +22,14 @@
             {{-- {{ dd($student['classList']);}} --}}
                 <div class="bg-gray-100 rounded-md shadow-lg bg-blend-multiply gap-5" wire:key="{{ $student['paper_id'] }}">
                     <h2 class="text-2xl text-center">{{ $student['paper_name'] }}</h2>
-                    <table class="table-fixed w-full shadow-inner">
+                    <table class="table-fixed shadow-inner w-max my-2">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">Student Name</th>
                                 <th class="px-8 py-2">Email</th>
                                 <th class="px-4 py-2">Github</th>
-                                <th class="px-4 py-2">Paper + Stream</th>
+                                <th class="px-4 py-2">Stream</th>
+                                <th class="px-4 py-2"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,14 +51,16 @@
                                     @else
                                         <td class="border px-4 py-2"></td>
                                     @endif
-                                    <td></td>
-                                    {{-- @if ($cohorts[]->stream)
-                                        <td class="border px-4 py-2">{{ $student[$i] }} | Stream
-                                            {{ $cohorts[$i]->stream }}
-                                        </td>
+                                    @if ($x_student->stream)
+                                    <td class="border px-4 py-2">Stream {{ $x_student->stream }}</td>
                                     @else
                                         <td class="border px-4 py-2"></td>
-                                    @endif --}}
+                                    @endif    
+                                    <td class="border grid grid-cols-3 gap-2 px-4 py-2">
+                                        <x-jet-button>Edit Student</x-jet-button>
+                                        <x-jet-button>Add Note</x-jet-button>
+                                        <x-jet-button>Upload File</x-jet-button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

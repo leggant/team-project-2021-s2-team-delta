@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use App\Models\Student;
 use App\Models\Cohort;
 use App\Models\User;
 use App\Models\Papers;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class SearchStudent extends Component
 {
@@ -27,6 +27,7 @@ class SearchStudent extends Component
         $this->students = $students;
         $this->cohorts = $cohorts;
         $this->papers = $papers;
+
         return view('livewire.search-student', [
             'students' => $this->students,
             'cohorts' => $this->cohorts,
@@ -37,7 +38,13 @@ class SearchStudent extends Component
     // does the initial search
     public function render()
     {
-        // $this->students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
+        $value = $this->searchFields;
+        $key = $this->searchField;
+        // dd($this->students);
+        // $filtered = $this->students->filter(function ($value, $key) {
+        //     return $this->searchFields[$this->searchField] == $this->query;
+        // });
+        // })->->where($this->searchFields[$this->searchField], 'like', '%' . $this->query. '%')->get();
         return view('livewire.search-student', [
             'students' => $this->students
         ]);

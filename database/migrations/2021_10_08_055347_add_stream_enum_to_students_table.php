@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAccessKeyColumnInEvidenceTable extends Migration
+class AddStreamEnumToStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddAccessKeyColumnInEvidenceTable extends Migration
      */
     public function up()
     {
-        Schema::table('evidence', function (Blueprint $table) {
-            $table->string('fileAccessKey')->unique();
+        Schema::table('student', function (Blueprint $table) {
+            $table->enum('stream', ['A', 'B', 'J'])->default(NULL)->nullable()->after('github');
         });
     }
 
@@ -25,7 +25,7 @@ class AddAccessKeyColumnInEvidenceTable extends Migration
      */
     public function down()
     {
-        Schema::table('evidence', function (Blueprint $table) {
+        Schema::table('students', function (Blueprint $table) {
             //
         });
     }

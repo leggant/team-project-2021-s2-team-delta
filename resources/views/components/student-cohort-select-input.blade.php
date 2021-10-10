@@ -5,7 +5,7 @@
     <option disabled selected>Pick a Course for the Student</option>
     @foreach ($cohorts as $cohort)
         @foreach ($papers as $index => $paper)
-        <option value="{{ $cohort->id }}">{{$paper->paper_name}} || Stream {{ $cohort->stream }} || Year {{ $cohort->updated_at }}</option>
+        <option value="{{ $cohort->id }}">{{$paper->paper_name}} || Stream {{ $cohort->stream }} || Year {{ $cohort->year }}</option>
         @endforeach
     @endforeach
 </select>

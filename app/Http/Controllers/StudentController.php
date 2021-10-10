@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,6 +36,7 @@ class StudentController extends Controller
         $students = array_values(Arr::sort($students, function ($value) {
             return $value['paper_name'];
         }));
+        $students = collect($students);
         $cohorts = Cohort::all();
         return view('pages.students', ['students'=>$students, 'cohorts' => $cohorts, 'papers' => $taught], compact('user'));
     }

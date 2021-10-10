@@ -20,6 +20,7 @@ class Student extends Model
         'username',
         'email',
         'github',
+        'stream',
         'cohort_id',
         'is_active',
     ];
@@ -39,6 +40,11 @@ class Student extends Model
     public function cohort()
     {
         return $this->belongsTo(Cohort::class, 'cohort_id');
+    }
+
+    public function papers() 
+    {
+        return $this->belongsToMany(Paper::class);
     }
 
     /**
