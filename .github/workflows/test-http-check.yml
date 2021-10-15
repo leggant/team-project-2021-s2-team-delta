@@ -1,0 +1,24 @@
+name: Test App Status Check
+on: 
+  schedule:
+    - cron:  '30 19 * * 1-5'
+    # 8.30am NZT
+    - cron:  '0 4 * * 1-5'
+    # 5pm NZT
+  push:
+    branches:
+      - master
+      - main
+      - staging
+jobs:
+  ping_testing:
+    runs-on: ubuntu-latest
+    name: Ping the testing site
+    steps:
+    - name: Check the test site
+      id: test
+      uses: lakuapik/gh-actions-http-status@v1
+      with:
+        sites: '["http://op-studio-testing.herokuapp.com", "http://op-studio-testing.herokuapp.com/login"]'
+        expected: '[302, 200]'
+          # 302 is a redirect response code - expected on this route for a logged out user

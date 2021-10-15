@@ -1,0 +1,30 @@
+name: Production App Status Check
+on: 
+  schedule:
+    - cron:  '30 19 * * 1-5'
+    # 8.30am NZT
+    - cron:  '0 4 * * 1-5'
+    # 5pm NZT
+  push:
+    branches:
+      - master
+      - main
+      - staging
+jobs:
+  ping_production:
+    runs-on: ubuntu-latest
+    name: Ping the production site
+    steps:
+    - name: Check the production site
+      id: production
+      uses: lakuapik/gh-actions-http-status@v1
+      with:
+        sites: '[
+          "http://bit-studio-management.herokuapp.com", 
+          "http://bit-studio-management.herokuapp.com/login"
+        ]'
+        expected: '[
+          302, 
+          200
+        ]'
+        # 302 is a redirect response code - expected on this route for a logged out user
