@@ -6,8 +6,10 @@
 </a>
 </p>
 
-[![Code Formatted Check](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml)
+[![Production App Status Check](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/production-http-check.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/production-http-check.yml)
+[![Test App Status Check](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/test-http-check.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/test-http-check.yml)
 [![Laravel Dusk Testing](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/laravel-dusk-testing.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/laravel-dusk-testing.yml)
+[![Code Formatted Check](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml/badge.svg)](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/actions/workflows/Project_Linter_Check.yml)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Deployments
