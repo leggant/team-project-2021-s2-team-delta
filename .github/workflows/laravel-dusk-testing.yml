@@ -1,9 +1,6 @@
 name: Laravel Dusk Testing
 on:
-  pull_request:
-    branches: [staging, master, main, development]
-  push:
-    branches: [sprint-*]
+  push
 jobs:
   Laravel-Set-Up:
     name: Laravel (PHP ${{ matrix.php-versions }} | NODE ${{matrix.node}})
