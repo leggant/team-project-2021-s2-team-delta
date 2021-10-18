@@ -5,10 +5,7 @@ on:
     # 8.30am NZT
     - cron: "0 4 * * 1-5"
     # 5pm NZT
-  deployment:
-    branches:
-      - master
-      - staging
+  push
 jobs:
   ping_testing:
     runs-on: ubuntu-latest
