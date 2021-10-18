@@ -49,8 +49,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install
-      - run: npm run dev
+      - run: |
+          npm install
+          npm run dev
       - name: Run Package Install Using HTTPS Instead of SSH
         run: git config --global url."https://${{ secrets.PAT }}@github.com/".insteadOf ssh://git@github.com/
       - name: Install Composer dependencies
