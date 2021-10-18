@@ -46,7 +46,7 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Setup Node ${{ matrix.node }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
@@ -57,6 +57,8 @@ jobs:
         run: |
             composer install --no-progress --prefer-dist --optimize-autoloader
             chmod -R 777 storage bootstrap/cache
+            npm install
+            npm run dev
       - name: Prepare the application
         run: |
           chmod -R 777 storage bootstrap/cache
