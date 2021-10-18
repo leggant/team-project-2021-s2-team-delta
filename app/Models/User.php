@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,9 +13,12 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Papers;
 use App\Models\Evidence;
 use App\Models\Note;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -74,7 +78,7 @@ class User extends Authenticatable
 
     public function papers()
     {
-        return $this->belongsToMany(Papers::class);
+        return $this->belongsToMany(Papers::class, 'user_papers', 'user_id', 'paper_id');
     }
 
     public function notes()

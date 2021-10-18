@@ -17,11 +17,11 @@ class Note extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'foreign_key');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function student()
     {
-        return $this->belongsTo(Student::class,'foreign_key');
+        return $this->belongsTo(Student::class,'student_id');
     }
 }

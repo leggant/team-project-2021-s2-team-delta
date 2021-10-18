@@ -12,12 +12,13 @@ class Papers extends Model
     use HasFactory;
 
     protected $table = 'papers';
+    public $timestamps = false;
 
     protected $fillable = ['paper_name'];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_papers', 'paper_id', 'user_id',);
     }
 
     public function cohort()

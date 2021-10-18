@@ -1,0 +1,29 @@
+# Delta Team - Studio Management Changelog
+<!-- auto-changelog-below -->
+<!-- auto-changelog-above -->
+{{#each releases}}
+  {{#if href}}
+    ## [{{title}}]({{href}}) - :calendar:{{isoDate}}
+  {{else}}
+    ## {{title}}{{#if tag}} - :calendar:{{isoDate}}{{/if}}
+  {{/if}}
+  {{#if summary}}
+    {{summary}}
+  {{/if}}
+  {{#if merges}}
+    ### Merged :heavy_check_mark:
+    {{#each merges}}
+      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} {{#if href}}[`#{{id}}`]({{href}}) :octocat:{{/if}}
+    {{/each}}
+  {{/if}}
+  {{#if fixes}}
+    ### Fixed :heavy_check_mark:
+    {{#each fixes}}
+      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{commit.subject}}{{#each fixes}} {{#if href}}[`#{{id}}`]({{href}}){{/if}} :octocat:{{/each}}
+    {{/each}}
+  {{/if}}
+  {{#commit-list commits heading='### Commits :heavy_check_mark:'}}
+    - {{#if breaking}}**Breaking change:** {{/if}} {{subject}} {{#if href}}[`{{shorthash}}`]({{href}}) :octocat:{{/if}}
+  {{/commit-list}}
+{{/each}}
+---
