@@ -32,6 +32,9 @@
                             <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                                 {{ __('User Admin Panel') }}
                             </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
+                                {{ __('Cohorts') }}
+                            </x-jet-nav-link>
                         @endif
                     @endrole
                     <x-nav-form-button 
