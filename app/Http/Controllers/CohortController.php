@@ -19,7 +19,7 @@ class CohortController extends Controller
         $cohorts = Cohort::all();
         $papers = Papers::all();
         $user = auth()->user();
-        return view('pages.cohort', compact('cohorts', 'papers', 'user'));
+        return view('pages.cohort', compact('cohorts', 'user', 'papers'));
     }
 
     /**
@@ -45,14 +45,18 @@ class CohortController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'stream' => 'required',
-        ])->validate();
-        $cohort = new Cohort;
-        $cohort->paper_id = $request->input('paper');
-        $cohort->year = $request->input('year');
-        $cohort->semester = $request->input('semester');
-        $cohort->stream = $request->input('stream');
-        $cohort->save();
-        return redirect('/cohorts')->with('success', 'Cohort was Created Successfully!');
+            ])->validate();
+        $cohort = Cohort::create([
+                'paper_id' => $request->paper,
+                'year' => $request->year,
+                'semester' => $request->semester,
+                'stream' => $request->stream,
+        ]);
+        $user = auth()->user();
+        $cohorts = Cohort::orderBy('created_at', 'desc')->get();
+        $cohorts = Cohort::addSelect();
+        ('created_at', 'desc')->get();
+        return redirect()->action([CohortController::class, 'index'], ['cohorts' => $cohorts]);
     }
 
     /**

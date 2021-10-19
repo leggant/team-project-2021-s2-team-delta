@@ -11,17 +11,16 @@
                         <select id="paper" name="paper" required
                             class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
                             @foreach ($papers as $paper)
-                                @foreach($user->papers as $up)
+                            <option value="{{ $paper->id }}">{{ $paper->paper_name }}</option>
+                                {{-- @foreach($user->papers as $up)
                                     @if($up->pivot->paper_id == $paper->id)
-                                        <option value="{{ $paper->id }}">{{ $paper->paper_name }}</option>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
                             @endforeach
                         </select>
                     </x-jet-label>
-                    <x-jet-label for="year">Year:
-                        <x-jet-input type="text" name="year" id="year"
-                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1" />
+                    <x-jet-label for="year">Year
+                        @livewire('year-form-input')
                     </x-jet-label>
                     <x-jet-label for="semester">Semester:
                         <select name="semester" id="semester"
@@ -54,16 +53,16 @@
                     </thead>
                     <tbody>
                         @foreach ($cohorts as $cohort)
-                            @foreach($user->papers as $up)
-                                @if($up->pivot->paper_id == $cohort->paper_id)
+                            {{-- @foreach($user->papers as $up) --}}
+                                {{-- @if($up->pivot->paper_id == $cohort->paper_id) --}}
                                     <tr>
                                         <td class="border px-4 py-2">{{ $cohort->papers->paper_name }}</td>
                                         <td class="border px-4 py-2">{{ $cohort->year }}</td>
                                         <td class="border px-4 py-2">{{ $cohort->semester }}</td>
                                         <td class="border px-4 py-2">{{ $cohort->stream }}</td>
                                     </tr>
-                                @endif
-                            @endforeach
+                                {{-- @endif --}}
+                            {{-- @endforeach --}}
                         @endforeach
                     </tbody>
                 </table>
