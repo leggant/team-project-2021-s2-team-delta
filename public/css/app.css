@@ -1364,6 +1364,9 @@ select {
 .w-1 {
 	width: 0.25rem;
 }
+.w-3\/12 {
+	width: 25%;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1392,6 +1395,9 @@ select {
 }
 .max-w-6xl {
 	max-width: 72rem;
+}
+.max-w-3xl {
+	max-width: 48rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1467,8 +1473,14 @@ select {
 .grid-flow-row {
 	grid-auto-flow: row;
 }
+.grid-flow-col {
+	grid-auto-flow: column;
+}
 .grid-flow-row-dense {
 	grid-auto-flow: row dense;
+}
+.grid-flow-col-dense {
+	grid-auto-flow: column dense;
 }
 .grid-cols-6 {
 	grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1931,6 +1943,10 @@ select {
 .text-3xl {
 	font-size: 1.875rem;
 	line-height: 2.25rem;
+}
+.text-4xl {
+	font-size: 2.25rem;
+	line-height: 2.5rem;
 }
 .font-medium {
 	font-weight: 500;
