@@ -5,35 +5,31 @@ namespace Tests\Browser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Tests\DuskTestCase;
 
 class AdminpanelTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
     public function testFindAdminPage()
     {       
-        $user = User::where('email', 'admin@admin.com')->first();
+        $user = User::factory()->create([
+            'name' => 'name',
+            'email' => 'admin@op.ac.nz',
+            'password' => Hash::make('password'),
+            'is_admin' => 1,
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+        ]);
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                    ->visit('/admin-panel')
+                    ->visit('/users')
                     ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->assertSee('MANAGE USERS');                    
-        });
-    }
-
-    public function testManageUsers()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE USERS')
-                    ->pause(2000)
-                    ->assertPathIs('/users')
-                    ->pause(2000);                   
+                    ->assertPathIs('/users')                   
+                    ->assertVisible("@dusk-title");                    
         });
     }
 
