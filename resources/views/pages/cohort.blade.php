@@ -2,14 +2,13 @@
     <x-slot name="header">
         <h1 class="font-semibold">Studio Cohorts</h1>
     </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6">
+    <div class="max-w-7xl mx-auto sm:px-6 grid grid-cols-2 py-10 gap-x-5">
         @can('create cohorts')
-            <div class="p-6">
-                <form action="{{ route('cohorts.store') }}" method="post">
+                <form action="{{ route('cohorts.store') }}" method="post" class="grid grid-cols-4 grid-flow-row place-content-around gap-x-2 gap-y-4 w-3/4">
                     @csrf
-                    <x-jet-label for="paper">Course:
+                        <x-jet-label for="paper" class="self-center justify-items-end col-span-1">Course</x-jet-label>
                         <select id="paper" name="paper" required
-                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
+                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block col-span-3">
                             @foreach ($papers as $paper)
                             <option value="{{ $paper->id }}">{{ $paper->paper_name }}</option>
                                 {{-- @foreach($user->papers as $up)
@@ -18,55 +17,56 @@
                                 @endforeach --}}
                             @endforeach
                         </select>
-                    </x-jet-label>
-                    <x-jet-label for="year">Year
-                        @livewire('year-form-input')
-                    </x-jet-label>
-                    <x-jet-label for="semester">Semester:
+                        <x-jet-label for="year" class="self-center row-start-2">
+                            Year
+                        </x-jet-label>
+                        <div class="self-center col-span-2">
+                            @livewire('year-form-input')
+                        </div>
+                    
+                        <x-jet-label for="semester" class="self-center col-span-1 row-start-3">Semester</x-jet-label>
                         <select name="semester" id="semester"
-                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
+                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm col-span-3">
                                 <option disabled selected>Please choose a semester here...</option>
                                 <option value="Semester 1">Semester 1</option>
                                 <option value="Semester 2">Semester 2</option>
                             </select>
-                    </x-jet-label>
-                    <x-jet-label for="stream">Stream:
-                        <select name="stream" id="stream" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
+                    
+                        <x-jet-label for="stream" class="self-center row-start-4 col-span-1">Stream</x-jet-label>
+                        <select name="stream" id="stream" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm col-span-3">
                             <option disabled selected>Please choose a stream here...</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="J">J</option>
                         </select>
-                    </x-jet-label>
-                    <x-jet-button class="mt-4">Create Cohort</x-jet-button>
+                    
+                    <x-jet-button class="row-start-5">Create Cohort</x-jet-button>
                 </form>
-            </div>
         @endcan
         @can('view cohorts')
-            <div class="flex justify-center">
-                <table class="table-fixed w-3/4">
+                <table class="grid grid-flow-row">
                     <thead>
                         <th class="px-4 py-2">Paper</th>
                         <th class="px-4 py-2">Year</th>
                         <th class="px-4 py-2">Semester</th>
-                        <th class="px-4 py-2 w-10">Stream</th>
+                        <th class="px-4 py-2">Stream</th>
                     </thead>
                     <tbody>
                         @foreach ($cohorts as $cohort)
                             {{-- @foreach($user->papers as $up) --}}
                                 {{-- @if($up->pivot->paper_id == $cohort->paper_id) --}}
                                     <tr>
-                                        <td class="border px-4 py-2">{{ $cohort->papers->paper_name }}</td>
-                                        <td class="border px-4 py-2">{{ $cohort->year }}</td>
-                                        <td class="border px-4 py-2">{{ $cohort->semester }}</td>
-                                        <td class="border px-4 py-2">{{ $cohort->stream }}</td>
+                                        <td class="border px-4 py-2 text-center">{{ $cohort->papers->paper_name }}</td>
+                                        <td class="border px-4 py-2 text-center">{{ $cohort->year }}</td>
+                                        <td class="border px-4 py-2 text-center">{{ $cohort->semester }}</td>
+                                        <td class="border px-4 py-2 text-center">{{ $cohort->stream }}</td>
                                     </tr>
                                 {{-- @endif --}}
                             {{-- @endforeach --}}
                         @endforeach
                     </tbody>
                 </table>
-            </div>
+ 
         @endcan
     </div>
 </x-app-layout>

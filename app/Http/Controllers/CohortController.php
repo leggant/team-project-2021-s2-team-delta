@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cohort;
 use App\Models\Papers;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +17,7 @@ class CohortController extends Controller
      */
     public function index()
     {
-        $cohorts = Cohort::all();
+        $cohorts = Cohort::orderBy('paper_id')->get();
         $papers = Papers::all();
         $user = auth()->user();
         return view('pages.cohort', compact('cohorts', 'user', 'papers'));
@@ -53,7 +54,7 @@ class CohortController extends Controller
                 'stream' => $request->stream,
         ]);
         $user = auth()->user();
-        $cohorts = Cohort::orderBy('created_at', 'desc')->get();
+        $cohorts = Cohort::orderBy('paper_id', 'desc')->get();
         return redirect()->action([CohortController::class, 'index'], ['cohorts' => $cohorts]);
     }
 
