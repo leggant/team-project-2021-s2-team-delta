@@ -60,24 +60,5 @@ class Evidence extends Model
             return false;
         }
     }
-    /**
-     * shortened button text.
-     *
-     * @return string
-     */
-    public function getAccessLinkAttribute()
-    {
-        try {
-            $decrypted = Crypt::decryptString($this->fileAccessKey);
-            return $decrypted;
-        } 
-        catch (DecryptException $e) {
-            return $e;
-        }
-    }
-    /**
-     * get shortend version of title to use as button text.
-     * @var array
-     */
-    protected $appends = ['short_title', 'permitted', 'access_link'];
+    protected $appends = ['short_title'];
 }
