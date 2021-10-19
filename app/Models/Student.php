@@ -13,8 +13,18 @@ class Student extends Model
     use HasFactory;
     protected $table = 'student';
     protected $primaryKey = 'id';
-    protected $fillable = ['student_id', 'first_name', 'last_name', 'username', 'email', 'github', 'cohort_id'];
+    protected $fillable = [
+        'student_id',
+        'first_name',
+        'last_name',
+        'username',
+        'email',
+        'github',
+        'cohort_id',
+        'is_active',
+    ];
     protected $hidden = ['created_at', 'updated_at'];
+    protected $casts = ['is_active' => 'boolean'];
 
     public function evidence()
     {
@@ -32,10 +42,10 @@ class Student extends Model
     }
 
     /**
-    * Get the user's full name.
-    *
-    * @return string
-    */
+     * Get the user's full name.
+     *
+     * @return string
+     */
     public function getNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";

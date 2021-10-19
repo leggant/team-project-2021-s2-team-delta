@@ -12,36 +12,36 @@ use Tests\DuskTestCase;
 class EvidenceTest extends DuskTestCase
 {
     /* 
-    Method to create a new student need to test evidence uploads
+    Method to create a new student needed to test evidence uploads
     Used to add the student directly to the database rather than
     via the students page
     */
 
-    public function createstudent()
+    public function testEvidenceMakeStudent()
     {
+        // Can create a user here but get warning about a risky file containing no tests
+        if (Student::where('email', 'jesus@hmail.com')->first() === null) 
+        {
             $student = Student::create([                
                 'first_name' => 'Jesus',
                 'last_name' => 'Christ',
                 'username' => 'HolyGhost',
                 'email' => 'jesus@hmail.com',
                 'github' => 'imagithub'
-            ]);        
-    }    
-
+            ]); 
+        }       
+    }
+    
     public function testEvidenceRouting()
-    {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-        
-        $user = User::where('name', 'admin')->first();
+    {   
+        /* Below line could be used to create a student used to upload evidence
+        NB: code in functions without the word 'test' in the name is not performed. */
+        // $this->CreateStudent();
 
-        $this->browse(function ($browser) use($user) {
+        $user = User::where('email', 'admin@admin.com')->first();
+
+        $this->browse(function ($browser) use($user) 
+        {
             $browser->loginAs($user)
                     ->visit('/evidence')
                     ->assertPathIs('/evidence');                                        
@@ -49,38 +49,25 @@ class EvidenceTest extends DuskTestCase
     }
 
     /* 
-    Attempt to upload a file using a full student name (first, last)
-    and a file stored in 'app/public/testing/'
-    ---Currently failing due changes to name field to first,last_name
-    (unknown column 'name')
-    */
+    Attempt to upload a file using a student from the dropdown selector
+    on the evidence blade. Chooses the first student in the dropdown (select statement)
+    and attaches a file stored in '/tests/Browser/testupload/'    
+    */ 
 
-    /* Temporarily commented out - bug in name dropdown - also file not found in github actions
-    when running dusk tests
+    // https://www.codegrepper.com/code-examples/php/laravel+get+root+path
     
     public function testCreateEvidence()
-    {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-
-        $user = User::where('name', 'admin')->first();
-        
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->type('@studentname', 'Jesus Christ')
-                    // ->select('student', '1') Choose the first name in the dropdown
+    {        
+        $this->browse(function ($browser) 
+        {            
+            $browser->visit('/evidence')
+                    ->select('#student', 1)                    
                     ->type('#title', 'Some Evidence')
-                    ->attach('@image', storage_path('app/public/testing/test_upload.png'))
+                    ->type('#description', 'This is a description of the evidence uploaded which has been typed into a textarea box')
+                    ->attach('@image', realpath('.').'/tests/Browser/testupload/test_upload_file.png')
                     ->click('button[type="submit"]')
-                    ->assertTitle('Studio Management');                                
+                    ->assertPathIs('/students/*')
+                    ->assertSee('Created:');                               
         });
-    }
-    */
+    }    
 }

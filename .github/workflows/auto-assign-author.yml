@@ -1,9 +1,7 @@
-name: Auto Assign Author
-
+name: Auto Assign PR Author
 on:
   pull_request:
     types: [opened, reopened]
-
 jobs:
   Auto-Assign-Author:
     runs-on: ubuntu-latest

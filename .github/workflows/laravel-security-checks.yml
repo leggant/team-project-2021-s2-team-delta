@@ -1,0 +1,21 @@
+name: Laravel Security Checks
+on:
+  pull_request:
+    branches: [staging, master, development]
+
+jobs:
+  Laravel-Composer-Security-Test:
+    name: Laravel Composer Security Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      id: cache-db
+      with:
+        path: ~/.symfony/cache
+        key: db
+    - name: Display Security Vulnerabilities
+      uses: symfonycorp/security-checker-action@v2

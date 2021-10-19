@@ -34,27 +34,27 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'upload evidence']);
         Permission::create(['name' => 'edit evidence']);
         Permission::create(['name' => 'delete evidence']);
-
-        //create roles and assign permissions
-        $regular = Role::create(['name' => 'Regular']);
-        $regular->givePermissionTo('create students');
-        $regular->givePermissionTo('edit students');
-        $regular->givePermissionTo('create cohorts');
-        $regular->givePermissionTo('edit cohorts');
-        $regular->givePermissionTo('create notes');
-        $regular->givePermissionTo('edit notes');
-        $regular->givePermissionTo('upload evidence');
-        $regular->givePermissionTo('edit evidence');
+        Permission::create(['name' => 'view evidence']);
+        Permission::create(['name' => 'view notes']);
+        Permission::create(['name' => 'view students']);
+        Permission::create(['name' => 'view cohorts']);
 
         $admin = Role::create(['name' => 'Super-Admin']);
+        $lecturer = Role::create(['name' => 'Lecturer']);
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'admin1',
-            'email' => 'admin@admin.com',
+        $user1 = \App\Models\User::factory()->create([
+            'name' => 'test administrator',
+            'email' => 'admin@op.ac.nz',
             'password' => Hash::make('password'),
             'is_admin' => 1,
         ]);
-
-        $user->assignRole('Super-Admin');
+        $user2 = \App\Models\User::factory()->create([
+            'name' => 'test lecturer',
+            'email' => 'lecturer@op.ac.nz',
+            'password' => Hash::make('password'),
+            'is_admin' => 0,
+        ]);
+        $user1->assignRole('Super-Admin');
+        $user2->assignRole('Lecturer');
     }
 }

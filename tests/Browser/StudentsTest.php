@@ -10,21 +10,7 @@ use Tests\DuskTestCase;
 
 
 class StudentsTest extends DuskTestCase
-{
-    /*
-    public function createstudent()
-    {        
-        $this->user = Student::create([
-            'first_name' => 'Jesus',
-            'last_name' => 'Christ',
-            'username' => 'usemyname',
-            'email' => 'jdog@hmail.com',
-            'github' => 'jezzy123',
-        ]);
-        
-    }
-    */
-    
+{    
     /* 
     Currently one placeholder test while waiting
     for CRUD features to be added. 
@@ -33,26 +19,60 @@ class StudentsTest extends DuskTestCase
     Will test delete, update, view/read when those features are available
     */
 
-    public function testCreateStudent()
+    public function testMakeStudent()
     {
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
-            $user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => 'password',
-                'is_admin' => 1,
-            ]);
-        }
-        
-        $user = User::where('name', 'admin')->first();
+        // an admin user is created and logged in
+        // the test visits the add-student page and enters data into the fields
+        // the Add/+ button is pressed to submit the data. Success submit is tested
+        // by checking the path and looking for entered data on the page.
+                       
+        $user = User::where('email', 'admin@admin.com')->first();
 
         $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
+            $browser->loginAs($user)                    
                     ->visit('/')
-                    ->assertPathIs('/');                    
+                    ->assertPathIs('/')
+                    ->type('#first_name','John')
+                    ->type('#last_name', 'Doe')
+                    ->type('#id', '666666666')
+                    ->type('#github','JohnD')
+                    //->type('#email','John@gmail.com')                    
+                    ->press('ADD NEW STUDENT')
+                    ->pause(2000)
+                    ->assertTitle('Studio Management')
+                    ->assertSee('Profile')
+                    ->assertSee('John Doe')
+                    ->assertSee('666666666@student.op.ac.nz');
+                    //->assertSee('John@gmail.com')
+                    //->assertSee('JohnD');
         });
     }
 
+    
+    public function testDuplicateEmail()
+    {
+        
+        // Test for bug with non-unique email address e.g use the same username again for a new record
+        // The email address is a combination of the username/id and '@student.op.ac.nz'
+        // This test is expected to fail if checks aren't done on the email address field        
+
+        $this->browse(function ($browser)  
+        {
+            $browser//->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->type('#first_name','David')
+                    ->type('#last_name', 'Doe')
+                    ->type('#id', '666666666')
+                    //->type('#email','John@gmail.com')
+                    //->type('#github','JohnD') - No longer a required field
+                    ->press('ADD NEW STUDENT')
+                    ->assertSee('The username has already been taken.');                    
+        });
+    }
+
+    // Placeholder functions for future tests of student features
+    
     /*
     public function testReadStudent()
     {

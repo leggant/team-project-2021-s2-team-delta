@@ -11,15 +11,17 @@ class StudentCohortSelectInput extends Component
      * @var array
      */
     public $cohorts;
+    public $user;
 
     /**
      * Create a new component instance.
      * @param  array  $cohorts
      * @return void
      */
-    public function __construct($cohorts)
+    public function __construct($cohorts, $user)
     {
         $this->cohorts = $cohorts;
+        $this->user = $user;
     }
 
     /**
