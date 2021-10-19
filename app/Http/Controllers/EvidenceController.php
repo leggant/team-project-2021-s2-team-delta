@@ -79,8 +79,7 @@ class EvidenceController extends Controller
             'originalFileName' => $request->file('filepath')->getClientOriginalName(),
             'url' => Storage::disk('s3')->url($path),
             'student_id' => $request->student_id,
-            'user_id' => Auth::id(),
-            'fileAccessKey' => Crypt::encryptString($request->url)
+            'user_id' => Auth::id()
         ]);
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
