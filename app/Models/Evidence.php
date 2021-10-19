@@ -21,7 +21,6 @@ class Evidence extends Model
         'url',
         'student_id',
         'user_id',
-        'fileAccessKey',
         'updated_at',
         'created_at',
     ];
