@@ -130,7 +130,11 @@ class EvidenceController extends Controller
     public function destroy(Request $request, Evidence $evidence)
     {
         $student = $evidence->student_id;
+        $file = Evidence::find($id);
+
         $evidence->delete();
+        Storage::disk('s3')->delete($path);
+
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 }
