@@ -34,7 +34,6 @@
                                     {{ $file->title }}
                                 </x-jet-button>
                             </a>
-                            @endif
                         </div>
                         <div class="flex gap-4 space-evenly align-content-center">
                             {{-- <form method="post" action="{{ route('evidence.edit', $file->id) }}" class="mx-6"> --}}
