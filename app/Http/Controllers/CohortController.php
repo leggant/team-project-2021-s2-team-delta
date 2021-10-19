@@ -54,8 +54,6 @@ class CohortController extends Controller
         ]);
         $user = auth()->user();
         $cohorts = Cohort::orderBy('created_at', 'desc')->get();
-        $cohorts = Cohort::addSelect();
-        ('created_at', 'desc')->get();
         return redirect()->action([CohortController::class, 'index'], ['cohorts' => $cohorts]);
     }
 
