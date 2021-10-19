@@ -22,7 +22,6 @@
                 @foreach ($uploads as $file)
                     <div class="grid grid-rows-2 mt-3 items-center gap-2">
                         <div class="flex gap-4">
-                            @if ($file->permitted)
                             {{-- <form action="{{ route('evidence.show', $file->id) }}" method="POST">
                                 @csrf
                                 @method('get')
