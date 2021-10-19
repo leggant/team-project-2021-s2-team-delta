@@ -43,21 +43,5 @@ class Evidence extends Model
     {
         return Str::of($this->title)->limit(25, '...');
     }
-
-    /**
-     * shortened button text.
-     *
-     * @return bool
-     */
-     public function getPermittedAttribute()
-    {
-        try {
-            $decrypted = Crypt::decryptString($this->fileAccessKey);
-            return true;
-        } 
-        catch (DecryptException $e) {
-            return false;
-        }
-    }
     protected $appends = ['short_title'];
 }
