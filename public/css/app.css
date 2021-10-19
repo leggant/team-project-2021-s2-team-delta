@@ -1130,6 +1130,15 @@ select {
 .row-start-5 {
 	grid-row-start: 5;
 }
+.row-start-1 {
+	grid-row-start: 1;
+}
+.row-end-3 {
+	grid-row-end: 3;
+}
+.row-end-2 {
+	grid-row-end: 2;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1273,8 +1282,23 @@ select {
 .h-20 {
 	height: 5rem;
 }
+.h-auto {
+	height: auto;
+}
+.h-2 {
+	height: 0.5rem;
+}
+.h-1 {
+	height: 0.25rem;
+}
+.h-0 {
+	height: 0px;
+}
 .min-h-screen {
 	min-height: 100vh;
+}
+.min-h-0 {
+	min-height: 0px;
 }
 .w-5 {
 	width: 1.25rem;
@@ -1342,6 +1366,11 @@ select {
 }
 .min-w-0 {
 	min-width: 0px;
+}
+.min-w-max {
+	min-width: -webkit-max-content;
+	min-width: -moz-max-content;
+	min-width: max-content;
 }
 .max-w-screen-xl {
 	max-width: 1280px;
@@ -1477,6 +1506,9 @@ select {
 .place-content-evenly {
 	place-content: space-evenly;
 }
+.content-start {
+	align-content: flex-start;
+}
 .items-center {
 	align-items: center;
 }
@@ -1568,6 +1600,12 @@ select {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.place-self-auto {
+	place-self: auto;
+}
+.place-self-start {
+	place-self: start;
 }
 .place-self-center {
 	place-self: center;
@@ -1748,6 +1786,9 @@ select {
 }
 .p-6 {
 	padding: 1.5rem;
+}
+.p-4 {
+	padding: 1rem;
 }
 .px-4 {
 	padding-left: 1rem;
