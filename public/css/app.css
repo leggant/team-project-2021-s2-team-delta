@@ -1106,15 +1106,6 @@ select {
 .col-span-1 {
 	grid-column: span 1 / span 1;
 }
-.col-span-5 {
-	grid-column: span 5 / span 5;
-}
-.col-span-4 {
-	grid-column: span 4 / span 4;
-}
-.col-start-1 {
-	grid-column-start: 1;
-}
 .row-span-1 {
 	grid-row: span 1 / span 1;
 }
@@ -1129,15 +1120,6 @@ select {
 }
 .row-start-5 {
 	grid-row-start: 5;
-}
-.row-start-1 {
-	grid-row-start: 1;
-}
-.row-end-3 {
-	grid-row-end: 3;
-}
-.row-end-2 {
-	grid-row-end: 2;
 }
 .mx-auto {
 	margin-left: auto;
@@ -1237,9 +1219,6 @@ select {
 .block {
 	display: block;
 }
-.inline-block {
-	display: inline-block;
-}
 .flex {
 	display: flex;
 }
@@ -1282,23 +1261,8 @@ select {
 .h-20 {
 	height: 5rem;
 }
-.h-auto {
-	height: auto;
-}
-.h-2 {
-	height: 0.5rem;
-}
-.h-1 {
-	height: 0.25rem;
-}
-.h-0 {
-	height: 0px;
-}
 .min-h-screen {
 	min-height: 100vh;
-}
-.min-h-0 {
-	min-height: 0px;
 }
 .w-5 {
 	width: 1.25rem;
@@ -1347,9 +1311,6 @@ select {
 	width: -moz-max-content;
 	width: max-content;
 }
-.w-1\/4 {
-	width: 25%;
-}
 .w-min {
 	width: -webkit-min-content;
 	width: -moz-min-content;
@@ -1358,22 +1319,11 @@ select {
 .w-1\/2 {
 	width: 50%;
 }
-.w-3 {
-	width: 0.75rem;
-}
-.w-1 {
-	width: 0.25rem;
-}
-.w-3\/12 {
+.w-1\/4 {
 	width: 25%;
 }
 .min-w-0 {
 	min-width: 0px;
-}
-.min-w-max {
-	min-width: -webkit-max-content;
-	min-width: -moz-max-content;
-	min-width: max-content;
 }
 .max-w-screen-xl {
 	max-width: 1280px;
@@ -1395,9 +1345,6 @@ select {
 }
 .max-w-6xl {
 	max-width: 72rem;
-}
-.max-w-3xl {
-	max-width: 48rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1473,15 +1420,6 @@ select {
 .grid-flow-row {
 	grid-auto-flow: row;
 }
-.grid-flow-col {
-	grid-auto-flow: column;
-}
-.grid-flow-row-dense {
-	grid-auto-flow: row dense;
-}
-.grid-flow-col-dense {
-	grid-auto-flow: column dense;
-}
 .grid-cols-6 {
 	grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -1493,9 +1431,6 @@ select {
 }
 .grid-cols-4 {
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.grid-cols-3 {
-	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .grid-cols-7 {
 	grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -1514,9 +1449,6 @@ select {
 }
 .place-content-around {
 	place-content: space-around;
-}
-.place-content-evenly {
-	place-content: space-evenly;
 }
 .content-start {
 	align-content: flex-start;
@@ -1566,37 +1498,16 @@ select {
 .gap-8 {
 	gap: 2rem;
 }
-.gap-10 {
-	gap: 2.5rem;
-}
-.gap-y-10 {
-	row-gap: 2.5rem;
-}
-.gap-y-4 {
-	row-gap: 1rem;
-}
-.gap-x-6 {
-	-moz-column-gap: 1.5rem;
-	     column-gap: 1.5rem;
-}
-.gap-y-2 {
-	row-gap: 0.5rem;
+.gap-x-5 {
+	-moz-column-gap: 1.25rem;
+	     column-gap: 1.25rem;
 }
 .gap-x-2 {
 	-moz-column-gap: 0.5rem;
 	     column-gap: 0.5rem;
 }
-.gap-x-4 {
-	-moz-column-gap: 1rem;
-	     column-gap: 1rem;
-}
-.gap-x-10 {
-	-moz-column-gap: 2.5rem;
-	     column-gap: 2.5rem;
-}
-.gap-x-5 {
-	-moz-column-gap: 1.25rem;
-	     column-gap: 1.25rem;
+.gap-y-4 {
+	row-gap: 1rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
@@ -1613,20 +1524,11 @@ select {
 	margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
-.place-self-auto {
-	place-self: auto;
-}
-.place-self-start {
-	place-self: start;
-}
 .place-self-center {
 	place-self: center;
 }
 .self-start {
 	align-self: flex-start;
-}
-.self-end {
-	align-self: flex-end;
 }
 .self-center {
 	align-self: center;
@@ -1799,9 +1701,6 @@ select {
 .p-6 {
 	padding: 1.5rem;
 }
-.p-4 {
-	padding: 1rem;
-}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -1907,9 +1806,6 @@ select {
 .text-right {
 	text-align: right;
 }
-.align-middle {
-	vertical-align: middle;
-}
 .font-sans {
 	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -1977,12 +1873,6 @@ select {
 }
 .leading-relaxed {
 	line-height: 1.625;
-}
-.leading-6 {
-	line-height: 1.5rem;
-}
-.leading-10 {
-	line-height: 2.5rem;
 }
 .tracking-widest {
 	letter-spacing: 0.1em;
