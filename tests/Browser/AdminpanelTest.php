@@ -3,6 +3,8 @@
 namespace Tests\Browser;
 
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +16,9 @@ class AdminpanelTest extends DuskTestCase
     use DatabaseMigrations;
 
     public function testFindAdminPage()
-    {       
+    {
+        Role::create(['name' => 'Super-Admin']);
+
         $user = User::factory()->create([
             'name' => 'name',
             'email' => 'admin@op.ac.nz',
@@ -24,56 +28,14 @@ class AdminpanelTest extends DuskTestCase
             'remember_token' => Str::random(10),
         ]);
 
+        $user->assignRole('Super-Admin');
+
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
                     ->visit('/users')
                     ->pause(2000)
                     ->assertPathIs('/users')                   
-                    ->assertVisible("@dusk-title");                    
+                    ->assertVisible("@admin-panel");                
         });
     }
-
-    public function testManagePapers()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE PAPERS')
-                    ->pause(2000)
-                    ->assertPathIs('/papers');                    
-        });
-    }
-
-    public function testManagePermissions()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE PERMISSIONS')
-                    ->pause(2000)
-                    ->assertPathIs('/permissions');                    
-        });
-    }
-
-    public function testManageRoles()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE ROLES')
-                    ->pause(2000)
-                    ->assertPathIs('/roles');                    
-        });
-    }
-
-
 }

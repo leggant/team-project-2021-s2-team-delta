@@ -29,7 +29,7 @@
                     </x-jet-nav-link>
                     @role('Super-Admin')
                         @if (Auth::check() && Auth::user()->isAdmin())
-                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                            <x-jet-nav-link dusk="admin-panel" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                                 {{ __('User Admin Panel') }}
                             </x-jet-nav-link>
                             <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
