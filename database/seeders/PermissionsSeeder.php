@@ -43,18 +43,25 @@ class PermissionsSeeder extends Seeder
         $lecturer = Role::create(['name' => 'Lecturer']);
 
         $user1 = \App\Models\User::factory()->create([
-            'name' => 'test administrator',
-            'email' => 'admin@op.ac.nz',
-            'password' => Hash::make('password'),
+            'name' => 'Administrator',
+            'email' => 'studio-admin@op.ac.nz',
+            'password' => Hash::make('studio2021'),
             'is_admin' => 1,
         ]);
         $user2 = \App\Models\User::factory()->create([
-            'name' => 'test lecturer',
-            'email' => 'lecturer@op.ac.nz',
-            'password' => Hash::make('password'),
+            'name' => 'Elise Allen',
+            'email' => 'elise.allen@op.ac.nz',
+            'password' => Hash::make('studio2021'),
+            'is_admin' => 0,
+        ]);
+        $user3 = \App\Models\User::factory()->create([
+            'name' => 'Martin Junek',
+            'email' => 'martin.junek@op.ac.nz',
+            'password' => Hash::make('studio2021'),
             'is_admin' => 0,
         ]);
         $user1->assignRole('Super-Admin');
         $user2->assignRole('Lecturer');
+        $user3->assignRole('Lecturer');
     }
 }
