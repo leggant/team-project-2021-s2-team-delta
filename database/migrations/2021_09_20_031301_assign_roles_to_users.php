@@ -18,7 +18,7 @@ class AssignRolesToUsers extends Migration
     {
         $users = User::all();
         foreach($users as $u) {
-            if($u->email == 'admin@admin.com')
+            if($u->email == 'studio-admin@op.ac.nz')
             {
                 $u->assignRole('Super-Admin');
             }
