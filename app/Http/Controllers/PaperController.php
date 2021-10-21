@@ -46,15 +46,19 @@ class PaperController extends Controller
             ['paper_name', 'LIKE', $request->input('paper')],
         ])->get();
 
-        if(count($duplicate) != 0) {
-            return redirect('/papers')->with('duplicate', 'Paper Already Exists');
-        }
-        else {
-            $papers = new Papers;
+        if (count($duplicate) != 0) {
+            return redirect('/papers')->with(
+                'duplicate',
+                'Paper Already Exists'
+            );
+        } else {
+            $papers = new Papers();
             $papers->paper_name = $request->input('paper');
             $papers->save();
-            return redirect('/papers')->with('success', 'Paper Created Successfully');
-
+            return redirect('/papers')->with(
+                'success',
+                'Paper Created Successfully'
+            );
         }
     }
 
@@ -98,14 +102,18 @@ class PaperController extends Controller
             ['paper_name', 'LIKE', $request->input('paper')],
         ])->get();
 
-        if(count($duplicate) != 0) {
-            return redirect('/papers')->with('duplicate', 'Paper Already Exists');
-        }
-        else {
+        if (count($duplicate) != 0) {
+            return redirect('/papers')->with(
+                'duplicate',
+                'Paper Already Exists'
+            );
+        } else {
             $paper->paper_name = $request->input('paper');
             $paper->save();
-            return redirect('/papers')->with('success', 'Paper Updated Successfully');
-
+            return redirect('/papers')->with(
+                'success',
+                'Paper Updated Successfully'
+            );
         }
     }
 
