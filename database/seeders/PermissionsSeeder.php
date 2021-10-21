@@ -46,19 +46,19 @@ class PermissionsSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'studioadmin@op.ac.nz',
             'password' => Hash::make('studio2021'),
-            'is_admin' => 1,
+            'is_admin' => 1
         ]);
         $user2 = \App\Models\User::factory()->create([
             'name' => 'Temp A',
             'email' => 'studio-a@op.ac.nz',
             'password' => Hash::make('studio2021'),
-            'is_admin' => 0,
+            'is_admin' => 0
         ]);
         $user3 = \App\Models\User::factory()->create([
             'name' => 'Temp B',
             'email' => 'studio-b@op.ac.nz',
             'password' => Hash::make('studio2021'),
-            'is_admin' => 0,
+            'is_admin' => 0
         ]);
         $user1->assignRole('Super-Admin');
         $user2->assignRole('Lecturer');
