@@ -9,16 +9,16 @@ use App\Models\User;
 
 class LecturerTest extends DuskTestCase
 {
-    public function testFindAdminPage()
+    public function testFindUsersPage()
     {       
         $user = User::where('is_admin', 1)->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
-                    ->visit('/admin-panel')
+                    ->visit('/users')
                     ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->assertSee('MANAGE USERS');                    
+                    ->assertPathIs('/users')                   
+                    ->assertSee('Current Registered Users');                    
         });
     }
 }

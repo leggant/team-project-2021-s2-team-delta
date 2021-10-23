@@ -35,9 +35,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('papers', PaperController::class)->except(['delete', 'update', 'store']);
         Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
         Route::resource('roles', RoleController::class)->except(['update', 'delete']);
+        /* Deprecated - ... replaced with /users
         Route::get('/admin-panel', function () {
             return view('admin.admin_panel');
         })->name('admin.admin-panel');
+        */
         // Return user to home any time a route is not found
         Route::fallback(function () {
             return redirect('/')->with('status', 'Error, Page Not Found');
