@@ -27,7 +27,11 @@ class StudentController extends Controller
         $students = Student::all();
         $cohorts = Cohort::all();
         $papers = Papers::all();
-        return view('pages.students', ['students'=>$students, 'cohorts' => $cohorts], compact('user', 'papers'));
+        return view(
+            'pages.students',
+            ['students' => $students, 'cohorts' => $cohorts],
+            compact('user', 'papers')
+        );
     }
 
     /**
@@ -49,25 +53,32 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'first_name' => 'required|alpha_dash|max:25|min:3',
-            'last_name' => 'required|alpha_dash|max:25|min:3',
+            'first_name' => 'required|alpha|max:25|min:3',
+            'last_name' => 'required|alpha|max:25|min:3',
             'username' => 'required|alpha_num|unique:student|required|max:10',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
-            'cohort_id' => 'nullable|integer'
+            'cohort_id' => 'nullable|integer',
         ];
         $messages = [
             'first_name.required' => 'Student First name is required',
         ];
-        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('studenterror');
+        $validator = Validator::make(
+            $request->all(),
+            $rules,
+            $messages
+        )->validateWithBag('studenterror');
         $student = Student::create([
-            'first_name' => Str::title($request->first_name),    
-            'last_name' => Str::title($request->last_name),    
-            'email' => $request->username . "@student.op.ac.nz",    
-            'username' => Str::lower($request->username),    
-            'github' => Str::lower($request->github),  
-            'cohort_id' => $request->cohort_id  
+            'first_name' => Str::title($request->first_name),
+            'last_name' => Str::title($request->last_name),
+            'email' => $request->username . '@student.op.ac.nz',
+            'username' => Str::lower($request->username),
+            'github' => Str::lower($request->github),
+            'cohort_id' => $request->cohort_id,
         ]);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student->id]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $student->id]
+        );
     }
 
     /**
@@ -119,24 +130,31 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $rules = [
-            'first_name' => 'alpha_dash|max:25|min:3',
-            'last_name' => 'alpha_dash|max:25|min:3',
+            'first_name' => 'alpha|max:25|min:3',
+            'last_name' => 'alpha|max:25|min:3',
             'username' => 'alpha_num|unique:student|required|max:10',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
-            'cohort_id' => 'nullable|integer'
+            'cohort_id' => 'nullable|integer',
         ];
         $messages = [
-            'first_name.required' => 'Student First name is required',
+            'first_name.alpha' => 'Student First name is required',
         ];
-        $validator = Validator::make($student->all(), $rules, $messages)->validateWithBag('studenterror');
+        $validator = Validator::make(
+            $student->all(),
+            $rules,
+            $messages
+        )->validateWithBag('studenterror');
         $student = Student::create([
-            'first_name' => Str::title($student->first_name),    
-            'last_name' => Str::title($student->last_name),    
-            'email' => $student->username . "@student.op.ac.nz",    
-            'username' => Str::lower($student->username),    
-            'github' => Str::lower($student->github),  
-            'cohort_id' => $student->cohort_id  
+            'first_name' => Str::title($student->first_name),
+            'last_name' => Str::title($student->last_name),
+            'email' => $student->username . '@student.op.ac.nz',
+            'username' => Str::lower($student->username),
+            'github' => Str::lower($student->github),
+            'cohort_id' => $student->cohort_id,
         ]);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student->id]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $student->id]
+        );
     }
 }

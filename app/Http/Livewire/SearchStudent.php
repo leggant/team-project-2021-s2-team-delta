@@ -20,15 +20,24 @@ class SearchStudent extends Component
     // does the initial search
     public function render()
     {
-        $students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query . '%')->get();
+        $students = Student::where(
+            $this->searchFields[$this->searchField],
+            'like',
+            '%' . $this->query . '%'
+        )->get();
         return view('livewire.search-student', [
-            'students' => $students
+            'students' => $students,
         ]);
     }
 
     // updates the search results each time the input filter changes
-    public function hydrate() {
-        $students = Student::where($this->searchFields[$this->searchField], 'like', '%' . $this->query . '%')->get();
+    public function hydrate()
+    {
+        $students = Student::where(
+            $this->searchFields[$this->searchField],
+            'like',
+            '%' . $this->query . '%'
+        )->get();
         return view('livewire.search-student', [
             'students' => $students,
         ]);
