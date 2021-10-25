@@ -129,10 +129,11 @@ class EvidenceController extends Controller
      * @param  \App\Models\Evidence  $evidence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Evidence $evidence)
+    public function destroy($id)
     {
+        $evidence = Evidence::find($id);
         $student = $evidence->student_id;
-        $file = $evidence->originalFileName;
+        $file = $evidence->filepath;
 
         Storage::disk('s3')->delete($file);
         $evidence->delete();
