@@ -9,14 +9,15 @@ use App\Models\User;
 
 class LecturerTest extends DuskTestCase
 {
-
+    /*
     public function setUp(): void
     {
         parent::setUp();
         $this->artisan('migrate:fresh --force');
         $this->artisan('db:seed');
     }
-    
+    */
+
     public function testAdminUsersPage()
     {     
         // Login as admin and set a lecturer to no papers assigned
