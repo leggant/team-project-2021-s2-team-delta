@@ -22,24 +22,24 @@ class LoginTest extends DuskTestCase
         $this->artisan('db:seed');
     }
 
-    // function testFailedAttempts()
-    // {
-    //     $this->browse(function ($browser)
-    //     {
-    //         $browser->visit('/login')
-    //                 ->assertPathIs('/login');
-
-    //                 for ($x = 1; $x <= 6; $x++)
-    //                 {
-    //                     $browser->value('#email', 'admin@admin.com')
-    //                             ->type('@password', 'wrongpassword')
-    //                             ->click('button[type="submit"]')
-    //                             ->pause(2000);
-    //                 }
-    //         $browser->assertSee('TOO MANY REQUESTS')
-    //                 ->pause(60000);
-    //     });
-    // }
+    function testFailedAttempts()
+    {
+        $user = User::where('name', 'Administrator')->get();
+        $this->browse(function ($browser) use ($user)
+        {
+            $browser->visit('/login')
+                    ->assertPathIs('/login');
+                    for ($x = 1; $x <= 6; $x++)
+                    {
+                        $browser->value('#email', 'admin@admin.com')
+                                ->type('#password', 'wrongpassword')
+                                ->click('button[type="submit"]')
+                                ->pause(2000);
+                    }
+            $browser->assertSee('TOO MANY REQUESTS')
+                    ->pause(60000);
+        });
+    }
 
     /*
     Testing the login process by creating an admin user
@@ -49,10 +49,6 @@ class LoginTest extends DuskTestCase
 
     public function testLogin()
     {
-        // WARNING : The password needs(?) to be hashed before the
-        // 'type' command is used into the login screen
-        // the loginAs() command doesn't seem to mind if a user is hashed/encrypted
-
         $user = User::where('name', 'Administrator')->get();
         $this->browse(function ($browser) use ($user){
             $email = $user[0]->email;
