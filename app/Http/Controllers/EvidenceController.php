@@ -54,9 +54,10 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $student = $request->student_id;
-        $path = 'files/'.$student;
-        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. 
+        $file = $request->file('filepath')->getClientOriginalName(); // retrieve the original filename
+        $path = $request->file('filepath')->storeAs('uploads/'.$student, $file, 's3'); // file is stored within a folder of the student id in s3 as its orignal name.
+
+        Storage::disk('s3')->setVisibility($path, 'public');
        
        $rules = [
             'title' => 'required|string|max:50',
@@ -69,11 +70,12 @@ class EvidenceController extends Controller
             'student_id.required' => 'Student Name Must Be Selected'
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->has('description') ? $request->description : null,
-            'filepath' => $request->file('filepath')->store( $path ),
-            'originalFileName' => $request->file('filepath')->getClientOriginalName(),
+            'filepath' => $path, 
+            'originalFileName' => $file,
             'url' => Storage::disk('s3')->url($path),
             'student_id' => $request->student_id,
             'user_id' => Auth::id()
@@ -130,11 +132,11 @@ class EvidenceController extends Controller
     public function destroy(Request $request, Evidence $evidence)
     {
         $student = $evidence->student_id;
-        $file = Evidence::find($id);
+        $file = $evidence->originalFileName;
 
+        Storage::disk('s3')->delete($file);
         $evidence->delete();
-        Storage::disk('s3')->delete($path);
-
+    
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 }
