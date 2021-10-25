@@ -47,16 +47,20 @@ class PermissionController extends Controller
             ['name', 'LIKE', $request->input('perm-name')],
         ])->get();
 
-        if(count($duplicate) != 0) {
-            return redirect('/permissions')->with('duplicate', 'Permission Already Exists');
-        }
-        else {
-            $permission = new Permission;
+        if (count($duplicate) != 0) {
+            return redirect('/permissions')->with(
+                'duplicate',
+                'Permission Already Exists'
+            );
+        } else {
+            $permission = new Permission();
             $permission->name = $request->input('perm-name');
             $permission->guard_name = $request->input('guard-name');
             $permission->save();
-            return redirect('/permissions')->with('success', 'Permission Created Successfully');
-
+            return redirect('/permissions')->with(
+                'success',
+                'Permission Created Successfully'
+            );
         }
     }
 

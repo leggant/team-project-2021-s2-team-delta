@@ -30,12 +30,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'is_admin',
-    ];
+    protected $fillable = ['name', 'email', 'password', 'is_admin'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -63,12 +58,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    protected $appends = ['profile_photo_url'];
 
     protected $attributes = [
-        'is_admin' => 0
+        'is_admin' => 0,
     ];
 
     public function isAdmin()
@@ -78,7 +71,12 @@ class User extends Authenticatable
 
     public function papers()
     {
-        return $this->belongsToMany(Papers::class, 'user_papers', 'user_id', 'paper_id');
+        return $this->belongsToMany(
+            Papers::class,
+            'user_papers',
+            'user_id',
+            'paper_id'
+        );
     }
 
     public function notes()
