@@ -6,60 +6,35 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LogoutTest extends DuskTestCase
 {
-    public function test_logout_setup()
+    public function setUp(): void
     {
-        $user = User::factory()->make([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'password1',
-        ]);
+        parent::setUp();
+        $this->artisan('migrate:fresh --force');
+        $this->artisan('db:seed');
     }
     public function test_logout() 
     {
-        $user = User::where('name', 'admin')->first();
-        $this->browse(function ($browser) {
+        $user = User::where('name', 'Administrator')->get();
+        $this->browse(function ($browser) use ($user) {
+            $email = $user[0]->email;
             $browser
-                ->visit('/')
+                ->visit('/login')
                 ->assertPathIs('/login')
-                ->loginAs($user)
-                ->assertPathIs('/');
+                ->type('#email', $email)
+                ->type('#password', 'studio2021')
+                ->click('#login')
+                ->assertSee('Welcome Administrator')
+                ->screenshot('home')
+                ->pause(3000)
+                ->click('#logout')
+                ->assertPathIs('/login')
+                ->pause(1000)
+                ->back()
+                ->assertPathIs('/login')
+                ->screenshot('logout');
         });
     }
-        // $this->browse(function ($browser) {
-        //     $browser->loginAs(User::find(1))->waitUntilMissing('@loginbtn')->assertSee('Admin');
-        // });
-        // $this->browse(function ($browser) {
-        //     $browser
-        //         ->visit('/')
-        //         ->waitForLocation('/login')
-        //         ->assertPathIs('/login');
-        //     $browser->loginAs($user);
-
-            // $browser->type('email', 'taylor@laravel.com');
-            //     ->waitForTextIn('email', $user->email)
-            //     ->type('password', 'password1')
-            //     ->waitForTextIn('password', 'password1')
-            //     ->press('@loginbtn');
-            // $browser->pause(2000)->assertPathIs('/');
-                // ->click('@logout')
-                // ->waitForLocation('/login')
-                // ->assertPathIs('/login');
-            // $browser->loginAs(USER::find(1))->->visit('/home');
-            // $browser->pause(3000)->assertPathIs('/');
-            // $browser->screenshot('home');
-            // $browser
-            //     ->Press('Log Out')
-            //     ->pause(2000)
-            //     ->assertPathIs('/login');
-            // $browser->back();
-            // $browser->pause(2000)->assertPathIs('/login');
-            // $browser->screenshot(
-            //     'Successfully Logged Out + Still on Login Page'
-            // );
-        //});
-    // }
 }
