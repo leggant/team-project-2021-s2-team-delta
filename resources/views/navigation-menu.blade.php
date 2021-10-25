@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                    <a id="home" href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                     {{-- <a href="{{ route('dashboard') }}">
@@ -18,26 +18,26 @@
                     {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                    <x-jet-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Students') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
+                    <x-jet-nav-link id="evidence" href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
                         {{ __('Uploads') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('notes.index') }}" :active="request()->routeIs('notes.index')">
+                    <x-jet-nav-link id="notes" href="{{ route('notes.index') }}" :active="request()->routeIs('notes.index')">
                         {{ __('Notes') }}
                     </x-jet-nav-link>
                     @role('Super-Admin')
                         @if (Auth::check() && Auth::user()->isAdmin())
-                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                            <x-jet-nav-link id="admin" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                                 {{ __('User Admin Panel') }}
                             </x-jet-nav-link>
-                            <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
+                            <x-jet-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
                                 {{ __('Cohorts') }}
                             </x-jet-nav-link>
                         @endif
                     @endrole
-                    <x-nav-form-button 
+                    <x-nav-form-button id="logout"
                         :active="request()->routeIs('logout')" 
                         action='logout'>{{ __('Log Out') }}
                     </x-nav-form-button>
