@@ -46,7 +46,7 @@ class LoginTest extends DuskTestCase
     button is pressed and the path is checked to ensure login has occurred.
     */
 
-    public function testRegisteredLogin()
+    public function testAdminCanLogin()
     {    
         // WARNING : The password needs(?) to be hashed before the 
         // 'type' command is used into the login screen
@@ -62,22 +62,25 @@ class LoginTest extends DuskTestCase
             ]);
         }
         */
-
-        $this->browse(function ($browser) 
-        {    
-            $user = User::where('is_admin', 1)->first();
+        
+        $user = User::where('is_admin', 1)->first();
             
-            // dd($user);
-
+        // dd($user);
+        $this->browse(function ($browser) use ($user)
+        {
+            $email = $user->email;
             $browser->visit('/login')
                     ->assertPathIs('/login')              
-                    ->value('#email', $user.email)                    
-                    ->type('@password', $user.password)
+                    ->value('#email', $email)                    
+                    ->type('@password', 'studio2021')
                     ->click('button[type="submit"]')
-                    ->assertPathIs('/')                   
+                                       
                     ->visit('/')
-                    ->assertSee('Github');
-
+                    ->assertPathIs('/')
+                    ->assertSee('Welcome Administrator')
+                    ->assertTitle('Studio Management')
+                    ->screenshot('adminloggedintosite')
+                    ;
         });
     }    
 }
