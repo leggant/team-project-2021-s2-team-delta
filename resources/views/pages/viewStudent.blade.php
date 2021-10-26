@@ -2,6 +2,11 @@
     <x-slot name="header">
         <h1 class="text-2xl font-semibold capitalize">{{ $student->name }}</h1>
     </x-slot>
+    <div class="py-6 text-center">
+        <form action="{{ route('home') }}" class="gap-4">
+            <x-jet-button type='submit'>Back</x-jet-button>
+        </form>
+    </div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8 grid grid-cols-2 gap-6">
         <div class="col-span-2">
             <h2 class="text-3xl mb-3">Profile</h2>
