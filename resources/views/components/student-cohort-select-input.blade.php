@@ -7,7 +7,7 @@
         @foreach($user->papers as $up)
             @if($up->pivot->paper_id == $cohort->paper_id)
                 <option  value="{{ $cohort->id }}">{{ $cohort->papers->paper_name }} | Stream {{ $cohort->stream }} |
-                    {{ $cohort->semester }}
+                    {{ $cohort->semester }} | {{ date('Y', strtotime($cohort->year)) }}
                 </option>
             @endif
         @endforeach
