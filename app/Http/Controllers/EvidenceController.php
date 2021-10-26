@@ -76,7 +76,6 @@ class EvidenceController extends Controller
             'description' => $request->has('description') ? $request->description : null,
             'filepath' => $path, 
             'originalFileName' => $file,
-            'url' => Storage::disk('s3')->url($path),
             'student_id' => $request->student_id,
             'user_id' => Auth::id()
         ]);
@@ -95,7 +94,7 @@ class EvidenceController extends Controller
     {
         $evidence = Evidence::find($id);
      
-        return redirect(Storage::disk('s3')->temporaryUrl($evidence->filepath, now()->addMinutes(5),
+        return redirect(Storage::disk('s3')->temporaryUrl($evidence->filepath, now()->addMinutes(2),
         ['ResponseContentDisposition' => 'attachment']));
     }
 
