@@ -7,7 +7,7 @@ $classes = ($active ?? false)
 @endphp
 <form method="POST" action={{ route($action) }} {{ $attributes->merge(['class' => $classes]) }}>
     @csrf
-    <button >
+    <button id="logout">
         {{ $slot }}
     </button>
 </form>

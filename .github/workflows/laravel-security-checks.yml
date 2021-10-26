@@ -2,6 +2,8 @@ name: Laravel Security Checks
 on:
   pull_request:
     branches: [staging, master, development]
+  push:
+    branches: [sprint-*]
 
 jobs:
   Laravel-Composer-Security-Test:

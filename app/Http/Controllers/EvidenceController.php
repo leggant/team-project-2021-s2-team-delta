@@ -62,12 +62,12 @@ class EvidenceController extends Controller
        $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
         ];
         $messages = [
             'title.required' => 'File/Upload Title Field Is Required',
             'title.max' => 'Max Title Length is 50 Chars',
-            'student_id.required' => 'Student Name Must Be Selected'
+            'student_id.required' => 'Student Name Must Be Selected',
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
 
@@ -77,9 +77,12 @@ class EvidenceController extends Controller
             'filepath' => $path, 
             'originalFileName' => $file,
             'student_id' => $request->student_id,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ]);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $student]
+        );
     }
 
     /**

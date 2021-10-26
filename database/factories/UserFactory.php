@@ -6,7 +6,6 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Laravel\Jetstream\Features;
 
 class UserFactory extends Factory
 {
@@ -29,8 +28,8 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'is_admin' => 1,
             'email_verified_at' => now(),
-            'password' => $this->faker->password(),
-            'remember_token' => Str::random(10),
+            'password' => $this->faker->password(6,8),
+            'remember_token' => $this->faker->uuid()
         ];
     }
 

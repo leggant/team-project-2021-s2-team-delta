@@ -46,16 +46,18 @@ class RoleController extends Controller
             'permissions' => 'required|array',
         ])->validate();
         $duplicate = Role::where(['name', $request->input('role-name')])->get();
-        if(count($duplicate) != 0) {
+        if (count($duplicate) != 0) {
             return redirect('/roles')->with('duplicate', 'Role Already Exists');
-        }
-        else {
-            $role = new Role;
+        } else {
+            $role = new Role();
             $role->name = $request->input('role-name');
             $role->guard_name = $request->input('guard-name');
             $role->syncPermissions($request->input('permissions'));
             $role->save();
-            return redirect('/roles')->with('success', 'Role Created Successfully');
+            return redirect('/roles')->with(
+                'success',
+                'Role Created Successfully'
+            );
         }
     }
 
