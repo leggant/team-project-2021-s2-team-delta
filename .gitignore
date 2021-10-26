@@ -13,4 +13,4 @@ npm-debug.log
 yarn-error.log
 /public/uploads/*
 package-lock.json
-/.vs
+.vs/*
