@@ -17,6 +17,7 @@ class LoginTest extends DuskTestCase
     can work correctly
     */
 
+    /*
     function testFailedAttempts()
     {
         $this->browse(function ($browser) 
@@ -37,6 +38,7 @@ class LoginTest extends DuskTestCase
         });          
 
     }
+    */
 
     /*
     Testing the login process by creating an admin user
@@ -44,7 +46,7 @@ class LoginTest extends DuskTestCase
     button is pressed and the path is checked to ensure login has occurred.
     */
 
-    public function testLogin()
+    public function testRegisteredLogin()
     {    
         // WARNING : The password needs(?) to be hashed before the 
         // 'type' command is used into the login screen
@@ -61,35 +63,21 @@ class LoginTest extends DuskTestCase
         }
         */
 
-        // $user = User::where('email', 'admin@admin.com')->first();
-
         $this->browse(function ($browser) 
-        {
+        {    
+            $user = User::where('is_admin', 1)->first();
+            
+            // dd($user);
+
             $browser->visit('/login')
                     ->assertPathIs('/login')              
-                    ->value('#email', 'admin@admin.com')                    
-                    ->type('@password', 'password')
+                    ->value('#email', $user.email)                    
+                    ->type('@password', $user.password)
                     ->click('button[type="submit"]')
                     ->assertPathIs('/')                   
                     ->visit('/')
                     ->assertSee('Github');
-            /*
-            Test if another browser instance is also logged in with the first - should NOT be able to.
-            Only one browser window should be logged in at a time.
-            REMOVED: Simplified log in tests for now
-            */
-            /*
-            $second->visit('/')
-                    ->assertPathIs('/');
-            */
+
         });
-    }
-
-    /*
-    Attempt to replicate an issue where admin user stays logged in if logout button is not pressed
-    (even if browser window is closed and app reloaded)
-    REMOVED: Simplified log in tests for now
-    */
-
-    
+    }    
 }
