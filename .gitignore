@@ -13,3 +13,6 @@ npm-debug.log
 yarn-error.log
 /public/uploads/*
 package-lock.json
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/team-project-2021-s2-team-delta/v16/.suo
