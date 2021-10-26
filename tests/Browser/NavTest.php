@@ -2,43 +2,22 @@
 
 namespace Tests\Browser;
 
-use App\Models\User;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use Laravel\Dusk\Chrome;
+use App\Models\User;
 
 class NavTest extends DuskTestCase
 {       
-    // Old method for user creation used before logins were created in the seeders
-    /*
-    public function createadminuser()
-    {
-        $user = User::where('email', '=', 'admin@admin.com')->first();
-        if ($user === null) {
-            $this->user = User::factory()->create([
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'is_admin' => 1,
-            ]);
-        }
-    }
-    */   
-
     /* 
         Functions to test each link used in the navigation bar of the app
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
-    */   
-    
+    */
     public function testBypassLogin()
     {
-        // Login as an admin user
-
         $user = User::where('is_admin', 1)->first();
-
         $this->browse(function (Browser $browser) use($user)
         {
             // Should only need to loginAs once per test file
@@ -48,42 +27,24 @@ class NavTest extends DuskTestCase
                     ->assertTitle('Studio Management')
                     ;
         });
-        
     }
 
     public function testHomeLink()
     {
-        $this->browse(function (Browser $browser) 
+        $user = User::where('name', 'Administrator')->get();
+        $this->browse(function ($browser) use($user)
         {
+            $email = $user[0]->email;
             $browser
                     ->visit('/')
                     ->assertPathIs('/')
                     ->assertSee('ADD NEW STUDENT')
-                    ->assertTitle('Studio Management')
-                    ;                    
+                    ->assertTitle('Studio Management');                    
         });
     }
-
-    // New Student link removed - its now a component used on the home route / students page
-    /*
-    public function testNewStudentLink()
-    {
-        
-
-        $this->browse(function ($browser) 
-        {
-            $browser//->loginAs($user)
-                    ->visit('/')
-                    ->assertSee('Student Admin');                    
-        });
-    }
-    */
 
     public function testEvidenceLink()
     {
-        // Also known as 'Uploads'
-        
-
         $this->browse(function ($browser) 
         {
             $browser->visit('/evidence')
@@ -108,22 +69,18 @@ class NavTest extends DuskTestCase
 
     public function testCohortsLink()
     {
-        // This link should only be present in the nav for admin users
-
         $this->browse(function ($browser) 
         {
             $browser->visit('/cohorts')
                     ->assertPathIs('/cohorts')
                     ->assertSee('Studio Cohorts')
-                    ->assertTitle('Studio Management')
-                    ;                    
+                    ->assertTitle('Studio Management');                    
         });
     }    
     
     public function testAdminLink()
     {
         // A link that should only be available to admins
-
         $this->browse(function (Browser $browser) 
         {
             $browser->visit('/users')
@@ -146,6 +103,72 @@ class NavTest extends DuskTestCase
                     ->assertTitle('Studio Management')
                     ->assertSee('LOG IN')
                     ;                    
+        });
+    }
+
+    public function testNavLinks()
+    {
+        $user = User::where('name', 'Administrator')->get();
+        $this->browse(function ($browser) use($user)
+        {
+            $email = $user[0]->email;
+            $browser
+                ->visit('/login')
+                ->assertPathIs('/login')
+                ->value('#email', $email)
+                ->type('#password', 'studio2021')
+                ->click('#login')
+                # Home Page
+                ->visit('/')
+                ->pause(2000)
+                ->screenshot('HOMELINK_home')
+                ->assertPathIs('/')
+                ->assertSee('Student Admin')
+                ->pause(2000)
+                # student page
+                ->click('#students')
+                ->pause(1500)
+                // ->assertPathIs('/students')
+                ->assertSee('Welcome Administrator')
+                ->screenshot('STUDENT_page')
+                ->pause(1500)
+                # evidence page
+                ->click('#evidence')
+                ->pause(1500)
+                ->assertPathIs('/evidence')
+                ->screenshot('EVIDENCE_LINK')
+                ->pause(1500)
+                # notes page
+                ->click('#notes')
+                ->pause(1500)
+                ->assertPathIs('/notes')
+                ->screenshot('Notes_page')
+                ->assertSee('SAVE NOTE')
+                ->pause(1500)
+                # cohort page
+                ->click('#cohorts')
+                ->assertPathIs('/cohorts')
+                ->screenshot('Cohorts_page')
+                ->assertSee('Studio Cohorts')
+                ->pause(1500)
+                # admin page
+                ->click('#admin')
+                ->pause(1500)
+                ->assertPathIs('/users')
+                ->screenshot('Admin_page')
+                ->assertSee('Current Registered Users')
+                #home page
+                ->click('#home')
+                ->pause(1500)
+                ->assertPathIs('/')
+                ->screenshot('Home_page')
+                ->pause(1500)
+                #logout
+                ->click('#logout')
+                ->pause(1500)
+                ->assertPathIs('/login')
+                ->assertSee('Password')
+                ->assertSee('Email');
         });
     }
 }
