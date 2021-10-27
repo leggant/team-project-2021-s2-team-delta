@@ -12,16 +12,15 @@
                         class='border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm row-span-1'
                         required aria-multiselectable="false" value="{{ old('student') }}">
                         @foreach ($students as $s)
-                        <option value="{{ $s->id }}" 
-                            class='border-gray-300 focus:border-indigo-300 focus:ring 
-                            focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
-                            {{ $s->first_name }} {{ $s->last_name }}
-                        </option>
-                        {{-- CODE BELOW CAUSED ERRORS --}}
-                            {{-- @foreach($user->papers as $up)
-                                @if($up->pivot->paper_id == $s->cohort->paper_id)
+                            @foreach($user->papers as $up)
+                                @if($up->pivot->paper_id == $s->cohort->papers->id)
+                                    <option value="{{ $s->id }}" 
+                                        class='border-gray-300 focus:border-indigo-300 focus:ring 
+                                        focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
+                                        {{ $s->first_name }} {{ $s->last_name }}
+                                    </option>
                                 @endif
-                            @endforeach --}}
+                            @endforeach
                         @endforeach
                     </select>
                     <x-jet-input type="text" name="title" id="title" value="{{ old('title') }}" required aria-label="Upload Title" aria-placeholder="Enter A Upload Title" placeholder="Enter A Upload Title" class="focus:placeholder-gray-400" ></x-jet-input>
@@ -34,12 +33,12 @@
                     </div>
             </form>
             @if ($errors->evidenceerror->any())
-            <ul>
-                @foreach ($errors->evidenceerror->all() as $error)
-                    <li class="text-red-500 list-none">{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+                <ul>
+                    @foreach ($errors->evidenceerror->all() as $error)
+                        <li class="text-red-500 list-none">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     @else
         <div>

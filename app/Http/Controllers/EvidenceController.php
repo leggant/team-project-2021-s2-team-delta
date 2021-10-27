@@ -27,7 +27,7 @@ class EvidenceController extends Controller
     {
         $uploads = Evidence::all();
         $students = Student::all();
-        $user = Auth::id();
+        $user = auth()->user();
         return view(
             'pages.evidence',
             ['uploads' => $uploads, 'students' => $students],

@@ -10,7 +10,11 @@
                     class="border-gray-300 focus:border-indigo-300 focus:ring 
                     focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-start-1 lg:col-end-2">
                     @foreach ($students as $student)
-                        <option value={{ $student->id }}>{{ $student->first_name }} {{ $student->last_name }}</option>
+                        @foreach($user->papers as $up)
+                            @if($student->cohort->papers->id == $up->pivot->paper_id)
+                                <option value={{ $student->id }}>{{ $student->first_name }} {{ $student->last_name }}</option>
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
                 <x-jet-label for="filelink" class="text-lg lg:col-start-2 lg:col-end-3 lg:row-start-0 lg:row-end-1">Optionally Enter A WebLink</x-jet-label>
