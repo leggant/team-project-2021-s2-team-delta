@@ -10,10 +10,11 @@ use App\Models\User;
 
 class PermissionTest extends DuskTestCase
 {
+    // Test whether an admin user can access the notes and evidence features
 
     public function testAccessNotesView()
     {
-        $user = User::where('email', 'admin@admin.com')->first();
+        $user = User::where('is_admin', 1)->first();
 
         $this->browse(function ($browser) use($user) 
         {
@@ -26,12 +27,9 @@ class PermissionTest extends DuskTestCase
 
     public function testAccessEvidenceView()
     {
-        $user = User::where('email', 'admin@admin.com')->first();
-
-        $this->browse(function ($browser) use($user) 
+        $this->browse(function ($browser) 
         {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
+            $browser->visit('/evidence')
                     ->assertPathIs('/evidence')
                     ->assertSee('UPLOAD FILES');                   
         });

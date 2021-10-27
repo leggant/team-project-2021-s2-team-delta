@@ -10,7 +10,10 @@ use Tests\DuskTestCase;
 
 
 class StudentsTest extends DuskTestCase
-{    
+{  
+    // NOTE : Any student tests will need to added to lecturer or admin access test files
+    // This is because roles and assignments need to be done before student features are usable
+
     /* 
     Currently one placeholder test while waiting
     for CRUD features to be added. 
@@ -19,14 +22,27 @@ class StudentsTest extends DuskTestCase
     Will test delete, update, view/read when those features are available
     */
 
+    public function testStudentPlaceholder()
+    {
+        // Placeholder test used to prevent errors from empty test file
+                       
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)                    
+                    ->visit('/')
+                    ->assertTitle('Studio Management');
+        });
+    }
+
+    /*
     public function testMakeStudent()
     {
-        // an admin user is created and logged in
-        // the test visits the add-student page and enters data into the fields
-        // the Add/+ button is pressed to submit the data. Success submit is tested
+        // an admin user logged in and new student info added to feilds
+        // successful submit is tested
         // by checking the path and looking for entered data on the page.
                        
-        $user = User::where('email', 'admin@admin.com')->first();
+        $user = User::where('is_admin', 1)->first();
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)                    
@@ -58,8 +74,7 @@ class StudentsTest extends DuskTestCase
 
         $this->browse(function ($browser)  
         {
-            $browser//->loginAs($user)
-                    ->visit('/')
+            $browser->visit('/')
                     ->assertPathIs('/')
                     ->type('#first_name','David')
                     ->type('#last_name', 'Doe')
@@ -71,7 +86,7 @@ class StudentsTest extends DuskTestCase
         });
     }
 
-    // Placeholder functions for future tests of student features
+    // Placeholder functions for future tests of student CRUD features
     
     /*
     public function testReadStudent()
