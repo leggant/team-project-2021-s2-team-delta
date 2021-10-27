@@ -8,40 +8,101 @@ use Laravel\Dusk\Chrome;
 use App\Models\User;
 
 class NavTest extends DuskTestCase
-{    
-    /*
+{       
+    /* 
         Functions to test each link used in the navigation bar of the app
         i.e. /, /add-student, /cohort, /evidence, /notes, /login
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */
-    public function setUp(): void
+    public function testBypassLogin()
     {
-        parent::setUp();
-        $this->artisan('migrate:fresh --force');
-        $this->artisan('db:seed');
+        $user = User::where('is_admin', 1)->first();
+        $this->browse(function (Browser $browser) use($user)
+        {
+            // Should only need to loginAs once per test file
+            $browser->loginAs($user) 
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->assertTitle('Studio Management')
+                    ;
+        });
     }
 
-    /* 
-    Methods for testing each link on the navigation bar
-    to ensure the links point to the right places and the pages exist
-    */
-    
-    public function testBypassLogin()
+    public function testHomeLink()
     {
         $user = User::where('name', 'Administrator')->get();
         $this->browse(function ($browser) use($user)
         {
             $email = $user[0]->email;
             $browser
-                ->visit('/login')
-                ->assertPathIs('/login')
-                ->value('#email', $email)
-                ->type('#password', 'studio2021')
-                ->click('#login')
-                ->visit('/')
-                ->assertPathIs('/')
-                ->pause(2000);
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->assertSee('ADD NEW STUDENT')
+                    ->assertTitle('Studio Management');                    
+        });
+    }
+
+    public function testEvidenceLink()
+    {
+        $this->browse(function ($browser) 
+        {
+            $browser->visit('/evidence')
+                    ->assertPathIs('/evidence')
+                    ->assertSee('UPLOAD FILES')
+                    ->assertTitle('Studio Management')
+                    ;                    
+        });
+    }
+
+    public function testNotesLink()
+    {
+        $this->browse(function ($browser) 
+        {
+            $browser->visit('/notes')
+                    ->assertPathIs('/notes')
+                    ->assertSee('SAVE NOTE')
+                    ->assertTitle('Studio Management')
+                    ;                    
+        });
+    }
+
+    public function testCohortsLink()
+    {
+        $this->browse(function ($browser) 
+        {
+            $browser->visit('/cohorts')
+                    ->assertPathIs('/cohorts')
+                    ->assertSee('Studio Cohorts')
+                    ->assertTitle('Studio Management');                    
+        });
+    }    
+    
+    public function testAdminLink()
+    {
+        // A link that should only be available to admins
+        $this->browse(function (Browser $browser) 
+        {
+            $browser->visit('/users')
+                    ->assertPathIs('/users')
+                    ->assertSee('CREATE NEW USER')
+                    ->assertTitle('Studio Management')
+                    ;                    
+        });
+    }    
+
+    public function testLogoutLink()
+    {
+        $this->browse(function ($browser) 
+        {
+            $browser->visit('/')
+                    ->press('Log Out')
+                    ->pause(1500)
+                    ->assertPathIs('/login')
+                    ->assertSee('Password')
+                    ->assertTitle('Studio Management')
+                    ->assertSee('LOG IN')
+                    ;                    
         });
     }
 
