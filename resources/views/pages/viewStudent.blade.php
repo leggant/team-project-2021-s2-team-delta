@@ -29,7 +29,7 @@
                                     {{ $file->title }}
                                 </x-jet-button>
                             </form> --}}
-                            <a href="{{ $file->url }}">
+                            <a href="{{ route('evidence.show', $file->id) }}">
                                 <x-jet-button>
                                     {{ $file->title }}
                                 </x-jet-button>
