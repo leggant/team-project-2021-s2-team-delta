@@ -24,7 +24,7 @@ class CohortFactory extends Factory
         return [
             'id' => 1,
             'paper_id' => 2,
-            'year' => now(),
+            'year' => '2021-01-01',
             'semester' => 'Semester 1',
             'stream' => 'A'            
         ];

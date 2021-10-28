@@ -42,32 +42,27 @@ class EvidenceTest extends DuskTestCase
 
     public function testEvidenceCohortFactory()
     {   
-        $cohort = Cohort::factory()->create([
-            'id' => 2,
-            'paper_id' => 3,
-            'year' => now(),
-            'semester' => 'Semester 2',
-            'stream' => 'J',
-        ]);
 
-        /* Factory NOTES 
+        /* Factory NOTES =
         Replacing default attribs
         ; $user = User::factory()->create([
     'name' => 'Abigail',
         ]);
         */
 
-        /*
-        $this->browse(function ($browser) use($user) 
-        {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertTitle('Studio Management')
-                    ->assertSee('UPLOAD FILES')
-                    ;                                        
-        });
-        */
+        
+        $cohort = Cohort::factory()->create([
+            'id' => 2,
+            'paper_id' => 3,
+            'year' => '2021-01-01',
+            'semester' => 'Semester 2',
+            'stream' => 'J'
+        ]);
+
+        
+        $newstudent = Student::factory()->create();
+            
+        
     }
 
     public function testEvidenceAdminAccess()
