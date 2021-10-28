@@ -18,8 +18,8 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
         $app->Schema::disableForeignKeyConstraints();
-        $app['config']->set('database.default','dusktesting');
-        $app['config']->set('database.connections.dusktesting.database', 'dusktest');
+        // $app['config']->set('database.default','dusktesting');
+        // $app['config']->set('database.connections.dusktesting.database', 'dusktest');
         return $app;
     }
 }
