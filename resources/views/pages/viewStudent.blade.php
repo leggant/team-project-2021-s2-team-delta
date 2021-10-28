@@ -72,7 +72,7 @@
             @endif
         </div>
     </div>
-    <div x-data="{ open: false }">
+    {{-- <div x-data="{ open: false }">
             <button x-on:click="open = ! open">Upload New Evidence</button>
             <div x-show="open">
                 Add new upload form here
@@ -83,5 +83,5 @@
             <div x-show="open">
                 create new note
             </div>
-        </div>
+        </div> --}}
 </x-app-layout>

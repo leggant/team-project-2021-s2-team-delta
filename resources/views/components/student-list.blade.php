@@ -1,9 +1,5 @@
 @can('view students')
-@if ($cohorts->count() > 1)
-<div class="grid w-full 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full md:w-full grid-flow-row justify-items-stretch items-stretch">
-@else
-<div class="grid 2xl:grid-cols-1 xl:grid-cols-1 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full md:w-1/2 grid-flow-row justify-items-stretch items-stretch">
-@endif
+<div class="grid w-full 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full grid-flow-row justify-items-stretch items-stretch">
 @foreach ($cohorts as $cohort)
         @foreach ($user->papers as $up)
             @if ($up->pivot->paper_id == $cohort->paper_id)
@@ -15,7 +11,7 @@
                     <table id="studentTable" class="border-collapse w-full">
                         <thead>
                             <tr>
-                                <th class="py-2 px-2 text-center lg:whitespace-nowrap">Student Name</th>
+                                <th class="py-2 px-2 text-center lg:whitespace-nowrap md:whitespace-nowrap">Student Name</th>
                                 <th class="py-2 px-2 text-center">Email</th>
                                 <th class="py-2 px-2 text-center">Github</th>
                                 <th class="py-2 px-2 text-center"></th>
