@@ -5,9 +5,11 @@ namespace Tests\Browser;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Cohort;
-use Database\Factories\UserFactory;
+use Database\Factories\CohortFactory;
+use Database\Factories\StudentFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Support\Facades\DB;
 
 
 class EvidenceTest extends DuskTestCase
@@ -40,29 +42,36 @@ class EvidenceTest extends DuskTestCase
     }
     */
 
-    public function testEvidenceCohortFactory()
-    {   
-
-        /* Factory NOTES =
-        Replacing default attribs
-        ; $user = User::factory()->create([
-    'name' => 'Abigail',
-        ]);
-        */
-
-        
+    public function testEvidenceCreateUsableStudent()
+    {           
         $cohort = Cohort::factory()->create([
-            'id' => 2,
-            'paper_id' => 3,
+            'id' => 1,
+            'paper_id' => 2,    // Studio 1
             'year' => '2021-01-01',
             'semester' => 'Semester 2',
             'stream' => 'J'
         ]);
+        
+        $newstudent = Student::factory()->create([
+            'id' => 1,
+            'first_name' => 'Jim',
+            'last_name' => 'Smith',
+            'username' => 'UseThisName',
+            'email' => 'johnsmith@gmail.com',
+            'github' => 'johnsgit',
+            'cohort_id' => 1,   // The cohort created above
+            'is_active' => 1
+        ]);
 
-        
-        $newstudent = Student::factory()->create();
-            
-        
+        DB::table('user_papers')->insert(
+            [
+                'id' => 1,
+                'user_id' => 1, // The student/user created above
+                'paper_id' => 2,    // With paper_id matching the one in cohort above
+            ]
+        );
+
+        $this->assertTrue(true);        
     }
 
     public function testEvidenceAdminAccess()

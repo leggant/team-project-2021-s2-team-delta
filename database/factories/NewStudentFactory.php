@@ -23,7 +23,7 @@ class NewStudentFactory extends Factory
     {
         
         return [
-            'student_id' => 1,
+            'id' => 1,
             'first_name' => 'Jim',
             'last_name' => 'Smith',
             'username' => 'UseThisName',
