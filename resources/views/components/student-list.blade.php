@@ -1,7 +1,5 @@
 @can('view students')
-<div class="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 mb-6 
-mx-auto gap-x-6 gap-y-6 sm:w-full md:w-full
-grid-flow-row justify-items-stretch items-stretch">
+<div class="grid w-1/2 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full md:w-full grid-flow-row justify-items-stretch items-stretch">
 @foreach ($cohorts as $cohort)
         @foreach ($user->papers as $up)
             @if ($up->pivot->paper_id == $cohort->paper_id)
@@ -10,11 +8,11 @@ grid-flow-row justify-items-stretch items-stretch">
                         {{ date('Y', strtotime($cohort->year)) }} Stream
                         {{ $cohort->stream }}
                     </h1>
-                    <table id="studentTable" class="border-collapse table-auto ">
+                    <table id="studentTable" class="border-collapse w-full">
                         <thead>
                             <tr>
                                 <th class="py-2 px-2 text-center">Student Name</th>
-                                {{-- <th class="py-2 px-2 text-center">Email</th> --}}
+                                <th class="py-2 px-2 text-center">Email</th>
                                 <th class="py-2 px-2 text-center">Github</th>
                                 <th class="py-2 px-2 text-center"></th>
                             </tr>
@@ -28,11 +26,11 @@ grid-flow-row justify-items-stretch items-stretch">
                                                 href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->name }}
                                             </a>
                                         </td>
-                                        {{-- <td class="border py-2 px-2 text-center">
+                                        <td class="border py-2 px-2 text-center">
                                             <a class="hover:underline"
                                                 href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->username }}@student.op.ac.nz
                                             </a>
-                                        </td> --}}
+                                        </td>
                                         <td class="border py-2 px-2 text-center">
                                         @if ($student->github)
                                             <a class="hover:underline" href="http://github.com/{{ $student->github }}"
@@ -43,7 +41,7 @@ grid-flow-row justify-items-stretch items-stretch">
                                         <td class="border py-2 px-2 text-center">
                                             <form action="{{ route('students.show', $student) }}" method="GET">
                                                 @csrf
-                                                <x-jet-button>Update Student</x-jet-button>
+                                                <x-jet-button>Profile</x-jet-button>
                                             </form>
                                         </td>
                                     </tr>

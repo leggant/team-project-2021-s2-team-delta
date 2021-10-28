@@ -25,18 +25,11 @@
                 <x-jet-label for="semester" class="self-center col-span-1 row-start-3">Semester</x-jet-label>
                 <select name="semester" id="semester"
                     class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm col-span-3">
-                    <option disabled selected>Please choose a semester here...</option>
+                    <option disabled selected>Select Semester</option>
                     <option value="Semester 1">Semester 1</option>
                     <option value="Semester 2">Semester 2</option>
                 </select>
-                <x-jet-label for="stream" class="self-center row-start-4 col-span-1">Stream</x-jet-label>
-                <select name="stream" id="stream"
-                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm col-span-3">
-                    <option disabled selected>Please choose a stream here...</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="J">J</option>
-                </select>
+                @livewire('stream-inputs', ['user' => $user], key($user->id))
                 <x-jet-button class="row-start-5">Create Cohort</x-jet-button>
             </form>
         </div>
