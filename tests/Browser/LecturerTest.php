@@ -2,10 +2,12 @@
 
 namespace Tests\Browser;
 
+use App\Models\User;
+use App\Models\Cohort;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class LecturerTest extends DuskTestCase
 {
@@ -44,14 +46,14 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerLogin()
     {       
-        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin
+        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
 
         $this->browse(function ($browser) use($user) {
             $browser->loginAs($user)
                     ->pause(2000)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertSee('There Are No Papers Currently Assigned To Temp A');
+                    ->assertSee('Welcome Temp A');
         });
     }
     
@@ -78,7 +80,7 @@ class LecturerTest extends DuskTestCase
 
     public function testNewAdminUsersPage()
     {     
-        // Now login as admin and set a paper and cohort to a lecturer
+        // Now login as admin and set a paper (Studio 1) and cohort to a lecturer
 
         $user = User::where('is_admin', 1)->first();
 
@@ -97,18 +99,17 @@ class LecturerTest extends DuskTestCase
                     ->press('SUBMIT')
                     ->pause(1000)
                     ->assertPathIs('/users')
-                    ->screenshot('6-tempApaperselected') // screenshots to confirm correct options are being selected and stored
-                    ;
+                    ->screenshot('6-tempApaperselected'); // screenshots to confirm correct options are being selected and stored                    
         });
     }
 
-    public function testLecturerCreateCohort()
+    public function testAdminCreateCohort()
     {    
         $this->browse(function ($browser) {
             $browser->visit('/cohorts')
                     ->assertPathIs('/cohorts')
                     ->assertTitle('Studio Management')
-                    ->assertSee('No Cohorts Have Been Assigned to Administrator')
+                    ->assertSee('Assigned')
                     ->select('#paper', 2)
                     ->append('#year', '01012021')
                     ->select('#semester', 'Semester 1')
@@ -117,8 +118,7 @@ class LecturerTest extends DuskTestCase
                     ->press('CREATE COHORT')
                     ->assertPathIs('/cohorts')
                     ->screenshot('8-cohortassigned')
-                    ->assertSee('Cohorts Assigned to Administrator')
-            ;
+                    ->assertSee('Cohorts Assigned to Administrator');
         });
     }
 
@@ -141,7 +141,7 @@ class LecturerTest extends DuskTestCase
                     ->pause(2000)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertSee('There Are No Papers Currently Assigned To Temp A');
+                    ->assertTitle('Studio Management');
         });
     }
 
@@ -169,15 +169,24 @@ class LecturerTest extends DuskTestCase
     // Lecturer can add a student with a course created by the admin
 
     public function testLecturerAddStudent()
-    {       
-        $this->browse(function ($browser) {
+    {    
+        $cohortid = DB::table('cohorts')
+            ->where('paper_id', 2)
+            ->where('semester', 'Semester 1')
+            ->where('stream', 'A')
+            ->pluck('id');
+
+        // dd($cohortid[0]);
+
+        $this->browse(function ($browser) use ($cohortid) {
+            $id = $cohortid[0];
             $browser->visit('/')
                     ->assertPathIs('/')
                     ->type('#first_name', 'Some')
                     ->type('#last_name', 'RandomName')
                     ->type('#id', 'Userofname') // Enter a username not greater than 10 chars. long
                     ->type('#github', 'gittyhubber')                    
-                    ->select('#cohort', 1)
+                    ->select('cohort_id', $id)
                     ->screenshot('9-studentoptions')
                     ->press('ADD NEW STUDENT')
                     ->pause(1000)

@@ -1340,11 +1340,11 @@ select {
 .max-w-xl {
 	max-width: 36rem;
 }
-.max-w-4xl {
-	max-width: 56rem;
-}
 .max-w-6xl {
 	max-width: 72rem;
+}
+.max-w-4xl {
+	max-width: 56rem;
 }
 .max-w-screen-lg {
 	max-width: 1024px;
@@ -1641,13 +1641,13 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(243, 244, 246, var(--tw-border-opacity));
 }
-.border-indigo-300 {
-	--tw-border-opacity: 1;
-	border-color: rgba(165, 180, 252, var(--tw-border-opacity));
-}
 .border-gray-400 {
 	--tw-border-opacity: 1;
 	border-color: rgba(156, 163, 175, var(--tw-border-opacity));
+}
+.border-indigo-300 {
+	--tw-border-opacity: 1;
+	border-color: rgba(165, 180, 252, var(--tw-border-opacity));
 }
 .bg-white {
 	--tw-bg-opacity: 1;
@@ -1813,11 +1813,11 @@ select {
 .pb-1 {
 	padding-bottom: 0.25rem;
 }
-.pr-8 {
-	padding-right: 2rem;
-}
 .pt-8 {
 	padding-top: 2rem;
+}
+.pr-8 {
+	padding-right: 2rem;
 }
 .text-left {
 	text-align: left;
@@ -1962,10 +1962,6 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
-.text-indigo-400 {
-	--tw-text-opacity: 1;
-	color: rgba(129, 140, 248, var(--tw-text-opacity));
-}
 .text-gray-200 {
 	--tw-text-opacity: 1;
 	color: rgba(229, 231, 235, var(--tw-text-opacity));
@@ -1973,6 +1969,10 @@ select {
 .text-gray-300 {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
+}
+.text-indigo-400 {
+	--tw-text-opacity: 1;
+	color: rgba(129, 140, 248, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;
@@ -2486,14 +2486,6 @@ select {
 		display: grid;
 	}
 
-	.md\:w-full {
-		width: 100%;
-	}
-
-	.md\:w-1\/2 {
-		width: 50%;
-	}
-
 	.md\:grid-cols-3 {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
@@ -2593,19 +2585,11 @@ select {
 	.xl\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
-
-	.xl\:grid-cols-1 {
-		grid-template-columns: repeat(1, minmax(0, 1fr));
-	}
 }
 @media (min-width: 1536px) {
 
 	.\32xl\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.\32xl\:grid-cols-1 {
-		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
 }
 

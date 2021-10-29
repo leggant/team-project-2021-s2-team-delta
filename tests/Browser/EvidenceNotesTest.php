@@ -12,7 +12,7 @@ use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
 
-class EvidenceTest extends DuskTestCase
+class EvidenceNotesTest extends DuskTestCase
 {
     /*
     The function below creates a cohort (studio 1, 2021-01-01, Semester 2, Stream J),
@@ -22,33 +22,33 @@ class EvidenceTest extends DuskTestCase
     */
     
     public function testEvidenceCreateUsableStudent()
-    {           
+    {
+        DB::table('user_papers')->insert(
+            [
+                'id' => 4,
+                'user_id' => 1, // The id from users table (1 = Admin, 2= Temp A, 3=Temp B)
+                'paper_id' => 2,    // With paper_id matching the one in cohort above
+            ]
+        );
+
         $cohort = Cohort::factory()->create([
-            'id' => 1,
+            'id' => 2,
             'paper_id' => 2,    // Studio 1
             'year' => '2021-01-01',
             'semester' => 'Semester 2',
             'stream' => 'J'
-        ]);
-        
+        ]);        
+
         $newstudent = Student::factory()->create([
-            'id' => 1,
+            'id' => 2,
             'first_name' => 'Jim',
             'last_name' => 'Smith',
             'username' => 'UseThisName',
             'email' => 'johnsmith@gmail.com',
             'github' => 'johnsgit',
-            'cohort_id' => 1,   // The cohort created above
+            'cohort_id' => 2,   // The cohort created above
             'is_active' => 1
         ]);
-
-        DB::table('user_papers')->insert(
-            [
-                'id' => 1,
-                'user_id' => 1, // The student/user created above
-                'paper_id' => 2,    // With paper_id matching the one in cohort above
-            ]
-        );
 
         $this->assertTrue(true);        
     }
@@ -65,5 +65,16 @@ class EvidenceTest extends DuskTestCase
                     ->assertTitle('Studio Management')
                     ->assertSee('UPLOAD FILES');                                        
         });
-    }    
+    }
+    
+    public function testFindNotesPage()
+    {  
+        $this->browse(function ($browser) 
+        {
+            $browser->visit('/notes')
+                    ->pause(2000)
+                    ->assertPathIs('/notes')                   
+                    ->assertSee('SAVE NOTE');                    
+        });
+    }
 }
