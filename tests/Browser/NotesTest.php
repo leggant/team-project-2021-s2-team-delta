@@ -50,7 +50,6 @@ class NotesTest extends DuskTestCase
         });
     }
 
-    /*
     public function testNoteEmpty()
     {       
         $this->browse(function ($browser) 
