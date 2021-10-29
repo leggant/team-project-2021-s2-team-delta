@@ -15,6 +15,7 @@ class NavTest extends DuskTestCase
         Each function visits the page and checks if a test word is present
         NB: Update the chrome-driver used for dusk with 'php artisan dusk:chrome-driver'
     */
+
     public function testBypassLogin()
     {
         $user = User::where('is_admin', 1)->first();
@@ -24,14 +25,14 @@ class NavTest extends DuskTestCase
             $browser->loginAs($user) 
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertTitle('Studio Management')
-                    ;
+                    ->assertTitle('Studio Management');
         });
     }
 
     public function testHomeLink()
     {
         $user = User::where('name', 'Administrator')->get();
+
         $this->browse(function ($browser) use($user)
         {
             $email = $user[0]->email;
@@ -50,8 +51,7 @@ class NavTest extends DuskTestCase
             $browser->visit('/evidence')
                     ->assertPathIs('/evidence')
                     ->assertSee('UPLOAD FILES')
-                    ->assertTitle('Studio Management')
-                    ;                    
+                    ->assertTitle('Studio Management');                   
         });
     }
 
@@ -62,8 +62,7 @@ class NavTest extends DuskTestCase
             $browser->visit('/notes')
                     ->assertPathIs('/notes')
                     ->assertSee('SAVE NOTE')
-                    ->assertTitle('Studio Management')
-                    ;                    
+                    ->assertTitle('Studio Management');                    
         });
     }
 
@@ -86,8 +85,7 @@ class NavTest extends DuskTestCase
             $browser->visit('/users')
                     ->assertPathIs('/users')
                     ->assertSee('CREATE NEW USER')
-                    ->assertTitle('Studio Management')
-                    ;                    
+                    ->assertTitle('Studio Management');                    
         });
     }    
 
@@ -101,11 +99,12 @@ class NavTest extends DuskTestCase
                     ->assertPathIs('/login')
                     ->assertSee('Password')
                     ->assertTitle('Studio Management')
-                    ->assertSee('LOG IN')
-                    ;                    
+                    ->assertSee('LOG IN');                    
         });
     }
 
+    // Coded by Anthony Legg
+    
     public function testNavLinks()
     {
         $user = User::where('name', 'Administrator')->get();

@@ -34,5 +34,4 @@ class PermissionTest extends DuskTestCase
                     ->assertSee('UPLOAD FILES');                   
         });
     }
-
 }

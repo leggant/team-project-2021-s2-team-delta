@@ -47,8 +47,7 @@ class AdminpanelTest extends DuskTestCase
                     ->screenshot('createadmininputs')
                     ->press('SUBMIT')
                     ->assertPathIs('/users')
-                    ->assertTitle('Studio Management')                    
-                    ;                    
+                    ->assertTitle('Studio Management');                    
         });
     }
 
@@ -68,8 +67,7 @@ class AdminpanelTest extends DuskTestCase
                     ->screenshot('updateadminfields')
                     ->press('SUBMIT')
                     ->assertPathIs('/users')
-                    ->assertSee('DEACTIVATE USER')
-                    ;                    
+                    ->assertSee('DEACTIVATE USER');                    
         });
     }
 
@@ -90,70 +88,7 @@ class AdminpanelTest extends DuskTestCase
                     ->screenshot('whatnewadmincansee')
                     ->visit('/users')
                     ->assertSee('Dusk Admin')
-                    ->screenshot('newadminonuserscreen')
-                    ;                    
+                    ->screenshot('newadminonuserscreen');                    
         });
     }
-
-
-    /* Old tests designed for functionality that no-longer exists
-    i.e. links have changed and method for creating, editing users is now different
-
-    public function testManageUsers()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE USERS')
-                    ->pause(2000)
-                    ->assertPathIs('/users')
-                    ->pause(2000);                   
-        });
-    }
-
-    public function testManagePapers()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE PAPERS')
-                    ->pause(2000)
-                    ->assertPathIs('/papers');                    
-        });
-    }
-
-    public function testManagePermissions()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE PERMISSIONS')
-                    ->pause(2000)
-                    ->assertPathIs('/permissions');                    
-        });
-    }
-
-    public function testManageRoles()
-    {    
-        $this->browse(function ($browser) 
-        {
-            $browser
-                    ->visit('/admin-panel')
-                    ->pause(2000)
-                    ->assertPathIs('/admin-panel')                   
-                    ->press('MANAGE ROLES')
-                    ->pause(2000)
-                    ->assertPathIs('/roles');                    
-        });
-    }
-    */
-
 }

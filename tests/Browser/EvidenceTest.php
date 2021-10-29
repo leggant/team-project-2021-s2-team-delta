@@ -15,23 +15,6 @@ use Illuminate\Support\Facades\DB;
 class EvidenceTest extends DuskTestCase
 {
     /*
-    public function testEvidenceMakeStudent()
-    {
-        // Can create a user here but get warning about a risky file containing no tests
-        if (Student::where('email', 'jesus@hmail.com')->first() === null) 
-        {
-            $student = Student::create([                
-                'first_name' => 'Jesus',
-                'last_name' => 'Christ',
-                'username' => 'HolyGhost',
-                'email' => 'jesus@hmail.com',
-                'github' => 'imagithub'
-            ]); 
-        }       
-    }
-    */
-
-    /*
     The function below creates a cohort (studio 1, 2021-01-01, Semester 2, Stream J),
     a Student for that cohort (Jim Smith, UseThisName, johnsmith@gmail.com, johnsgit)
     and assigns Studio 1 to the admin user (studioadmin@op.ac.nz)
@@ -82,30 +65,5 @@ class EvidenceTest extends DuskTestCase
                     ->assertTitle('Studio Management')
                     ->assertSee('UPLOAD FILES');                                        
         });
-    }
-
-    /* 
-    Attempt to upload a file using a student from the dropdown selector
-    on the evidence blade. Chooses the first student in the dropdown (select statement)
-    and attaches a file stored in '/tests/Browser/testupload/'    
-    */ 
-
-    // https://www.codegrepper.com/code-examples/php/laravel+get+root+path
-    
-    /*
-    public function testCreateEvidence()
-    {        
-        $this->browse(function ($browser) 
-        {            
-            $browser->visit('/evidence')
-                    ->select('#student', 1)                    
-                    ->type('#title', 'Some Evidence')
-                    ->type('#description', 'This is a description of the evidence uploaded which has been typed into a textarea box')
-                    ->attach('@image', realpath('.').'/tests/Browser/testupload/test_upload_file.png')
-                    ->click('button[type="submit"]')
-                    ->assertPathIs('/students/*')
-                    ->assertSee('Created:');                               
-        });
-    }  
-    */  
+    }    
 }
