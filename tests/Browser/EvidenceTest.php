@@ -11,7 +11,6 @@ use Tests\DuskTestCase;
 
 class EvidenceTest extends DuskTestCase
 {
-    /* *** NOTE: Evidence Tests (as with notes) will need to be moved in lecturer access test file
     due to the setup requirements needed to add students and then attach 'notes/evidence'.
     /*
 
