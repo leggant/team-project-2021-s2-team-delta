@@ -59,23 +59,20 @@ class NotesTest extends DuskTestCase
                     ->assertPathIs('/notes')
                     ->press('SAVE NOTE')    // Pressing save note button without entering anything in the fields - i.e. an empty note
                     ->assertPathIs('/notes')
-                    ->assertTitle('Studio Management')  // The title of the current page will be 'outside' the normal if an error has occurred
-                    ;              
+                    ->assertTitle('Studio Management');  // The title of the current page will be 'outside' the normal if an error has occurred        
         });
     }
-
-    public function testNoteNoStudent()
-    {       
-        $this->browse(function ($browser) 
-        {
-            $browser->visit('/notes')
-                    ->pause(1500)
-                    ->assertPathIs('/notes')
-                    ->type('notes', 'a note for a student is typed into the notes textarea but a student name has not been selected')
-                    ->press('SAVE NOTE')
-                    ->assertPathIs('/students/*');              
-        });
-    }
-    */
-
+    //user is not logged in before the test is run, there are no records in the database with id of *
+    // public function testNoteNoStudent()
+    // {       
+    //     $this->browse(function ($browser) 
+    //     {
+    //         $browser->visit('/notes')
+    //                 ->pause(1500)
+    //                 ->assertPathIs('/notes')
+    //                 ->type('notes', 'a note for a student is typed into the notes textarea but a student name has not been selected')
+    //                 ->press('SAVE NOTE')
+    //                 ->assertPathIs('/students/*');              
+    //     });
+    // }
 }
