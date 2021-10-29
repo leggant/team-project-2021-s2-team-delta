@@ -9,6 +9,7 @@ use App\Http\Controllers\ {
     PermissionController,
     RoleController,
     PaperController,
+    StudentDisableController,
 }; 
 
 /*
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('papers', PaperController::class)->except(['delete', 'update', 'store']);
         Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
         Route::resource('roles', RoleController::class)->except(['update', 'delete']);
+        Route::post('/student-disable', [StudentDisableController::class, 'disable'])->name('disable');
         Route::get('/admin-panel', function () {
             return view('admin.admin_panel');
         })->name('admin.admin-panel');

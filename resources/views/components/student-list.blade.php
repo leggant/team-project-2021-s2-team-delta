@@ -14,7 +14,8 @@
                     @foreach ($students as $student)
                         @if ($up->pivot->paper_id == $student->cohort->paper_id)
                             <tr>
-                                <td class="border py-2 px-2 text-center"><input type="checkbox" name="student-checkbox" value="{{$student->id}}"></td>
+                            <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}">
+                            </td>
                                 <td class="border py-2 px-2 text-center">
                                     {{$student->name}}
                                 </td>
@@ -35,7 +36,7 @@
                                     {{ $student->cohort->stream }}
                                 </td>
                                 <td class="py-2 px-12 text-center">
-                                    <form action="{{ route('students.show', $student) }}" method="get">
+                                    <form action="{{ route('students.show', $student) }}" method="GET">
                                         @csrf
                                         <x-jet-button type="submit">View Student Records</x-jet-button>
                                     </form>
@@ -44,6 +45,13 @@
                         @endif
                     @endforeach
                 </table>
+                <div class="pt-6 text-center">
+                    <form action="{{route('disable')}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="students_selected[]" value="">
+                        <x-jet-danger-button name="delete" value="Delete" type="submit">Remove Selected</x-jet-danger-button>
+                    </form>
+                </div>
             </details>
         </div>
     @endforeach
