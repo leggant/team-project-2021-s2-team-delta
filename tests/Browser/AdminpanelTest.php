@@ -95,7 +95,6 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
-
     /* Old tests designed for functionality that no-longer exists
     i.e. links have changed and method for creating, editing users is now different
 
