@@ -10,11 +10,10 @@ use Tests\DuskTestCase;
 
 class NotesTest extends DuskTestCase
 {
+    /*
     public function NotesMakeStudent()
     {
-        // Can create a user here but get warning about a risky file containing no tests
-        // This method won't be called cos it doesn't include the word test in it's name
-
+        
         if (Student::where('email', 'jesus@hmail.com')->first() === null) 
         {
             $student = Student::create([                
@@ -26,15 +25,45 @@ class NotesTest extends DuskTestCase
             ]); 
         }       
     }
-
-    /* 
-    Currently commented out/excluded due these not working with the current flow of the site
-    i.e. these tests would be more appropriate for inclusion during lecturer access testing
-    due partly to the need for admin to assign papers, cohort creation, then student creation before
-    note tests can occur
     */
 
-    // This simple test left in to prevent 'no assertions' error happening
+    /*
+    Similar to the function in EvidenceTest
+    Used to create a cohort, student, and assign a paper to admin
+    to be used for notes tests    
+    */
+
+    public function testNotesCreateUsableStudent()
+    {           
+        $cohort = Cohort::factory()->create([
+            'id' => 2,
+            'paper_id' => 3,    // Studio 2
+            'year' => '2021-01-01',
+            'semester' => 'Semester 1',
+            'stream' => 'A'
+        ]);
+        
+        $newstudent = Student::factory()->create([
+            'id' => 2,
+            'first_name' => 'Dave',
+            'last_name' => 'Jones',
+            'username' => 'nameymcname',
+            'email' => 'djones@yahoo.com',
+            'github' => 'jonesydgit',
+            'cohort_id' => 2,   // The cohort created above
+            'is_active' => 1
+        ]);
+
+        DB::table('user_papers')->insert(
+            [
+                'id' => 2,
+                'user_id' => 2, // The student/user created above
+                'paper_id' => 3,    // With paper_id matching the one in cohort above
+            ]
+        );
+
+        $this->assertTrue(true);        
+    }
 
     public function testFindNotesPage()
     {       

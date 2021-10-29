@@ -9,15 +9,6 @@ use App\Models\User;
 
 class LecturerTest extends DuskTestCase
 {
-    /*
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('migrate:fresh --force');
-        $this->artisan('db:seed');
-    }
-    */
-
     public function testAdminUsersPage()
     {     
         // Login as admin and set a lecturer to no papers assigned
@@ -39,8 +30,7 @@ class LecturerTest extends DuskTestCase
                     ->press('SUBMIT')
                     ->pause(1000)
                     ->assertPathIs('/users')
-                    ->screenshot('3-tempAnoneselected')
-                    ;
+                    ->screenshot('3-tempAnoneselected');
         });
     }
 
@@ -64,9 +54,9 @@ class LecturerTest extends DuskTestCase
                     ->assertSee('There Are No Papers Currently Assigned To Temp A');
         });
     }
-
-    // You do not have access to this page
+    
     // Next two functions test that a lecturer with no papers cannot access evidence or notes
+    // You do not have access to this page
 
     public function testLecturerUploads()
     {  
@@ -155,7 +145,6 @@ class LecturerTest extends DuskTestCase
         });
     }
 
-
     // Expect different results now that a paper is assigned and a cohort created by admin
     // The lecturer should now have access to these forms
 
@@ -194,8 +183,7 @@ class LecturerTest extends DuskTestCase
                     ->pause(1000)
                     ->assertPathIs('/students/*')
                     ->screenshot('10-fakestudentprofile')
-                    ->assertSee('Userofname@student.op.ac.nz')
-                    ;
+                    ->assertSee('Userofname@student.op.ac.nz');
         });
     }
 
@@ -206,10 +194,7 @@ class LecturerTest extends DuskTestCase
                     ->assertPathIs('/')
                     ->assertTitle('Studio Management')
                     ->assertSee('Studio 1')
-                    ->seeLink('Some RandomName')
-                    ;
+                    ->seeLink('Some RandomName');
         });
     }
-
-
 }

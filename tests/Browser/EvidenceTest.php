@@ -14,17 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class EvidenceTest extends DuskTestCase
 {
-    /* *** NOTE: Evidence Tests (as with notes) will need to be moved in lecturer access test file
-    due to the setup requirements needed to add students and then attach 'notes/evidence'.
-    /*
-
-    /*
-    Method to create a new student needed to test evidence uploads
-    Used to add the student directly to the database rather than
-    via the students page
-    */
-
-
     /*
     public function testEvidenceMakeStudent()
     {
@@ -42,6 +31,13 @@ class EvidenceTest extends DuskTestCase
     }
     */
 
+    /*
+    The function below creates a cohort (studio 1, 2021-01-01, Semester 2, Stream J),
+    a Student for that cohort (Jim Smith, UseThisName, johnsmith@gmail.com, johnsgit)
+    and assigns Studio 1 to the admin user (studioadmin@op.ac.nz)
+    You can now use the student in evidence tests
+    */
+    
     public function testEvidenceCreateUsableStudent()
     {           
         $cohort = Cohort::factory()->create([
@@ -84,8 +80,7 @@ class EvidenceTest extends DuskTestCase
                     ->visit('/evidence')
                     ->assertPathIs('/evidence')
                     ->assertTitle('Studio Management')
-                    ->assertSee('UPLOAD FILES')
-                    ;                                        
+                    ->assertSee('UPLOAD FILES');                                        
         });
     }
 
