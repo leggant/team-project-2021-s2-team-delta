@@ -27,7 +27,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');
     //     });
     // }
-
+        // USER IS NEVER LOGGED IN SO THIS TEST FAILS 
     // public function testHomeLink()
     // {
     //     $user = User::where('name', 'Administrator')->get();
@@ -41,7 +41,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');                    
     //     });
     // }
-
+    // USER IS NEVER LOGGED IN SO THIS TEST FAILS 
     // public function testEvidenceLink()
     // {
     //     $this->browse(function ($browser) 
@@ -52,7 +52,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');                    
     //     });
     // }
-
+    // USER IS NEVER LOGGED IN SO THIS TEST FAILS 
     // public function testNotesLink()
     // {
     //     $this->browse(function ($browser) 
@@ -63,7 +63,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');                    
     //     });
     // }
-
+    // USER IS NEVER LOGGED IN SO THIS TEST FAILS 
     // public function testCohortsLink()
     // {
     //     $this->browse(function ($browser) 
@@ -74,7 +74,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');                    
     //     });
     // }    
-    
+    // USER IS NEVER LOGGED IN SO THIS TEST FAILS 
     // public function testAdminLink()
     // {
     //     // A link that should only be available to admins
@@ -86,7 +86,7 @@ class NavTest extends DuskTestCase
     //                 ->assertTitle('Studio Management');                    
     //     });
     // }    
-
+    // USER IS NEVER LOGGED IN SO THIS TEST FAILS    
     // public function testLogoutLink()
     // {
     //     $this->browse(function ($browser) 

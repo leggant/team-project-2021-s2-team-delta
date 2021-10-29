@@ -2,11 +2,9 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
-
 
 class PermissionTest extends DuskTestCase
 {
@@ -15,7 +13,6 @@ class PermissionTest extends DuskTestCase
     public function testAccessNotesView()
     {
         $user = User::where('is_admin', 1)->first();
-
         $this->browse(function ($browser) use($user) 
         {
             $browser->loginAs($user)
@@ -34,5 +31,4 @@ class PermissionTest extends DuskTestCase
                     ->assertSee('UPLOAD FILES');                   
         });
     }
-
 }
