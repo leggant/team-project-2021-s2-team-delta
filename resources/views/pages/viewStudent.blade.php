@@ -85,6 +85,12 @@
             @endif
         </div>
     </div>
+
+    {{-- Allow some student fields to be altered and submitted --}}
+    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-rows-1 gap-4 mt-8 grid-flow-row">
+        <x-update-student-form :student="$student"/>
+    </div>
+
     {{-- <div x-data="{ open: false }">
             <button x-on:click="open = ! open">Upload New Evidence</button>
             <div x-show="open">
