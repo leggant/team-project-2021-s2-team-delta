@@ -15,20 +15,25 @@
                     {{ Str::title($user->name) }}
                 </h2>
             @endif
-            @foreach ($cohorts as $cohort)
-                @if (count($students) == 0)
-                    <h2 class="text-center text-3xl">
-                        There Are No Students Currently Assigned To {{ Str::title($user->name) }}
-                    </h2>
-                @endif
-                @once
-                    @if ($cohort->students == null && $paper->id != 1 || $cohorts->count() <= 0)
-                        <h2 class="text-center text-3xl">
-                            {{$paper->paper_name}} Has Been Assigned To {{ Str::title($user->name) }} But Has No Students Currently 
-                        </h2>
-                    @endif
-                @endonce
-            @endforeach
+            @if (count($students) == 0)
+                <h2 class="text-center text-3xl">
+                    There Are No Students Currently Assigned To {{ Str::title($user->name) }}
+                </h2>
+            @endif
+        @endforeach
+        @foreach ($cohorts as $cohort)
+        @once    
+        @if (!$cohort)
+            <h2 class="text-center text-3xl">
+                There Are No Cohorts Set Up To Assign Students To.
+            </h2>
+        @endif
+        @if (!$cohort->students)
+        <h2 class="text-center text-3xl">
+            {{ Str::title($user->name) }} Has Papers Assigned, But No Intake To Add Students To.
+        </h2>
+        @endif
+        @endonce
         @endforeach
     </div>
 </x-app-layout>
