@@ -87,8 +87,12 @@
     </div>
 
     {{-- Allow some student fields to be altered and submitted --}}
-    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-rows-1 gap-4 mt-8 grid-flow-row">
-        <x-update-student-form :student="$student"/>
+    <br><br>
+    <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-3/4 grid mb-6">
+    <h2 class="text-3xl mb-3">Update Student Information</h2>
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-rows-1 gap-4 mt-8 grid-flow-row">
+            <x-update-student-form :student="$student"/>
+        </div>
     </div>
 
     {{-- <div x-data="{ open: false }">

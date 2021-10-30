@@ -128,9 +128,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($id);
-        //dd('UPDATE', $request, $student->id, $student->first_name);
-
         $user = auth()->user();
 
         $rules = [
@@ -157,6 +154,7 @@ class StudentController extends Controller
         $upstudent->first_name = $request->first_name;
         $upstudent->last_name = $request->last_name;
         $upstudent->username = Str::lower($request->username);
+        $upstudent->email = $request->username . '@student.op.ac.nz';
         $upstudent->github = Str::lower($request->github);
         $upstudent->save();        
 
