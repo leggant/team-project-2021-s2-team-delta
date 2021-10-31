@@ -17,6 +17,7 @@
                 <x-jet-input type="url" name="filelink" id="filelink" placeholder="Enter File URL" aria-label="Enter File URL" aria-placeholder="Enter File URL" class="focus:placeholder-gray-400 lg:col-start-2 lg:col-end-3" value="{{ old('filelink') }}"></x-jet-input>
                 <textarea rows="5" name="notes" required placeholder="Enter A Note...."
                     class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-span-2"></textarea>
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                 <x-jet-button>Save Note</x-jet-button>
             </form>
     @else

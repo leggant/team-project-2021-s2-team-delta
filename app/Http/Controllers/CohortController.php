@@ -24,16 +24,6 @@ class CohortController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -41,68 +31,29 @@ class CohortController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'paper' => 'required',
-            'year' => 'required',
-            'semester' => 'required',
-            'stream' => 'required',
-        ])->validate();
-        $cohort = Cohort::create([
-            'paper_id' => $request->paper,
-            'year' => $request->year,
-            'semester' => $request->semester,
-            'stream' => $request->stream,
-        ]);
-        $user = auth()->user();
-        $cohorts = Cohort::orderBy('paper_id', 'desc')->get();
-        return redirect()->action(
-            [CohortController::class, 'index'],
-            ['cohorts' => $cohorts]
-        );
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cohort $cohort)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cohort $cohort)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cohort $cohort)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cohort $cohort)
-    {
-        //
+        $current = Cohort::where('year', $request->year)
+            ->where('semester', $request->semester)
+            ->where('stream', $request->stream)
+            ->get();
+        if ($current->isNotEmpty()) {
+            $cohorts = Cohort::orderBy('paper_id', 'desc')->get();
+            return redirect()->action([CohortController::class, 'index'], 
+            ['cohorts' => $cohorts]);
+        } else {
+            Validator::make($request->all(), [
+                'paper' => 'required',
+                'year' => 'required',
+                'semester' => 'required',
+                'stream' => 'required',
+            ])->validate();
+            $cohort = Cohort::create([
+                'paper_id' => $request->paper,
+                'year' => $request->year,
+                'semester' => $request->semester,
+                'stream' => $request->stream,
+            ]);
+            $cohorts = Cohort::orderBy('paper_id', 'desc')->get();
+            return redirect()->action([CohortController::class, 'index'], ['cohorts' => $cohorts]);
+        }
     }
 }
