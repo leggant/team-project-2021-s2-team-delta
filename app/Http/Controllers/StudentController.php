@@ -24,7 +24,7 @@ class StudentController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $students = Student::all();
+        $students = Student::where('cohort_id', '!=', null)->get();
         $cohorts = Cohort::all();
         $papers = Papers::all();
         return view(
