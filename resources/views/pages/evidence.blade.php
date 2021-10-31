@@ -3,7 +3,8 @@
         <x-slot name="header">
             <h1 class="font-semibold">Student Evidence Upload</h1>
         </x-slot>
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-8 xs:mx-6">
+        <div class="max-w-7xl mx-auto sm:px-6 mt-8 xs:mx-6 grid grid-cols-2 gap-x-6">
+            <div>
             <form action="{{ route('evidence.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="bg-white overflow-hidden shadow rounded-lg grid md:grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 py-4 px-4 drop-shadow-2xl auto-cols-auto">
@@ -34,7 +35,27 @@
                     <li class="text-red-500 list-none">{{ $error }}</li>
                 @endforeach
             </ul>
-        @endif
+            @endif
+            </div>
+                <form action="{{ route('notes.store') }}" method="post">
+                @csrf
+                <div class="bg-white overflow-hidden shadow rounded-lg grid md:grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 py-4 px-4 drop-shadow-2xl auto-cols-auto">
+                <x-jet-label for="student" class="text-lg lg:col-start-1 lg:col-end-2">Select Student</x-jet-label>
+                <select id="student" name="student_id" required
+                    class="border-gray-300 focus:border-indigo-300 focus:ring 
+                    focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-start-1 lg:col-end-2">
+                    @foreach ($students as $student)
+                        <option value={{ $student->id }}>{{ $student->first_name }} {{ $student->last_name }}</option>
+                    @endforeach
+                </select>
+                <x-jet-label for="filelink" class="text-lg lg:col-start-2 lg:col-end-3 lg:row-start-0 lg:row-end-1">Optionally Enter A WebLink</x-jet-label>
+                <x-jet-input type="url" name="filelink" id="filelink" placeholder="Enter File URL" aria-label="Enter File URL" aria-placeholder="Enter File URL" class="focus:placeholder-gray-400 lg:col-start-2 lg:col-end-3" value="{{ old('filelink') }}"></x-jet-input>
+                <textarea rows="5" name="notes" required placeholder="Enter A Note...."
+                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-span-2"></textarea>
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                <x-jet-button>Save Note</x-jet-button>
+                </div>
+                </form>
         </div>
     @else
         <div>

@@ -6,7 +6,7 @@
             <form action="{{ route('notes.store') }}" method="post" class="w-max lg:w-1/2 lg:grid-cols-2 h-max mx-auto grid gap-3 grid-flow-row mt-8">
                 @csrf
                 <x-jet-label for="student" class="text-lg lg:col-start-1 lg:col-end-2">Select Student</x-jet-label>
-                <select id="student" name="student" required
+                <select id="student" name="student_id" required
                     class="border-gray-300 focus:border-indigo-300 focus:ring 
                     focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-start-1 lg:col-end-2">
                     @foreach ($students as $student)
