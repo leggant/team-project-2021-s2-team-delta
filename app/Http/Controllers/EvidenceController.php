@@ -54,31 +54,35 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $student = $request->student_id;
-        $path = 'files/'.$student;
-        $path = $request->file('filepath')->store('uploads/'.$student, 's3'); // file is stored within a folder of the student id in s3. 
-        Storage::disk('s3')->setVisibility($path, 'public'); //all files in the bucket aren't public, only for this request they are temporarily set. 
+        $file = $request->file('filepath')->getClientOriginalName(); // retrieve the original filename
+        $path = $request->file('filepath')->storeAs('uploads/'.$student, $file, 's3'); // file is stored within a folder of the student id in s3 as its orignal name.
+
+        Storage::disk('s3')->setVisibility($path, 'private');
        
        $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
         ];
         $messages = [
             'title.required' => 'File/Upload Title Field Is Required',
             'title.max' => 'Max Title Length is 50 Chars',
-            'student_id.required' => 'Student Name Must Be Selected'
+            'student_id.required' => 'Student Name Must Be Selected',
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+
         $evidence = Evidence::create([
             'title' => $request->title,
             'description' => $request->has('description') ? $request->description : null,
-            'filepath' => $request->file('filepath')->store( $path ),
-            'originalFileName' => $request->file('filepath')->getClientOriginalName(),
-            'url' => Storage::disk('s3')->url($path),
+            'filepath' => $path, 
+            'originalFileName' => $file,
             'student_id' => $request->student_id,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ]);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $student]
+        );
     }
 
     /**
@@ -91,11 +95,10 @@ class EvidenceController extends Controller
      */
     public function show($id, Request $request)
     {
-        $file = Evidence::find($id);
-        // somehow need to access the download from amazon s3?
-        $url = $file->url;
-        $student = Student::find($file->student_id);
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
+        $evidence = Evidence::find($id);
+     
+        return redirect(Storage::disk('s3')->temporaryUrl($evidence->filepath, now()->addMinutes(2),
+        ['ResponseContentDisposition' => 'attachment']));
     }
 
     /**
@@ -108,7 +111,7 @@ class EvidenceController extends Controller
     {
         //
     }
-
+ 
     /**
      * Update the specified resource in storage.
      *
@@ -127,10 +130,15 @@ class EvidenceController extends Controller
      * @param  \App\Models\Evidence  $evidence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Evidence $evidence)
+    public function destroy($id)
     {
+        $evidence = Evidence::find($id);
         $student = $evidence->student_id;
+        $file = $evidence->filepath;
+
+        Storage::disk('s3')->delete($file);
         $evidence->delete();
+    
         return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
     }
 }

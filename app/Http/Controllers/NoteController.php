@@ -42,13 +42,14 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $student = Student::where('id', $request->student_id)->first();
-        Note::create(
-            [
-                'student_id' => $request->student,
-                'notes' => $request->notes,
-            ]
+        Note::create([
+            'student_id' => $request->student,
+            'notes' => $request->notes,
+        ]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $request->student]
         );
-        return redirect()->action([StudentController::class, 'show'], ['student' => $request->student]);
     }
 
     /**
@@ -59,7 +60,6 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-
     }
 
     /**
@@ -82,7 +82,6 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-
     }
 
     /**
@@ -95,6 +94,9 @@ class NoteController extends Controller
     {
         $student = $note->student_id;
         $note->delete();
-        return redirect()->action([StudentController::class, 'show'], ['student' => $student]);
+        return redirect()->action(
+            [StudentController::class, 'show'],
+            ['student' => $student]
+        );
     }
 }
