@@ -7,7 +7,6 @@ use App\Models\Papers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Rules\UniqueCohort;
 
 class CohortController extends Controller
 {
