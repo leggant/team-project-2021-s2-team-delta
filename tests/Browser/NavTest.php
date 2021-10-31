@@ -134,12 +134,14 @@ class NavTest extends DuskTestCase
                 ->screenshot('EVIDENCE_LINK')
                 ->pause(1500)
                 # notes page
+                /*
                 ->click('#notes')
                 ->pause(1500)
                 ->assertPathIs('/notes')
                 ->screenshot('Notes_page')
                 ->assertSee('SAVE NOTE')
                 ->pause(1500)
+                */
                 # cohort page
                 ->click('#cohorts')
                 ->assertPathIs('/cohorts')
