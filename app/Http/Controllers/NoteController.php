@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\StudentController;
 
 class NoteController extends Controller
@@ -43,6 +42,7 @@ class NoteController extends Controller
     {
         $student = Student::where('id', $request->student_id)->first();
         Note::create([
+            'user_id' => $request->user_id,
             'student_id' => $request->student,
             'notes' => $request->notes,
         ]);
