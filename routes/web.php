@@ -36,9 +36,6 @@ Route::group(['middleware' => 'auth'], function(){
         });
     });
 });
-// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-//     return view('pages.students');
-// })->name('home');
 
 // Dashboard route needs to be kept so this can be re-deployed later.
 //  Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {

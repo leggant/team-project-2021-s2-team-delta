@@ -24,7 +24,6 @@ class LoginTest extends DuskTestCase
                     ->value('#email', $email)                    
                     ->type('@password', 'studio2021')
                     ->click('button[type="submit"]')
-                                       
                     ->visit('/')
                     ->assertPathIs('/')
                     ->assertSee('Welcome Administrator')
