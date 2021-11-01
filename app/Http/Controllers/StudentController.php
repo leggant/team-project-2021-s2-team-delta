@@ -57,7 +57,7 @@ class StudentController extends Controller
             'last_name' => 'required|alpha|max:25|min:3',
             'username' => 'required|alpha_num|unique:student|required|max:10',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
-            'cohort_id' => 'nullable|integer',
+            'cohort_id' => 'required|integer',
         ];
         $messages = [
             'first_name.required' => 'Student First name is required',
