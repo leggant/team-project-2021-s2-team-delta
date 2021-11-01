@@ -9,19 +9,19 @@ use Tests\DuskTestCase;
 
 class AdminpanelTest extends DuskTestCase
 {
-    public function testFindAdminPage()
-    {
-        $user = User::where('is_admin', 1)->first();
+    // public function testFindAdminPage()
+    // {
+    //     $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use ($user) {
-            $browser
-                ->loginAs($user)
-                ->visit('/users')
-                ->pause(2000)
-                ->assertPathIs('/users')
-                ->assertSee('Current Registered Users');
-        });
-    }
+    //     $this->browse(function ($browser) use ($user) {
+    //         $browser
+    //             ->loginAs($user)
+    //             ->visit('/users')
+    //             ->pause(2000)
+    //             ->assertPathIs('/users')
+    //             ->assertSee('Current Registered Users');
+    //     });
+    // }
 
     // Method to test user creation for admin
     // involves navigation to pages and inputting into several fields

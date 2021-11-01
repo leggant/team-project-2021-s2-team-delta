@@ -21,17 +21,17 @@ class StudentsTest extends DuskTestCase
     Will test delete, update, view/read when those features are available
     */
 
-    public function testStudentPlaceholder()
-    {
-        // Placeholder test used to prevent errors from empty test file
+    // public function testStudentPlaceholder()
+    // {
+    //     // Placeholder test used to prevent errors from empty test file
 
-        $user = User::where('is_admin', 1)->first();
+    //     $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use ($user) {
-            $browser
-                ->loginAs($user)
-                ->visit('/')
-                ->assertTitle('Studio Management');
-        });
-    }    
+    //     $this->browse(function ($browser) use ($user) {
+    //         $browser
+    //             ->loginAs($user)
+    //             ->visit('/')
+    //             ->assertTitle('Studio Management');
+    //     });
+    // }    
 }
