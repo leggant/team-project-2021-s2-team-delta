@@ -129,7 +129,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $user = auth()->user();
-
+$upstudent = Student::find($id);
         // 'username' => 'required|alpha_num|unique:student|required|max:10',
         $rules = [
             'first_name' => 'alpha|max:25|min:3',
