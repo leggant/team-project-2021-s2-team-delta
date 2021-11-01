@@ -17,11 +17,6 @@
                             focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
                             {{ $s->first_name }} {{ $s->last_name }}
                         </option>
-                        {{-- CODE BELOW CAUSED ERRORS --}}
-                            {{-- @foreach($user->papers as $up)
-                                @if($up->pivot->paper_id == $s->cohort->paper_id)
-                                @endif
-                            @endforeach --}}
                         @endforeach
                     </select>
                     <x-jet-input type="text" name="title" id="title" dusk="title" value="{{ old('title') }}" required aria-label="Upload Title" aria-placeholder="Enter A Upload Title" placeholder="Enter A Upload Title" class="focus:placeholder-gray-400" ></x-jet-input>
