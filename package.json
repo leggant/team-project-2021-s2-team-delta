@@ -25,14 +25,14 @@
         "output": "CHANGELOG.md",
         "unreleased": true,
         "commitLimit": true,
-        "releaseSummary":true
+        "releaseSummary": true
     },
     "auto-changelog": {
         "template": "commitlog-template.hbs",
         "output": "COMMITLOG.md",
         "unreleased": true,
         "commitLimit": false,
-        "releaseSummary":true,
+        "releaseSummary": true,
         "hideCredit": false
     },
     "devDependencies": {
