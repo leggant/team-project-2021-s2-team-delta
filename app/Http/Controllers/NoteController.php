@@ -41,8 +41,6 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $student = $request->student_id;
-        //dd($student);
-        //$student = Student::where('id', $request->student_id)->first();
         Note::create([
             'user_id' => $request->user_id,
             'student_id' => $request->student_id,

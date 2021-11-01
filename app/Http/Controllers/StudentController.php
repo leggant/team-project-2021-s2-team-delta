@@ -128,7 +128,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $user = auth()->user();
         $rules = [
             'first_name' => 'alpha|max:25|min:3',
             'last_name' => 'alpha|max:25|min:3',
@@ -143,7 +142,7 @@ class StudentController extends Controller
             $student->all(),
             $rules,
             $messages
-        )->validateWithBag('studenterror');
+        )->validateWithBag('studentupdateerror');
         $student = Student::create([
             'first_name' => Str::title($student->first_name),
             'last_name' => Str::title($student->last_name),
