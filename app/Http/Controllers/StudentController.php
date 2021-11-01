@@ -9,7 +9,6 @@ use App\Models\Note;
 use App\Models\Evidence;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -60,7 +59,14 @@ class StudentController extends Controller
             'cohort_id' => 'required|integer',
         ];
         $messages = [
-            'first_name.required' => 'Student First name is required',
+            'first_name.required' => 'Student first name is required',
+            'first_name.alpha' => 'Please use letters only',
+            'first_name.max' => 'First name exceeds 25 character limit',
+            'first_name.min' => 'First name must have at least 3 characters',
+            'last_name.required' => 'Student last name is required',
+            'last_name.alpha' => 'Please use letters only',
+            'last_name.max' => 'Last name exceeds 25 character limit',
+            'last_name.min' => 'Last name must have at least 3 characters',
         ];
         $validator = Validator::make(
             $request->all(),
@@ -133,7 +139,7 @@ class StudentController extends Controller
             'first_name' => 'alpha|max:25|min:3',
             'last_name' => 'alpha|max:25|min:3',
             'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
-            'github' => 'alpha_dash| 'github' => 'alpha_dash|Rule::unique('students', 'github')->ignore($upstudent->id)|nullable|max:15',|nullable|max:15',
+            // 'github' => 'alpha_dash| 'github' => 'alpha_dash|Rule::unique('students', 'github')->ignore($upstudent->id)|nullable|max:15',|nullable|max:15',
             'cohort_id' => 'nullable|integer',
         ];
 
