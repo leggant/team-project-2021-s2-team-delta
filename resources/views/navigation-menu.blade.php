@@ -30,7 +30,7 @@
                                 {{ __('User Admin Panel') }}
                             </x-jet-nav-link>
                             <x-jet-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                                {{ __('Cohorts') }}
+                                {{ __('Cohort Admin Panel') }}
                             </x-jet-nav-link>
                         @endif
                     @endrole
