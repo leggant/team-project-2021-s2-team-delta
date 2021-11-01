@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 // 100% failing test
 class LecturerTest extends DuskTestCase
 {
-    // public function testAdminUsersPage()
-    // {     
+    public function testAdminUsersPage()
+    {     
         // Login as admin and set a lecturer to no papers assigned
 
         $user = User::where('is_admin', 1)->first();
