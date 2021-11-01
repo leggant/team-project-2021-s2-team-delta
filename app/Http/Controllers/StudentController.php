@@ -130,10 +130,11 @@ class StudentController extends Controller
     {
         $user = auth()->user();
 
+        // 'username' => 'required|alpha_num|unique:student|required|max:10',
         $rules = [
             'first_name' => 'alpha|max:25|min:3',
             'last_name' => 'alpha|max:25|min:3',
-            'username' => 'alpha_num|unique:student|required|max:10',
+            'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
             'github' => 'alpha_dash|unique:student|nullable|max:15',
             'cohort_id' => 'nullable|integer',
         ];
@@ -142,13 +143,13 @@ class StudentController extends Controller
             'first_name.alpha' => 'Student First name is required',
         ];
 
-        /*
+        
         $validator = Validator::make(
             $request->all(),
             $rules,
             $messages
         )->validateWithBag('studenterror');
-        */
+        
         
         $upstudent = Student::find($id);
         $upstudent->first_name = $request->first_name;
