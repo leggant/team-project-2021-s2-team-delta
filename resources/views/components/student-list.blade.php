@@ -57,7 +57,7 @@
                     <br>
                     <form id="move" action="{{route('move')}}" method="POST">
                         {{csrf_field()}}
-                        <input type="hidden" name="students_selected" value="" id="hidden_students2">
+                        <input type="hidden" name="students_selected" value="" id="{{$up->pivot->paper_id}}">
                         <select name="cohort" required>
                             @foreach($cohorts as $cohort)
                                 <option value="{{$cohort->id}}">
@@ -65,7 +65,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <x-jet-button onclick="move()">Move Selected Students</x-jet-button>
+                        <x-jet-button onclick="move({{$up->pivot->paper_id}})">Move Selected Students</x-jet-button>
                     </form>
                 </div>
             </details>

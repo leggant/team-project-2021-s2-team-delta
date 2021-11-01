@@ -3,6 +3,20 @@
         <h1 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }} - Student Admin</h1>
     </x-slot>
     <br>
+    @if(\Session::has('success'))
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">
+            <ul>
+                <li class="text-sm">{!! \Session::get('success') !!}</li>
+            </ul>
+        </div>
+    @endif
+    @if(\Session::has('error'))
+        <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" >
+            <ul>
+                <li class="font-bold">{!! \Session::get('error') !!}</li>
+            </ul>
+        </div>
+    @endif
     @if(count($students) >= 1)
         <div class="py-6 text-center">
             <form action="{{ route('home') }}" class="gap-4">
@@ -22,7 +36,7 @@
                     @foreach($students as $s)
                         <tr>
                             <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$s->id}}" 
-                                id="checkbox_students" required>
+                                id="checkbox_students">
                             </td>
                             <td class="border py-2 px-2 text-center">{{$s->name}}</td>
                             <td class="border py-2 px-2 text-center">

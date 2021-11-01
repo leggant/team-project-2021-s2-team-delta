@@ -60,7 +60,7 @@ class StudentDisableController extends Controller
             $s->save();
         }
 
-        return redirect()->route('home')->with('success', 'Successfully Added Student(s)');
+        return redirect()->back()->with('success', 'Successfully Added Student(s)');
     }
 
     public function move(Request $request)
