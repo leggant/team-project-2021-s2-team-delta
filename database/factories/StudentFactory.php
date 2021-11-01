@@ -27,7 +27,7 @@ class StudentFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'username' => $this->faker->userName(),
             'password' => $this->faker->password(),
-            'remember_token' => $this->faker->uuid()
+            'remember_token' => $this->faker->uuid(),
         ];
     }
 }

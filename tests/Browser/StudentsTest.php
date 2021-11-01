@@ -8,9 +8,8 @@ use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-
 class StudentsTest extends DuskTestCase
-{  
+{
     // NOTE : Any student tests will need to added to lecturer or admin access test files
     // This is because roles and assignments need to be done before student features are usable
 
@@ -25,13 +24,14 @@ class StudentsTest extends DuskTestCase
     public function testStudentPlaceholder()
     {
         // Placeholder test used to prevent errors from empty test file
-                       
+
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)                    
-                    ->visit('/')
-                    ->assertTitle('Studio Management');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/')
+                ->assertTitle('Studio Management');
         });
     }
 

@@ -8,7 +8,6 @@ use Database\Factories\UserFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-
 class EvidenceTest extends DuskTestCase
 {
     //due to the setup requirements needed to add students and then attach 'notes/evidence'.
@@ -19,7 +18,6 @@ class EvidenceTest extends DuskTestCase
     Used to add the student directly to the database rather than
     via the students page
     */
-
 
     /*
     public function testEvidenceMakeStudent()
@@ -39,16 +37,16 @@ class EvidenceTest extends DuskTestCase
     */
 
     public function testEvidenceAdminAccess()
-    {   
+    {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) 
-        {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertTitle('Studio Management')
-                    ->assertSee('UPLOAD FILES');                                        
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/evidence')
+                ->assertPathIs('/evidence')
+                ->assertTitle('Studio Management')
+                ->assertSee('UPLOAD FILES');
         });
     }
 
@@ -56,10 +54,10 @@ class EvidenceTest extends DuskTestCase
     Attempt to upload a file using a student from the dropdown selector
     on the evidence blade. Chooses the first student in the dropdown (select statement)
     and attaches a file stored in '/tests/Browser/testupload/'    
-    */ 
+    */
 
     // https://www.codegrepper.com/code-examples/php/laravel+get+root+path
-    
+
     /*
     public function testCreateEvidence()
     {        
@@ -75,5 +73,5 @@ class EvidenceTest extends DuskTestCase
                     ->assertSee('Created:');                               
         });
     }  
-    */  
+    */
 }

@@ -15,7 +15,10 @@ class AddPaperIdToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('paper_id')->nullable();
-            $table->foreign('paper_id')->references('id')->on('papers');
+            $table
+                ->foreign('paper_id')
+                ->references('id')
+                ->on('papers');
         });
     }
 
