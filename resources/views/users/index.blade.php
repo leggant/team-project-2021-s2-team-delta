@@ -8,6 +8,10 @@
                 @csrf
                 <x-jet-button type="submit">Create New User</x-jet-button>
             </form>
+            <form action="{{ route('student-list') }}" method="get" class="mx-auto">
+                @csrf
+                <x-jet-button type="submit">View All Students</x-jet-button>
+            </form>
         </div>
         <table class="max-w-full mx-auto mt-6">
             <thead>

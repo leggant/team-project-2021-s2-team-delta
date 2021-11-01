@@ -19,6 +19,9 @@
 <form action="{{route('enableView')}}" method="GET">
     <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
 </form>
+{{--<form action="{{route('student-list')}}" method="GET">
+    <x-jet-button type="submit">View All Students</x-jet-button>
+</form>--}}
 @if ($errors->studenterror->any())
     <ul>
         @foreach ( $errors->studenterror->all() as $error)
