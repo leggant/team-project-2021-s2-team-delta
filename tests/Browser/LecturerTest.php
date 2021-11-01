@@ -36,7 +36,8 @@ class LecturerTest extends DuskTestCase
                     ->screenshot('3-tempAnoneselected');
         });
     }
-    // not logged in
+
+    
     public function testLecturerLogoutAdmin()
     {    
         $this->browse(function ($browser) {
@@ -44,7 +45,7 @@ class LecturerTest extends DuskTestCase
                     ->assertPathIs('/login');
         });
     }
-//not logged in 
+
     public function testLecturerLogin()
     {       
         $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
