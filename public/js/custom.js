@@ -6,7 +6,6 @@ function test() {
         }
     });
     console.log(arr)
-    event.preventDefault();
     $("#hidden_students").val(JSON.stringify(arr))
     $('#disable').submit()
 }
