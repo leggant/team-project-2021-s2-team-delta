@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
         Route::resource('roles', RoleController::class)->except(['update', 'delete']);
         Route::post('/student-disable', [StudentDisableController::class, 'disable'])->name('disable');
+        Route::post('/stud-enable', [StudentDisableController::class, 'enable'])->name('enable');
+        Route::get('/student-enable', [StudentDisableController::class, 'enableView'])->name('enableView');
         Route::get('/admin-panel', function () {
             return view('admin.admin_panel');
         })->name('admin.admin-panel');

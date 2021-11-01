@@ -15,7 +15,8 @@
                         @if ($up->pivot->paper_id == $student->cohort->paper_id)
                             @if($student->is_active)
                                 <tr>
-                                <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" id="checkbox_students">
+                                <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" 
+                                    id="checkbox_students" required>
                                 </td>
                                     <td class="border py-2 px-2 text-center">
                                         {{$student->name}}

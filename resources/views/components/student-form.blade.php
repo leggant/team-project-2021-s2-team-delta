@@ -15,7 +15,9 @@
         <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" class="col-span-2"/>
     </div>
     <x-jet-button>Add New Student</x-jet-button>
-    
+</form>
+<form action="{{route('enableView')}}" method="GET">
+    <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
 </form>
 @if ($errors->studenterror->any())
     <ul>
