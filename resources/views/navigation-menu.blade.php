@@ -22,10 +22,7 @@
                         {{ __('Students') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link id="evidence" href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
-                        {{ __('Uploads') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link id="notes" href="{{ route('notes.index') }}" :active="request()->routeIs('notes.index')">
-                        {{ __('Notes') }}
+                        {{ __('Notes + Uploads') }}
                     </x-jet-nav-link>
                     @role('Super-Admin')
                         @if (Auth::check() && Auth::user()->isAdmin())
@@ -33,7 +30,7 @@
                                 {{ __('User Admin Panel') }}
                             </x-jet-nav-link>
                             <x-jet-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                                {{ __('Cohorts') }}
+                                {{ __('Cohort Admin Panel') }}
                             </x-jet-nav-link>
                         @endif
                     @endrole

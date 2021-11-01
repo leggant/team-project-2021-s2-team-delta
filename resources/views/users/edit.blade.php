@@ -1,7 +1,7 @@
 <x-app-layout>
     <!-- Form that allows the user to edit a user -->
     @role('Super-Admin')
-    <div class="w-max h-max mx-auto sm:px-6 mt-8 grid gap-5">
+    <div class="w-max h-max mx-auto sm:px-6 mt-8 grid gap-5 pb-8">
         <div class="flex gap-12">
             <h2 class="text-3xl leading-9 text-gray-900">Update {{ Str::title($user->name) }}</h2>
             <form action="{{ route('users.index') }}" class="gap-4">

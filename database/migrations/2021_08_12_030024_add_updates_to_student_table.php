@@ -19,8 +19,14 @@ class AddUpdatesToStudentTable extends Migration
                 $table->string('username', 15)->nullable();
             });
             $table->string('name', 25)->change();
-            $table->string('email', 30)->unique()->change();
-            $table->string('github', 30)->nullable()->change();
+            $table
+                ->string('email', 30)
+                ->unique()
+                ->change();
+            $table
+                ->string('github', 30)
+                ->nullable()
+                ->change();
         });
         Schema::table('student', function (Blueprint $table) {
             $table->renameColumn('name', 'first_name');

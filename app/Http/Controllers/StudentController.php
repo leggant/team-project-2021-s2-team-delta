@@ -126,35 +126,37 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
         $user = auth()->user();
         $rules = [
             'first_name' => 'alpha|max:25|min:3',
             'last_name' => 'alpha|max:25|min:3',
-            'username' => 'alpha_num|unique:student|required|max:10',
-            'github' => 'alpha_dash|unique:student|nullable|max:15',
+            'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
+            'github' => 'alpha_dash| 'github' => 'alpha_dash|Rule::unique('students', 'github')->ignore($upstudent->id)|nullable|max:15',|nullable|max:15',
             'cohort_id' => 'nullable|integer',
         ];
+
         $messages = [
             'first_name.alpha' => 'Student First name is required',
         ];
+
         $validator = Validator::make(
-            $student->all(),
+            $request->all(),
             $rules,
             $messages
         )->validateWithBag('studenterror');
-        $student = Student::create([
-            'first_name' => Str::title($student->first_name),
-            'last_name' => Str::title($student->last_name),
-            'email' => $student->username . '@student.op.ac.nz',
-            'username' => Str::lower($student->username),
-            'github' => Str::lower($student->github),
-            'cohort_id' => $student->cohort_id,
-        ]);
+        
+        $upstudent = Student::find($id);
+        $upstudent->first_name = $request->first_name;
+        $upstudent->last_name = $request->last_name;
+        $upstudent->username = Str::lower($request->username);
+        $upstudent->email = $request->username . '@student.op.ac.nz';
+        $upstudent->github = Str::lower($request->github) ? Str::lower($request->github) : $upstudent->github;
+        $upstudent->save();        
         return redirect()->action(
             [StudentController::class, 'show'],
-            ['student' => $student->id]
+            ['student' => $id]
         );
     }
 }
