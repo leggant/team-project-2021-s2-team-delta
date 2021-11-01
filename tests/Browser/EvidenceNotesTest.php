@@ -95,7 +95,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->attach('@image', storage_path('test_upload_file.png'))  
                     ->click('button[type="submit"]')
                     ->pause(2000)
-                    //->assertPathBeginsWith('/students')
+                    ->assertPathBeginsWith('/students')
                     ->assertSee('EVIDENCE UPLOAD TEST')
                     ->screenshot('studentprofile');
         });
