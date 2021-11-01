@@ -15,9 +15,6 @@
             <x-jet-input type="text" id="github" name="github" value="{{ $student->github }}" placeholder="Github Username"
                 aria-label="Github Username"></x-jet-input>
         </div>
-            <div class="grid grid-cols-4 mt-4 mb-4 gap-4">
-            {{-- <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" class="col-span-2"/> --}}
-            </div>
         <x-jet-button>Update Student</x-jet-button>    
     </form>
 
