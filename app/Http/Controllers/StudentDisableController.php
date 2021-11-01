@@ -62,4 +62,30 @@ class StudentDisableController extends Controller
 
         return redirect()->route('home')->with('success', 'Successfully Added Student(s)');
     }
+
+    public function move(Request $request)
+    {
+        Validator::make($request->all(), [
+            'students_selected' => 'required',
+            'cohort' => 'required',
+        ])->validate();
+
+        $s = $request->input("students_selected");
+        $students = json_decode($s);
+
+        if(empty($students))
+        {
+            return redirect()->back()->with('error', 'No Student(s) Selected');
+        }
+        else
+        {
+            foreach($students as $student)
+            {
+                $sdb = Student::find($student);
+                $sdb->cohort_id = $request->input('cohort');
+                $sdb->save();
+            }
+            return redirect()->back()->with('success', 'Student(s) Moved Successfully');
+        }
+    }
 }

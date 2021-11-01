@@ -52,7 +52,20 @@
                     <form id="disable" action="{{route('disable')}}" method="POST">
                         {{csrf_field()}}
                         <input type="hidden" name="students_selected" value="" id="hidden_students">
-                        <x-jet-danger-button onclick="test()">Remove Selected Students</x-jet-danger-button>
+                        <x-jet-danger-button onclick="disable()">Remove Selected Students</x-jet-danger-button>
+                    </form>
+                    <br>
+                    <form id="move" action="{{route('move')}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="students_selected" value="" id="hidden_students2">
+                        <select name="cohort" required>
+                            @foreach($cohorts as $cohort)
+                                <option value="{{$cohort->id}}">
+                                    {{$cohort->papers->paper_name}} | {{$cohort->semester}} | {{$cohort->stream}}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-jet-button onclick="move()">Move Selected Students</x-jet-button>
                     </form>
                 </div>
             </details>
