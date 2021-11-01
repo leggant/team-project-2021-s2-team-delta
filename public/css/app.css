@@ -1113,14 +1113,14 @@ select {
 .col-span-2 {
 	grid-column: span 2 / span 2;
 }
+.col-span-4 {
+	grid-column: span 4 / span 4;
+}
 .col-span-1 {
 	grid-column: span 1 / span 1;
 }
 .col-span-3 {
 	grid-column: span 3 / span 3;
-}
-.col-span-4 {
-	grid-column: span 4 / span 4;
 }
 .row-span-1 {
 	grid-row: span 1 / span 1;
@@ -1352,9 +1352,6 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
-.max-w-4xl {
-	max-width: 56rem;
-}
 .flex-1 {
 	flex: 1 1 0%;
 }
@@ -1447,11 +1444,11 @@ select {
 .grid-rows-2 {
 	grid-template-rows: repeat(2, minmax(0, 1fr));
 }
-.grid-rows-1 {
-	grid-template-rows: repeat(1, minmax(0, 1fr));
-}
 .grid-rows-4 {
 	grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+.grid-rows-1 {
+	grid-template-rows: repeat(1, minmax(0, 1fr));
 }
 .flex-col {
 	flex-direction: column;
@@ -1513,6 +1510,9 @@ select {
 .gap-12 {
 	gap: 3rem;
 }
+.gap-y-2 {
+	row-gap: 0.5rem;
+}
 .gap-x-6 {
 	-moz-column-gap: 1.5rem;
 	     column-gap: 1.5rem;
@@ -1530,9 +1530,6 @@ select {
 }
 .gap-y-4 {
 	row-gap: 1rem;
-}
-.gap-y-2 {
-	row-gap: 0.5rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
@@ -1818,17 +1815,17 @@ select {
 .pb-1 {
 	padding-bottom: 0.25rem;
 }
+.pb-6 {
+	padding-bottom: 1.5rem;
+}
 .pr-8 {
 	padding-right: 2rem;
-}
-.pt-8 {
-	padding-top: 2rem;
 }
 .pb-8 {
 	padding-bottom: 2rem;
 }
-.pb-6 {
-	padding-bottom: 1.5rem;
+.pt-8 {
+	padding-top: 2rem;
 }
 .text-left {
 	text-align: left;
