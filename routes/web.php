@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('evidence', EvidenceController::class)->except([
             'delete',
         ]);
-        Route::resource('notes', NoteController::class)->except(['delete']);
+        Route::resource('notes', NoteController::class)->except(['index','delete', 'show']);
         Route::resource('papers', PaperController::class)->except([
             'delete',
             'update',

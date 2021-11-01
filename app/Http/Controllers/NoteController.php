@@ -10,19 +10,6 @@ use App\Http\Controllers\StudentController;
 class NoteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $notes = Note::all();
-        $students = Student::all();
-        $user = auth()->user();
-        return view('pages.notes', compact('notes', 'students', 'user'));
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
