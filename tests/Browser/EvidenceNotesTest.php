@@ -48,7 +48,9 @@ class EvidenceNotesTest extends DuskTestCase
             'github' => 'johnsgit',
             'cohort_id' => 2,   // The cohort created above
             'is_active' => 1
-        ]);      
+        ]); 
+        
+        $this->assertTrue(true);
     }
 
     public function testEvidenceAdminAccess()
@@ -69,9 +71,9 @@ class EvidenceNotesTest extends DuskTestCase
     {  
         $this->browse(function ($browser) 
         {
-            $browser->visit('/notes')
+            $browser->visit('/evidence')
                     ->pause(2000)
-                    ->assertPathIs('/notes')                   
+                    ->assertPathIs('/evidence')                   
                     ->assertSee('SAVE NOTE');                    
         });
     }

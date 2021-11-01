@@ -139,7 +139,7 @@ class StudentController extends Controller
             'first_name' => 'alpha|max:25|min:3',
             'last_name' => 'alpha|max:25|min:3',
             'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
-            // 'github' => 'alpha_dash| 'github' => 'alpha_dash|Rule::unique('students', 'github')->ignore($upstudent->id)|nullable|max:15',|nullable|max:15',
+            'github' => ['alpha_dash', 'max:15', 'nullable', Rule::unique('student', 'github')->ignore($id)],
             'cohort_id' => 'nullable|integer',
         ];
 
