@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Papers;
 use App\Models\Cohort;
+use Illuminate\Support\Facades\Validator;
 
 class StudentDisableController extends Controller
 {
     public function disable(Request $request)
     {
+        Validator::make($request->all(), [
+            'students_selected' => 'required',
+        ])->validate();
+        
         $s = $request->input("students_selected");
         $students = json_decode($s);
         if(empty($students))
@@ -41,6 +46,11 @@ class StudentDisableController extends Controller
 
     public function enable(Request $request)
     {
+        Validator::make($request->all(), [
+            'student_checkboxes' => 'required',
+            'cohort' => 'required',
+        ])->validate();
+
         $students = $request->input('student_checkboxes');
         foreach($students as $student)
         {
