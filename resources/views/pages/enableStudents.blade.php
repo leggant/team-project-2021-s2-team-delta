@@ -36,12 +36,17 @@
             </table>
             <br>
             <select name="cohort" required>
-                @foreach($cohorts as $cohort)
-                <option value="{{$cohort->id}}">
-                    {{$cohort->papers->paper_name}} | {{$cohort->semester}} | Stream {{$cohort->stream}}
-                </option>
+                @foreach($user->papers as $up)
+                    @foreach($cohorts as $cohort)
+                        @if($cohort->paper_id == $up->pivot->paper_id)
+                            <option value="{{$cohort->id}}">
+                                {{$cohort->papers->paper_name}} | {{$cohort->semester}} | Stream {{$cohort->stream}}
+                            </option>
+                        @endif
+                    @endforeach
                 @endforeach
             </select>
+            <br>
             <br>
             <x-jet-button type="submit">Add Students</x-jet-button>
         </div>

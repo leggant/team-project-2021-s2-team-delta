@@ -12,40 +12,40 @@
                         <th class="px-4 py-2">Course + Stream</th>
                     </tr>
                     @foreach ($students as $student)
-                        @if ($up->pivot->paper_id == $student->cohort->paper_id)
-                            @if($student->is_active)
-                                <tr>
-                                <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" 
-                                    id="checkbox_students" required>
-                                </td>
-                                    <td class="border py-2 px-2 text-center">
-                                        {{$student->name}}
+                            @if ($up->pivot->paper_id == $student->cohort->paper_id)
+                                @if($student->is_active)
+                                    <tr>
+                                    <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" 
+                                        id="checkbox_students" required>
                                     </td>
-                                    <td class="border py-2 px-2 text-center">
-                                        <a class="hover:underline"
-                                            href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->username }}@student.op.ac.nz
-                                        </a>
-                                    </td>
-                                    @if ($student->github)
                                         <td class="border py-2 px-2 text-center">
-                                            <a class="hover:underline" href="http://github.com/{{ $student->github }}"
-                                                target="_blank">github.com/{{ $student->github }}
+                                            {{$student->name}}
+                                        </td>
+                                        <td class="border py-2 px-2 text-center">
+                                            <a class="hover:underline"
+                                                href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->username }}@student.op.ac.nz
                                             </a>
                                         </td>
-                                    @endif
-                                    <td class="border py-2 px-2 text-center">
-                                        {{ $student->cohort->papers->paper_name }} | Stream
-                                        {{ $student->cohort->stream }}
-                                    </td>
-                                    <td class="py-2 px-12 text-center">
-                                        <form action="{{ route('students.show', $student) }}" method="GET">
-                                            @csrf
-                                            <x-jet-button type="submit">View Student Records</x-jet-button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                        @if ($student->github)
+                                            <td class="border py-2 px-2 text-center">
+                                                <a class="hover:underline" href="http://github.com/{{ $student->github }}"
+                                                    target="_blank">github.com/{{ $student->github }}
+                                                </a>
+                                            </td>
+                                        @endif
+                                        <td class="border py-2 px-2 text-center">
+                                            {{ $student->cohort->papers->paper_name }} | Stream
+                                            {{ $student->cohort->stream }}
+                                        </td>
+                                        <td class="py-2 px-12 text-center">
+                                            <form action="{{ route('students.show', $student) }}" method="GET">
+                                                @csrf
+                                                <x-jet-button type="submit">View Student Records</x-jet-button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endif
-                        @endif
                     @endforeach
                 </table>
                 <div class="pt-6 text-center">
