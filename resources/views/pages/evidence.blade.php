@@ -49,7 +49,7 @@
                 <div
                     class="bg-white overflow-hidden shadow rounded-lg grid md:grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 py-4 px-4 drop-shadow-2xl auto-cols-auto">
                     <h2 class="lg:col-span-2 text-2xl">Student Note</h2>
-                    <div class="grid">
+                    <div class="grid gap-y-2">
                         <x-jet-label for="studentnote" class="text-lg lg:col-start-1 lg:col-end-2">Select Student
                         </x-jet-label>
                         <select id="studentnote" name="student_id" required
@@ -61,7 +61,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="grid">
+                    <div class="grid gap-y-2">
                         <x-jet-label for="filelink" class="text-lg lg:col-start-2 lg:col-end-3 lg:row-start-0 lg:row-end-1">
                             Optionally Enter A WebLink</x-jet-label>
                         <x-jet-input type="url" name="filelink" id="filelink" placeholder="Enter File URL"
