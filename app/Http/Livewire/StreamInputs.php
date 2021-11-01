@@ -9,17 +9,6 @@ use app\Models\Cohort;
 class StreamInputs extends Component
 {
     public $streampick;
-    public $options = ['A', 'B', 'J'];
-
-    public function mount()
-    {
-        $this->streampick;
-    }
-
-    public function hydrate()
-    {
-        $this->streampick;
-    }
 
     public function render()
     {
