@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Student;
 
-use App\Http\Controllers\ {
+use App\Http\Controllers\{
     StudentController,
     UserController,
     CohortController,
@@ -10,8 +10,8 @@ use App\Http\Controllers\ {
     NoteController,
     PaperController,
     StudentDisableController,
-    UserEnableController,
-}; 
+    UserEnableController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -34,20 +34,42 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
         Route::resource('users', UserController::Class)->except(['delete']);
         Route::resource('cohorts', CohortController::class)->except(['delete']);
-        Route::post('/student-disable', [StudentDisableController::class, 'disable'])->name('disable');
-        Route::post('/stud-enable', [StudentDisableController::class, 'enable'])->name('enable');
-        Route::post('/student-move', [StudentDisableController::class, 'move'])->name('move');
-        Route::get('/student-enable', [StudentDisableController::class, 'enableView'])->name('enableView');
+        Route::post('/student-disable', [
+            StudentDisableController::class,
+            'disable',
+        ])->name('disable');
+        Route::post('/stud-enable', [
+            StudentDisableController::class,
+            'enable',
+        ])->name('enable');
+        Route::post('/student-move', [
+            StudentDisableController::class,
+            'move',
+        ])->name('move');
+        Route::get('/student-enable', [
+            StudentDisableController::class,
+            'enableView',
+        ])->name('enableView');
         Route::get('/student-list', function () {
             $students = Student::where('cohort_id', '!=', null)->get();
             return view('pages.studentListView', compact('students', 'user'));
         })->name('student-list');
-        Route::get('/deactivated-users', [UserEnableController::class, 'index'])->name('deactivated-users');
-        Route::post('/enable-users', [UserEnableController::class, 'enableUser'])->name('enable-users');
+        Route::get('/deactivated-users', [
+            UserEnableController::class,
+            'index',
+        ])->name('deactivated-users');
+        Route::post('/enable-users', [
+            UserEnableController::class,
+            'enableUser',
+        ])->name('enable-users');
         Route::resource('evidence', EvidenceController::class)->except([
             'delete',
         ]);
-        Route::resource('notes', NoteController::class)->except(['index','delete', 'show']);
+        Route::resource('notes', NoteController::class)->except([
+            'index',
+            'delete',
+            'show',
+        ]);
         Route::resource('papers', PaperController::class)->except([
             'delete',
             'update',

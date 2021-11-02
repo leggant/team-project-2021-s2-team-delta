@@ -17,7 +17,7 @@ class NavTest extends DuskTestCase
     */
 
     // Coded by Anthony Legg
-    
+
     public function testNavLinks()
     {
         $user = User::where('name', 'Administrator')->get();

@@ -26,7 +26,7 @@ class CohortFactory extends Factory
             'paper_id' => 2,
             'year' => '2021-01-01',
             'semester' => 'Semester 1',
-            'stream' => 'A'            
+            'stream' => 'A',
         ];
     }
 }

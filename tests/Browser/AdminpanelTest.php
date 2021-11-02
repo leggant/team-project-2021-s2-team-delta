@@ -17,15 +17,16 @@ class AdminpanelTest extends DuskTestCase
     }
 
     public function testFindAdminPage()
-    { 
+    {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/users')
-                    ->pause(2000)
-                    ->assertPathIs('/users')                   
-                    ->assertSee('Current Registered Users');                  
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users');
         });
     }
 
@@ -33,21 +34,22 @@ class AdminpanelTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/users')
-                    ->pause(2000)
-                    ->assertPathIs('/users')                   
-                    ->assertSee('Current Registered Users')  
-                    ->click('@new_user')
-                    ->assertSee('Create New User')
-                    ->type('Name', 'Test User')
-                    ->type('Email', 'testuser@test.com')
-                    ->type('Password', 'password')
-                    ->check('is_admin')
-                    ->click('@new_user_submit')
-                    ->assertPathIs('/users')
-                    ->assertSee('testuser@test.com');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@new_user')
+                ->assertSee('Create New User')
+                ->type('Name', 'Test User')
+                ->type('Email', 'testuser@test.com')
+                ->type('Password', 'password')
+                ->check('is_admin')
+                ->click('@new_user_submit')
+                ->assertPathIs('/users')
+                ->assertSee('testuser@test.com');
         });
     }
 
@@ -55,21 +57,22 @@ class AdminpanelTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/users')
-                    ->pause(2000)
-                    ->assertPathIs('/users')                   
-                    ->assertSee('Current Registered Users')
-                    ->click('@edit_user_2')
-                    ->assertSee('Update Temp A')
-                    ->check('Admin')
-                    ->select('Papers[]', ['2', '3'])
-                    ->click('@edit_submit')
-                    ->assertPathIs('/users')
-                    ->assertSee('studio-a@op.ac.nz')
-                    ->assertSee('Studio 1')
-                    ->assertSee('Studio 2');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@edit_user_2')
+                ->assertSee('Update Temp A')
+                ->check('Admin')
+                ->select('Papers[]', ['2', '3'])
+                ->click('@edit_submit')
+                ->assertPathIs('/users')
+                ->assertSee('studio-a@op.ac.nz')
+                ->assertSee('Studio 1')
+                ->assertSee('Studio 2');
         });
     }
 
@@ -77,17 +80,18 @@ class AdminpanelTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/users')
-                    ->pause(2000)
-                    ->assertPathIs('/users')                   
-                    ->assertSee('Current Registered Users')
-                    ->click('@new_user')
-                    ->assertSee('Create New User')
-                    ->click('@back')
-                    ->assertPathIs('/users')
-                    ->assertSee('Current Registered Users');  
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@new_user')
+                ->assertSee('Create New User')
+                ->click('@back')
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users');
         });
     }
 
@@ -95,18 +99,18 @@ class AdminpanelTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) {
-            $browser->loginAs($user)
-                    ->visit('/users')
-                    ->pause(2000)
-                    ->assertPathIs('/users')                   
-                    ->assertSee('Current Registered Users')
-                    ->click('@edit_user_2')  
-                    ->assertSee('Update Temp A')
-                    ->click('@back')
-                    ->assertPathIs('/users')
-                    ->assertSee('Current Registered Users');    
-
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@edit_user_2')
+                ->assertSee('Update Temp A')
+                ->click('@back')
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users');
         });
     }
 }

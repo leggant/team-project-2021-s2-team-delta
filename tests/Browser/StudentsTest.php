@@ -33,5 +33,5 @@ class StudentsTest extends DuskTestCase
                 ->visit('/')
                 ->assertTitle('Studio Management');
         });
-    }    
+    }
 }

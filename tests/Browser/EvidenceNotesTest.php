@@ -11,7 +11,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
-// Note: make sure the AWS .env variables are configured in your .env 
+// Note: make sure the AWS .env variables are configured in your .env
 
 class EvidenceNotesTest extends DuskTestCase
 {
@@ -21,24 +21,22 @@ class EvidenceNotesTest extends DuskTestCase
     and assigns Studio 1 to the admin user (studioadmin@op.ac.nz)
     You can now use the student in evidence tests
     */
-    
+
     public function testEvidenceCreateUsableStudent()
     {
-        DB::table('user_papers')->insert(
-            [
-                //'id' => 4,
-                'user_id' => 1, // The id from users table (1 = Admin, 2= Temp A, 3=Temp B)
-                'paper_id' => 2,    // With paper_id matching the one in cohort above
-            ]
-        );
+        DB::table('user_papers')->insert([
+            //'id' => 4,
+            'user_id' => 1, // The id from users table (1 = Admin, 2= Temp A, 3=Temp B)
+            'paper_id' => 2, // With paper_id matching the one in cohort above
+        ]);
 
         $cohort = Cohort::factory()->create([
             //'id' => 2,
-            'paper_id' => 2,    // Studio 1
+            'paper_id' => 2, // Studio 1
             'year' => '2021-01-01',
             'semester' => 'Semester 2',
-            'stream' => 'J'
-        ]);        
+            'stream' => 'J',
+        ]);
 
         $newstudent = Student::factory()->create([
             //'id' => 2,
@@ -47,35 +45,35 @@ class EvidenceNotesTest extends DuskTestCase
             'username' => 'UseThisName',
             'email' => 'johnsmith@gmail.com',
             'github' => 'johnsgit',
-            'cohort_id' => 2,   // The cohort created above
-            'is_active' => 1
-        ]); 
-        
+            'cohort_id' => 2, // The cohort created above
+            'is_active' => 1,
+        ]);
+
         $this->assertTrue(true);
     }
 
     public function testEvidenceAdminAccess()
-    {   
+    {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user) 
-        {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertTitle('Studio Management')
-                    ->assertSee('UPLOAD FILES');                                        
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/evidence')
+                ->assertPathIs('/evidence')
+                ->assertTitle('Studio Management')
+                ->assertSee('UPLOAD FILES');
         });
     }
-    
+
     public function testFindNotesPage()
-    {  
-        $this->browse(function ($browser) 
-        {
-            $browser->visit('/evidence')
-                    ->pause(2000)
-                    ->assertPathIs('/evidence')                   
-                    ->assertSee('SAVE NOTE');                    
+    {
+        $this->browse(function ($browser) {
+            $browser
+                ->visit('/evidence')
+                ->pause(2000)
+                ->assertPathIs('/evidence')
+                ->assertSee('SAVE NOTE');
         });
     }
 
@@ -84,24 +82,24 @@ class EvidenceNotesTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user)
-        {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertSee('Jim Smith')
-                    ->assertSee('UPLOAD FILES')
-                    ->type('#title', 'Evidence Upload Test')
-                    ->attach('@image', storage_path('test_upload_file.png'))  
-                    ->click('button[type="submit"]')
-                    ->pause(2000)
-                    ->assertPathBeginsWith('/students')
-                    ->assertSee('EVIDENCE UPLOAD TEST')
-                    ->screenshot('studentprofile');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/evidence')
+                ->assertPathIs('/evidence')
+                ->assertSee('Jim Smith')
+                ->assertSee('UPLOAD FILES')
+                ->type('#title', 'Evidence Upload Test')
+                ->attach('@image', storage_path('test_upload_file.png'))
+                ->click('button[type="submit"]')
+                ->pause(2000)
+                ->assertPathBeginsWith('/students')
+                ->assertSee('EVIDENCE UPLOAD TEST')
+                ->screenshot('studentprofile');
         });
     }
 
-    //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence. 
+    //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence.
     /*public function testEvidenceDeletion()
     {
         $user = User::where('is_admin', 1)->first();

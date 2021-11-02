@@ -16,19 +16,21 @@ class PermissionTest extends DuskTestCase
         $user = User::where('is_admin', 1)->first();
 
         $this->browse(function ($browser) use ($user) {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertSee('SAVE NOTE');
+            $browser
+                ->loginAs($user)
+                ->visit('/evidence')
+                ->assertPathIs('/evidence')
+                ->assertSee('SAVE NOTE');
         });
     }
 
     public function testAccessEvidenceView()
     {
         $this->browse(function ($browser) {
-            $browser->visit('/evidence')
-                    ->assertPathIs('/evidence')
-                    ->assertSee('UPLOAD FILES');
+            $browser
+                ->visit('/evidence')
+                ->assertPathIs('/evidence')
+                ->assertSee('UPLOAD FILES');
         });
     }
 }

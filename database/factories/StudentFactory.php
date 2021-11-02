@@ -29,7 +29,7 @@ class StudentFactory extends Factory
             'email' => 'johnsmith@gmail.com',
             'github' => 'johnsgit',
             'cohort_id' => 2,
-            'is_active' => 1
+            'is_active' => 1,
         ];
 
         /*
