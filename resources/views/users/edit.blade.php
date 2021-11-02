@@ -5,7 +5,7 @@
         <div class="flex gap-12">
             <h2 class="text-3xl leading-9 text-gray-900">Update {{ Str::title($user->name) }}</h2>
             <form action="{{ route('users.index') }}" class="gap-4">
-                <x-jet-button type='submit'>Back</x-jet-button>
+                <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
             </form>
         </div>
         <form action="{{ route('users.update', $user->id) }}" method='POST' class="grid gap-4 grid-cols-1">

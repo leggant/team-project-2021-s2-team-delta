@@ -75,11 +75,37 @@ class AdminpanelTest extends DuskTestCase
 
     public function testCreateBackButton()
     {
-        //
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/users')
+                    ->pause(2000)
+                    ->assertPathIs('/users')                   
+                    ->assertSee('Current Registered Users')
+                    ->click('@new_user')
+                    ->assertSee('Create New User')
+                    ->click('@back')
+                    ->assertPathIs('/users')
+                    ->assertSee('Current Registered Users');  
+        });
     }
 
     public function testEditBackButton()
     {
-        //
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/users')
+                    ->pause(2000)
+                    ->assertPathIs('/users')                   
+                    ->assertSee('Current Registered Users')
+                    ->click('@edit_user_2')  
+                    ->assertSee('Update Temp A')
+                    ->click('@back')
+                    ->assertPathIs('/users')
+                    ->assertSee('Current Registered Users');    
+        });
     }
 }
