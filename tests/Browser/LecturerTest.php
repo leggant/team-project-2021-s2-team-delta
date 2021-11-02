@@ -9,6 +9,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
+// 100% failing test
 class LecturerTest extends DuskTestCase
 {
     public function testAdminUsersPage()
@@ -36,6 +37,7 @@ class LecturerTest extends DuskTestCase
         });
     }
 
+    
     public function testLecturerLogoutAdmin()
     {    
         $this->browse(function ($browser) {
@@ -72,8 +74,8 @@ class LecturerTest extends DuskTestCase
     public function testLecturerNotes()
     {       
         $this->browse(function ($browser) {
-            $browser->visit('/notes')
-                    ->assertPathIs('/notes')
+            $browser->visit('/evidence')
+                    ->assertPathIs('/evidence')
                     ->assertSee('You do not have access to this page');
         });
     }
@@ -109,16 +111,16 @@ class LecturerTest extends DuskTestCase
             $browser->visit('/cohorts')
                     ->assertPathIs('/cohorts')
                     ->assertTitle('Studio Management')
-                    ->assertSee('Assigned')
+                    //->assertSee('Assigned')
                     ->select('#paper', 2)
                     ->append('#year', '01012021')
                     ->select('#semester', 'Semester 1')
-                    ->select('#stream', 'A')
+                    ->click('#streama')
                     ->screenshot('7-cohortoptions')
                     ->press('CREATE COHORT')
                     ->assertPathIs('/cohorts')
                     ->screenshot('8-cohortassigned')
-                    ->assertSee('Cohorts Assigned to Administrator');
+                    ->assertSee('Current Cohorts');
         });
     }
 
@@ -160,8 +162,8 @@ class LecturerTest extends DuskTestCase
     public function testLecturerRetestNotes()
     {       
         $this->browse(function ($browser) {
-            $browser->visit('/notes')
-                    ->assertPathIs('/notes')
+            $browser->visit('/evidence')
+                    ->assertPathIs('/evidence')
                     ->assertSee('SAVE NOTE');
         });
     }

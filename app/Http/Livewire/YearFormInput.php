@@ -24,7 +24,7 @@ class YearFormInput extends Component
             max="{{$this->maxYear}}-01-01" id="year" 
             class="border-gray-300 focus:border-indigo-300 focus:ring 
             focus:ring-indigo-200 focus:ring-opacity-50 
-            rounded-md shadow-sm block mt-1">
+            rounded-md shadow-sm block mt-1 cursor-pointer">
         </x-jet-input>
         blade;
     }

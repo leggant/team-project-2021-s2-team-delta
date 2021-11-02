@@ -1,7 +1,7 @@
 <x-app-layout>
     <!-- A table of all users in the database -->
     @role('Super-Admin')
-    <div class="grid-rows-2 max-w-screen-lg mt-6  mx-auto gap-6">
+    <div class="grid-rows-2 max-w-screen-lg mt-6 mx-auto gap-6 pb-6">
         <div class="flex">
             <h2 class="text-3xl leading-9 text-gray-900">Current Registered Users</h2>
             <form action="{{ route('users.create') }}" method="get" class="mx-auto">
@@ -14,7 +14,7 @@
                 <tr>
                     <th class="px-4 py-2 w-max">Name</th>
                     <th class="px-4 py-2 w-max">Email</th>
-                    <th class="px-4 py-2 w-max">Papers</th>
+                    <th class="px-4 py-2 w-max whitespace-nowrap">Papers</th>
                     <th class="px-4 py-2 w-min">Is Admin</th>
                     <th class="px-4 py-2 w-min">Actions</th>
                 </tr>
@@ -23,10 +23,10 @@
                 @foreach ($user as $users)
                     <tr>
                         <td class="border px-4 py-2">{{ $users->name }}</td>
-                        <td class="border px-4 py-2">{{ $users->email }}</td>
+                        <td class="border px-4 py-2 hover:underline"><a href="mailto:{{ $users->email }}">{{ $users->email }}</a></td>
                         <td class="border px-4 py-2">
                             @foreach ($users->papers as $paper)
-                                {{ $paper->paper_name }}<br>
+                                {{ $paper->paper_name }}
                             @endforeach
                         </td>
                         @if ($users->is_admin)

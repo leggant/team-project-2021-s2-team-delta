@@ -49,9 +49,9 @@ class EvidenceNotesTest extends DuskTestCase
             'github' => 'johnsgit',
             'cohort_id' => 2,   // The cohort created above
             'is_active' => 1
-        ]);
-
-        $this->assertTrue(true);        
+        ]); 
+        
+        $this->assertTrue(true);
     }
 
     public function testEvidenceAdminAccess()
@@ -72,9 +72,9 @@ class EvidenceNotesTest extends DuskTestCase
     {  
         $this->browse(function ($browser) 
         {
-            $browser->visit('/notes')
+            $browser->visit('/evidence')
                     ->pause(2000)
-                    ->assertPathIs('/notes')                   
+                    ->assertPathIs('/evidence')                   
                     ->assertSee('SAVE NOTE');                    
         });
     }
@@ -91,7 +91,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertPathIs('/evidence')
                     ->assertSee('Jim Smith')
                     ->assertSee('UPLOAD FILES')
-                    ->type('@title', 'Evidence Upload Test')
+                    ->type('#title', 'Evidence Upload Test')
                     ->attach('@image', storage_path('test_upload_file.png'))  
                     ->click('button[type="submit"]')
                     ->pause(2000)
@@ -111,10 +111,9 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertSee('Jim Smith')
                     ->clickLink('Jim Smith')
                     ->assertSee('EVIDENCE UPLOAD TEST')
-                    ->press('DELETE')
+                    ->press('@delete')
                     ->assertSee('No files found')
                     ->screenshot('deletion');
         });
