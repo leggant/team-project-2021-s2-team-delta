@@ -17,6 +17,6 @@
             <x-jet-label for="Admin" class="text-lg text-bold cursor-pointer">Set New User As Admin</x-jet-label>
             <x-jet-input type="checkbox" id="Admin" name="is_admin" class="form-checkbox rounded text-indigo-600 px-3 py-3 cursor-pointer" />
         </div>
-        <x-jet-button type="submit">Submit</x-jet-button>
+        <x-jet-button dusk="new_user_submit" type="submit">Submit</x-jet-button>
     </form>
 </div>

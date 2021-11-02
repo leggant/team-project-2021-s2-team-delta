@@ -3,10 +3,10 @@
     @role('Super-Admin')
     <div class="grid-rows-2 max-w-screen-lg mt-6  mx-auto gap-6">
         <div class="flex">
-            <h2 class="text-3xl leading-9 text-gray-900">Current Registered Users</h2>
+            <h2 class="text-3xl leading-9 text-gray-900" id="title">Current Registered Users</h2>
             <form action="{{ route('users.create') }}" method="get" class="mx-auto">
                 @csrf
-                <x-jet-button type="submit">Create New User</x-jet-button>
+                <x-jet-button dusk="new_user" type="submit">Create New User</x-jet-button>
             </form>
         </div>
         <table class="max-w-full mx-auto mt-6">
