@@ -11,6 +11,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
+// Note: make sure the AWS .env variables are configured in your .env 
 
 class EvidenceNotesTest extends DuskTestCase
 {
@@ -77,4 +78,69 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertSee('SAVE NOTE');                    
         });
     }
+
+    //this test uploads a file to a student profile as an admin, then checks if the file has been uploaded.
+    public function testAdminEvidenceSubmit()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/evidence')
+                    ->assertPathIs('/evidence')
+                    ->assertSee('Jim Smith')
+                    ->assertSee('UPLOAD FILES')
+                    ->type('@title', 'Evidence Upload Test')
+                    ->attach('@image', storage_path('test_upload_file.png'))  
+                    ->click('button[type="submit"]')
+                    ->pause(2000)
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('EVIDENCE UPLOAD TEST')
+                    ->screenshot('studentprofile');
+        });
+    }
+
+    //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence. 
+    public function testEvidenceDeletion()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->assertSee('Jim Smith')
+                    ->clickLink('Jim Smith')
+                    ->assertSee('EVIDENCE UPLOAD TEST')
+                    ->press('DELETE')
+                    ->assertSee('No files found')
+                    ->screenshot('deletion');
+        });
+    }
+
+    /*
+
+    Commented out temporarily as the notes upload isn't working in this branch but is in development, will get the notes test working 
+    after the merge 
+    public function testAdminNoteSubmit()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/notes')
+                    ->pause(2000)
+                    ->assertPathIs('/notes')
+                    ->assertSee('SAVE NOTE')
+                    ->assertSee('Jim Smith')
+                    ->type('@filelink', 'www.google.com')
+                    ->type('@noteinput', 'testing note submissions!')
+                    ->click('button[type="submit"]')
+                    ->pause(2000)
+
+        });
+    }*/
 }

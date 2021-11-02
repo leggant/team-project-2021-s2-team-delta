@@ -32,7 +32,7 @@
                             <form method="post" action="{{ route('evidence.destroy', $file->id) }}" >
                                 @csrf
                                 @method('delete')
-                                <x-delete-button/>
+                                <x-delete-button dusk="delete"/>
                             </form>
                             <p class="leading-relaxed py-1">Created: {{ date('d-m-Y', strtotime($file->created_at)) }}
                             </p>
