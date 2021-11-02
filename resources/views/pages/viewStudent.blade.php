@@ -2,8 +2,13 @@
     <x-slot name="header">
         <h1 class="text-2xl font-semibold capitalize">{{ $student->name }}</h1>
     </x-slot>
-    <div class="max-w-7xl min-w-2xl mx-auto sm:px-8 lg:px-8 mt-8 grid grid-cols-2 gap-6 pb-8">
-        <div class="xs:px-6 grid grid-cols-2 grid-rows-4">
+    <div class="py-6 text-center">
+        <form action="{{ route('home') }}" class="gap-4">
+            <x-jet-button type='submit'>Back</x-jet-button>
+        </form>
+    </div>
+    <div class="max-w-7xl min-w-2xl mx-auto sm:px-8 lg:px-8 mt-8 grid grid-cols-2 gap-6">
+        <div class="col-span-2 xs:px-6">
             <h2 class="text-3xl mb-3">Contact Details</h2>
             <x-jet-button class="justify-start self-start">Edit</x-jet-button>
             <div>

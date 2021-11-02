@@ -1,13 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
+use App\Models\Student;
+
+use App\Http\Controllers\ {
     StudentController,
     UserController,
     CohortController,
     EvidenceController,
     NoteController,
-    PaperController
-};
+    PaperController,
+    StudentDisableController,
+    UserEnableController,
+}; 
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +34,16 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
         Route::resource('users', UserController::Class)->except(['delete']);
         Route::resource('cohorts', CohortController::class)->except(['delete']);
+        Route::post('/student-disable', [StudentDisableController::class, 'disable'])->name('disable');
+        Route::post('/stud-enable', [StudentDisableController::class, 'enable'])->name('enable');
+        Route::post('/student-move', [StudentDisableController::class, 'move'])->name('move');
+        Route::get('/student-enable', [StudentDisableController::class, 'enableView'])->name('enableView');
+        Route::get('/student-list', function () {
+            $students = Student::where('cohort_id', '!=', null)->get();
+            return view('pages.studentListView', compact('students', 'user'));
+        })->name('student-list');
+        Route::get('/deactivated-users', [UserEnableController::class, 'index'])->name('deactivated-users');
+        Route::post('/enable-users', [UserEnableController::class, 'enableUser'])->name('enable-users');
         Route::resource('evidence', EvidenceController::class)->except([
             'delete',
         ]);

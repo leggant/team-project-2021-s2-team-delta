@@ -1,57 +1,76 @@
 @can('view students')
 <div class="grid w-full 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full grid-flow-row justify-items-stretch items-stretch">
-    @foreach ($cohorts as $cohort)
     @foreach ($user->papers as $up)
-    @if ($up->pivot->paper_id == $cohort->paper_id)
-    <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl content-start h-content lg:px-4">
-        <h1 class="text-center text-4xl mb-4">{{ $up->paper_name }} -
-            {{ date('Y', strtotime($cohort->year)) }} Stream
-            {{ $cohort->stream }}
-        </h1>
-        <table id="studentTable" class="border-collapse w-full">
-            <thead>
-                <tr>
-                    <th class="py-2 px-2 text-center lg:whitespace-nowrap md:whitespace-nowrap">Student Name</th>
-                    <th class="py-2 px-2 text-center">Email</th>
-                    <th class="py-2 px-2 text-center">Github</th>
-                    <th class="py-2 px-2 text-center"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($students as $student)
-                @if ($up->pivot->paper_id == $student->cohort->paper_id)
-                <tr class="h-min-1">
-                    <td class="border py-2 px-2 text-center">
-                        <a class="hover:underline" href="mailto:{{ $student->username }}@student.op.ac.nz">{{
-                            $student->name }}
-                        </a>
-                    </td>
-                    <td class="border py-2 px-2 text-center">
-                        <a class="hover:underline" href="mailto:{{ $student->username }}@student.op.ac.nz">{{
-                            $student->username }}@student.op.ac.nz
-                        </a>
-                    </td>
-                    <td class="border py-2 px-2 text-center">
-                        @if ($student->github)
-                        <a class="hover:underline" href="http://github.com/{{ $student->github }}"
-                            target="_blank">github.com/{{ $student->github }}
-                        </a>
-                        @endif
-                    </td>
-                    <td class="border py-2 px-2 text-center">
-                        <form action="{{ route('students.show', $student) }}" method="GET">
-                            @csrf
-                            <x-jet-button>Profile</x-jet-button>
-                        </form>
-                    </td>
-                </tr>
-                @endif
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    @endif
-    @endforeach
+        <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
+            <details class="py-4">
+                <summary><h1 class="text-center text-4xl mb-4">{{ $up->paper_name }}</h1></summary>
+                <table id="studentTable">
+                    <tr>
+                        <th class="px-4 py-2"></th>
+                        <th class="px-4 py-2">Student Name</th>
+                        <th class="px-8 py-2">Email</th>
+                        <th class="px-4 py-2">Github</th>
+                        <th class="px-4 py-2">Course + Stream</th>
+                    </tr>
+                    @foreach ($students as $student)
+                            @if ($up->pivot->paper_id == $student->cohort->paper_id)
+                                @if($student->is_active)
+                                    <tr>
+                                    <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" 
+                                        id="checkbox_students" required>
+                                    </td>
+                                        <td class="border py-2 px-2 text-center">
+                                            {{$student->name}}
+                                        </td>
+                                        <td class="border py-2 px-2 text-center">
+                                            <a class="hover:underline"
+                                                href="mailto:{{ $student->username }}@student.op.ac.nz">{{ $student->username }}@student.op.ac.nz
+                                            </a>
+                                        </td>
+                                        @if ($student->github)
+                                            <td class="border py-2 px-2 text-center">
+                                                <a class="hover:underline" href="http://github.com/{{ $student->github }}"
+                                                    target="_blank">github.com/{{ $student->github }}
+                                                </a>
+                                            </td>
+                                        @endif
+                                        <td class="border py-2 px-2 text-center">
+                                            {{ $student->cohort->papers->paper_name }} | Stream
+                                            {{ $student->cohort->stream }}
+                                        </td>
+                                        <td class="py-2 px-12 text-center">
+                                            <form action="{{ route('students.show', $student) }}" method="GET">
+                                                @csrf
+                                                <x-jet-button type="submit">View Student Records</x-jet-button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endif
+                    @endforeach
+                </table>
+                <div class="pt-6 text-center">
+                    <form id="disable" action="{{route('disable')}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="students_selected" value="" id="hidden_students">
+                        <x-jet-danger-button onclick="disable()">Remove Selected Students</x-jet-danger-button>
+                    </form>
+                    <br>
+                    <form id="move" action="{{route('move')}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="students_selected" value="" id="{{$up->pivot->paper_id}}">
+                        <select name="cohort" required>
+                            @foreach($cohorts as $cohort)
+                                <option value="{{$cohort->id}}">
+                                    {{$cohort->papers->paper_name}} | {{$cohort->semester}} | {{$cohort->stream}}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-jet-button onclick="move({{$up->pivot->paper_id}})">Move Selected Students</x-jet-button>
+                    </form>
+                </div>
+            </details>
+        </div>
     @endforeach
 </div>
 @endcan

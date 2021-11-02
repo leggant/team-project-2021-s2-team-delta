@@ -14,10 +14,15 @@
                         class='border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm row-span-1'
                         required aria-multiselectable="false" value="{{ old('student') }}">
                         @foreach ($students as $s)
-                        <option value="{{ $s->id }}" class='border-gray-300 focus:border-indigo-300 focus:ring 
-                                focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
-                            {{ $s->first_name }} {{ $s->last_name }}
-                        </option>
+                            @foreach($user->papers as $up)
+                                @if($up->pivot->paper_id == $s->cohort->papers->id)
+                                    <option value="{{ $s->id }}" 
+                                        class='border-gray-300 focus:border-indigo-300 focus:ring 
+                                        focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'>
+                                        {{ $s->first_name }} {{ $s->last_name }}
+                                    </option>
+                                @endif
+                            @endforeach
                         @endforeach
                     </select>
                     <x-jet-input type="text" name="title" id="title" value="{{ old('title') }}" required
