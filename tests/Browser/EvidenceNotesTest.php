@@ -111,7 +111,6 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->assertSee('Jim Smith')
                     ->clickLink('Jim Smith')
                     ->assertSee('EVIDENCE UPLOAD TEST')
                     ->press('DELETE')
