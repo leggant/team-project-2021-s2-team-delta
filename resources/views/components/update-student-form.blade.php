@@ -2,6 +2,9 @@
     <form action="{{ route('students.update', $student->id) }}" method="POST">
         @csrf
         {{ method_field('PUT') }}
+        @if ($errors->studentupdateerror->any())
+        <p>html</p>
+        @endif
         <div class="grid grid-cols-4 mt-4 gap-4">
             <x-jet-input type="text" id="first_name" name="first_name" value="{{ $student->first_name }}"
                 placeholder="Student First Name" required aria-label="Student First Name"></x-jet-input>
@@ -18,9 +21,9 @@
         <x-jet-button>Update Student</x-jet-button>    
     </form>
 
-@if ($errors->studenterror->any())
+@if ($errors->studentupdateerror->any())
     <ul>
-        @foreach ( $errors->studenterror->all() as $error)
+        @foreach ( $errors->studentupdateerror->all() as $error)
             <li class="text-red-500 list-none">{{ $error }}</li>
         @endforeach
     </ul>
