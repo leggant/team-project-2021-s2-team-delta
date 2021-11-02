@@ -38,9 +38,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/stud-enable', [StudentDisableController::class, 'enable'])->name('enable');
         Route::post('/student-move', [StudentDisableController::class, 'move'])->name('move');
         Route::get('/student-enable', [StudentDisableController::class, 'enableView'])->name('enableView');
-        Route::get('/admin-panel', function () {
-            return view('admin.admin_panel');
-        })->name('admin.admin-panel');
         Route::get('/student-list', function () {
             $students = Student::where('cohort_id', '!=', null)->get();
             return view('pages.studentListView', compact('students', 'user'));
