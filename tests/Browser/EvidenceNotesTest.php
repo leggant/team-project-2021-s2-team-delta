@@ -113,7 +113,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertPathIs('/')
                     ->clickLink('Jim Smith')
                     ->assertSee('EVIDENCE UPLOAD TEST')
-                    ->press('DELETE')
+                    ->press('@delete')
                     ->assertSee('No files found')
                     ->screenshot('deletion');
         });

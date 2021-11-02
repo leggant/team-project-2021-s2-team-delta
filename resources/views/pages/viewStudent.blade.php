@@ -93,7 +93,7 @@
                     <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                         @csrf
                         @method('delete')
-                        <x-delete-button />
+                        <x-delete-button dusk="delete"/>
                     </form>
                     <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 </div>
