@@ -40,9 +40,9 @@
                             </td>
                             @if ($users->is_admin)
                                 <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
-                                <td class="border px-4 py-2">Yes</td>
+                                <td class="border px-4 py-2">Administrator</td>
                             @else
-                                <td class="border px-4 py-2">No</td>
+                                <td class="border px-4 py-2">Lecturer</td>
                             @endif
                             <td class="border px-4 py-2">
                                 <!-- Form that allows the user to delete a user -->
