@@ -38,7 +38,7 @@ class CohortController extends Controller
         if ($current->isNotEmpty()) {
             $cohorts = Cohort::orderBy('paper_id', 'desc')->get();
             return redirect()->action([CohortController::class, 'index'], 
-            ['cohorts' => $cohorts]);
+            ['cohorts' => $cohorts])->with('error', 'Cohort Already Exists');
         } else {
             Validator::make($request->all(), [
                 'paper' => 'required',

@@ -14,7 +14,10 @@ class AddUrlFilenameToEvidenceTable extends Migration
     public function up()
     {
         Schema::table('evidence', function (Blueprint $table) {
-            $table->mediumText('filepath')->nullable()->change();
+            $table
+                ->mediumText('filepath')
+                ->nullable()
+                ->change();
             $table->after('filepath', function ($table) {
                 $table->string('originalFileName', 100)->nullable();
             });

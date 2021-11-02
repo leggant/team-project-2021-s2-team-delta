@@ -27,3 +27,5 @@ app/Console/*
 app/Exceptions/*
 app/Http/*
 app/Providers/*
+*.mix.js
+*.config.js

@@ -26,9 +26,11 @@ class DropPaperIdFromUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign(['paper_id'])
-                  ->references('id')
-                  ->on('papers')->onDelete('cascade');
+            $table
+                ->foreign(['paper_id'])
+                ->references('id')
+                ->on('papers')
+                ->onDelete('cascade');
         });
     }
 }

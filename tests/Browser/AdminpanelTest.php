@@ -106,6 +106,7 @@ class AdminpanelTest extends DuskTestCase
                     ->click('@back')
                     ->assertPathIs('/users')
                     ->assertSee('Current Registered Users');    
+
         });
     }
 }
