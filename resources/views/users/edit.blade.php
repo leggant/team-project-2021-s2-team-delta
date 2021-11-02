@@ -43,7 +43,7 @@
                 </select>
                 (For now press ctrl while clicking options to select multiple)
                 <input type="hidden" value="{{ $user->id }}" id="userID" name="userID">
-                <x-jet-button type='submit'>Submit</x-jet-button>
+                <x-jet-button dusk="edit_submit" type='submit'>Submit</x-jet-button>
         </form>
 
     @else

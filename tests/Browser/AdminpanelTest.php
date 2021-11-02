@@ -50,4 +50,36 @@ class AdminpanelTest extends DuskTestCase
                     ->assertSee('testuser@test.com');
         });
     }
+
+    public function testEditUsers()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user) {
+            $browser->loginAs($user)
+                    ->visit('/users')
+                    ->pause(2000)
+                    ->assertPathIs('/users')                   
+                    ->assertSee('Current Registered Users')
+                    ->click('@edit_user_2')
+                    ->assertSee('Update Temp A')
+                    ->check('Admin')
+                    ->select('Papers[]', ['2', '3'])
+                    ->click('@edit_submit')
+                    ->assertPathIs('/users')
+                    ->assertSee('studio-a@op.ac.nz')
+                    ->assertSee('Studio 1')
+                    ->assertSee('Studio 2');
+        });
+    }
+
+    public function testCreateBackButton()
+    {
+        //
+    }
+
+    public function testEditBackButton()
+    {
+        //
+    }
 }
