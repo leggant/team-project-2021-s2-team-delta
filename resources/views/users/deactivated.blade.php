@@ -40,9 +40,9 @@
                                 <td>{{$user->email}}</td>
                                 <td>
                                     @if($user->is_admin == 1)
-                                        Yes
+                                        Administrator
                                     @else
-                                        No
+                                        Lecturer
                                     @endif
                                 </td>
                             </tr>
