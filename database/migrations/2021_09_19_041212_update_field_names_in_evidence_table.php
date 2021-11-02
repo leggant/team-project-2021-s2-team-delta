@@ -15,7 +15,7 @@ class UpdateFieldNamesInEvidenceTable extends Migration
     {
         Schema::table('evidence', function (Blueprint $table) {
             $table->mediumText('title', 50)->change();
-            $table->renameColumn('image', 'filepath'); 
+            $table->renameColumn('image', 'filepath');
             $table->after('title', function ($table) {
                 $table->text('description')->nullable();
             });

@@ -20,7 +20,7 @@ class AddUpdatesToNotesTable extends Migration
             $table->dropForeign('notes_student_id_foreign');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -30,10 +30,11 @@ class AddUpdatesToNotesTable extends Migration
     {
         Schema::table('notes', function (Blueprint $table) {
             $table->unsignedBigInteger('student_id')->change();
-            $table->foreign('student_id')
-            ->references('id')
-            ->on('student')
-            ->onUpdate('cascade');
+            $table
+                ->foreign('student_id')
+                ->references('id')
+                ->on('student')
+                ->onUpdate('cascade');
         });
     }
 }

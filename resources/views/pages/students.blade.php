@@ -35,19 +35,5 @@
                 </h2>
             @endif
         @endforeach
-        @foreach ($cohorts as $cohort)
-        @once    
-        @if (!$cohort)
-            <h2 class="text-center text-3xl">
-                There Are No Cohorts Set Up To Assign Students To.
-            </h2>
-        @endif
-        @if (!$cohort->students)
-        <h2 class="text-center text-3xl">
-            {{ Str::title($user->name) }} Has Papers Assigned, But No Intake To Add Students To.
-        </h2>
-        @endif
-        @endonce
-        @endforeach
     </div>
 </x-app-layout>

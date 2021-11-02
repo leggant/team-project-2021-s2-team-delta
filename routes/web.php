@@ -25,30 +25,34 @@ use App\Http\Controllers\ {
 
 */
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['middleware' => 'prevent-back-history'],function(){
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/', [StudentController::class, 'index'])->name('home');
-        Route::resource('students', StudentController::class)->except(['delete', 'index']);
-        Route::resource('users', UserController::Class)->except(['delete']);;  
+        Route::resource('students', StudentController::class)->except([
+            'delete',
+            'index',
+        ]);
+        Route::resource('users', UserController::Class)->except(['delete']);
         Route::resource('cohorts', CohortController::class)->except(['delete']);
-        Route::resource('evidence', EvidenceController::class)->except(['delete']);
-        Route::resource('notes', NoteController::class)->except(['delete']);
-        Route::resource('papers', PaperController::class)->except(['delete', 'update', 'store']);
-        Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
-        Route::resource('roles', RoleController::class)->except(['update', 'delete']);
         Route::post('/student-disable', [StudentDisableController::class, 'disable'])->name('disable');
         Route::post('/stud-enable', [StudentDisableController::class, 'enable'])->name('enable');
         Route::post('/student-move', [StudentDisableController::class, 'move'])->name('move');
         Route::get('/student-enable', [StudentDisableController::class, 'enableView'])->name('enableView');
-        Route::get('/admin-panel', function () {
-            return view('admin.admin_panel');
-        })->name('admin.admin-panel');
         Route::get('/student-list', function () {
             $students = Student::where('cohort_id', '!=', null)->get();
             return view('pages.studentListView', compact('students', 'user'));
         })->name('student-list');
         Route::get('/deactivated-users', [UserEnableController::class, 'index'])->name('deactivated-users');
         Route::post('/enable-users', [UserEnableController::class, 'enableUser'])->name('enable-users');
+        Route::resource('evidence', EvidenceController::class)->except([
+            'delete',
+        ]);
+        Route::resource('notes', NoteController::class)->except(['index','delete', 'show']);
+        Route::resource('papers', PaperController::class)->except([
+            'delete',
+            'update',
+            'store',
+        ]);
         // Return user to home any time a route is not found
         Route::fallback(function () {
             return redirect('/')->with('status', 'Error, Page Not Found');

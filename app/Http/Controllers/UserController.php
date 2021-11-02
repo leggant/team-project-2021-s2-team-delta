@@ -47,9 +47,9 @@ class UserController extends Controller
     {
         #Validate the fields recieved
         Validator::make($request->all(), [
-            'Name' => 'required',
-            'Email' => 'required',
-            'Password' => 'required',
+            'Name' => 'required|unique:users',
+            'Email' => 'required|unique:users',
+            'Password' => 'required|min:8',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
@@ -68,17 +68,6 @@ class UserController extends Controller
             'success',
             'User was Created Successfully!'
         );
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
     }
 
     /**
@@ -107,7 +96,7 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
-            'Papers' => 'sometimes|array',
+            'Papers' => 'sometimes|array'
         ])->validate();
         $roles = Role::select('id')->get();
         #Change db field of user to new information provided

@@ -10,19 +10,6 @@ use App\Http\Controllers\StudentController;
 class NoteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $notes = Note::all();
-        $students = Student::all();
-        $user = auth()->user();
-        return view('pages.notes', compact('notes', 'students', 'user'));
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -40,15 +27,15 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $student = Student::where('id', $request->student_id)->first();
+        $student = $request->student_id;
         Note::create([
             'user_id' => $request->user_id,
-            'student_id' => $request->student,
+            'student_id' => $request->student_id,
             'notes' => $request->notes,
         ]);
         return redirect()->action(
             [StudentController::class, 'show'],
-            ['student' => $request->student]
+            ['student' => $student]
         );
     }
 
