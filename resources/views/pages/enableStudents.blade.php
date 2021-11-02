@@ -24,8 +24,8 @@
             </form>
         </div>
         <form action="{{route('enable')}}" method="POST">
-            {{csrf_field()}}
-            <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl w-full">
+            @csrf
+            <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
                 <table id="studentTable">
                     <tr>
                         <th class="px-4 py-2"></th>

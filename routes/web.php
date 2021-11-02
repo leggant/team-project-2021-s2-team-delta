@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Models\Student;
+
 use App\Http\Controllers\ {
     StudentController,
     UserController,
@@ -11,6 +12,7 @@ use App\Http\Controllers\ {
     RoleController,
     PaperController,
     StudentDisableController,
+    UserEnableController,
 }; 
 
 /*
@@ -48,6 +50,8 @@ Route::group(['middleware' => 'auth'], function(){
             $students = Student::where('cohort_id', '!=', null)->get();
             return view('pages.studentListView', compact('students', 'user'));
         })->name('student-list');
+        Route::get('/deactivated-users', [UserEnableController::class, 'index'])->name('deactivated-users');
+        Route::post('/enable-users', [UserEnableController::class, 'enableUser'])->name('enable-users');
         // Return user to home any time a route is not found
         Route::fallback(function () {
             return redirect('/')->with('status', 'Error, Page Not Found');
