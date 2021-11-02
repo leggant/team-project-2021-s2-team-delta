@@ -52,7 +52,6 @@
                                         <x-jet-button type="submit" name="edit">Edit</x-jet-button>
                                     </form>
                                     @if ($id != $users->id)
-                                        {{-- <form action="{{ route('users.update', $users->id) }}" method="POST"> --}}
                                         <form action="{{ route('users.destroy', $users->id) }}" method="POST">
                                             @csrf
                                             {{method_field('DELETE')}}
