@@ -5,24 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\StudentController;
 
 class NoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $notes = Note::all();
-        $students = Student::all();
-        $user = auth()->user();
-        return view('pages.notes', compact('notes', 'students', 'user'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,14 +27,15 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $student = Student::where('id', $request->student_id)->first();
+        $student = $request->student_id;
         Note::create([
-            'student_id' => $request->student,
+            'user_id' => $request->user_id,
+            'student_id' => $request->student_id,
             'notes' => $request->notes,
         ]);
         return redirect()->action(
             [StudentController::class, 'show'],
-            ['student' => $request->student]
+            ['student' => $student]
         );
     }
 

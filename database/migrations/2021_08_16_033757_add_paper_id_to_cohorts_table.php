@@ -16,7 +16,10 @@ class AddPaperIdToCohortsTable extends Migration
         Schema::table('cohorts', function (Blueprint $table) {
             $table->dropColumn(['student_id', 'students', 'subject']);
             $table->unsignedBigInteger('paper_id')->nullable();
-            $table->foreign('paper_id')->references('id')->on('papers');
+            $table
+                ->foreign('paper_id')
+                ->references('id')
+                ->on('papers');
         });
     }
 
@@ -30,7 +33,10 @@ class AddPaperIdToCohortsTable extends Migration
         Schema::table('cohorts', function (Blueprint $table) {
             $table->dropForeign(['paper_id']);
             $table->unsignedBigInteger('student_id')->nullable();
-            $table->string('students')->default(' ')->nullable();
+            $table
+                ->string('students')
+                ->default(' ')
+                ->nullable();
         });
     }
 }

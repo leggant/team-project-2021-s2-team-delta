@@ -19,9 +19,53 @@ class StudioRoleSeeder extends Seeder
         $studio3 = Role::firstOrCreate(['name' => 'Studio 3']);
         $studio4 = Role::firstOrCreate(['name' => 'Studio 4']);
 
-        $studio1->givePermissionTo(['create students','edit students', 'create notes', 'edit notes', 'upload evidence', 'edit evidence', 'view evidence', 'view notes', 'view cohorts', 'view students']);
-        $studio2->givePermissionTo(['create students','edit students', 'create notes', 'edit notes', 'upload evidence', 'edit evidence', 'view evidence', 'view notes', 'view cohorts', 'view students']);
-        $studio3->givePermissionTo(['create students','edit students', 'create notes', 'edit notes', 'upload evidence', 'edit evidence', 'view evidence', 'view notes', 'view cohorts', 'view students']);
-        $studio4->givePermissionTo(['create students','edit students', 'create notes', 'edit notes', 'upload evidence', 'edit evidence', 'view evidence', 'view notes', 'view cohorts', 'view students']);
+        $studio1->givePermissionTo([
+            'create students',
+            'edit students',
+            'create notes',
+            'edit notes',
+            'upload evidence',
+            'edit evidence',
+            'view evidence',
+            'view notes',
+            'view cohorts',
+            'view students',
+        ]);
+        $studio2->givePermissionTo([
+            'create students',
+            'edit students',
+            'create notes',
+            'edit notes',
+            'upload evidence',
+            'edit evidence',
+            'view evidence',
+            'view notes',
+            'view cohorts',
+            'view students',
+        ]);
+        $studio3->givePermissionTo([
+            'create students',
+            'edit students',
+            'create notes',
+            'edit notes',
+            'upload evidence',
+            'edit evidence',
+            'view evidence',
+            'view notes',
+            'view cohorts',
+            'view students',
+        ]);
+        $studio4->givePermissionTo([
+            'create students',
+            'edit students',
+            'create notes',
+            'edit notes',
+            'upload evidence',
+            'edit evidence',
+            'view evidence',
+            'view notes',
+            'view cohorts',
+            'view students',
+        ]);
     }
 }

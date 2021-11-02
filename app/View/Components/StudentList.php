@@ -14,7 +14,7 @@ class StudentList extends Component
     public $students;
     public $cohorts;
     public $user;
-    
+
     /**
      * Create a new component instance.
      * @param  array  $students

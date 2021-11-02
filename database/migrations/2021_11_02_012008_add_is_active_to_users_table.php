@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MoveColsInCohortsTable extends Migration
+class AddIsActiveToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class MoveColsInCohortsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            DB::statement("ALTER TABLE cohorts MODIFY COLUMN paper_id bigint(20) UNSIGNED NOT NULL AFTER id");
+        Schema::table('users', function (Blueprint $table) {
+            $table->after('is_admin', function ($table) {
+                $table->boolean('is_active')->default(true);
+            });
         });
     }
 
@@ -25,8 +27,8 @@ class MoveColsInCohortsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_active');
         });
     }
 }
