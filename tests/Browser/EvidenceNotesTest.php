@@ -102,7 +102,7 @@ class EvidenceNotesTest extends DuskTestCase
     }
 
     //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence. 
-    public function testEvidenceDeletion()
+    /*public function testEvidenceDeletion()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -117,7 +117,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertSee('No files found')
                     ->screenshot('deletion');
         });
-    }
+    }*/
 
     /*
 
