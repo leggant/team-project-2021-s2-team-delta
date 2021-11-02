@@ -8,8 +8,6 @@ use App\Http\Controllers\ {
     CohortController,
     EvidenceController,
     NoteController,
-    PermissionController,
-    RoleController,
     PaperController,
     StudentDisableController,
     UserEnableController,
@@ -31,11 +29,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'prevent-back-history'],function(){
         Route::get('/', [StudentController::class, 'index'])->name('home');
         Route::resource('students', StudentController::class)->except(['delete', 'index']);
-        // wildcard name not needed, it's the default given in the first set of round brackets
-        Route::resource('users', UserController::Class);  
-        Route::resource('cohorts', CohortController::class);
-        Route::resource('evidence', EvidenceController::class);
-        Route::resource('notes', NoteController::class);
+        Route::resource('users', UserController::Class)->except(['delete']);;  
+        Route::resource('cohorts', CohortController::class)->except(['delete']);
+        Route::resource('evidence', EvidenceController::class)->except(['delete']);
+        Route::resource('notes', NoteController::class)->except(['delete']);
         Route::resource('papers', PaperController::class)->except(['delete', 'update', 'store']);
         Route::resource('permissions', PermissionController::class)->except(['update', 'delete']);
         Route::resource('roles', RoleController::class)->except(['update', 'delete']);
@@ -58,9 +55,6 @@ Route::group(['middleware' => 'auth'], function(){
         });
     });
 });
-// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-//     return view('pages.students');
-// })->name('home');
 
 // Dashboard route needs to be kept so this can be re-deployed later.
 //  Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {

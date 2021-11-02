@@ -18,10 +18,10 @@
                     @endforeach
                 </select>
                 <x-jet-label for="filelink" class="text-lg lg:col-start-2 lg:col-end-3 lg:row-start-0 lg:row-end-1">Optionally Enter A WebLink</x-jet-label>
-                <x-jet-input type="url" name="filelink" id="filelink" placeholder="Enter File URL" aria-label="Enter File URL" aria-placeholder="Enter File URL" class="focus:placeholder-gray-400 lg:col-start-2 lg:col-end-3" value="{{ old('filelink') }}"></x-jet-input>
-                <textarea rows="5" name="notes" required placeholder="Enter A Note...."
+                <x-jet-input type="url" name="filelink" id="filelink" dusk="filelink" placeholder="Enter File URL" aria-label="Enter File URL" aria-placeholder="Enter File URL" class="focus:placeholder-gray-400 lg:col-start-2 lg:col-end-3" value="{{ old('filelink') }}"></x-jet-input>
+                <textarea rows="5" name="notes" dusk="noteinput" required placeholder="Enter A Note...."
                     class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block lg:col-span-2"></textarea>
-                <x-jet-button>Save Note</x-jet-button>
+                <x-jet-button type="submit">Save Note</x-jet-button>
             </form>
     @else
         <div>

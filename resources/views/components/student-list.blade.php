@@ -1,4 +1,7 @@
 @can('view students')
+<div
+    class="grid w-full 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full grid-flow-row justify-items-stretch items-stretch">
+    @foreach ($cohorts as $cohort)
     @foreach ($user->papers as $up)
         <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
             <details class="py-4">
@@ -71,4 +74,5 @@
             </details>
         </div>
     @endforeach
+</div>
 @endcan

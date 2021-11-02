@@ -20,16 +20,6 @@ class PaperController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -60,17 +50,6 @@ class PaperController extends Controller
                 'Paper Created Successfully'
             );
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Papers  $papers
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Papers $papers)
-    {
-        //
     }
 
     /**
@@ -115,16 +94,5 @@ class PaperController extends Controller
                 'Paper Updated Successfully'
             );
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Papers  $papers
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Papers $paper)
-    {
-        //
     }
 }

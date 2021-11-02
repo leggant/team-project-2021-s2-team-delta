@@ -18,7 +18,6 @@ class Evidence extends Model
         'description',
         'filepath',
         'originalFileName',
-        'url',
         'student_id',
         'user_id',
         'updated_at',
