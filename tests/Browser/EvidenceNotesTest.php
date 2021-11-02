@@ -91,7 +91,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertPathIs('/evidence')
                     ->assertSee('Jim Smith')
                     ->assertSee('UPLOAD FILES')
-                    ->type('@title', 'Evidence Upload Test')
+                    ->type('#title', 'Evidence Upload Test')
                     ->attach('@image', storage_path('test_upload_file.png'))  
                     ->click('button[type="submit"]')
                     ->pause(2000)
