@@ -1456,6 +1456,9 @@ select {
 .flex-wrap {
 	flex-wrap: wrap;
 }
+.place-content-between {
+	place-content: space-between;
+}
 .place-content-around {
 	place-content: space-around;
 }
@@ -1464,6 +1467,9 @@ select {
 }
 .content-start {
 	align-content: flex-start;
+}
+.content-between {
+	align-content: space-between;
 }
 .items-center {
 	align-items: center;
@@ -1483,8 +1489,14 @@ select {
 .justify-between {
 	justify-content: space-between;
 }
+.justify-around {
+	justify-content: space-around;
+}
 .justify-items-end {
 	justify-items: end;
+}
+.justify-items-center {
+	justify-items: center;
 }
 .justify-items-stretch {
 	justify-items: stretch;
@@ -1531,6 +1543,14 @@ select {
 .gap-y-4 {
 	row-gap: 1rem;
 }
+.gap-x-12 {
+	-moz-column-gap: 3rem;
+	     column-gap: 3rem;
+}
+.gap-x-14 {
+	-moz-column-gap: 3.5rem;
+	     column-gap: 3.5rem;
+}
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
 	margin-right: calc(2rem * var(--tw-space-x-reverse));
@@ -1546,6 +1566,22 @@ select {
 	margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+	margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.place-self-start {
+	place-self: start;
+}
+.place-self-end {
+	place-self: end;
+}
 .place-self-center {
 	place-self: center;
 }
@@ -1557,6 +1593,9 @@ select {
 }
 .justify-self-start {
 	justify-self: start;
+}
+.justify-self-stretch {
+	justify-self: stretch;
 }
 .overflow-hidden {
 	overflow: hidden;
