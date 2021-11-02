@@ -169,10 +169,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        #Delete a user
-        $user->delete();
-        #Deletes data relevant to the user in the pivot table
-        $user->papers()->detach($user->id);
-        return redirect('/users')->with('success', 'User Deleted');
+        $user->is_active = 0;
+        $user->save();
+        return redirect('/users')->with('success', 'User Deactivated Successfully');
     }
 }
