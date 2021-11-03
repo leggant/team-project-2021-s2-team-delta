@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
             'enableView',
         ])->name('enableView');
         Route::get('/student-list', function () {
-            $students = Student::where('cohort_id', '!=', null)->get();
+            $students = Student::all();
             $user = auth()->user();
             return view('pages.studentListView', compact('students', 'user'));
         })->name('student-list');
