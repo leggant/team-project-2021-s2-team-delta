@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1 class="font-semibold">Studio Cohorts</h1>
     </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6 grid grid-cols-2 py-10 gap-x-5">
+    <div class="max-w-7xl mx-auto xl:grid-col-2 sm:px-6 grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 py-10">
         @can('create cohorts')
             <div>
                 <h2 class="col-span-2 text-3xl mb-4">Add a New Cohort</h2>
@@ -45,8 +45,9 @@
         <div class="w-full">
             @can('view cohorts')
                 @if ($cohorts->count() > 0)
-                    <h2 class="text-left text-2xl mb-4">Current Cohorts</h2>
-                    <table class="w-full">
+                <h2 class="text-left text-3xl mb-4">Current Cohorts</h2>
+                @livewire('cohort-table')
+                    {{-- <table class="w-full">
                         <thead>
                             <tr class="grid grid-cols-4">
                                 <th class="px-4 py-2 text-center">Paper</th>
@@ -66,7 +67,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
                 @else
                     <h2 class="text-left text-2xl">No Cohorts Have Been Created.</h2>
                 @endif
