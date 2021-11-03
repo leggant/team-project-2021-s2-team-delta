@@ -144,14 +144,21 @@ class StudentController extends Controller
         ];
 
         $messages = [
-            'first_name.alpha' => 'Student First name is required',
+            'first_name.required' => 'Student first name is required',
+            'first_name.alpha' => 'Please use letters only',
+            'first_name.max' => 'First name exceeds 25 character limit',
+            'first_name.min' => 'First name must have at least 3 characters',
+            'last_name.required' => 'Student last name is required',
+            'last_name.alpha' => 'Please use letters only',
+            'last_name.max' => 'Last name exceeds 25 character limit',
+            'last_name.min' => 'Last name must have at least 3 characters',            
         ];
 
         $validator = Validator::make(
             $request->all(),
             $rules,
             $messages
-        )->validateWithBag('studenterror');
+        )->validateWithBag('studentupdateerror');
         
         $upstudent = Student::find($id);
         $upstudent->first_name = $request->first_name;
@@ -159,7 +166,8 @@ class StudentController extends Controller
         $upstudent->username = Str::lower($request->username);
         $upstudent->email = $request->username . '@student.op.ac.nz';
         $upstudent->github = Str::lower($request->github) ? Str::lower($request->github) : $upstudent->github;
-        $upstudent->save();        
+        $upstudent->save();
+
         return redirect()->action(
             [StudentController::class, 'show'],
             ['student' => $id]

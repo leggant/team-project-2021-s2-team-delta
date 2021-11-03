@@ -54,6 +54,17 @@
                 <x-jet-button class="mt-2">Update Student</x-jet-button>
             </form>
         </div>
+
+        {{-- Display any errors resulting from validation of the student update --}}
+
+            @if ($errors->studentupdateerror->any())
+                <ul>
+                    @foreach ( $errors->studentupdateerror->all() as $error)
+                        <li class="text-red-500 list-none">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+
         <div class="mt-4">
             <h3 class="text-3xl">Evidence</h3>
             @if($uploads->count() > 0)
