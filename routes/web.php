@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         ])->name('enableView');
         Route::get('/student-list', function () {
             $students = Student::where('cohort_id', '!=', null)->get();
+            $user = auth()->user();
             return view('pages.studentListView', compact('students', 'user'));
         })->name('student-list');
         Route::get('/deactivated-users', [
