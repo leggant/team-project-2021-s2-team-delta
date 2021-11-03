@@ -49,7 +49,7 @@
                                 <div class="flex justify-start gap-4">
                                     <form action="{{ route('users.edit', $users->id) }}" method="get">
                                         @csrf
-                                        <x-jet-button type="submit" dusk="edit_users_{{$user->id}}" name="edit">Edit</x-jet-button>
+                                        <x-jet-button type="submit" dusk="edit_users_{{$users->id}}" name="edit">Edit</x-jet-button>
                                     </form>
                                     @if ($id != $users->id)
                                         <form action="{{ route('users.destroy', $users->id) }}" method="POST">
