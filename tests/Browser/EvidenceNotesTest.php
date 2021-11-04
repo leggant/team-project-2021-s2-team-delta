@@ -30,6 +30,13 @@ class EvidenceNotesTest extends DuskTestCase
             'paper_id' => 2, // With paper_id matching the one in cohort above
         ]);
 
+        
+        DB::table('users')
+            ->where('id', 1)
+            ->update(['paper_id' => 2 
+        ]);
+
+
         $cohort = Cohort::factory()->create([
             //'id' => 2,
             'paper_id' => 2, // Studio 1
@@ -42,16 +49,18 @@ class EvidenceNotesTest extends DuskTestCase
             //'id' => 2,
             'first_name' => 'Jim',
             'last_name' => 'Smith',
-            'username' => 'UseThisName',
+            'username' => 'Jsmithy',
             'email' => 'johnsmith@gmail.com',
             'github' => 'johnsgit',
-            'cohort_id' => 2, // The cohort created above
+            'cohort_id' => 1, // The cohort created above
             'is_active' => 1,
         ]);
 
         $this->assertTrue(true);
     }
 
+
+    /*
     public function testEvidenceAdminAccess()
     {
         $user = User::where('is_admin', 1)->first();
@@ -75,7 +84,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->assertPathIs('/evidence')
                 ->assertSee('SAVE NOTE');
         });
-    }
+    }*/
 
     //this test uploads a file to a student profile as an admin, then checks if the file has been uploaded.
     public function testAdminEvidenceSubmit()
@@ -89,18 +98,18 @@ class EvidenceNotesTest extends DuskTestCase
                 ->assertPathIs('/evidence')
                 ->assertSee('Jim Smith')
                 ->assertSee('UPLOAD FILES')
-                ->type('#title', 'Evidence Upload Test')
+                ->type('#title', 'Test')
                 ->attach('@image', storage_path('test_upload_file.png'))
-                ->click('button[type="submit"]')
+                ->click('button[type="evidence_submit"]')
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
-                ->assertSee('EVIDENCE UPLOAD TEST')
+                ->assertSee('TEST')
                 ->screenshot('studentprofile');
         });
     }
 
     //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence.
-    /*public function testEvidenceDeletion()
+    public function testEvidenceDeletion()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -109,13 +118,15 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->clickLink('Jim Smith')
-                    ->assertSee('EVIDENCE UPLOAD TEST')
-                    ->press('@delete')
+                    ->click('@dropdown')
+                    ->click('@student_records')
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('TEST')
+                    ->press('button[type="delete"]')
                     ->assertSee('No files found')
                     ->screenshot('deletion');
         });
-    }*/
+    }
 
     /*
 

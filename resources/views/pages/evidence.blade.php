@@ -25,7 +25,7 @@
                             @endforeach
                         @endforeach
                     </select>
-                    <x-jet-input type="text" name="title" id="title" value="{{ old('title') }}" required
+                    <x-jet-input type="text" name="title" id="title" dusk="title" value="{{ old('title') }}" required
                         aria-label="Upload Title" aria-placeholder="Enter A Upload Title"
                         placeholder="Enter A Upload Title" class="focus:placeholder-gray-400"></x-jet-input>
                     <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image"
@@ -39,7 +39,7 @@
                     {{-- MULTIPLE ALLOWS MULTIPLE FILES TO BE UPLOADED. CHECK BACKEND CAN HANDLE THIS IN THE HTTP
                     REQUEST --}}
                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                    <x-jet-button>Upload Files</x-jet-button>
+                    <x-jet-button type="evidence_submit">Upload Files</x-jet-button>
                 </div>
             </form>
             @if ($errors->evidenceerror->any())

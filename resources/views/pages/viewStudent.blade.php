@@ -67,7 +67,7 @@
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf
                     @method('delete')
-                    <x-delete-button dusk="delete"/>
+                    <x-jet-button type="delete"></x-jet-button>
                 </form>
                 @if($file->created_at != $file->updated_at)
                 <p class="leading-relaxed py-1 col-span-4">Updated:
