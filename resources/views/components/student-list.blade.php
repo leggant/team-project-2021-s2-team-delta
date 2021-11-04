@@ -7,7 +7,7 @@
             @if($up->pivot->paper_id == $cohort->paper_id)
                 <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
                     <details class="py-4">
-                        <summary><h1 class="text-center text-4xl mb-4">{{ $cohort->papers->paper_name  }} | {{$cohort->semester}} | Stream {{$cohort->stream}}</h1></summary>
+                        <summary><h1 class="text-center text-4xl mb-4">{{ $cohort->papers->paper_name  }} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}</h1></summary>
                         <table id="studentTable">
                             <tr>
                                 <th class="px-4 py-2"></th>
@@ -55,18 +55,18 @@
                         </table>
                         <div class="pt-6 text-center">
                             <form id="disable" action="{{route('disable')}}" method="POST">
-                                {{csrf_field()}}
+                                @csrf
                                 <input type="hidden" name="students_selected" value="" id="hidden_students">
                                 <x-jet-danger-button onclick="disable()">Remove Selected Students</x-jet-danger-button>
                             </form>
                             <br>
                             <form id="move" action="{{route('move')}}" method="POST">
-                                {{csrf_field()}}
+                                @csrf
                                 <input type="hidden" name="students_selected" value="" id="{{$oldcount}}">
                                 <select name="cohort" required>
                                     @foreach($cohorts as $cohort)
                                         <option value="{{$cohort->id}}">
-                                            {{$cohort->papers->paper_name}} | {{$cohort->semester}} | {{$cohort->stream}}
+                                            {{$cohort->papers->paper_name}} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | {{$cohort->stream}}
                                         </option>
                                     @endforeach
                                 </select>
