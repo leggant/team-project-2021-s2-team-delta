@@ -10,15 +10,15 @@ function disable() {
     $('#disable').submit()
 }
 
-function move(paper_id) {
+function move(id) {
     const arr = []
-    console.log("Paper ID:" + paper_id)
+    console.log("ID:" + id)
     $("input[name='student_checkboxes[]']").each(function() {
         if(this.checked){
             arr.push(this.value)
         }
     });
     console.log(arr)
-    $('#' + paper_id).val(JSON.stringify(arr))
+    $('#' + id).val(JSON.stringify(arr))
     $('#move').submit()
 }
