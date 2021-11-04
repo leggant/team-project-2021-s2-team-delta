@@ -203,8 +203,7 @@ Correct the inability to style clickable types in iOS and Safari.
 button,
 [type='button'],
 [type='reset'],
-[type='submit'],
-[type='delete'] {
+[type='submit'] {
 	-webkit-appearance: button;
 }
 
@@ -1135,6 +1134,12 @@ select {
 .row-start-5 {
 	grid-row-start: 5;
 }
+.m-2 {
+	margin: 0.5rem;
+}
+.m-1 {
+	margin: 0.25rem;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1265,6 +1270,9 @@ select {
 }
 .h-20 {
 	height: 5rem;
+}
+.h-1 {
+	height: 0.25rem;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1815,6 +1823,10 @@ select {
 	padding-left: 3rem;
 	padding-right: 3rem;
 }
+.px-5 {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
 .pt-6 {
 	padding-top: 1.5rem;
 }
@@ -2154,6 +2166,10 @@ select {
 .hover\:bg-gray-50:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
+}
+.hover\:bg-red-700:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(185, 28, 28, var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;

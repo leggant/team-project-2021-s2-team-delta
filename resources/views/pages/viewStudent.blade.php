@@ -60,14 +60,14 @@
             @foreach($uploads as $file)
             <div class="grid grid-cols-6 mt-3 place-items-start items-center gap-2">
                 <a href="{{ route('evidence.show', $file->id) }}">
-                    <x-jet-button>
+                    <x-jet-button class="h-10 px-5">
                         {{ $file->title }}
                     </x-jet-button>
                 </a>
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf
                     @method('delete')
-                    <x-jet-button type="delete"></x-jet-button>
+                    <button dusk="evidence_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button> 
                 </form>
                 @if($file->created_at != $file->updated_at)
                 <p class="leading-relaxed py-1 col-span-4">Updated:
@@ -93,12 +93,12 @@
                     <form method="#" action="#" class="self-start">
                         @csrf
                         @method('put')
-                        <x-edit-button />
+                        <x-jet-button class="h-10 px-5"> Edit </x-jet-button>
                     </form>
                     <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                         @csrf
                         @method('delete')
-                        <x-delete-button dusk="delete"/>
+                        <button dusk="notes_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button>
                     </form>
                     <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 </div>

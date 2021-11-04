@@ -59,9 +59,7 @@ class EvidenceNotesTest extends DuskTestCase
         $this->assertTrue(true);
     }
 
-
-    /*
-    public function testEvidenceAdminAccess()
+    public function testEvidenceNotesAdminAccess()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -70,21 +68,11 @@ class EvidenceNotesTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit('/evidence')
                 ->assertPathIs('/evidence')
-                ->assertTitle('Studio Management')
-                ->assertSee('UPLOAD FILES');
+                ->assertSee('UPLOAD FILES')
+                ->assertSee('SAVE NOTE')
+                ->screenshot('evidence/notes upload form');
         });
     }
-
-    public function testFindNotesPage()
-    {
-        $this->browse(function ($browser) {
-            $browser
-                ->visit('/evidence')
-                ->pause(2000)
-                ->assertPathIs('/evidence')
-                ->assertSee('SAVE NOTE');
-        });
-    }*/
 
     //this test uploads a file to a student profile as an admin, then checks if the file has been uploaded.
     public function testAdminEvidenceSubmit()
@@ -100,11 +88,11 @@ class EvidenceNotesTest extends DuskTestCase
                 ->assertSee('UPLOAD FILES')
                 ->type('#title', 'Test')
                 ->attach('@image', storage_path('test_upload_file.png'))
-                ->click('button[type="evidence_submit"]')
+                ->click('@evidence_submit')
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
                 ->assertSee('TEST')
-                ->screenshot('studentprofile');
+                ->screenshot('evidence_view');
         });
     }
 
@@ -122,16 +110,14 @@ class EvidenceNotesTest extends DuskTestCase
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
                     ->assertSee('TEST')
-                    ->press('button[type="delete"]')
+                    ->press('@evidence_delete')
+                    ->pause(2000)
                     ->assertSee('No files found')
-                    ->screenshot('deletion');
+                    ->screenshot('evidence_deletion');
         });
     }
 
-    /*
-
-    Commented out temporarily as the notes upload isn't working in this branch but is in development, will get the notes test working 
-    after the merge 
+    //test uploads a note then checks the student profile for the upload. 
     public function testAdminNoteSubmit()
     {
         $user = User::where('is_admin', 1)->first();
@@ -139,16 +125,37 @@ class EvidenceNotesTest extends DuskTestCase
         $this->browse(function ($browser) use($user)
         {
             $browser->loginAs($user)
-                    ->visit('/notes')
+                    ->visit('/evidence')
                     ->pause(2000)
-                    ->assertPathIs('/notes')
+                    ->assertPathIs('/evidence')
                     ->assertSee('SAVE NOTE')
                     ->assertSee('Jim Smith')
-                    ->type('@filelink', 'www.google.com')
+                    ->type('@filelink', 'https://www.google.com')
                     ->type('@noteinput', 'testing note submissions!')
-                    ->click('button[type="submit"]')
+                    ->click('@notes_submit')
                     ->pause(2000)
-
+                    ->screenshot('note_view');
         });
-    }*/
+    }
+
+    //test goes to the student profile, than deletes a note upload. 
+    public function testAdminNotesDelete()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->click('@dropdown')
+                    ->click('@student_records')
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('Testing Note Submissions!')
+                    ->press('@notes_delete')
+                    ->pause(2000)
+                    ->assertSee('No notes found')
+                    ->screenshot('note_deletion');
+        });
+    }
 }
