@@ -47,8 +47,8 @@ class UserController extends Controller
     {
         #Validate the fields recieved
         Validator::make($request->all(), [
-            'Name' => 'required|unique:users',
-            'Email' => 'required|unique:users',
+            'Name' => 'required',
+            'Email' => 'required|unique:App\Models\User,email',
             'Password' => 'required|min:8',
         ])->validate();
 

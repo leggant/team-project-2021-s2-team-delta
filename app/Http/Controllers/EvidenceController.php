@@ -26,7 +26,7 @@ class EvidenceController extends Controller
     public function index()
     {
         $uploads = Evidence::all();
-        $students = Student::all();
+        $students = Student::where('cohort_id', '!=', null)->get();
         $user = auth()->user();
         return view(
             'pages.evidence',
