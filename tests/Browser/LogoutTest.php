@@ -15,6 +15,7 @@ class LogoutTest extends DuskTestCase
         $this->artisan('migrate:fresh --force');
         $this->artisan('db:seed');
     }
+    
     public function test_logout()
     {
         $user = User::where('name', 'Administrator')->get();

@@ -9,7 +9,6 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
-// 100% failing test
 class LecturerTest extends DuskTestCase
 {
     public function testAdminUsersPage()
@@ -38,6 +37,30 @@ class LecturerTest extends DuskTestCase
         });
     }
 
+    public function testAdminCreateNewUser()
+    {   
+        // Admin creates a new user - Dusk Lecturer
+        // Will be used to test changing of details in the lecturer's profile tab
+        
+        $this->browse(function ($browser) {
+            $browser->visit('/users')
+                    ->pause(2000)
+                    ->assertPathIs('/users')                   
+                    ->assertSee('Current Registered Users')
+                    ->press('CREATE NEW USER')
+                    ->assertPathIs('/users/create*')
+                    ->screenshot('usercreatescreen')
+                    ->type('#Name', 'Dusk Lecturer')
+                    ->type('#Email', 'fake@fakeemail.com')
+                    ->type('#Password', 'SeriousPassword987')
+                    //->check('#Admin')                    
+                    ->screenshot('createdusklecturerinputs')
+                    ->press('SUBMIT')
+                    ->assertPathIs('/users')
+                    ->assertTitle('Studio Management');                    
+        });
+    }
+
     public function testLecturerLogoutAdmin()
     {
         $this->browse(function ($browser) {
@@ -47,7 +70,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerLogin()
     {
-        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
+        $user = User::where('name', 'Temp A')->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
 
         $this->browse(function ($browser) use ($user) {
             $browser
@@ -96,7 +119,7 @@ class LecturerTest extends DuskTestCase
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
                 ->assertSee('studio-a@op.ac.nz') // hard-coded 'temp A' lecturer email login
-                ->visit('/users/2/edit')
+                ->visit('/users/2/edit')    // hard-coded for user 2 'temp A'
                 ->screenshot('4-editlectureragain')
                 ->assertSee('Update Temp A')
                 ->select('Papers[]', 2) // Select option 2 from 'papers' dropdown for Studio 1 then click the SUBMIT button
@@ -128,7 +151,7 @@ class LecturerTest extends DuskTestCase
         });
     }
 
-    public function testLecturerLogoutAdminAgain()
+    public function testLogoutAdminAgain()
     {
         $this->browse(function ($browser) {
             $browser->press('Log Out')->assertPathIs('/login');
@@ -139,7 +162,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerLoginAgain()
     {
-        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin
+        $user = User::where('name', 'Temp A')->first(); // get first user that isn't flagged as an admin
 
         $this->browse(function ($browser) use ($user) {
             $browser
@@ -182,9 +205,7 @@ class LecturerTest extends DuskTestCase
             ->where('paper_id', 2)
             ->where('semester', 'Semester 1')
             ->where('stream', 'A')
-            ->pluck('id');
-
-        // dd($cohortid[0]);
+            ->pluck('id');        
 
         $this->browse(function ($browser) use ($cohortid) {
             $id = $cohortid[0];
@@ -213,7 +234,67 @@ class LecturerTest extends DuskTestCase
                 ->assertPathIs('/')
                 ->assertTitle('Studio Management')
                 ->assertSee('Studio 1')
-                ->seeLink('Some RandomName');
+                ->assertPresent('#studentTable')
+                ->click('summary')
+                ->assertSee('Some Randomname')
+                ->screenshot('lecturerseeslink');                
         });
     }
+
+    public function testLogoutLecturerTempA()
+    {
+        $this->browse(function ($browser) {
+            $browser->press('Log Out')->assertPathIs('/login');
+        });
+    }
+
+    public function testUpdateLecturerProfile()
+    {
+        $user = User::where('name', 'Dusk Lecturer')->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->assertTitle('Studio Management')
+                    ->screenshot('dusklecturerlogin')
+                    ->visit('/user/profile')
+                    ->type('#name', 'Dusky')
+                    ->type('#email', 'dusky@fakeemail.com')                    
+                    ->click('#updateprofile')
+                    ->pause(1000)
+                    ->screenshot('profileupdates')
+                    ->type('#current_password', 'SeriousPassword987')
+                    ->type('#password', 'BetterPassword321')
+                    ->type('#password_confirmation', 'BetterPassword321')
+                    ->click('#updatepassword')
+                    ->pause(1000)
+                    ->screenshot('passwordupdated');
+        });
+    }
+
+    public function testLogoutLecturerDusk()
+    {
+        $this->browse(function ($browser) {
+            $browser->press('Log Out')->assertPathIs('/login');
+        });
+    }
+
+    public function testLecturerUpdateLogin()
+    {           
+        $this->browse(function ($browser) {            
+            $browser
+                ->visit('/login')
+                ->assertPathIs('/login')
+                ->value('#email', 'dusky@fakeemail.com')
+                ->type('@password', 'BetterPassword321')
+                ->click('button[type="submit"]')
+                ->visit('/')
+                ->assertPathIs('/')
+                ->assertSee('Welcome Dusky')
+                ->assertTitle('Studio Management')
+                ->screenshot('updatedlecturerlogin');
+        });
+    }
+
 }
