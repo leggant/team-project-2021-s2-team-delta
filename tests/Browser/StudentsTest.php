@@ -10,14 +10,7 @@ use Tests\DuskTestCase;
 
 class StudentsTest extends DuskTestCase
 {
-    // NOTE : Any student tests will need to added to lecturer or admin access test files
-    // This is because roles and assignments need to be done before student features are usable
-
-    /* 
-    Currently one placeholder test while waiting
-    for CRUD features to be added. 
-    Tests for create student and create with duplicate email address
-    can be found in file StudentViewTest.php
+    /*
     Will test delete, update, view/read when those features are available
     */
 
