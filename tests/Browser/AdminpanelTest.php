@@ -30,6 +30,20 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
+    public function testFindCohortAdminPage()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/cohorts')
+                ->pause(2000)
+                ->assertPathIs('/cohorts')
+                ->assertSee('Add a New Cohort');
+        });
+    }
+
     public function testCreateNewUser()
     {
         $user = User::where('is_admin', 1)->first();
@@ -221,6 +235,19 @@ class AdminpanelTest extends DuskTestCase
                 ->visit('/student-list')
                 ->pause(2000)
                 ->assertPathIs('/student-list')
+                ->assertSee('You do not have permission to access this page');
+        });
+    }
+
+    public function testNormalUserCantAccessCohorts()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/cohorts')
+                ->pause(2000)
+                ->assertPathIs('/cohorts')
                 ->assertSee('You do not have permission to access this page');
         });
     }
