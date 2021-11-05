@@ -44,6 +44,6 @@
         </table>
     </div>
 @else
-    <h2>You do not have permission to view this page</h2>
+    <h2>You do not have permission to access this page</h2>
 @endrole
 </x-app-layout>

@@ -156,19 +156,6 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
-    public function testNormalUserCantAccessAdminPanel()
-    {
-        $user = User::where('is_admin', 0)->first();
-        $this->browse(function ($browser) use ($user) {
-            $browser
-                ->loginAs($user)
-                ->visit('/users')
-                ->pause(2000)
-                ->assertPathIs('/users')
-                ->assertSee('You do not have permission to access this page');
-        });
-    }
-
     public function testAdminCanViewAllStudents()
     {
         $user = User::where('is_admin', 1)->first();
@@ -183,6 +170,58 @@ class AdminpanelTest extends DuskTestCase
                 ->click('@student_list')
                 ->assertPathIs('/student-list')
                 ->assertPresent('@student_table');
+        });
+    }
+
+    public function testNormalUserCantAccessAdminPanel()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('You do not have permission to access this page');
+        });
+    }
+
+    public function testNormalUserCantAccessCreateUser()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users/create')
+                ->pause(2000)
+                ->assertPathIs('/users/create')
+                ->assertSee('You do not have permission to access this page');
+        });
+    }
+
+    public function testNormalUserCantAccessDeactivateUsersList()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/deactivated-users')
+                ->pause(2000)
+                ->assertPathIs('/deactivated-users')
+                ->assertSee('You do not have permission to access this page');
+        });
+    }
+
+    public function testNormalUserCantAccessStudentsList()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/student-list')
+                ->pause(2000)
+                ->assertPathIs('/student-list')
+                ->assertSee('You do not have permission to access this page');
         });
     }
 }

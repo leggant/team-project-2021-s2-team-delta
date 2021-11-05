@@ -63,6 +63,6 @@
         </div>
     @endif
 @else
-    <h2 class="text-center">You don't have access to this page</h2>
+    <h2 class="text-center">You do not have permission to access this page</h2>
 @endrole
 </x-app-layout>
