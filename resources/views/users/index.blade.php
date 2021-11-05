@@ -14,7 +14,7 @@
             </form>
             <form action="{{ route('deactivated-users') }}" method="get" class="mx-auto">
                 @csrf
-                <x-jet-button type="submit">View Deactivated Users</x-jet-button>
+                <x-jet-button dusk="deactivated_list" type="submit">View Deactivated Users</x-jet-button>
             </form>
         </div>
         <table class="max-w-full mx-auto mt-6">
@@ -55,7 +55,7 @@
                                         <form action="{{ route('users.destroy', $users->id) }}" method="POST">
                                             @csrf
                                             {{method_field('DELETE')}}
-                                            <x-jet-danger-button type="submit">Deactivate User</x-jet-danger-button>
+                                            <x-jet-danger-button dusk="deactivate_{{$users->id}}" type="submit">Deactivate User</x-jet-danger-button>
                                         </form>
                                     @endif
                                 </div>

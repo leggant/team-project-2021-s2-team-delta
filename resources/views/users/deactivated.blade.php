@@ -17,7 +17,7 @@
     @if(count($users) >= 1)
         <div class="py-6 text-center">
             <form action="{{ route('users.index') }}" class="gap-4">
-                <x-jet-button type='submit'>Back</x-jet-button>
+                <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
             </form>
         </div>
         <form action="{{route('enable-users')}}" method="POST">
@@ -51,14 +51,14 @@
                 </table>
             </div>
             <div class="py-6 text-center">
-                <x-jet-button type="submit">Activate Users</x-jet-button>
+                <x-jet-button dusk="activate" type="submit">Activate Users</x-jet-button>
             </div>
         </form>
     @else
         <h2 class="text-center">All Users Have Been Activated</h2>
         <div class="py-6 text-center">
             <form action="{{ route('users.index') }}" class="gap-4">
-                <x-jet-button type='submit'>Back</x-jet-button>
+                <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
             </form>
         </div>
     @endif

@@ -113,4 +113,46 @@ class AdminpanelTest extends DuskTestCase
                 ->assertSee('Current Registered Users');
         });
     }
+
+    public function testAdminCanDeactivateUsers()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@deactivate_2')
+                ->assertDontSee('studio-a@op.ac.nz');
+        });
+    }
+
+    public function testAdminCanDeactivateAndActivateUsers()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@deactivate_2')
+                ->assertDontSee('studio-a@op.ac.nz')
+                ->click('@deactivated_list')
+                ->assertPathIs('/deactivated-users')
+                ->assertSee('Temp A')
+                ->check('selected_users[]')
+                ->click('@activate')
+                ->assertDontSee('Temp A')
+                ->assertSee('All Users Have Been Activated')
+                ->click('@back')
+                ->assertPathIs('/users')
+                ->assertSee('Temp A');
+        });
+    }
 }
