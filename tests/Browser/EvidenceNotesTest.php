@@ -30,6 +30,13 @@ class EvidenceNotesTest extends DuskTestCase
             'paper_id' => 2, // With paper_id matching the one in cohort above
         ]);
 
+        
+        DB::table('users')
+            ->where('id', 1)
+            ->update(['paper_id' => 2 
+        ]);
+
+
         $cohort = Cohort::factory()->create([
             //'id' => 2,
             'paper_id' => 2, // Studio 1
@@ -42,17 +49,17 @@ class EvidenceNotesTest extends DuskTestCase
             //'id' => 2,
             'first_name' => 'Jim',
             'last_name' => 'Smith',
-            'username' => 'UseThisName',
+            'username' => 'Jsmithy',
             'email' => 'johnsmith@gmail.com',
             'github' => 'johnsgit',
-            'cohort_id' => 2, // The cohort created above
+            'cohort_id' => 1, // The cohort created above
             'is_active' => 1,
         ]);
 
         $this->assertTrue(true);
     }
 
-    public function testEvidenceAdminAccess()
+    public function testEvidenceNotesAdminAccess()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -61,19 +68,9 @@ class EvidenceNotesTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit('/evidence')
                 ->assertPathIs('/evidence')
-                ->assertTitle('Studio Management')
-                ->assertSee('UPLOAD FILES');
-        });
-    }
-
-    public function testFindNotesPage()
-    {
-        $this->browse(function ($browser) {
-            $browser
-                ->visit('/evidence')
-                ->pause(2000)
-                ->assertPathIs('/evidence')
-                ->assertSee('SAVE NOTE');
+                ->assertSee('UPLOAD FILES')
+                ->assertSee('SAVE NOTE')
+                ->screenshot('evidence/notes upload form');
         });
     }
 
@@ -89,18 +86,18 @@ class EvidenceNotesTest extends DuskTestCase
                 ->assertPathIs('/evidence')
                 ->assertSee('Jim Smith')
                 ->assertSee('UPLOAD FILES')
-                ->type('#title', 'Evidence Upload Test')
+                ->type('#title', 'Test')
                 ->attach('@image', storage_path('test_upload_file.png'))
-                ->click('button[type="submit"]')
+                ->click('@evidence_submit')
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
-                ->assertSee('EVIDENCE UPLOAD TEST')
-                ->screenshot('studentprofile');
+                ->assertSee('TEST')
+                ->screenshot('evidence_view');
         });
     }
 
     //evidence deletion test, visits the home screen, clicks on the student profile then deletes the evidence.
-    /*public function testEvidenceDeletion()
+    public function testEvidenceDeletion()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -109,18 +106,18 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->clickLink('Jim Smith')
-                    ->assertSee('EVIDENCE UPLOAD TEST')
-                    ->press('@delete')
+                    ->click('@dropdown')
+                    ->click('@student_records')
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('TEST')
+                    ->press('@evidence_delete')
+                    ->pause(2000)
                     ->assertSee('No files found')
-                    ->screenshot('deletion');
+                    ->screenshot('evidence_deletion');
         });
-    }*/
+    }
 
-    /*
-
-    Commented out temporarily as the notes upload isn't working in this branch but is in development, will get the notes test working 
-    after the merge 
+    //test uploads a note then checks the student profile for the upload. 
     public function testAdminNoteSubmit()
     {
         $user = User::where('is_admin', 1)->first();
@@ -128,16 +125,37 @@ class EvidenceNotesTest extends DuskTestCase
         $this->browse(function ($browser) use($user)
         {
             $browser->loginAs($user)
-                    ->visit('/notes')
+                    ->visit('/evidence')
                     ->pause(2000)
-                    ->assertPathIs('/notes')
+                    ->assertPathIs('/evidence')
                     ->assertSee('SAVE NOTE')
                     ->assertSee('Jim Smith')
-                    ->type('@filelink', 'www.google.com')
+                    ->type('@filelink', 'https://www.google.com')
                     ->type('@noteinput', 'testing note submissions!')
-                    ->click('button[type="submit"]')
+                    ->click('@notes_submit')
                     ->pause(2000)
-
+                    ->screenshot('note_view');
         });
-    }*/
+    }
+
+    //test goes to the student profile, than deletes a note upload. 
+    public function testAdminNotesDelete()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->click('@dropdown')
+                    ->click('@student_records')
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('Testing Note Submissions!')
+                    ->press('@notes_delete')
+                    ->pause(2000)
+                    ->assertSee('No notes found')
+                    ->screenshot('note_deletion');
+        });
+    }
 }
