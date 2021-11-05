@@ -155,4 +155,34 @@ class AdminpanelTest extends DuskTestCase
                 ->assertSee('Temp A');
         });
     }
+
+    public function testNormalUserCantAccessAdminPanel()
+    {
+        $user = User::where('is_admin', 0)->first();
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('You do not have permission to access this page');
+        });
+    }
+
+    public function testAdminCanViewAllStudents()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->click('@student_list')
+                ->assertPathIs('/student-list')
+                ->assertPresent('@student_table');
+        });
+    }
 }

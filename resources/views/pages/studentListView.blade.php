@@ -2,11 +2,11 @@
 @role('Super-Admin')
     <div class="py-6 text-center">
         <form action="{{ route('users.index') }}" class="gap-4">
-            <x-jet-button type='submit'>Back</x-jet-button>
+            <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
         </form>
     </div>
     <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
-        <table>
+        <table dusk="student_table">
             <thead>
                 <tr>
                     <th class="px-4 py-2">Name</th>

@@ -10,7 +10,7 @@
             </form>
             <form action="{{ route('student-list') }}" method="get" class="mx-auto">
                 @csrf
-                <x-jet-button type="submit">View All Students</x-jet-button>
+                <x-jet-button dusk="student_list" type="submit">View All Students</x-jet-button>
             </form>
             <form action="{{ route('deactivated-users') }}" method="get" class="mx-auto">
                 @csrf
