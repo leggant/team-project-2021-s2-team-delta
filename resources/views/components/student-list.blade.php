@@ -7,7 +7,7 @@
             @if($up->pivot->paper_id == $cohort->paper_id)
                 <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
                     <details class="py-4">
-                        <summary><h1 class="text-center text-4xl mb-4">{{ $cohort->papers->paper_name  }} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}</h1></summary>
+                        <summary dusk="dropdown"><h1 class="text-center text-4xl mb-4">{{ $cohort->papers->paper_name  }} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}</h1></summary>
                         <table id="studentTable">
                             <tr>
                                 <th class="px-4 py-2"></th>
@@ -45,7 +45,7 @@
                                                 <td class="py-2 px-12 text-center">
                                                     <form action="{{ route('students.show', $student) }}" method="GET">
                                                         @csrf
-                                                        <x-jet-button type="submit">View Student Records</x-jet-button>
+                                                        <x-jet-button type="submit" dusk="student_records">View Student Records</x-jet-button>
                                                     </form>
                                                 </td>
                                             </tr>
