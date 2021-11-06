@@ -36,7 +36,6 @@ class EvidenceNotesTest extends DuskTestCase
             ->update(['paper_id' => 2 
         ]);
 
-
         $cohort = Cohort::factory()->create([
             //'id' => 2,
             'paper_id' => 2, // Studio 1
@@ -92,6 +91,9 @@ class EvidenceNotesTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
                 ->assertSee('TEST')
+                ->click('@evidence_dwonload')
+                ->pause(2000)
+                ->assertPathBeginsWith('/students')
                 ->screenshot('evidence_view');
         });
     }
@@ -106,7 +108,7 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->click('@dropdown')
+                    ->click('@dropdown_Studio 1')
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
                     ->assertSee('TEST')
@@ -148,7 +150,7 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->click('@dropdown')
+                    ->click('@dropdown_Studio 1')
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
                     ->assertSee('Testing Note Submissions!')
@@ -156,6 +158,16 @@ class EvidenceNotesTest extends DuskTestCase
                     ->pause(2000)
                     ->assertSee('No notes found')
                     ->screenshot('note_deletion');
+
+                    //remove created cohort and student as it overlaps other tests and causes SQL errors
+                    //and I can't be bothered to go through them all and edit the tests to account for that 
+                    DB::table('cohorts')
+                    ->where('id', 1)
+                    ->delete();
+
+                    DB::table('student')
+                    ->where('id', 1)
+                    ->delete();
         });
     }
 }

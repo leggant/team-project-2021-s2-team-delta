@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Cohort;
 use App\Models\Student;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Database\Factories\CohortFactory;
+use Database\Factories\StudentFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +75,7 @@ class LecturerTest extends DuskTestCase
                     ->screenshot('updateuserscreen')
                     ->assertSee('Update Dusk Lecturer')                    
                     //->check('#Admin')
-                    ->select('Papers[]', 2)                   
+                    ->select('Papers[]', 2)                 
                     ->screenshot('updateadminfields')
                     ->press('SUBMIT')
                     ->pause(1000)
@@ -257,11 +259,153 @@ class LecturerTest extends DuskTestCase
                 ->assertTitle('Studio Management')
                 ->assertSee('Studio 1')
                 ->assertPresent('#studentTable')
-                ->click('summary')  // Open hidden student table
+                ->click('@dropdown_Studio 1')  // Open hidden student table
                 ->assertSee('Some Randomname')
                 ->screenshot('lecturerseeslink');                
         });
     }
+
+    public function testLecturerUpdateStudent()
+    {     
+        $student = Student::where('first_name', 'Some')->first();
+
+        $this->browse(function ($browser) use ($student) {            
+            $browser
+                ->visit('/students/'.$student->id)
+                ->assertPathIs('/students/*')
+                ->screenshot('updateprofilesome')
+                ->type('#edit_first_name', '123')
+                ->press('UPDATE STUDENT')
+                ->assertSee('Please use letters only')
+                ->screenshot('uselettersonly')
+                ->type('#edit_id', '12345678901')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The username must not be greater than 10 characters.')
+                ->screenshot('notgreaterthan10')
+                ->type('#edit_id', '!@#$%^&*(')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The username must only contain letters and numbers.')
+                ->screenshot('lettersandnumbersonly')
+                ->type('#edit_github', 'agithubnamewithmorethan15chars')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The github must not be greater than 15 characters.')
+                ->screenshot('github15letters')
+                ->type('#edit_github', 'brandnewgithub')
+                ->press('UPDATE STUDENT')
+                ->visit('/')
+                ->click('@dropdown_Studio 1') // open studio student list for viewing
+                ->assertSeeLink('github.com/brandnewgithub')
+                ->screenshot('updatedstudentgithub');
+        });
+    }
+
+    //Function creates studio 2 and assigns it to Lecturer A, then creates dummy students and assigns them to studio 1,
+    //Then finally tests if the students can be moved to studio 2.
+    public function testLecturerMoveStudent()
+    {
+        $this->browse(function ($browser) {
+
+            // Assigning studio 2 to Lecturer Temp A 
+            DB::table('user_papers')->insert([
+                'user_id' => 2,
+                'paper_id' => 3, 
+            ]);
+
+            // Creating Cohort (there now should be 2 cohorts)
+            Cohort::factory()->create([
+                'id' => 3,
+                'paper_id' => 3, // Studio 2
+                'year' => '2021-01-01',
+                'semester' => 'Semester 1',
+                'stream' => 'A',
+            ]);
+
+            // Creating Dummy Students to Move between Cohorts, all are placed into studio 1
+            Student::factory()->create([
+                'id' => 3,
+                'first_name' => 'Sam',
+                'last_name' => 'Smith',
+                'username' => 'Smithy',
+                'email' => 'smithy@gmail.com',
+                'github' => 'smithgit',
+                'cohort_id' => 2, 
+                'is_active' => 1,
+            ]);
+
+            Student::factory()->create([
+                'id' => 4,
+                'first_name' => 'Mike',
+                'last_name' => 'Myers',
+                'username' => 'mmmike',
+                'email' => 'mmike@gmail.com',
+                'github' => 'mmikeygit',
+                'cohort_id' => 2, 
+                'is_active' => 1,
+            ]);
+
+            Student::factory()->create([
+                'id' => 5,
+                'first_name' => 'bobby',
+                'last_name' => 'bob',
+                'username' => 'bobbyb',
+                'email' => 'bob@gmail.com',
+                'github' => 'bobgit',
+                'cohort_id' => 2, 
+                'is_active' => 1,
+            ]);
+
+            $browser
+                ->visit('/')
+                ->assertSee('Studio 1')
+                ->assertSee('Studio 2')
+                ->click('@dropdown_Studio 1')
+                ->assertSee('Sam Smith')
+                ->assertSee('Mike Myers')
+                ->assertSee('bobby bob')
+                ->check('@student_checkboxes3')
+                ->check('@student_checkboxes4')
+                ->check('@student_checkboxes5')
+                ->select('cohort', 3)
+                ->screenshot('selectedStudentsToMove')
+                ->click('@move_students')
+                ->pause(2000)
+                ->click('@dropdown_Studio 2')
+                ->assertSee('Sam Smith')
+                ->assertSee('Mike Myers')
+                ->assertSee('bobby bob')
+                ->screenshot('movestudents');
+        });
+    }
+
+    //Test Selects multiple students and removes then.
+    public function testLecturerRemoveMultipleStudentsFromCohot()
+    {
+        $this->browse(function ($browser) {
+            $browser
+                ->visit('/')
+                ->assertPathIs('/')
+                ->assertSee('Studio 2')
+                ->click('@dropdown_Studio 2')
+                ->pause(2000)
+                ->assertSee('Sam Smith')
+                ->assertSee('Mike Myers')
+                ->assertSee('bobby bob')
+                ->check('@student_checkboxes3')
+                ->check('@student_checkboxes4')
+                ->check('@student_checkboxes5')
+                ->screenshot('selectedStudents')
+                //->click('@remove_students') //for some reason dusk cannot interact with the remove student button and its driving me insane 
+                ->clickAtPoint($x = 1436, $y = 860) //x, y co-ords of remove student button  
+                ->pause(2000)
+                ->assertSee('Student(s) Removed and Disabled Successfully')
+                ->click('@dropdown_Studio 2')
+                ->assertDontSee('Sam Smith')
+                ->assertDontSee('Mike Myers')
+                ->assertDontSee('bobby bob')
+                ->screenshot('deletedstudents');
+        });
+    }
+
 
     public function testLogoutLecturerTempA()
     {
@@ -304,6 +448,11 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerUpdateLogin()
     {           
+        DB::table('user_papers')->insert([
+            'user_id' => 4,
+            'paper_id' => 3, 
+        ]);
+
         $this->browse(function ($browser) {            
             $browser
                 ->visit('/login')
@@ -318,39 +467,4 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('updatedlecturerlogin');
         });
     }
-
-    public function testLecturerUpdateStudent()
-    {     
-        $student = Student::where('first_name', 'Some')->first();
-
-        $this->browse(function ($browser) use ($student) {            
-            $browser
-                ->visit('/students/'.$student->id)
-                ->assertPathIs('/students/*')
-                ->screenshot('updateprofilesome')
-                ->type('#edit_first_name', '123')
-                ->press('UPDATE STUDENT')
-                ->assertSee('Please use letters only')
-                ->screenshot('uselettersonly')
-                ->type('#edit_id', '12345678901')
-                ->press('UPDATE STUDENT')
-                ->assertSee('The username must not be greater than 10 characters.')
-                ->screenshot('notgreaterthan10')
-                ->type('#edit_id', '!@#$%^&*(')
-                ->press('UPDATE STUDENT')
-                ->assertSee('The username must only contain letters and numbers.')
-                ->screenshot('lettersandnumbersonly')
-                ->type('#edit_github', 'agithubnamewithmorethan15chars')
-                ->press('UPDATE STUDENT')
-                ->assertSee('The github must not be greater than 15 characters.')
-                ->screenshot('github15letters')
-                ->type('#edit_github', 'brandnewgithub')
-                ->press('UPDATE STUDENT')
-                ->visit('/')
-                ->click('summary') // open studio student list for viewing
-                ->assertSeeLink('github.com/brandnewgithub')
-                ->screenshot('updatedstudentgithub');
-        });
-    }
-
 }

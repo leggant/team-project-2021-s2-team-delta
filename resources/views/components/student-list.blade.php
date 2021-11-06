@@ -3,7 +3,7 @@
     @foreach ($user->papers as $up)
         <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
             <details class="py-4">
-                <summary dusk="dropdown"><h1 class="text-center text-4xl mb-4">{{ $up->paper_name }}</h1></summary>
+                <summary dusk="dropdown_{{ $up->paper_name }}"><h1 class="text-center text-4xl mb-4">{{ $up->paper_name }}</h1></summary>
                 <table id="studentTable">
                     <tr>
                         <th class="px-4 py-2"></th>
@@ -16,7 +16,7 @@
                             @if ($up->pivot->paper_id == $student->cohort->paper_id)
                                 @if($student->is_active)
                                     <tr>
-                                    <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$student->id}}" 
+                                    <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" dusk="student_checkboxes{{ $student->id }}" value="{{$student->id}}" 
                                         id="checkbox_students" required>
                                     </td>
                                         <td class="border py-2 px-2 text-center">
@@ -53,7 +53,7 @@
                     <form id="disable" action="{{route('disable')}}" method="POST">
                         {{csrf_field()}}
                         <input type="hidden" name="students_selected" value="" id="hidden_students">
-                        <x-jet-danger-button onclick="disable()">Remove Selected Students</x-jet-danger-button>
+                        <x-jet-danger-button onclick="disable()" dusk="remove_students">Remove Selected Students</x-jet-danger-button>
                     </form>
                     <br>
                     <form id="move" action="{{route('move')}}" method="POST">
@@ -66,7 +66,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <x-jet-button onclick="move({{$up->pivot->paper_id}})">Move Selected Students</x-jet-button>
+                        <x-jet-button onclick="move({{$up->pivot->paper_id}})" dusk="move_students">Move Selected Students</x-jet-button>
                     </form>
                 </div>
             </details>

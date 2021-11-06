@@ -71,7 +71,7 @@
             @foreach($uploads as $file)
             <div class="grid grid-cols-6 mt-3 place-items-start items-center gap-2">
                 <a href="{{ route('evidence.show', $file->id) }}">
-                    <x-jet-button class="h-10 px-5">
+                    <x-jet-button class="h-10 px-5" dusk="evidence_dwonload">
                         {{ $file->title }}
                     </x-jet-button>
                 </a>
