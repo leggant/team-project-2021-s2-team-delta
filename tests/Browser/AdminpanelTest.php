@@ -9,12 +9,14 @@ use Tests\DuskTestCase;
 
 class AdminpanelTest extends DuskTestCase
 {
+    /*
     public function setUp(): void
     {
         parent::setUp();
         $this->artisan('migrate:fresh --force');
         $this->artisan('db:seed');
     }
+    */
 
     public function testFindAdminPage()
     {
@@ -42,13 +44,16 @@ class AdminpanelTest extends DuskTestCase
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
                 ->click('@new_user')
+                ->screenshot('clicknewuser')
                 ->assertSee('Create New User')
-                ->type('Name', 'Test User')
-                ->type('Email', 'testuser@test.com')
-                ->type('Password', 'password')
+                ->type('#Name', 'Test User')
+                ->type('#Email', 'testuser@test.com')
+                ->type('#Password', 'password')
                 ->check('is_admin')
-                ->click('@new_user_submit')
+                ->screenshot('createuseroptions')
+                ->press('SUBMIT')
                 ->assertPathIs('/users')
+                ->screenshot('checkusercreated')
                 ->assertSee('testuser@test.com');
         });
     }
@@ -64,11 +69,13 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
-                ->click('@edit_user_2')
+                ->screenshot('testeditusers')
+                ->visit('/users/2/edit')
                 ->assertSee('Update Temp A')
                 ->check('Admin')
                 ->select('Papers[]', ['2', '3'])
-                ->click('@edit_submit')
+                ->screenshot('useredited')
+                ->press('SUBMIT')
                 ->assertPathIs('/users')
                 ->assertSee('studio-a@op.ac.nz')
                 ->assertSee('Studio 1')
@@ -106,7 +113,7 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
-                ->click('@edit_user_2')
+                ->visit('/users/2/edit')
                 ->assertSee('Update Temp A')
                 ->click('@back')
                 ->assertPathIs('/users')

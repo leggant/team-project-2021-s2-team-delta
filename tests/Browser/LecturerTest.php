@@ -4,12 +4,12 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use App\Models\Cohort;
+use App\Models\Student;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Illuminate\Support\Facades\DB;
 
-// 100% failing test
 class LecturerTest extends DuskTestCase
 {
     public function testAdminUsersPage()
@@ -34,7 +34,51 @@ class LecturerTest extends DuskTestCase
                 ->press('SUBMIT')
                 ->pause(1000)
                 ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
                 ->screenshot('3-tempAnoneselected');
+        });
+    }
+
+    public function testAdminCreateNewUser()
+    {   
+        // Admin creates a new user - Dusk Lecturer
+        // Will be used to test changing of details in the lecturer's profile tab
+        // and updating student info
+        
+        $this->browse(function ($browser) {
+            $browser->visit('/users')                                    
+                    ->press('CREATE NEW USER')
+                    ->assertPathIs('/users/create*')
+                    ->screenshot('usercreatescreen')
+                    ->type('#Name', 'Dusk Lecturer')
+                    ->type('#Email', 'fake@fakeemail.com')
+                    ->type('#Password', 'SeriousPassword987')
+                    //->check('#Admin')                    
+                    ->screenshot('createdusklecturerinputs')
+                    ->press('SUBMIT')
+                    ->assertPathIs('/users')
+                    ->assertTitle('Studio Management');                    
+        });
+    }
+
+    public function testAdminEditNewUser()
+    {   
+        $user = User::where('name', 'Dusk Lecturer')->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $id = $user->id;
+            //dd('users/'.$id.'/edit');
+            $browser->visit('/users/'.$id.'/edit')
+                    ->pause(1500)
+                    ->screenshot('updateuserscreen')
+                    ->assertSee('Update Dusk Lecturer')                    
+                    //->check('#Admin')
+                    ->select('Papers[]', 2)                   
+                    ->screenshot('updateadminfields')
+                    ->press('SUBMIT')
+                    ->pause(1000)
+                    ->assertPathIs('/users')
+                    ->assertSee('Current Registered Users');                    
         });
     }
 
@@ -47,7 +91,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerLogin()
     {
-        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
+        $user = User::where('name', 'Temp A')->first(); // get first user that isn't flagged as an admin (i.e. A Lecturer)
 
         $this->browse(function ($browser) use ($user) {
             $browser
@@ -84,7 +128,8 @@ class LecturerTest extends DuskTestCase
 
     public function testNewAdminUsersPage()
     {
-        // Now login as admin and set a paper (Studio 1) and cohort to a lecturer
+        // Now login as admin and set a paper (Studio 1) to a lecturer
+        // and create a cohort for studio 1
 
         $user = User::where('is_admin', 1)->first();
 
@@ -96,7 +141,7 @@ class LecturerTest extends DuskTestCase
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
                 ->assertSee('studio-a@op.ac.nz') // hard-coded 'temp A' lecturer email login
-                ->visit('/users/2/edit')
+                ->visit('/users/2/edit')    // hard-coded for user 2 'temp A'
                 ->screenshot('4-editlectureragain')
                 ->assertSee('Update Temp A')
                 ->select('Papers[]', 2) // Select option 2 from 'papers' dropdown for Studio 1 then click the SUBMIT button
@@ -128,7 +173,7 @@ class LecturerTest extends DuskTestCase
         });
     }
 
-    public function testLecturerLogoutAdminAgain()
+    public function testLogoutAdminAgain()
     {
         $this->browse(function ($browser) {
             $browser->press('Log Out')->assertPathIs('/login');
@@ -139,7 +184,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerLoginAgain()
     {
-        $user = User::where('is_admin', 0)->first(); // get first user that isn't flagged as an admin
+        $user = User::where('name', 'Temp A')->first(); // get first user that isn't flagged as an admin
 
         $this->browse(function ($browser) use ($user) {
             $browser
@@ -182,9 +227,7 @@ class LecturerTest extends DuskTestCase
             ->where('paper_id', 2)
             ->where('semester', 'Semester 1')
             ->where('stream', 'A')
-            ->pluck('id');
-
-        // dd($cohortid[0]);
+            ->pluck('id');        
 
         $this->browse(function ($browser) use ($cohortid) {
             $id = $cohortid[0];
@@ -213,7 +256,101 @@ class LecturerTest extends DuskTestCase
                 ->assertPathIs('/')
                 ->assertTitle('Studio Management')
                 ->assertSee('Studio 1')
-                ->seeLink('Some RandomName');
+                ->assertPresent('#studentTable')
+                ->click('summary')  // Open hidden student table
+                ->assertSee('Some Randomname')
+                ->screenshot('lecturerseeslink');                
         });
     }
+
+    public function testLogoutLecturerTempA()
+    {
+        $this->browse(function ($browser) {
+            $browser->press('Log Out')->assertPathIs('/login');
+        });
+    }
+
+    public function testUpdateLecturerProfile()
+    {
+        $user = User::where('name', 'Dusk Lecturer')->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->assertTitle('Studio Management')
+                    ->screenshot('dusklecturerlogin')
+                    ->visit('/user/profile')
+                    ->type('#name', 'Dusky')
+                    ->type('#email', 'dusky@fakeemail.com')                    
+                    ->click('#updateprofile')
+                    ->pause(1000)
+                    ->screenshot('profileupdates')
+                    ->type('#current_password', 'SeriousPassword987')
+                    ->type('#password', 'BetterPassword321')
+                    ->type('#password_confirmation', 'BetterPassword321')
+                    ->click('#updatepassword')
+                    ->pause(1000)
+                    ->screenshot('passwordupdated');
+        });
+    }
+
+    public function testLogoutLecturerDusk()
+    {
+        $this->browse(function ($browser) {
+            $browser->press('Log Out')->assertPathIs('/login');
+        });
+    }
+
+    public function testLecturerUpdateLogin()
+    {           
+        $this->browse(function ($browser) {            
+            $browser
+                ->visit('/login')
+                ->assertPathIs('/login')
+                ->value('#email', 'dusky@fakeemail.com')
+                ->type('@password', 'BetterPassword321')
+                ->click('button[type="submit"]')
+                ->visit('/')
+                ->assertPathIs('/')
+                ->assertSee('Welcome Dusky')
+                ->assertTitle('Studio Management')
+                ->screenshot('updatedlecturerlogin');
+        });
+    }
+
+    public function testLecturerUpdateStudent()
+    {     
+        $student = Student::where('first_name', 'Some')->first();
+
+        $this->browse(function ($browser) use ($student) {            
+            $browser
+                ->visit('/students/'.$student->id)
+                ->assertPathIs('/students/*')
+                ->screenshot('updateprofilesome')
+                ->type('#edit_first_name', '123')
+                ->press('UPDATE STUDENT')
+                ->assertSee('Please use letters only')
+                ->screenshot('uselettersonly')
+                ->type('#edit_id', '12345678901')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The username must not be greater than 10 characters.')
+                ->screenshot('notgreaterthan10')
+                ->type('#edit_id', '!@#$%^&*(')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The username must only contain letters and numbers.')
+                ->screenshot('lettersandnumbersonly')
+                ->type('#edit_github', 'agithubnamewithmorethan15chars')
+                ->press('UPDATE STUDENT')
+                ->assertSee('The github must not be greater than 15 characters.')
+                ->screenshot('github15letters')
+                ->type('#edit_github', 'brandnewgithub')
+                ->press('UPDATE STUDENT')
+                ->visit('/')
+                ->click('summary') // open studio student list for viewing
+                ->assertSeeLink('github.com/brandnewgithub')
+                ->screenshot('updatedstudentgithub');
+        });
+    }
+
 }
