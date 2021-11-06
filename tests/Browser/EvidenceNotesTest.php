@@ -92,6 +92,9 @@ class EvidenceNotesTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
                 ->assertSee('TEST')
+                ->click('@evidence_dwonload')
+                ->pause(2000)
+                ->assertPathBeginsWith('/students')
                 ->screenshot('evidence_view');
         });
     }
@@ -106,7 +109,7 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->click('@dropdown')
+                    ->click('@dropdown_Studio 1')
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
                     ->assertSee('TEST')
@@ -148,7 +151,7 @@ class EvidenceNotesTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertPathIs('/')
-                    ->click('@dropdown')
+                    ->click('@dropdown_Studio 1')
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
                     ->assertSee('Testing Note Submissions!')
