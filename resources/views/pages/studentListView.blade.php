@@ -3,6 +3,8 @@
         <h1 class="font-semibold capitalize">BIT Student List</h1>
     </x-slot>
 @role('Super-Admin')
+    <div class="mb-6 max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 mt-8">
+        <h2 class="text-center text-3xl">Full Student List</h2>
     <div class="bg-white shadow rounded-lg py-6 drop-shadow-2xl w-full mb-6 max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 mt-8 grid-flow-row">
         <table dusk="student_table">
             <thead>
@@ -40,6 +42,7 @@
                 </tbody>
             @endforeach
         </table>
+    </div>
     </div>
 @else
     <h2>You do not have permission to access this page</h2>

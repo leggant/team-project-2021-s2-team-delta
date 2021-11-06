@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold capitalize">Deactivated Users</h1>
+    </x-slot>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 gap-4 mt-8 grid-flow-row">
 @role('Super-Admin')
     @if(\Session::has('success'))
         <div class="text-center bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">
@@ -55,7 +59,7 @@
             </div>
         </form>
     @else
-        <h2 class="text-center">All Users Have Been Activated</h2>
+        <h2 class="text-center text-2xl">All Users Have Been Activated</h2>
         <div class="py-6 text-center">
             <form action="{{ route('users.index') }}" class="gap-4">
                 <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
@@ -65,4 +69,5 @@
 @else
     <h2 class="text-center">You do not have permission to access this page</h2>
 @endrole
+</div>
 </x-app-layout>
