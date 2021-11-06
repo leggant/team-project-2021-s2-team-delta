@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }} - Student Admin</h1>
     </x-slot>
-    <br>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 gap-4 mt-8 grid-flow-row">
     @if(\Session::has('success'))
         <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">
             <ul>
@@ -18,11 +18,6 @@
         </div>
     @endif
     @if(count($students) >= 1)
-        <div class="py-6 text-center">
-            <form action="{{ route('home') }}" class="gap-4">
-                <x-jet-button type='submit'>Back</x-jet-button>
-            </form>
-        </div>
         <form action="{{route('enable')}}" method="POST">
             @csrf
             <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
@@ -54,7 +49,6 @@
                         </tr>   
                     @endforeach
                 </table>
-                <br>
                 <select name="cohort" required>
                     @foreach($user->papers as $up)
                         @foreach($cohorts as $cohort)
@@ -66,8 +60,6 @@
                         @endforeach
                     @endforeach
                 </select>
-                <br>
-                <br>
                 <x-jet-button type="submit">Add Students</x-jet-button>
             </div>
         </form>
@@ -79,4 +71,5 @@
             </form>
         </div>
     @endif
+</div>
 </x-app-layout>

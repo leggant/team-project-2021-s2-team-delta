@@ -1,18 +1,16 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold capitalize">BIT Student List</h1>
+    </x-slot>
 @role('Super-Admin')
-    <div class="py-6 text-center">
-        <form action="{{ route('users.index') }}" class="gap-4">
-            <x-jet-button dusk="back" type='submit'>Back</x-jet-button>
-        </form>
-    </div>
-    <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
+    <div class="bg-white shadow rounded-lg py-6 drop-shadow-2xl w-full mb-6 max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 mt-8 grid-flow-row">
         <table dusk="student_table">
             <thead>
                 <tr>
                     <th class="px-4 py-2">Name</th>
                     <th class="px-4 py-2">Username</th>
                     <th class="px-4 py-2">Github</th>
-                    <th class="px-8 py-2">Email</th>
+                    <th class="px-4 py-2">Email</th>
                     <th class="px-4 py-2">Active?</th>
                     <th class="px-4 py-2">Current Class</th>
                 </tr>
