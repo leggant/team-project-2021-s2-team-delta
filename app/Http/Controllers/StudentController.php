@@ -24,7 +24,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $students = Student::where('cohort_id', '!=', null)->get();
-        $cohorts = Cohort::all();
+        $cohorts = Cohort::orderBy('paper_id')->get();
         $papers = Papers::all();
         return view(
             'pages.students',
