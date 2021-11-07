@@ -51,9 +51,10 @@ Route::group(['middleware' => 'check-deactivated'], function() {
                 'enableView',
             ])->name('enableView');
             Route::get('/student-list', function () {
-                $students = Student::orderBy('is_active', 'desc', 'last_name')->get();
+                $students = Student::orderBy('is_active', 'desc')->get();
+                $groups = $students->groupBy('is_active');
                 $user = auth()->user();
-                return view('pages.studentListView', compact('students', 'user'));
+                return view('pages.studentListView', compact('students', 'user', 'groups'));
             })->name('student-list');
             Route::get('/deactivated-users', [
                 UserEnableController::class,

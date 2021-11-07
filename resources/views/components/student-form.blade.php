@@ -13,12 +13,14 @@
             <x-jet-label for="cohort" class="py-1 whitespace-nowrap col-span-2">Pick a Course for the Student</x-jet-label>
         <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" />
         </div>
-    <x-jet-button>Add New Student</x-jet-button>
-    @if (session('status'))
-    <div class="alert alert-success mt-2">
-        <p class="text-bold text-green-800">{{ session('status') }}</p>
+    <div class="flex gap-x-6 mt-2 items-center">
+        <x-jet-button>Add New Student</x-jet-button>
+        @if (session('status'))
+        <div class="alert alert-success">
+            <p class="text-bold border-green-300 text-green-600 text-xl select-none">{{ session('status') }}</p>
+        </div>
+        @endif
     </div>
-    @endif
 </form>
 <form action="{{route('enableView')}}" method="GET">
     <x-jet-button type="submit">Add Exisiting Students</x-jet-button>

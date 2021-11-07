@@ -6,11 +6,10 @@
     @foreach($user->papers as $up)
     @foreach ($cohorts as $cohort)
     @if($up->pivot->paper_id == $cohort->paper_id)
-    
     <details
         class="bg-white shadow rounded-lg py-6 px-4 content-start place-items-start drop-shadow-2xl grid mb-6">
         <summary dusk="dropdown">
-            <h1 class="text-center text-4xl mb-4 hover:underline font-bold hover:text-gray-600 hover:cursor-pointer">{{
+            <h1 class="text-center text-4xl mb-4 hover:underline font-bold hover:text-gray-600 hover:cursor-pointer select-none">{{
                 $cohort->papers->paper_name }} | {{ date('Y',
                 strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}</h1>
         </summary>
@@ -31,7 +30,7 @@
                         required class="hover:cursor-pointer px-2 py-2" />
                 </td>
                 <td class="border py-2 px-2 text-center">
-                    {{$student->name}}
+                    <p>{{$student->name}}</p>
                 </td>
                 <td class="border py-2 px-2 text-center hover:cursor-pointer">
                     <a class="hover:underline hover:cursor-pointer"
@@ -64,9 +63,9 @@
             <form id="disable" action="{{route('disable')}}" method="POST">
                 @csrf
                 <input type="hidden" name="students_selected" value="" id="hidden_students">
-                <x-jet-danger-button onclick="disable()">Remove</x-jet-danger-button>
+                <x-jet-danger-button onclick="disable()">Remove Selected</x-jet-danger-button>
             </form>
-            <form id="move" action="{{route('move')}}" method="POST">
+            <form id="move" action="{{route('move')}}" method="POST" class="flex gap-x-4">
                 @csrf
                 <input type="hidden" name="students_selected" value="" id="{{$oldcount}}">
                 <select name="cohort" required>
