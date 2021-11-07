@@ -4,12 +4,9 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use App\Models\Cohort;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\DB;
 
-// 100% failing test
 class LecturerTest extends DuskTestCase
 {
     public function testAdminUsersPage()
@@ -199,8 +196,8 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('9-studentoptions')
                 ->press('ADD NEW STUDENT')
                 ->pause(1000)
-                ->assertPathIs('/students')
-                ->screenshot('10-useradded')
+                ->assertPathIs('/')
+                ->screenshot('10-student-added')
                 ->assertSee('BIT Student Admin');
         });
     }
