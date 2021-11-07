@@ -51,7 +51,7 @@ Route::group(['middleware' => 'check-deactivated'], function() {
                 'enableView',
             ])->name('enableView');
             Route::get('/student-list', function () {
-                $students = Student::all();
+                $students = Student::orderBy('is_active', 'desc', 'last_name')->get();
                 $user = auth()->user();
                 return view('pages.studentListView', compact('students', 'user'));
             })->name('student-list');

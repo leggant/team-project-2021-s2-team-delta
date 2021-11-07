@@ -52,19 +52,19 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'first_name' => 'required|alpha|max:25|min:3',
-            'last_name' => 'required|alpha|max:25|min:3',
+            'first_name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
+            'last_name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
             'username' => 'required|alpha_num|unique:student|required|max:10',
             'github' => 'alpha_dash|unique:student|nullable|max:15',
             'cohort_id' => 'required|integer',
         ];
         $messages = [
             'first_name.required' => 'Student first name is required',
-            'first_name.alpha' => 'Please use letters only',
+            'first_name.regex' => 'Please use letters, spaces and hyhens only',
             'first_name.max' => 'First name exceeds 25 character limit',
             'first_name.min' => 'First name must have at least 3 characters',
             'last_name.required' => 'Student last name is required',
-            'last_name.alpha' => 'Please use letters only',
+            'last_name.regex' => 'Please use letters, spaces and hyhens only',
             'last_name.max' => 'Last name exceeds 25 character limit',
             'last_name.min' => 'Last name must have at least 3 characters',
         ];
@@ -81,9 +81,14 @@ class StudentController extends Controller
             'github' => Str::lower($request->github),
             'cohort_id' => $request->cohort_id,
         ]);
-        return redirect()->action(
-            [StudentController::class, 'show'],
-            ['student' => $student->id]
+        $user = auth()->user();
+        $students = Student::where('cohort_id', '!=', null)->get();
+        $cohorts = Cohort::orderBy('updated_at', 'desc')->get();
+        $papers = Papers::all();
+        return view(
+            'pages.students',
+            ['students' => $students, 'cohorts' => $cohorts],
+            compact('user', 'papers')
         );
     }
 
@@ -136,15 +141,20 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $rules = [
-            'first_name' => 'alpha|max:25|min:3',
-            'last_name' => 'alpha|max:25|min:3',
+            'first_name' => 'regex:/^[\pL\s\-]+$/u|max:25|min:3',
+            'last_name' => 'regex:/^[\pL\s\-]+$/u|max:25|min:3',
             'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
             'github' => ['alpha_dash', 'max:15', 'nullable', Rule::unique('student', 'github')->ignore($id)],
-            'cohort_id' => 'nullable|integer',
+            'cohort_id' => 'required|integer',
         ];
 
         $messages = [
-            'first_name.alpha' => 'Student First name is required',
+            'first_name.regex' => 'Please use letters, spaces and hyhens only',
+            'first_name.max' => 'First name exceeds 25 character limit',
+            'first_name.min' => 'First name must have at least 3 characters',
+            'last_name.regex' => 'Please use letters, spaces and hyhens only',
+            'last_name.max' => 'Last name exceeds 25 character limit',
+            'last_name.min' => 'Last name must have at least 3 characters',
         ];
 
         $validator = Validator::make(

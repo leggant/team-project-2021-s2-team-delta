@@ -20,10 +20,21 @@
             @foreach($students as $s)
                 <tbody>
                     <tr>
-                        <td class="border py-2 px-2 text-center">{{$s->name}}</td>
+                        <td class="border py-2 px-2 text-center">
+                            <form action="{{ route('students.show', $s) }}" method="GET">
+                                @csrf
+                                <button type="submit" dusk="student_records" class="hover:underline">{{ $s->name }}</button>
+                            </form>    
+                        </td>
                         <td class="border py-2 px-2 text-center">{{$s->username}}</td>
-                        <td class="border py-2 px-2 text-center">{{$s->github}}</td>
-                        <td class="border py-2 px-2 text-center">{{$s->email}}</td>
+                        <td class="border py-2 px-2 text-center">
+                            <a class="hover:underline hover:cursor-pointer" href="http://www.github.com/{{ $s->github }}"
+                                target="_blank">{{ $s->github }}
+                            </a>
+                        </td>
+                        <td class="border py-2 px-2 text-center hover:underline">
+                            <a href="mailto:{{$s->email}}" class="hover:underline">{{$s->email}}</a>
+                        </td>
                         <td class="border py-2 px-2 text-center">
                             @if($s->is_active == 1)
                                 Yes

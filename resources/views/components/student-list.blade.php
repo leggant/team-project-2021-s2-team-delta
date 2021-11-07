@@ -42,8 +42,8 @@
 
                 @if ($student->github)
                 <td class="border py-2 px-2 text-center hover:cursor-pointer">
-                    <a class="hover:underline hover:cursor-pointer" href="http://github.com/{{ $student->github }}"
-                        target="_blank">github.com/{{ $student->github }}
+                    <a class="hover:underline hover:cursor-pointer" href="http://www.github.com/{{ $student->github }}"
+                        target="_blank">{{ $student->github }}
                     </a>
                 </td>
                 @else
