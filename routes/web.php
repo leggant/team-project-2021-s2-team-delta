@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Models\Student;
+use App\Models\Cohort;
 
 use App\Http\Controllers\{
     StudentController,
@@ -24,7 +25,7 @@ use App\Http\Controllers\{
 |
 
 */
-Route::group(['middleware' => 'check-deactivated'], function() {
+Route::group(['middleware' => 'check-deactivated'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('/', [StudentController::class, 'index'])->name('home');
@@ -33,7 +34,9 @@ Route::group(['middleware' => 'check-deactivated'], function() {
                 'index',
             ]);
             Route::resource('users', UserController::Class)->except(['delete']);
-            Route::resource('cohorts', CohortController::class)->except(['delete']);
+            Route::resource('cohorts', CohortController::class)->except([
+                'delete',
+            ]);
             Route::post('/student-disable', [
                 StudentDisableController::class,
                 'disable',
@@ -51,9 +54,14 @@ Route::group(['middleware' => 'check-deactivated'], function() {
                 'enableView',
             ])->name('enableView');
             Route::get('/student-list', function () {
-                $students = Student::all();
+                $students = Student::orderBy('is_active', 'desc')->get();
+                $cohorts = Cohort::all();
+                $groups = $students->groupBy('is_active');
                 $user = auth()->user();
-                return view('pages.studentListView', compact('students', 'user'));
+                return view(
+                    'pages.studentListView',
+                    compact('students', 'user', 'groups', 'cohorts')
+                );
             })->name('student-list');
             Route::get('/deactivated-users', [
                 UserEnableController::class,
@@ -83,7 +91,6 @@ Route::group(['middleware' => 'check-deactivated'], function() {
         });
     });
 });
-
 
 // Dashboard route needs to be kept so this can be re-deployed later.
 //  Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {

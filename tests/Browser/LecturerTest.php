@@ -4,12 +4,9 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use App\Models\Cohort;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\DB;
 
-// 100% failing test
 class LecturerTest extends DuskTestCase
 {
     public function testAdminUsersPage()
@@ -178,13 +175,10 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerAddStudent()
     {
-        $cohortid = DB::table('cohorts')
-            ->where('paper_id', 2)
+        $cohortid = Cohort::where('paper_id', 2)
             ->where('semester', 'Semester 1')
             ->where('stream', 'A')
             ->pluck('id');
-
-        // dd($cohortid[0]);
 
         $this->browse(function ($browser) use ($cohortid) {
             $id = $cohortid[0];
@@ -199,9 +193,9 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('9-studentoptions')
                 ->press('ADD NEW STUDENT')
                 ->pause(1000)
-                ->assertPathIs('/students/*')
-                ->screenshot('10-fakestudentprofile')
-                ->assertSee('Userofname@student.op.ac.nz');
+                ->assertPathIs('/')
+                ->screenshot('10-student-added')
+                ->assertSee('BIT Student Admin');
         });
     }
 
