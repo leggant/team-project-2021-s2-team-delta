@@ -5,7 +5,6 @@ namespace Tests\Browser;
 use App\Models\User;
 use App\Models\Cohort;
 use App\Models\Student;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Database\Factories\CohortFactory;
 use Database\Factories\StudentFactory;
 use Laravel\Dusk\Browser;
