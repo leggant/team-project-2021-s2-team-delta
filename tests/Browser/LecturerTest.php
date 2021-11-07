@@ -181,8 +181,6 @@ class LecturerTest extends DuskTestCase
             ->where('stream', 'A')
             ->pluck('id');
 
-        // dd($cohortid[0]);
-
         $this->browse(function ($browser) use ($cohortid) {
             $id = $cohortid[0];
             $browser
