@@ -9,14 +9,6 @@ use Tests\DuskTestCase;
 
 class AdminpanelTest extends DuskTestCase
 {
-    /*
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('migrate:fresh --force');
-        $this->artisan('db:seed');
-    }
-    */
 
     public function testFindAdminPage()
     {
