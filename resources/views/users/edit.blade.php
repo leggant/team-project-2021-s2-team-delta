@@ -24,7 +24,7 @@
                 </x-jet-label>
                 <input type="checkbox" id="Admin" name="Admin" {{ $user->is_admin ? 'checked' : '' }}
                 value="{{ !$user->is_admin }}"
-                class="px-2 py-2 hover:cursor-pointer hover:border-indigo-500 hover:ring-indigo-300 place-self-center"/>
+                class="px-2 py-2 hover:cursor-pointer hover:border-indigo-500 hover:ring-indigo-300 place-self-center checked:bg-indigo-500" />
             </div>
             @endif
             <h3 class="text-2xl">{{ Str::title($user->name) }} Is Currently Assigned To</h3>
@@ -37,7 +37,7 @@
             <select id="paper" name="Papers[]" multiple required class="px-4 py-3 rounded bg-white border border-gray-400 
 hover:border-gray-500 shadow leading-tight focus:outline-none focus:shadow-outline form-input">
                 @foreach ($papers as $paper)
-                <option value="{{ $paper->id }}" class="text-center my-2 box-border select-text">{{ $paper->paper_name
+                <option value="{{ $paper->id }}" class="text-center my-2 py-2 box-border select-text hover:cursor-pointer hover:bg-indigo-300 hover:font-bold hover:underline">{{ $paper->paper_name
                     }}</option>
                 @endforeach
             </select>

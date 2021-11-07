@@ -1211,6 +1211,9 @@ select {
 .box-border {
 	box-sizing: border-box;
 }
+.box-content {
+	box-sizing: content-box;
+}
 .block {
 	display: block;
 }
@@ -1255,6 +1258,9 @@ select {
 }
 .h-20 {
 	height: 5rem;
+}
+.h-full {
+	height: 100%;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1585,15 +1591,24 @@ select {
 .overflow-hidden {
 	overflow: hidden;
 }
+.overflow-visible {
+	overflow: visible;
+}
 .overflow-y-auto {
 	overflow-y: auto;
 }
 .overflow-y-hidden {
 	overflow-y: hidden;
 }
+.overflow-y-visible {
+	overflow-y: visible;
+}
 .overscroll-auto {
 	-ms-scroll-chaining: chained;
 	    overscroll-behavior: auto;
+}
+.overscroll-y-contain {
+	overscroll-behavior-y: contain;
 }
 .truncate {
 	overflow: hidden;
@@ -2131,6 +2146,18 @@ select {
 .ease-in {
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+.checked\:bg-blue-600:checked {
+	--tw-bg-opacity: 1;
+	background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
+}
+.checked\:bg-indigo-600:checked {
+	--tw-bg-opacity: 1;
+	background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
+}
+.checked\:bg-indigo-500:checked {
+	--tw-bg-opacity: 1;
+	background-color: rgba(99, 102, 241, var(--tw-bg-opacity));
+}
 .hover\:cursor-pointer:hover {
 	cursor: pointer;
 }
@@ -2174,6 +2201,13 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(185, 28, 28, var(--tw-bg-opacity));
 }
+.hover\:bg-indigo-300:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(165, 180, 252, var(--tw-bg-opacity));
+}
+.hover\:font-bold:hover {
+	font-weight: 700;
+}
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -2197,6 +2231,10 @@ select {
 .hover\:text-gray-600:hover {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+.hover\:text-green-300:hover {
+	--tw-text-opacity: 1;
+	color: rgba(110, 231, 183, var(--tw-text-opacity));
 }
 .hover\:underline:hover {
 	text-decoration: underline;
