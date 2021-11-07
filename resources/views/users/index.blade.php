@@ -10,11 +10,11 @@
             </form>
             <form action="{{ route('student-list') }}" method="get" class="mx-auto">
                 @csrf
-                <x-jet-button type="submit">View All Students</x-jet-button>
+                <x-jet-button dusk="student_list" type="submit">View All Students</x-jet-button>
             </form>
             <form action="{{ route('deactivated-users') }}" method="get" class="mx-auto">
                 @csrf
-                <x-jet-button type="submit">View Deactivated Users</x-jet-button>
+                <x-jet-button dusk="deactivated_list" type="submit">View Deactivated Users</x-jet-button>
             </form>
         </div>
         <table class="max-w-full mx-auto mt-6">
@@ -49,13 +49,13 @@
                                 <div class="flex justify-start gap-4">
                                     <form action="{{ route('users.edit', $users->id) }}" method="get">
                                         @csrf
-                                        <x-jet-button type="submit" name="edit">Edit</x-jet-button>
+                                        <x-jet-button type="submit" dusk="edit_user_{{$users->id}}" name="edit">Edit</x-jet-button>
                                     </form>
                                     @if ($id != $users->id)
                                         <form action="{{ route('users.destroy', $users->id) }}" method="POST">
                                             @csrf
                                             {{method_field('DELETE')}}
-                                            <x-jet-danger-button type="submit">Deactivate User</x-jet-danger-button>
+                                            <x-jet-danger-button dusk="deactivate_{{$users->id}}" type="submit">Deactivate User</x-jet-danger-button>
                                         </form>
                                     @endif
                                 </div>
