@@ -37,7 +37,6 @@
     </div>
     @stack('modals')
     @livewireScripts
-    @powerGridScripts
 </body>
 
 </html>
