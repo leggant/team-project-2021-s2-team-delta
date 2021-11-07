@@ -200,8 +200,8 @@ class LecturerTest extends DuskTestCase
                 ->press('ADD NEW STUDENT')
                 ->pause(1000)
                 ->assertPathIs('/students')
-                ->screenshot('10-fakestudentprofile')
-                ->assertSee('Userofname');
+                ->screenshot('10-useradded')
+                ->assertSee('BIT Student Admin');
         });
     }
 
