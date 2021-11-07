@@ -81,15 +81,8 @@ class StudentController extends Controller
             'github' => Str::lower($request->github),
             'cohort_id' => $request->cohort_id,
         ]);
-        $user = auth()->user();
-        $students = Student::where('cohort_id', '!=', null)->get();
-        $cohorts = Cohort::orderBy('updated_at', 'desc')->get();
-        $papers = Papers::all();
-        return view(
-            'pages.students',
-            ['students' => $students, 'cohorts' => $cohorts],
-            compact('user', 'papers')
-        );
+        $message = Str::title($request->first_name) . " Added Successfully";
+        return redirect()->action([StudentController::class, 'index'])->with('status', $message);
     }
 
     /**
@@ -110,8 +103,6 @@ class StudentController extends Controller
                 'uploads' => $uploads,
                 'notes' => $notes,
             ]);
-        } else {
-            return response()->json(['message' => 'Student not found.'], 404);
         }
     }
 
@@ -124,7 +115,6 @@ class StudentController extends Controller
     public function edit(Request $request, Student $student)
     {
         $student = Student::where('id', $student->id)->get();
-        dd($student);
         return view('pages.editStudent', [
             'student' => $student,
         ]);

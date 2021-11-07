@@ -14,6 +14,11 @@
         <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" />
         </div>
     <x-jet-button>Add New Student</x-jet-button>
+    @if (session('status'))
+    <div class="alert alert-success mt-2">
+        <p class="text-bold text-green-800">{{ session('status') }}</p>
+    </div>
+    @endif
 </form>
 <form action="{{route('enableView')}}" method="GET">
     <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
