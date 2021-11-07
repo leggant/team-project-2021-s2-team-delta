@@ -107,7 +107,7 @@ class LecturerTest extends DuskTestCase
 
     // Next two functions test that a lecturer with no papers cannot access evidence or notes
     // You do not have access to this page
-
+    
     public function testLecturerUploads()
     {
         $this->browse(function ($browser) {
@@ -406,6 +406,32 @@ class LecturerTest extends DuskTestCase
         });
     }
 
+    //test to re-add the students back to studio 2
+    public function testLecturerAddStudentsToCohort()
+    {
+        $this->browse(function ($browser) {
+            $browser
+                ->visit('/')
+                ->click('@go_to_enable_students')
+                ->assertSee('Sam Smith')
+                ->assertSee('Mike Myers')
+                ->assertSee('bobby bob')
+                ->check('@student_checkboxes3')
+                ->check('@student_checkboxes4')
+                ->check('@student_checkboxes5')
+                ->select('cohort', 3)
+                ->click('@activate_students')
+                ->assertSee('Successfully Added Student(s)')
+                ->screenshot('students_confirm_msg')
+                ->visit('/')
+                ->assertPathIs('/')
+                ->click('@dropdown_Studio 2')
+                ->assertSee('Sam Smith')
+                ->assertSee('Mike Myers')
+                ->assertSee('bobby bob')
+                ->screenshot('students_confirm');
+        });
+    }
 
     public function testLogoutLecturerTempA()
     {

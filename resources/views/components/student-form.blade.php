@@ -17,7 +17,7 @@
     <x-jet-button>Add New Student</x-jet-button>
 </form>
 <form action="{{route('enableView')}}" method="GET">
-    <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
+    <x-jet-button type="submit" dusk="go_to_enable_students">Add Exisiting Students</x-jet-button>
 </form>
 @if ($errors->studenterror->any())
     <ul>

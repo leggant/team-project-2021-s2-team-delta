@@ -36,7 +36,7 @@
                     @foreach($students as $s)
                         <tr>
                             <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$s->id}}" 
-                                id="checkbox_students">
+                                id="checkbox_students" dusk="student_checkboxes{{ $s->id }}">
                             </td>
                             <td class="border py-2 px-2 text-center">{{$s->name}}</td>
                             <td class="border py-2 px-2 text-center">
@@ -68,7 +68,7 @@
                 </select>
                 <br>
                 <br>
-                <x-jet-button type="submit">Add Students</x-jet-button>
+                <x-jet-button type="submit" dusk="activate_students">Add Students</x-jet-button>
             </div>
         </form>
     @else
