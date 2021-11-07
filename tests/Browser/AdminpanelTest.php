@@ -138,8 +138,8 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
-                ->click('@deactivate_2')
-                ->assertDontSee('studio-a@op.ac.nz');
+                ->click('@deactivate_3')
+                ->assertDontSee('studio-b@op.ac.nz');
         });
     }
 
@@ -154,17 +154,21 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
+                ->pause(2000)
                 ->click('@deactivate_2')
                 ->assertDontSee('studio-a@op.ac.nz')
                 ->click('@deactivated_list')
                 ->assertPathIs('/deactivated-users')
                 ->assertSee('Temp A')
-                ->check('selected_users[]')
+                ->check('@user_2')
+                ->check('@user_3')
+                ->screenshot('x')
                 ->click('@activate')
                 ->assertDontSee('Temp A')
                 ->assertSee('All Users Have Been Activated')
                 ->click('@back')
                 ->assertPathIs('/users')
+                ->assertSee('Temp B')
                 ->assertSee('Temp A');
         });
     }

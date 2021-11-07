@@ -35,7 +35,7 @@
                     <tbody class="text-center">
                         @foreach($users as $user)
                             <tr>
-                                <td><input type="checkbox" name="selected_users[]" value="{{$user->id}}"></td>
+                                <td><input type="checkbox" dusk="user_{{ $user->id }}" name="selected_users[]" value="{{$user->id}}"></td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
