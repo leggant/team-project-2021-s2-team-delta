@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Models\Student;
+use App\Models\Cohort;
 
 use App\Http\Controllers\{
     StudentController,
@@ -52,9 +53,10 @@ Route::group(['middleware' => 'check-deactivated'], function() {
             ])->name('enableView');
             Route::get('/student-list', function () {
                 $students = Student::orderBy('is_active', 'desc')->get();
+                $cohorts = Cohort::all();
                 $groups = $students->groupBy('is_active');
                 $user = auth()->user();
-                return view('pages.studentListView', compact('students', 'user', 'groups'));
+                return view('pages.studentListView', compact('students', 'user', 'groups', 'cohorts'));
             })->name('student-list');
             Route::get('/deactivated-users', [
                 UserEnableController::class,
