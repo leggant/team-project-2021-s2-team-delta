@@ -144,10 +144,21 @@ class UserController extends Controller
             $user->syncRoles([$selected]);
         }
         #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
-        $user->papers()->sync($request->input('Papers'));
-        #Save the new information to exisitng user
-        $user->save();
-        return redirect('/users')->with('success', 'User Updated');
+        foreach($request->input('Papers') as $input)
+        {
+            if($input == '1') {
+                $user->papers()->sync('1');
+                $user->save();
+                return redirect('/users')->with('success', 'User Updated');
+            }
+            else 
+            {
+                $user->papers()->sync($request->input('Papers'));
+                #Save the new information to exisitng user
+                $user->save();
+                return redirect('/users')->with('success', 'User Updated');
+            }
+        }
     }
 
     /**
