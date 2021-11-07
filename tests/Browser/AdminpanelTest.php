@@ -164,8 +164,7 @@ class AdminpanelTest extends DuskTestCase
                 ->assertSee('Current Registered Users')
                 ->click('@student_list')
                 ->assertPathIs('/student-list')
-                ->assertSee('Full Student List')
-                ->assertSee('All Active Students');
+                ->assertSee('Full Student List');
         });
     }
 
