@@ -37,7 +37,6 @@ class EvidenceNotesTest extends DuskTestCase
         ]);
 
         $cohort = Cohort::factory()->create([
-            //'id' => 2,
             'paper_id' => 2, // Studio 1
             'year' => '2021-01-01',
             'semester' => 'Semester 2',
