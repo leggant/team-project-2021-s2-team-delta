@@ -175,8 +175,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerAddStudent()
     {
-        $cohortid = DB::table('cohorts')
-            ->where('paper_id', 2)
+        $cohortid = Cohort::where('paper_id', 2)
             ->where('semester', 'Semester 1')
             ->where('stream', 'A')
             ->pluck('id');
