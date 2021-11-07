@@ -69,7 +69,6 @@ class LecturerTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $id = $user->id;
-            //dd('users/'.$id.'/edit');
             $browser->visit('/users/'.$id.'/edit')
                     ->pause(1500)
                     ->screenshot('updateuserscreen')
