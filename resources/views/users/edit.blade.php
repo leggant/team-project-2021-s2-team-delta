@@ -18,11 +18,14 @@
                 <x-jet-input type="email" value="{{ $user->email }}" id="email" name="Email" required class="w-full" />
             </div>
             @if ($id != $user->id)
+            <div class="flex gap-x-4 content-center">
                 <x-jet-label for="Admin">
                     {{ $user->is_admin ? 'Super-Admin - Set As Lecturer?' : 'Lecturer - Set As Admin?' }}
-                    <input type="checkbox" id="Admin" name="Admin" {{ $user->is_admin ? 'checked' : '' }}
-                        value="{{ !$user->is_admin }}" />
                 </x-jet-label>
+                <input type="checkbox" id="Admin" name="Admin" {{ $user->is_admin ? 'checked' : '' }}
+                        value="{{ !$user->is_admin }}" 
+                        class="px-2 py-2 hover:cursor-pointer hover:border-indigo-500 hover:ring-indigo-300 place-self-center"/>
+            </div>
             @endif
                 <h3 class="text-2xl">{{ Str::title($user->name)  }} Is Currently Assigned To</h3>
                 <ul class="flex gap-4">
@@ -31,13 +34,7 @@
                     @endforeach
                 </ul>
                 <x-jet-label for="paper">Select Papers:</x-jet-label>
-                <select id="paper" name="Papers[]" multiple required
-                    class="px-4 py-3 rounded bg-white border border-gray-400 
-                    hover:border-gray-500 shadow leading-tight focus:outline-none focus:shadow-outline form-input">
-                    @foreach ($papers as $paper)
-                        <option value="{{ $paper->id }}" class="text-center my-2 box-border select-text">{{ $paper->paper_name }}</option>
-                    @endforeach
-                </select>
+                @livewire('lecturer-paper-selection', ['papers' => $papers, 'user' => $user], key($user->id))
                 (For now press ctrl while clicking options to select multiple)
                 <input type="hidden" value="{{ $user->id }}" id="userID" name="userID">
                 <x-jet-button dusk="edit_submit" type='submit'>Submit</x-jet-button>
