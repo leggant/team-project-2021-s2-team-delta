@@ -1462,6 +1462,9 @@ select {
 .place-items-start {
 	place-items: start;
 }
+.content-center {
+	align-content: center;
+}
 .content-start {
 	align-content: flex-start;
 }
@@ -2139,6 +2142,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(107, 114, 128, var(--tw-border-opacity));
 }
+.hover\:border-indigo-500:hover {
+	--tw-border-opacity: 1;
+	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+}
 .hover\:bg-indigo-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
@@ -2193,6 +2200,10 @@ select {
 }
 .hover\:underline:hover {
 	text-decoration: underline;
+}
+.hover\:ring-indigo-300:hover {
+	--tw-ring-opacity: 1;
+	--tw-ring-color: rgba(165, 180, 252, var(--tw-ring-opacity));
 }
 .focus\:z-10:focus {
 	z-index: 10;
