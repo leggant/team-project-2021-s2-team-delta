@@ -64,7 +64,7 @@
             </div>
         </form>
     @else
-        <h2>All Students Have Been Assigned To A Course</h2>
+        <h2 class="text-center text-3xl">All Students Have Been Assigned To A Course</h2>
         <div class="py-6 text-center">
             <form action="{{ route('home') }}" class="gap-4">
                 <x-jet-button type='submit'>Back</x-jet-button>

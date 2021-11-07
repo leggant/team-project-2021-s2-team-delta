@@ -39,9 +39,17 @@
                     <td class="border px-4 py-2">{{ $users->name }}</td>
                     <td class="border px-4 py-2">{{ $users->email }}</td>
                     <td class="border px-4 py-2">
-                        @foreach ($users->papers as $paper)
-                        {{ $paper->paper_name }}<br>
-                        @endforeach
+                        <ul class="whitespace-nowrap flex">
+                            @foreach ($users->papers as $paper)
+                            @if ($loop->first)
+                            <li>{{ $paper->paper_name }}</li>
+                            @elseif ($loop->last)
+                            <li>, {{ $paper->paper_name }}</li>
+                            @else
+                            <li>, {{ $paper->paper_name }}</li>
+                            @endif
+                            @endforeach
+                        </ul>
                     </td>
                     @if ($users->is_admin)
                     <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
