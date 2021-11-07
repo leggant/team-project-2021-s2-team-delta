@@ -73,7 +73,6 @@ class LecturerTest extends DuskTestCase
                     ->pause(1500)
                     ->screenshot('updateuserscreen')
                     ->assertSee('Update Dusk Lecturer')                    
-                    //->check('#Admin')
                     ->select('Papers[]', 2)                 
                     ->screenshot('updateadminfields')
                     ->press('SUBMIT')
