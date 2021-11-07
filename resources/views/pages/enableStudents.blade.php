@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold capitalize">Welcome {{ Str::title($user->name) }} - Student Admin</h1>
+        <h1 class="font-semibold capitalize">Assign Students To Studio Papers</h1>
     </x-slot>
 <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 gap-4 mt-8 grid-flow-row">
     @if(\Session::has('error'))
@@ -11,6 +11,7 @@
     </div>
     @endif
     @if(count($students) >= 1)
+    <h2 class="text-4xl font-bold text-center">Inactive Student List</h2>
     <div class="bg-white shadow rounded-lg py-6 px-4 drop-shadow-2xl mx-auto w-full grid mb-6">
         @if(\Session::has('success'))
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">
@@ -49,18 +50,20 @@
                         </tr>   
                     @endforeach
                 </table>
-                <select name="cohort" required>
-                    @foreach($user->papers as $up)
+                <div class="grid gap-x-6 grid-cols-4 mt-6">
+                    <select name="cohort" required class="col-span-2">
+                        @foreach($user->papers as $up)
                         @foreach($cohorts as $cohort)
-                            @if($cohort->paper_id == $up->pivot->paper_id)
-                                <option value="{{$cohort->id}}">
-                                    {{$cohort->papers->paper_name}} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}
-                                </option>
-                            @endif
+                        @if($cohort->paper_id == $up->pivot->paper_id)
+                        <option value="{{$cohort->id}}">
+                            {{$cohort->papers->paper_name}} | {{ date('Y', strtotime($cohort->year)) }} | {{$cohort->semester}} | Stream {{$cohort->stream}}
+                        </option>
+                        @endif
                         @endforeach
-                    @endforeach
-                </select>
-                <x-jet-button type="submit">Add Students</x-jet-button>
+                        @endforeach
+                    </select>
+                    <x-jet-button>Transfer Selected Students</x-jet-button>
+                </div>
             </form>
         </div>
     @else

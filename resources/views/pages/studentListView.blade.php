@@ -103,19 +103,21 @@
                     </tr>
                     @endforeach
                 </table>
-                <select name="cohort" required>
-                    @foreach($user->papers as $up)
-                    @foreach($cohorts as $cohort)
-                    @if($cohort->paper_id == $up->pivot->paper_id)
-                    <option value="{{$cohort->id}}">
-                        {{$cohort->papers->paper_name}} | {{ date('Y', strtotime($cohort->year)) }} |
-                        {{$cohort->semester}} | Stream {{$cohort->stream}}
-                    </option>
-                    @endif
-                    @endforeach
-                    @endforeach
-                </select>
-                <x-jet-button type="submit">Add Students</x-jet-button>
+                <div class="mt-6 grid grid-cols-4 gap-x-6">
+                    <select name="cohort" required class="col-span-2">
+                        @foreach($user->papers as $up)
+                        @foreach($cohorts as $cohort)
+                        @if($cohort->paper_id == $up->pivot->paper_id)
+                        <option value="{{$cohort->id}}">
+                            {{$cohort->papers->paper_name}} | {{ date('Y', strtotime($cohort->year)) }} |
+                            {{$cohort->semester}} | Stream {{$cohort->stream}}
+                        </option>
+                        @endif
+                        @endforeach
+                        @endforeach
+                    </select>
+                    <x-jet-button type="submit">Transfer Selected Students</x-jet-button>
+                </div>
             </form>
             @endif
         </div>
