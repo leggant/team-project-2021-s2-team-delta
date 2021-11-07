@@ -201,7 +201,7 @@ class LecturerTest extends DuskTestCase
                 ->pause(1000)
                 ->assertPathIs('/students')
                 ->screenshot('10-fakestudentprofile')
-                ->assertSee('Userofname@student.op.ac.nz');
+                ->assertSee('Userofname');
         });
     }
 

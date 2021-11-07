@@ -103,6 +103,7 @@ class AdminpanelTest extends DuskTestCase
                 ->assertSee('Current Registered Users')
                 ->click('@new_user')
                 ->assertSee('Create New User')
+                ->click('@back')
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users');
         });
