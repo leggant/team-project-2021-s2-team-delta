@@ -199,7 +199,7 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('9-studentoptions')
                 ->press('ADD NEW STUDENT')
                 ->pause(1000)
-                ->assertPathIs('/students/*')
+                ->assertPathIs('/students')
                 ->screenshot('10-fakestudentprofile')
                 ->assertSee('Userofname@student.op.ac.nz');
         });
