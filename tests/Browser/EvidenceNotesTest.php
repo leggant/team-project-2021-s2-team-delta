@@ -84,7 +84,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->attach('@image', storage_path('test_upload_file.png'))
                 ->click('@evidence_submit')
                 ->pause(2000)
-                ->assertPathBeginsWith('/students')
+                ->assertPathBeginsWith('/evidence')
                 ->assertSee('Test')
                 ->screenshot('evidence_view');
         });
@@ -103,7 +103,6 @@ class EvidenceNotesTest extends DuskTestCase
                 ->click('@dropdown')
                 ->click('@student_records')
                 ->assertPathBeginsWith('/students')
-                ->assertSee('Test')
                 ->press('@evidence_delete')
                 ->pause(2000)
                 ->assertSee('No files found')
