@@ -85,7 +85,6 @@ class EvidenceNotesTest extends DuskTestCase
                 ->click('@evidence_submit')
                 ->pause(2000)
                 ->assertPathBeginsWith('/evidence')
-                ->assertSee('Test')
                 ->screenshot('evidence_view');
         });
     }
