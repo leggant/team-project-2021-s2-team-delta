@@ -66,10 +66,11 @@
                                 </x-jet-button>
                             </form>
                             @if ($id != $users->id)
-                            <form action="{{ route('users.destroy', $users->id) }}" method="POST">
+                            <form action="{{ route('users.destroy', $users->id) }}" method="POST" dusk="deactivate_{{$users->id}}">
                                 @csrf
                                 {{method_field('DELETE')}}
-                                <x-delete-button dusk="deactivate_{{$users->id}}">Deactivate User
+                                <x-delete-button dusk="deactivate_{{$users->id}}">
+                                    Deactivate User
                                 </x-delete-button>
                             </form>
                             @endif
