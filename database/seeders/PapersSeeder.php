@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\Papers;
 
 class PapersSeeder extends Seeder
@@ -15,22 +14,22 @@ class PapersSeeder extends Seeder
      */
     public function run()
     {
-        $papers = [
-            [
-                'paper_name' => 'Studio 1'
-            ],
-            [
-                'paper_name' => 'Studio 2'
-            ],
-            [
-                'paper_name' => 'Studio 3'
-            ],
-            [
-                'paper_name' => 'Studio 4'
-            ]
-
-        ];
-
-        Papers::insert($papers);
+        // FirstOrCreate allows the seeder to run error free,
+        // without duplicating paper data
+        $option1 = Papers::firstOrCreate([
+            'paper_name' => 'None Selected',
+        ]);
+        $option2 = Papers::firstOrCreate([
+            'paper_name' => 'Studio 1',
+        ]);
+        $option3 = Papers::firstOrCreate([
+            'paper_name' => 'Studio 2',
+        ]);
+        $option4 = Papers::firstOrCreate([
+            'paper_name' => 'Studio 3',
+        ]);
+        $option5 = Papers::firstOrCreate([
+            'paper_name' => 'Studio 4',
+        ]);
     }
 }

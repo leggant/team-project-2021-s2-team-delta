@@ -1,47 +1,52 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold capitalize">BIT User Update</h1>
+    </x-slot>
     <!-- Form that allows the user to edit a user -->
-    @if(Auth::check() && Auth::user()->isAdmin())
-        <div>
-            <a href="{{url('/users')}}">Back</a>
-        </div>
-        <form action="{{route('users.update', $user->id)}}" method='POST'>
-            {{csrf_field()}}
-            {{ method_field('PATCH') }}
-            <fieldset>
-                <div>
-                    <h5>Enter Name:</h5>
-                    <input type="text" placeholder="{{$user->name}}" id="Name" name="Name" required>
-                </div>
-                <br>
-                <div>
-                    <h5>Enter Email:</h5>
-                    <input type="email" placeholder="{{$user->email}}" id="Email" name="Email" required>
-                </div>
-                <br>
-                <div>
-                    <h5>Admin?</h5>
-                    @if($user->is_admin == 1)
-                        <input type="checkbox" id="Admin" name="Admin" checked>
-                    @else
-                        <input type="checkbox" id="Admin" name="Admin">
-                    @endif
-                </div>
-                <br>
-                <div>
-                    <h5>Select Paper:</h5>
-                    <select id="paper" name="Paper" required>
-                        @foreach($papers as $paper)
-                            <option value="{{$paper->id}}">{{$paper->paper_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <br>
-                <div>
-                    <input type='submit' name='submit' value='Submit'>
-                </div>
-            </fieldset>
+    @role('Super-Admin')
+    <div class="w-max h-max mx-auto sm:px-6 mt-8 grid grid-cols-1 gap-5 pb-8">
+        <h2 class="text-3xl leading-9 text-gray-900">Update {{ Str::title($user->name) }}</h2>
+        <form action="{{ route('users.update', $user->id) }}" method='POST' class="grid gap-y-4 grid-cols-1">
+            @csrf
+            @method('PUT')
+            <div>
+                <x-jet-label for="name" class="text-lg">Edit Name:</x-jet-label>
+                <x-jet-input type="text" value="{{ $user->name }}" id="name" name="Name" required class="w-full" />
+            </div>
+            <div>
+                <x-jet-label for="email" class="text-lg">Edit Email</x-jet-label>
+                <x-jet-input type="email" value="{{ $user->email }}" id="email" name="Email" required class="w-full" />
+            </div>
+            @if ($id != $user->id)
+            <div class="flex gap-x-4 content-center">
+                <x-jet-label for="Admin">
+                    {{ $user->is_admin ? 'Super-Admin - Set As Lecturer?' : 'Lecturer - Set As Admin?' }}
+                </x-jet-label>
+                <input type="checkbox" id="Admin" name="Admin" {{ $user->is_admin ? 'checked' : '' }}
+                value="{{ !$user->is_admin }}"
+                class="px-2 py-2 hover:cursor-pointer hover:border-indigo-500 hover:ring-indigo-300 place-self-center checked:bg-indigo-500" />
+            </div>
+            @endif
+            <h3 class="text-2xl">{{ Str::title($user->name) }} Is Currently Assigned To</h3>
+            <ul class="flex gap-4">
+                @foreach ($user->papers as $p)
+                <li class="text-lg">{{ $p->paper_name}}</li>
+                @endforeach
+            </ul>
+            <x-jet-label for="paper">Select Papers:</x-jet-label>
+            <select id="paper" name="Papers[]" multiple required class="px-4 py-3 rounded bg-white border border-gray-400 
+hover:border-gray-500 shadow leading-tight focus:outline-none focus:shadow-outline form-input">
+                @foreach ($papers as $paper)
+                <option value="{{ $paper->id }}" class="text-center my-2 py-2 box-border select-text hover:cursor-pointer hover:bg-indigo-300 hover:font-bold hover:underline">{{ $paper->paper_name
+                    }}</option>
+                @endforeach
+            </select>
+            (For now press ctrl while clicking options to select multiple)
+            <input type="hidden" value="{{ $user->id }}" id="userID" name="userID">
+            <x-jet-button dusk="edit_submit" type='submit'>Submit</x-jet-button>
         </form>
-    @else
-        <h2>You do not have access to this page</h2>
-    @endif
+        @else
+        <h2>You do not have permission to access this page</h2>
+        @endrole
+    </div>
 </x-app-layout>

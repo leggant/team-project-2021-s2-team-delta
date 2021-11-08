@@ -12,11 +12,11 @@ class Cohort extends Model
     use HasFactory;
 
     protected $table = 'cohorts';
-    protected $fillable = ['subject', 'year', 'semester', 'stream', 'paper_id'];
+    protected $fillable = ['year', 'semester', 'stream', 'paper_id'];
 
     public function papers()
     {
-        return $this->hasOne(Paper::class, 'foreign_key');
+        return $this->belongsTo(Papers::class, 'paper_id');
     }
 
     public function student()

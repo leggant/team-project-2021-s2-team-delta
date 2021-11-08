@@ -7,13 +7,25 @@ use Illuminate\View\Component;
 class StudentForm extends Component
 {
     /**
-     * Create a new component instance.
+     * The alert message.
      *
+     * @var array
+     */
+    public $cohorts;
+    public $students;
+    public $user;
+
+    /**
+     * Create a new component instance.
+     * @param  array  $cohorts
+     * @param  array  $students
      * @return void
      */
-    public function __construct()
+    public function __construct($cohorts, $students, $user)
     {
-        //
+        $this->cohorts = $cohorts;
+        $this->students = $students;
+        $this->user = $user;
     }
 
     /**

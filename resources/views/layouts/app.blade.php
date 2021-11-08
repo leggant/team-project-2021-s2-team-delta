@@ -12,12 +12,15 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @livewireStyles
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased overflow-x-hidden min-w-lg">
     <x-jet-banner />
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100 min-w-screen">
         @livewire('navigation-menu')
         <!-- Page Heading -->
         @if (isset($header))
@@ -28,7 +31,7 @@
             </header>
         @endif
         <!-- Page Content -->
-        <main>
+        <main class="xs:px-1 sm:px-2 lg:px-4">
             {{ $slot }}
         </main>
     </div>

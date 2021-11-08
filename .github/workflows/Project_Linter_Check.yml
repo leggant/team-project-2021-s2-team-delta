@@ -1,9 +1,6 @@
 name: Code Linter Check
-on: 
-    push:
-        branches: [sprint-*]
-    pull_request:
-        branches: [master, staging, development]
+on:
+   push
 jobs:
   phplint:
     runs-on: ubuntu-latest

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Papers;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -45,36 +48,26 @@ class UserController extends Controller
         #Validate the fields recieved
         Validator::make($request->all(), [
             'Name' => 'required',
-            'Email' => 'required',
-            'Password' => 'required',
-            'Paper' => 'required',
+            'Email' => 'required|unique:App\Models\User,email',
+            'Password' => 'required|min:8',
         ])->validate();
 
         #Create new User and save the given data into the correct db fields
-        $user = new User;
-        $user->name = $request->input('Name');
-        $user->email = $request->input('Email');
+        $user = new User();
+        $user->name = Str::title($request->input('Name'));
+        $user->email = Str::lower($request->input('Email'));
         $user->password = Hash::make($request['Password']); #Hash password to make it secure
         #If the request contains Admin field then save is_admin as 1 otherwise it will just fill is_admin with default value which is 0
-        if($request->has('Admin'))
-        {
+        if ($request->has('Admin')) {
             $user->is_admin = 1;
+            $user->assignRole('Super-Admin');
         }
-        $user->paper_id = $request->input('Paper');
         #Save the new user
         $user->save();
-        return redirect('/users')->with('success', 'User was Created Successfully!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
+        return redirect('/users')->with(
+            'success',
+            'User was Created Successfully!'
+        );
     }
 
     /**
@@ -86,7 +79,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $papers = Papers::all();
-        return view('users.edit', compact('user', 'papers'));
+        $id = Auth::id(); #Grabs id of logged in user
+        return view('users.edit', compact('user', 'papers', 'id'));
     }
 
     /**
@@ -102,25 +96,69 @@ class UserController extends Controller
         Validator::make($request->all(), [
             'Name' => 'required',
             'Email' => 'required',
-            'Paper' => 'required'
+            'Papers' => 'sometimes|array'
         ])->validate();
-
+        $roles = Role::select('id')->get();
         #Change db field of user to new information provided
-        $user->name = $request->input('Name');
-        $user->email = $request->input('Email');
-        if($request->has('Admin'))
-        {
-            $user->is_admin = 1;
+        $user->name = $request->input('Name')
+            ? $request->input('Name')
+            : $user->name;
+        $user->email = $request->input('Email')
+            ? $request->input('Email')
+            : $user->email;
+        if ($request->has('Admin')) {
+            $user->is_admin = !$user->is_admin;
         }
-        else
-        {
-            $user->is_admin = 0;
-        }
-        $user->paper_id = $request->input('Paper');
-        #Save the new information to exisitng user
         $user->save();
-
-        return redirect('/users')->with('success', 'User Updated');
+        if ($user->is_admin == 1) {
+            $user->syncRoles('Super-Admin');
+        } else {
+            $user->syncRoles('Lecturer');
+            $selected = [];
+            foreach ($request->input('Papers') as $item) {
+                switch ($item) {
+                    case 1:
+                        $selected[] = 'Lecturer';
+                        break;
+                    case 2:
+                        $selected[] = 'Studio 1';
+                        break;
+                    case 3:
+                        $selected[] = 'Studio 2';
+                        break;
+                    case 4:
+                        $selected[] = 'Studio 3';
+                        break;
+                    case 5:
+                        $selected[] = 'Studio 4';
+                        break;
+                    default:
+                        return redirect()
+                            ->back()
+                            ->with(
+                                'error',
+                                'Select Course that does not have a role'
+                            );
+                }
+            }
+            $user->syncRoles([$selected]);
+        }
+        #Adds papers to the pivot table for the user. Also updates pivot table with new papers if they don't exist in the table
+        foreach($request->input('Papers') as $input)
+        {
+            if($input == '1') {
+                $user->papers()->sync('1');
+                $user->save();
+                return redirect('/users')->with('success', 'User Updated');
+            }
+            else 
+            {
+                $user->papers()->sync($request->input('Papers'));
+                #Save the new information to exisitng user
+                $user->save();
+                return redirect('/users')->with('success', 'User Updated');
+            }
+        }
     }
 
     /**
@@ -131,8 +169,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        #Delete a user
-        $user->delete();
-        return redirect('/users')->with('success', 'User Deleted');
+        $user->is_active = 0;
+        $user->save();
+        return redirect('/users')->with('success', 'User Deactivated Successfully');
     }
 }

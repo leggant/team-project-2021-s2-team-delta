@@ -5,40 +5,33 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a id="home" href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('students.index') }}" :active="request()->routeIs('students.index')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:ml-6 md:mr-6 xmd:ml-4 xmd:mr-4 sm:flex xmd:whitespace-nowrap">
+                    <x-jet-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Students') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('pages.evidence') }}" :active="request()->routeIs('pages.evidence')">
-                        {{ __('Uploads') }}
+                    <x-jet-nav-link id="evidence" href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
+                        {{ __('Notes + Uploads') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('pages.notes') }}" :active="request()->routeIs('pages.notes')">
-                        {{ __('Notes') }}
-                    </x-jet-nav-link>
-                    {{-- <x-jet-nav-link href="{{ route('students.create') }}" :active="request()->routeIs('students.create')">
-                        {{ __('New Student') }}
-                    </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
-                        {{ __('Cohorts') }}
-                    </x-jet-nav-link>
-                     {{-- <x-jet-nav-link href="#" :active="request()->routeIs('dashboard')">
-                        {{ __('View Cohorts') }}
-                    </x-jet-nav-link> --}}
-                    <x-jet-nav-link href="{{ route('logout') }}" :active="request()->routeIs('logout')">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            {{ __('Log Out') }}
-                        </form>
-                    </x-jet-nav-link>
+                    @role('Super-Admin')
+                        @if (Auth::check() && Auth::user()->isAdmin())
+                            <x-jet-nav-link id="admin" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                                {{ __('User Admin Panel') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
+                                {{ __('Cohort Admin Panel') }}
+                            </x-jet-nav-link>
+                        @endif
+                    @endrole
+                    <x-nav-form-button id="logout"
+                        :active="request()->routeIs('logout')" 
+                        action='logout'>{{ __('Log Out') }}
+                    </x-nav-form-button>
                 </div>
             </div>
 
@@ -136,7 +129,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                <x-jet-dropdown-link dusk="logoutindropdown" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
@@ -162,9 +155,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Home') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Students') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link id="evidence" href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
+                {{ __('Notes + Uploads') }}
+            </x-jet-responsive-nav-link>
+            @role('Super-Admin')
+                @if (Auth::check() && Auth::user()->isAdmin())
+                    <x-jet-responsive-nav-link id="admin" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('User Admin Panel') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
+                        {{ __('Cohort Admin Panel') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

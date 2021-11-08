@@ -2,10 +2,11 @@ name: Laravel Dusk Testing
 on:
   pull_request:
     branches: [staging, master, main, development]
-
+  push:
+    branches: [sprint-*]
 jobs:
   Laravel-Set-Up:
-    name: Laravel (PHP ${{ matrix.php-versions }})
+    name: Laravel (PHP ${{ matrix.php-versions }} | NODE ${{matrix.node}})
     runs-on: ubuntu-latest    
     services:
       mysql:
@@ -24,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # php-versions: ['7.4', '8.0']
+        node: ['12']
         php-versions: ['8.0']
     steps:
       - name: Checkout
@@ -44,10 +45,12 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
-      - name: Setup Node.js
+      - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node }}
+      - name: Run Package Install Using HTTPS Instead of SSH
+        run: git config --global url."https://${{ secrets.PAT }}@github.com/".insteadOf ssh://git@github.com/
       - name: Install Composer dependencies
         run: |
             composer install --no-progress --prefer-dist --optimize-autoloader
