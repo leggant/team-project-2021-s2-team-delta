@@ -14,7 +14,6 @@
                         target="_blank">github.com/{{ $student->github }}</a>
                     </p>
                 @endif
-                <x-jet-button class="justify-start self-start">Edit</x-jet-button>
         </div>
         <div>
             <h3>Edit {{ $student->name }}</h3>
@@ -83,11 +82,6 @@
             <div class="grid grid-rows-2 mt-3 items-center gap-2">
                 <p class="capitalize">{{ $note->notes }}</p>
                 <div class="flex gap-2 items-center">
-                    <form method="#" action="#" class="self-start">
-                        @csrf
-                        @method('put')
-                        <x-jet-button class="h-10 px-5"> Edit </x-jet-button>
-                    </form>
                     <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                         @csrf
                         @method('delete')
