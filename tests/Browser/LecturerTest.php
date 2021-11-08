@@ -272,7 +272,7 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('updateprofilesome')
                 ->type('#edit_first_name', '123')
                 ->press('UPDATE STUDENT')
-                ->assertSee('Please use letters only')
+                ->assertSee('Please use letters, spaces and hyhens only')
                 ->screenshot('uselettersonly')
                 ->type('#edit_id', '12345678901')
                 ->press('UPDATE STUDENT')
