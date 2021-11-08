@@ -135,7 +135,7 @@ class StudentController extends Controller
             'last_name' => 'regex:/^[\pL\s\-]+$/u|max:25|min:3',
             'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
             'github' => ['alpha_dash', 'max:15', 'nullable', Rule::unique('student', 'github')->ignore($id)],
-            'cohort_id' => 'required|integer',
+            'cohort_id' => 'integer',
         ];
 
         $messages = [
