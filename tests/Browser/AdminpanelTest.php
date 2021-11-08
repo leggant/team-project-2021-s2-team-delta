@@ -109,25 +109,6 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
-    public function testEditBackButton()
-    {
-        $user = User::where('is_admin', 1)->first();
-
-        $this->browse(function ($browser) use ($user) {
-            $browser
-                ->loginAs($user)
-                ->visit('/users')
-                ->pause(2000)
-                ->assertPathIs('/users')
-                ->assertSee('Current Registered Users')
-                ->click('@edit_user_2')
-                ->assertSee('Update Temp A')
-                ->click('@back')
-                ->assertPathIs('/users')
-                ->assertSee('Current Registered Users');
-        });
-    }
-
     public function testAdminCanDeactivateUsers()
     {
         $user = User::where('is_admin', 1)->first();
@@ -183,7 +164,8 @@ class AdminpanelTest extends DuskTestCase
                 ->assertSee('Current Registered Users')
                 ->click('@student_list')
                 ->assertPathIs('/student-list')
-                ->assertPresent('@student_table');
+                ->screenshot('student-list')
+                ->assertSee('No Students In App');
         });
     }
 

@@ -33,7 +33,17 @@
                             <option value="Semester 1">Semester 1</option>
                             <option value="Semester 2">Semester 2</option>
                         </select>
-                        @livewire('stream-inputs', ['user' => $user], key($user->id))
+                        <div class="flex gap-x-14">
+                            <p class="inline-flex items-center font-medium text-lg text-gray-700">Stream: </p>
+                            <div class="inline-flex gap-x-6 items-center place-self-end justify-self-stretch">
+                                <x-jet-label for="streama" class="cursor-pointer">A</x-jet-label>
+                                <x-jet-input type="radio" checked name="stream" value="A" class="cursor-pointer focus:ring focus:text-indigo-800 p-2 border-indigo-400 text-indigo-400 form-radio" id="streama"/>
+                                <x-jet-label for="streamb" class="cursor-pointer">B</x-jet-label>
+                                <x-jet-input type="radio" name="stream" value="B" class="cursor-pointer focus:ring focus:text-indigo-800 p-2 border-indigo-400 text-indigo-400 form-radio" id="streamb"/>
+                                <x-jet-label for="streamj" class="cursor-pointer">J</x-jet-label>
+                                <x-jet-input type="radio" name="stream" value="J" class="cursor-pointer focus:ring focus:text-indigo-800 p-2 border-indigo-400 text-indigo-400 form-radio" id="streamj"/>
+                            </div>
+                        </div>
                         <x-jet-button class="row-start-5">Create Cohort</x-jet-button>
                     </form>
                     @if (session('error'))

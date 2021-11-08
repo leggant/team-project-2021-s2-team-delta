@@ -12,7 +12,7 @@ class Cohort extends Model
     use HasFactory;
 
     protected $table = 'cohorts';
-    protected $fillable = ['subject', 'year', 'semester', 'stream', 'paper_id'];
+    protected $fillable = ['year', 'semester', 'stream', 'paper_id'];
 
     public function papers()
     {
