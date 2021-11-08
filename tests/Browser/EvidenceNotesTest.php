@@ -84,7 +84,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->attach('@image', storage_path('test_upload_file.png'))
                 ->click('@evidence_submit')
                 ->pause(2000)
-                ->assertPathBeginsWith('/evidence')
+                ->assertPathBeginsWith('/students')
                 ->screenshot('evidence_view');
         });
     }
