@@ -10,7 +10,7 @@
             @if ($loop->first)
             @once
             <h2 class="text-center text-3xl font-bold mb-4">All Active Students</h2>
-            <table dusk="student_table_{{$loop->iteration}}" class="max-h-min">
+            <table dusk="student_table_{{$loop->iteration}}" class="max-h-min w-full">
                 <thead>
                     <tr>
                         <th class="md:px-4 py-2">Name</th>
@@ -20,8 +20,8 @@
                         <th class="md:px-4 py-2">Current Class</th>
                     </tr>
                 </thead>
-                @foreach($group as $s)
                 <tbody>
+                @foreach($group as $s)
                     <tr>
                         <td class="border md:py-2 px-2 text-center">
                             <form action="{{ route('students.show', $s) }}" method="GET">

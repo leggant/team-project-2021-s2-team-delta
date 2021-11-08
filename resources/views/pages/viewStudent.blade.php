@@ -75,7 +75,7 @@
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf
                     @method('delete')
-                    <button dusk="evidence_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button> 
+                    <x-delete-button dusk="evidence_delete">Delete</x-delete-button> 
                 </form>
             </div>
             @endforeach

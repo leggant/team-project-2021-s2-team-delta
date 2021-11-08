@@ -31,8 +31,8 @@
                     </tr>
                     @foreach($students as $s)
                         <tr>
-                            <td class="border py-2 px-2 text-center"><input type="checkbox" name="student_checkboxes[]" value="{{$s->id}}" 
-                                id="checkbox_students">
+                            <td class="border py-2 px-2 text-center hover:cursor-pointer"><input type="checkbox" name="student_checkboxes[]" value="{{$s->id}}" 
+                                id="checkbox_students" class="hover:cursor-pointer">
                             </td>
                             <td class="border py-2 px-2 text-center">{{$s->name}}</td>
                             <td class="border py-2 px-2 text-center">

@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:ml-6 md:mr-6 xmd:ml-4 xmd:mr-4 sm:flex xmd:flex-shrink xmd:space-x-6 xmd:whitespace-nowrap">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:ml-6 md:mr-6 xmd:ml-4 xmd:mr-4 sm:flex xmd:whitespace-nowrap">
                     <x-jet-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Students') }}
                     </x-jet-nav-link>

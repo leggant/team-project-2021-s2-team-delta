@@ -1566,9 +1566,6 @@ select {
 .justify-between {
 	justify-content: space-between;
 }
-.justify-items-start {
-	justify-items: start;
-}
 .justify-items-end {
 	justify-items: end;
 }
@@ -3111,24 +3108,20 @@ select {
 }
 @media (min-width: 600px) {
 
-	.xmd\:col-span-2 {
-		grid-column: span 2 / span 2;
-	}
-
 	.xmd\:col-span-3 {
 		grid-column: span 3 / span 3;
 	}
 
-	.xmd\:col-start-2 {
-		grid-column-start: 2;
+	.xmd\:col-span-2 {
+		grid-column: span 2 / span 2;
 	}
 
 	.xmd\:col-start-1 {
 		grid-column-start: 1;
 	}
 
-	.xmd\:row-start-1 {
-		grid-row-start: 1;
+	.xmd\:col-start-2 {
+		grid-column-start: 2;
 	}
 
 	.xmd\:row-start-2 {
@@ -3143,16 +3136,12 @@ select {
 		margin-right: 1rem;
 	}
 
-	.xmd\:flex-shrink {
-		flex-shrink: 1;
+	.xmd\:grid-cols-8 {
+		grid-template-columns: repeat(8, minmax(0, 1fr));
 	}
 
 	.xmd\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.xmd\:grid-cols-8 {
-		grid-template-columns: repeat(8, minmax(0, 1fr));
 	}
 
 	.xmd\:grid-rows-2 {
@@ -3161,12 +3150,6 @@ select {
 
 	.xmd\:gap-y-6 {
 		row-gap: 1.5rem;
-	}
-
-	.xmd\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
-		--tw-space-x-reverse: 0;
-		margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-		margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 	}
 
 	.xmd\:whitespace-nowrap {
