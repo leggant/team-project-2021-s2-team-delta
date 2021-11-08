@@ -7,6 +7,7 @@ use App\Models\Cohort;
 use App\Models\Student;
 use Database\Factories\CohortFactory;
 use Database\Factories\StudentFactory;
+use Illuminate\Support\Facades\DB;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
