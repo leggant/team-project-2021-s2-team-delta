@@ -60,7 +60,7 @@ class StudentController extends Controller
         ];
         $messages = [
             'first_name.required' => 'Student first name is required',
-            'first_name.regex' => 'Please use letters, spaces and hyhens only',
+            'first_name.regex' => 'Please use letters, spaces and hyphens only',
             'first_name.max' => 'First name exceeds 25 character limit',
             'first_name.min' => 'First name must have at least 3 characters',
             'last_name.required' => 'Student last name is required',
