@@ -2,25 +2,17 @@
 
 ## Commits :heavy_check_mark:
 
-### [`#26cc2ce`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/26cc2cedce94e13c08ad488db1bdc0b89456bc98) Merge pull request sprint-6-layout-bug-fix/development
-
-Sprint 6 Layout Bug Fixes 
-leggtc1@student.op.ac.nz
-
 ### [`#68ec732`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/68ec732324d7c4aba884bc5a658a74cc22017d6c) fix(paper selection bug): fix added to prevent user selecting none and studio papers
 
-change in the user update contoller method
+change in the user update controller method
 
 #265 
 LEGGTC1@student.op.ac.nz
 
+### [`#71e367c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/71e367cdfa0fa058147060cfee681a62243e04bb) refactor(css and js compiled + changelog updated): change log updates 
+LEGGTC1@student.op.ac.nz
+
 ### [`#5973705`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59737050abcd54628507f977cf248cf88e2ec39e) docs(updated commit and changelogs): changelog Updated 
-leggtc1@student.op.ac.nz
-
-### [`#59ad03d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59ad03defd8e6281f4d36b4891f1b37c12e47505) feat(filtered cohort list): new cohort table searchable, filterable
-
-new package installed called powergrid which provide filter ordering functionality. table head can
-be clicked to order results 
 leggtc1@student.op.ac.nz
 
 ### [`#702e057`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/702e057d93873a1e9c2828a232f1eec62179d5f6) fix(removed unused powergrid composer package): removal of power grid components and config files
@@ -31,12 +23,10 @@ leggtc1@student.op.ac.nz
 ### [`#f30d071`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f30d07148f35e5d4eae7a4df78beedd95ad3d1c9) refactor(css recompiled): css recompiled after branch merge 
 leggtc1@student.op.ac.nz
 
-### [`#1886928`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1886928c2293e42e3296deb938851641b15e4d66) refactor(user/student layout updates): updated css and html
+### [`#d19254a`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d19254ac184eeefad62374faa7f348e2d3853e4b) refactor(admin student list layout bug fix): css layout updates to resolve errors in layout
 
-changes make user edit, index and enable student pages and components more consitently styled
-
-#262, #258 
-leggtc1@student.op.ac.nz
+on small screens 
+LEGGTC1@student.op.ac.nz
 
 ### [`#fc2c1c5`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fc2c1c5815e02d8fcad2ad167a28613801d93eec) refactor(css and js): branch updated with fresh css 
 leggtc1@student.op.ac.nz
@@ -56,12 +46,8 @@ feedback for new students added. removed unused route functions from role contro
 #112, #140, #180, #225 
 leggtc1@student.op.ac.nz
 
-### [`#38e3a4c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/38e3a4cfe53108a1ff3d63d0adbf73000f45aeb5) refactor(cohort and deactivated page layout update): css updates added to cohort and deactivated
-
-to make these consistent with other page layouts. removed radio button component from cohort.
-
-#180, #262 
-leggtc1@student.op.ac.nz
+### [`#fb2d04b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fb2d04b503bd2d8560c270cad1c6d86ba1cc84bb) refactor(css recompiled): css updated and compiled 
+LEGGTC1@student.op.ac.nz
 
 ### [`#1a43579`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1a4357996d0d1410f91a21d9cba7f05e0eca0aff) test(admin test fix): removed failing assertion
 
@@ -70,33 +56,12 @@ did not see the text on the page
 #112 
 leggtc1@student.op.ac.nz
 
-### [`#447a642`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/447a642c212662915c333b466f1e67bc04080466) added tests to check if the cohorts page can be reached by an admin and not a regular user 
-scotms2@student.op.ac.nz
-
-### [`#13af27f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/13af27f7b278a1c496908946a69166931a92bef6) changed js a little, got it so the user can only see their cohorts and fixed the move feature as it broke due to the change 
-scotms2@student.op.ac.nz
-
-### [`#a1d54ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a1d54eaba7e5afe31c139582e24e1119477f7bbf) added middleware to stop deactivated users from logging in 
-scotms2@student.op.ac.nz
-
 ### [`#afa81b2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/afa81b25bfbe94bc427515b38976b327c0c37e0d) test(update test fix): corrected an error in dusk tests
 
 also updated admin users student list. This now has a form to move an unassigned student to a cohort
 
 #100, #112, #180 
 leggtc1@student.op.ac.nz
-
-### [`#bbd3e5e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bbd3e5e2afa79f4900f9e08e94269dbd0beebc67) got it so students are sorted by cohorts on the main page rather than by papers 
-scotms2@student.op.ac.nz
-
-### [`#3dbce52`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3dbce5227f92f6d5f8f1d5a4bd222cf90778b5fb) inistal commit for this branch 
-WINTST1@student.op.ac.nz
-
-### [`#c9d82f0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c9d82f01e83483a32bd738c3a49230f95ba39181) created tests for notes and fixed broken test locally 
-WINTST1@student.op.ac.nz
-
-### [`#2066863`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/2066863ffc8b4b219dbb08589e556098cc2da17a) breifly fixed tests, jet-delete-button is overwriting html tags and dusk is unable to locate the buttons beucase of that 
-WINTST1@student.op.ac.nz
 
 ### [`#fa1b5b6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fa1b5b61aace70d7adc0fcafaca50d04ccf94c93) fix(removed package import from app layout): power grid template package import removed
 
@@ -111,25 +76,12 @@ studio papers. this component will toggle studio papers on and off if none selec
 #265 
 leggtc1@student.op.ac.nz
 
-### [`#23f8086`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/23f8086f3be91fc003d730e7cc999fce03e5c356) added more tests for regular users making sure they cant access certain admin pages 
-scotms2@student.op.ac.nz
-
 ### [`#3fe11b4`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3fe11b4653143d5d55880c166b411630bb9a09d8) refactor(updated admin student list): added space around inactive student form
 
 updated dusk Admin panel test
 
 #180, #112 
 leggtc1@student.op.ac.nz
-
-### [`#99a2065`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/99a2065081e1c4ec3fc23b27661e66cc8ec7b2fc) refactor(student admin list): updated admin user list
-
-now is sorted, provides email, github and profile links to student
-
-#258, #256 
-leggtc1@student.op.ac.nz
-
-### [`#a4dbe70`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a4dbe707e15ef03f1aa65e67f1499e06caa1136e) added tests to test if the admin can deactivate and activate users 
-scotms2@student.op.ac.nz
 
 ### [`#5fa2669`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5fa26693725917e5ec79e19b9b530df40369d495) test(test fix + removed note page): updated failing tests/assertion error
 
@@ -148,8 +100,8 @@ LEGGTC1@student.op.ac.nz
 causing test failures on this one 
 leggtc1@student.op.ac.nz
 
-### [`#35a4ae0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/35a4ae00e16194c640bbc04076d7f2a086a539f4) added tests that check if a normal user can access the admin panel and if a admin user can view a list of all students 
-scotms2@student.op.ac.nz
+### [`#6549cd8`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/6549cd8c617eaca22b115b8e8345d19c6230f699) fix(bug fix ui): updated admin student list css and heading 
+LEGGTC1@student.op.ac.nz
 
 ### [`#17e4535`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/17e453571577c21de63c027784d42faf0d9e2d9a) refactor(student form): response added when a new student
 
@@ -170,24 +122,43 @@ leggtc1@student.op.ac.nz
 check box to add space and padding 
 leggtc1@student.op.ac.nz
 
+### [`#5e25053`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5e25053599e193d533203f90da0e5407a4c4af5c) test(test error fixes + note layout fix): css updated on evidence and not page
+
+failing tests updated to fit update ui 
+LEGGTC1@student.op.ac.nz
+
 ### [`#ca5f9bf`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/ca5f9bf212183f55ae4d425134e0b0d979ddbc95) refactor(recomiled css): css updated following merge 
 LEGGTC1@student.op.ac.nz
 
-### [`#02887bd`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/02887bd02512c514b03ef4f20ce93732dd0687d5) refactor(deactivated and student list admin pages): layout updates added to bring pages in line
+### [`#a24d518`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a24d51820a82fa27e5e7327e49f2defd41f2c10d) fix(removed edit buttons from student profile): edit buttons do not have any back end function 
+LEGGTC1@student.op.ac.nz
 
-with other pages in the app
+### [`#d40e581`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d40e581f0dd89a4f2d30c597f7f105c00841205c) test(lecturer test): accidentially removed a use statement
 
-#180 
+readded this line
+
+#100 
 leggtc1@student.op.ac.nz
 
-### [`#29be194`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/29be194c89cb8e9073d11605d632c0c782449b44) added requested changes + added year to drop downs 
-scotms2@student.op.ac.nz
+### [`#f274144`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f274144e44762d10a2db275d9c457cbe92ba1143) test(admin and lecturer tests): updates added to tests related to ui changes
 
-### [`#fb8f896`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fb8f89654cc3343c340bf4328e69996b2e0105f1) added if check around the students so the lecturer can only see the students that are in their class 
-scotms2@student.op.ac.nz
+removed back button click, updated path following adding of a new student
 
-### [`#415cb53`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/415cb5347d25080ec3a99c0c9c70a8573086994a) removed 2FA and account deletion from profile page 
-scotms2@student.op.ac.nz
+#112, #140, #156, #158 
+leggtc1@student.op.ac.nz
+
+### [`#c6b32ae`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c6b32ae124f7c36d6e881b55257f004b6b65e048) fix(student update validation bug): required validation preventing form submission 
+LEGGTC1@student.op.ac.nz
+
+### [`#6ff68c5`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/6ff68c52ef6d5e7d08440f8780befcf37bc5a463) Merge pull request #280 development/staging
+
+Sprint 6 Development &gt; Staging 
+leggtc1@student.op.ac.nz
+
+### [`#26cc2ce`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/26cc2cedce94e13c08ad488db1bdc0b89456bc98) Merge pull request sprint-6-layout-bug-fix/development
+
+Sprint 6 Layout Bug Fixes 
+leggtc1@student.op.ac.nz
 
 ### [`#116cfd6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/116cfd60313b8ee14db0f466b41ce91056db2449) test(lecturer test): updated test to resolve path error
 
@@ -196,29 +167,9 @@ in the testLecturerAddStudent test
 #100 
 leggtc1@student.op.ac.nz
 
-### [`#dd9a15d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/dd9a15d97493ff519ac2ecd979a2919b9228386a) changed query in route file to get all students even if they are deactivated, changed validation for new users hoping it fixes the crash 
-scotms2@student.op.ac.nz
-
 ### [`#26d46a5`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/26d46a5c51c44513bc09244389c3c87ecc660031) test(lecturer test): updated AssertSee function
 
 change required due to the change in path following a successful student creation
-
-#100 
-leggtc1@student.op.ac.nz
-
-### [`#a81cd4b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a81cd4b1b8c276654ae1c4f027d43dcc58cf3fc1) added dusk tags to fix tests, must of got lost during a merge or something 
-wintst1@student.op.ac.nz
-
-### [`#bf8ca7c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bf8ca7cbf0080417f8f468b7a8f50aa68087726f) refactor(notes model): changed the student fk field referenced by notes
-
-it was referencing a column in the student table that does not exist in the database
-
-#221 
-leggtc1@student.op.ac.nz
-
-### [`#d40e581`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d40e581f0dd89a4f2d30c597f7f105c00841205c) test(lecturer test): accidentially removed a use statement
-
-readded this line
 
 #100 
 leggtc1@student.op.ac.nz
@@ -230,18 +181,59 @@ altered email to username in lecturer tests
 #225, #100 
 leggtc1@student.op.ac.nz
 
-### [`#f274144`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f274144e44762d10a2db275d9c457cbe92ba1143) test(admin and lecturer tests): updates added to tests related to ui changes
-
-removed back button click, updated path following adding of a new student
-
-#112, #140, #156, #158 
-leggtc1@student.op.ac.nz
-
 ### [`#9b3ff15`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9b3ff1551b31f4b2954a515e9e20eeb67336f85b) test(lecturer test): updated Lecturer Add Student Test
 
 altered path assertion in testLecturerAddStudent test method to bring this in line with ui changes
 
 #100 
+leggtc1@student.op.ac.nz
+
+### [`#da778c8`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/da778c886a59aee18d0c80065a91322b778e3186) Merge pull request #276 development/staging
+
+Sprint 6 Bug Fixes + Test Suite Updates 
+leggtc1@student.op.ac.nz
+
+### [`#1886928`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1886928c2293e42e3296deb938851641b15e4d66) refactor(user/student layout updates): updated css and html
+
+changes make user edit, index and enable student pages and components more consitently styled
+
+#262, #258 
+leggtc1@student.op.ac.nz
+
+### [`#38e3a4c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/38e3a4cfe53108a1ff3d63d0adbf73000f45aeb5) refactor(cohort and deactivated page layout update): css updates added to cohort and deactivated
+
+to make these consistent with other page layouts. removed radio button component from cohort.
+
+#180, #262 
+leggtc1@student.op.ac.nz
+
+### [`#447a642`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/447a642c212662915c333b466f1e67bc04080466) added tests to check if the cohorts page can be reached by an admin and not a regular user 
+scotms2@student.op.ac.nz
+
+### [`#bbd3e5e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bbd3e5e2afa79f4900f9e08e94269dbd0beebc67) got it so students are sorted by cohorts on the main page rather than by papers 
+scotms2@student.op.ac.nz
+
+### [`#3dbce52`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3dbce5227f92f6d5f8f1d5a4bd222cf90778b5fb) inistal commit for this branch 
+WINTST1@student.op.ac.nz
+
+### [`#23f8086`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/23f8086f3be91fc003d730e7cc999fce03e5c356) added more tests for regular users making sure they cant access certain admin pages 
+scotms2@student.op.ac.nz
+
+### [`#99a2065`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/99a2065081e1c4ec3fc23b27661e66cc8ec7b2fc) refactor(student admin list): updated admin user list
+
+now is sorted, provides email, github and profile links to student
+
+#258, #256 
+leggtc1@student.op.ac.nz
+
+### [`#a4dbe70`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a4dbe707e15ef03f1aa65e67f1499e06caa1136e) added tests to test if the admin can deactivate and activate users 
+scotms2@student.op.ac.nz
+
+### [`#02887bd`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/02887bd02512c514b03ef4f20ce93732dd0687d5) refactor(deactivated and student list admin pages): layout updates added to bring pages in line
+
+with other pages in the app
+
+#180 
 leggtc1@student.op.ac.nz
 
 ### [`#37f1789`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/37f17897099ecf4913569c73e8c49d4c37b5c931) Update sprint-6-layout-bug-fix from development 
@@ -251,6 +243,12 @@ leggtc1@student.op.ac.nz
 
 Sprint 6 admin tests 
 leggtc1@student.op.ac.nz
+
+### [`#35a4ae0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/35a4ae00e16194c640bbc04076d7f2a086a539f4) added tests that check if a normal user can access the admin panel and if a admin user can view a list of all students 
+scotms2@student.op.ac.nz
+
+### [`#a81cd4b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a81cd4b1b8c276654ae1c4f027d43dcc58cf3fc1) added dusk tags to fix tests, must of got lost during a merge or something 
+wintst1@student.op.ac.nz
 
 ### [`#4a0f14a`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/4a0f14ad8cf1205927ff102c2b391a916e94e75f) Merge pull request #272 sprint-6-sort-classes-by-cohort/development
 
@@ -265,9 +263,46 @@ scotms2@student.op.ac.nz
 Test Fixes 
 leggtc1@student.op.ac.nz
 
+### [`#13af27f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/13af27f7b278a1c496908946a69166931a92bef6) changed js a little, got it so the user can only see their cohorts and fixed the move feature as it broke due to the change 
+scotms2@student.op.ac.nz
+
+### [`#c9d82f0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c9d82f01e83483a32bd738c3a49230f95ba39181) created tests for notes and fixed broken test locally 
+WINTST1@student.op.ac.nz
+
+### [`#2066863`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/2066863ffc8b4b219dbb08589e556098cc2da17a) breifly fixed tests, jet-delete-button is overwriting html tags and dusk is unable to locate the buttons beucase of that 
+WINTST1@student.op.ac.nz
+
+### [`#29be194`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/29be194c89cb8e9073d11605d632c0c782449b44) added requested changes + added year to drop downs 
+scotms2@student.op.ac.nz
+
 ### [`#842f232`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/842f23267dfce95a9e3e858f54e70c07e71ca8ce) Merge pull request sprint-6-bug-fixes/development
 
 Bug Fixes + Security Fix 
+leggtc1@student.op.ac.nz
+
+### [`#59ad03d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59ad03defd8e6281f4d36b4891f1b37c12e47505) feat(filtered cohort list): new cohort table searchable, filterable
+
+new package installed called powergrid which provide filter ordering functionality. table head can
+be clicked to order results 
+leggtc1@student.op.ac.nz
+
+### [`#a1d54ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a1d54eaba7e5afe31c139582e24e1119477f7bbf) added middleware to stop deactivated users from logging in 
+scotms2@student.op.ac.nz
+
+### [`#fb8f896`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fb8f89654cc3343c340bf4328e69996b2e0105f1) added if check around the students so the lecturer can only see the students that are in their class 
+scotms2@student.op.ac.nz
+
+### [`#415cb53`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/415cb5347d25080ec3a99c0c9c70a8573086994a) removed 2FA and account deletion from profile page 
+scotms2@student.op.ac.nz
+
+### [`#dd9a15d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/dd9a15d97493ff519ac2ecd979a2919b9228386a) changed query in route file to get all students even if they are deactivated, changed validation for new users hoping it fixes the crash 
+scotms2@student.op.ac.nz
+
+### [`#bf8ca7c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bf8ca7cbf0080417f8f468b7a8f50aa68087726f) refactor(notes model): changed the student fk field referenced by notes
+
+it was referencing a column in the student table that does not exist in the database
+
+#221 
 leggtc1@student.op.ac.nz
 
 ### [`#ef4d3b2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/ef4d3b2e94f2c47b00432f6d8deef1da4f58383f) another typo fixed 
@@ -2533,7 +2568,8 @@ Sprint 5 Development &gt; Staging
 -  fix(students.blade.php): no fall back content for users removed for a studio paper [`b6d5342`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b6d5342a227e0394a7b007066b0f4dd25388a174) :octocat:
 -  Added update student to profile page, altered student controller update method, viewStudent blade, added component StudentUpdate and update-student-form [`d5b8cfb`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d5b8cfb3641070160a41dab92e8096e9a2e44e53) :octocat:
 -  fix(notes.blade.php): bug occured due to http request not using the current users id [`fdc21ae`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fdc21aed651e0227ed106f7e377540f5f08c2843) :octocat:
--  Update StudentController.php [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
+-  Update StudentController.php
+ [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
 -  Update tests/Browser/NotesTest.php [`14945d6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/14945d61484a6df41a93ded28f62490251b7e9be) :octocat:
 -  Update tests/Browser/EvidenceTest.php [`53ffe24`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/53ffe248a1e6728ed31ee8adffa52ce637f3daaa) :octocat:
 -  Update tests/Browser/AdminpanelTest.php [`5bf2cd8`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5bf2cd8f8b590ff51665742503a2691e9d64ab33) :octocat:
@@ -2561,13 +2597,16 @@ Sprint 5 Development &gt; Staging
 -  style(app.css): updated css with fresh compilation [`815ab4d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/815ab4d25cf4d4b61b4dceec5b43e872d7e60155) :octocat:
 -  Evidence test file working in a cut back state. Ready for moving to lecturer or admin test files [`59c2a8e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59c2a8ea71202fc4c32a2b58f782713f3a6e5454) :octocat:
 -  Login test for admin user working locally [`e288a7f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e288a7f38424ca29330de7a85d5bd3163920e209) :octocat:
--  Update PermissionsSeeder.php [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
--  Update PermissionsSeeder.php [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
+-  Update PermissionsSeeder.php
+ [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
+-  Update PermissionsSeeder.php
+ [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
 -  Update laravel-dusk-testing.yml [`5af27f7`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5af27f7c6d5c27d5098583168882be8db2bfa2cb) :octocat:
 -  dusk password attribute fixed in login form [`902d60b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/902d60b808a7e93a6fa97e8c9fcd0b3306b7560d) :octocat:
 -  fix(databaseseeder.php): correcting error in seeder order [`1b25903`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1b25903414bb52387d825454c321c2c3045fd5a8) :octocat:
 -  Update laravel-security-checks.yml [`0d1d2fe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0d1d2fed4eb6f482d94fd96a1c2e009a7fe4d022) :octocat:
--  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
+-  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php
+ [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
 -  removed event line [`3e85d4e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3e85d4e9c6f8c5bb8dfab366a7581780361352c3) :octocat:
 ## [v1.2.1-beta](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/compare/v1.1.1-beta...v1.2.1-beta) - :calendar:2021-10-20
 Sprint 4 Completion
@@ -2610,12 +2649,14 @@ Sprint 4 Completion
 -  Update .github/workflows/test-http-check.yml [`8c6ae28`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/8c6ae28192586268c5b48c78cef8a32c4bccec44) :octocat:
 -  Update .github/workflows/production-http-check.yml [`e7fc6ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e7fc6eab4fcedafd76b5bed865fe23c9e3c3c6db) :octocat:
 -  debugging node installation - dusk action script [`64f462b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/64f462b4cfc788bce2ca3be441a2b5de835940fe) :octocat:
--  Update app/Http/Controllers/EvidenceController.php [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
+-  Update app/Http/Controllers/EvidenceController.php
+ [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
 -  Bug Fix app/Http/Controllers/EvidenceController.php [`bc357cf`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bc357cfc93cc87b323055e405698161eff47a171) :octocat:
 -  fix(correct cohort controller): error added in last commit - resolved [`aba6059`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/aba605911ed34404a025a007af05329e8d94186a) :octocat:
 -  Bug fix app/Models/Evidence.php [`43f1d5c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/43f1d5c8ebcf5aaf7dde8900b8527682a475ef1f) :octocat:
 -  Update resources/views/pages/viewStudent.blade.php [`9a59cad`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9a59cad5887b8664d491e1dc59dd531c237ad94c) :octocat:
--  Update resources/views/pages/viewStudent.blade.php [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
+-  Update resources/views/pages/viewStudent.blade.php
+ [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
 -  Merge development into github-action-updates [`b4f6dbe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b4f6dbe2c154d4f74cbde3c9dc18859c507ebce2) :octocat:
 -  Merge pull request #200 sprint-4-qa-admin-links [`c5216a2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c5216a2a3251302c1f9a699275a60c008d2706b6) :octocat:
 -  Merge pull request #198 sprint-4-rename-papers-to-courses-frontend [`3554836`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3554836d61677f7c06d46a4301944e26aa1ddd26) :octocat:
@@ -3695,7 +3736,8 @@ Sprint 5 Development &gt; Staging
 -  fix(students.blade.php): no fall back content for users removed for a studio paper [`b6d5342`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b6d5342a227e0394a7b007066b0f4dd25388a174) :octocat:
 -  Added update student to profile page, altered student controller update method, viewStudent blade, added component StudentUpdate and update-student-form [`d5b8cfb`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d5b8cfb3641070160a41dab92e8096e9a2e44e53) :octocat:
 -  fix(notes.blade.php): bug occured due to http request not using the current users id [`fdc21ae`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fdc21aed651e0227ed106f7e377540f5f08c2843) :octocat:
--  Update StudentController.php [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
+-  Update StudentController.php
+ [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
 -  Update tests/Browser/NotesTest.php [`14945d6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/14945d61484a6df41a93ded28f62490251b7e9be) :octocat:
 -  Update tests/Browser/EvidenceTest.php [`53ffe24`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/53ffe248a1e6728ed31ee8adffa52ce637f3daaa) :octocat:
 -  Update tests/Browser/AdminpanelTest.php [`5bf2cd8`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5bf2cd8f8b590ff51665742503a2691e9d64ab33) :octocat:
@@ -3723,13 +3765,16 @@ Sprint 5 Development &gt; Staging
 -  style(app.css): updated css with fresh compilation [`815ab4d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/815ab4d25cf4d4b61b4dceec5b43e872d7e60155) :octocat:
 -  Evidence test file working in a cut back state. Ready for moving to lecturer or admin test files [`59c2a8e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59c2a8ea71202fc4c32a2b58f782713f3a6e5454) :octocat:
 -  Login test for admin user working locally [`e288a7f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e288a7f38424ca29330de7a85d5bd3163920e209) :octocat:
--  Update PermissionsSeeder.php [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
--  Update PermissionsSeeder.php [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
+-  Update PermissionsSeeder.php
+ [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
+-  Update PermissionsSeeder.php
+ [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
 -  Update laravel-dusk-testing.yml [`5af27f7`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5af27f7c6d5c27d5098583168882be8db2bfa2cb) :octocat:
 -  dusk password attribute fixed in login form [`902d60b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/902d60b808a7e93a6fa97e8c9fcd0b3306b7560d) :octocat:
 -  fix(databaseseeder.php): correcting error in seeder order [`1b25903`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1b25903414bb52387d825454c321c2c3045fd5a8) :octocat:
 -  Update laravel-security-checks.yml [`0d1d2fe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0d1d2fed4eb6f482d94fd96a1c2e009a7fe4d022) :octocat:
--  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
+-  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php
+ [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
 -  removed event line [`3e85d4e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3e85d4e9c6f8c5bb8dfab366a7581780361352c3) :octocat:
 ## [v1.2.1-beta](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/compare/v1.1.1-beta...v1.2.1-beta) - :calendar:2021-10-20
 Sprint 4 Completion
@@ -3772,12 +3817,14 @@ Sprint 4 Completion
 -  Update .github/workflows/test-http-check.yml [`8c6ae28`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/8c6ae28192586268c5b48c78cef8a32c4bccec44) :octocat:
 -  Update .github/workflows/production-http-check.yml [`e7fc6ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e7fc6eab4fcedafd76b5bed865fe23c9e3c3c6db) :octocat:
 -  debugging node installation - dusk action script [`64f462b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/64f462b4cfc788bce2ca3be441a2b5de835940fe) :octocat:
--  Update app/Http/Controllers/EvidenceController.php [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
+-  Update app/Http/Controllers/EvidenceController.php
+ [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
 -  Bug Fix app/Http/Controllers/EvidenceController.php [`bc357cf`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bc357cfc93cc87b323055e405698161eff47a171) :octocat:
 -  fix(correct cohort controller): error added in last commit - resolved [`aba6059`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/aba605911ed34404a025a007af05329e8d94186a) :octocat:
 -  Bug fix app/Models/Evidence.php [`43f1d5c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/43f1d5c8ebcf5aaf7dde8900b8527682a475ef1f) :octocat:
 -  Update resources/views/pages/viewStudent.blade.php [`9a59cad`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9a59cad5887b8664d491e1dc59dd531c237ad94c) :octocat:
--  Update resources/views/pages/viewStudent.blade.php [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
+-  Update resources/views/pages/viewStudent.blade.php
+ [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
 -  Merge development into github-action-updates [`b4f6dbe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b4f6dbe2c154d4f74cbde3c9dc18859c507ebce2) :octocat:
 -  Merge pull request #200 sprint-4-qa-admin-links [`c5216a2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c5216a2a3251302c1f9a699275a60c008d2706b6) :octocat:
 -  Merge pull request #198 sprint-4-rename-papers-to-courses-frontend [`3554836`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3554836d61677f7c06d46a4301944e26aa1ddd26) :octocat:
@@ -4777,7 +4824,8 @@ recompiled css and js files
 -  fix(homepage cohort grid): bug occurred when there is only 1 cohort [`5dd6a0d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5dd6a0dced239e1bd36734c2365a0f8e9773ad6a) :octocat:
 -  fix(students.blade.php): no fall back content for users removed for a studio paper [`b6d5342`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b6d5342a227e0394a7b007066b0f4dd25388a174) :octocat:
 -  Added update student to profile page, altered student controller update method, viewStudent blade, added component StudentUpdate and update-student-form [`d5b8cfb`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/d5b8cfb3641070160a41dab92e8096e9a2e44e53) :octocat:
--  Update StudentController.php [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
+-  Update StudentController.php
+ [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
 -  Removing bug on line 10 [`fc4583d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fc4583d6c049bb46e80e6138274139a5151746a1) :octocat:
 -  Merge sprint-5-homepage-layout-update/development [`94cd499`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/94cd4996b452a4705877e94070a0826c47d79129) :octocat:
 -  fix(notes.blade.php): bug occured due to http request not using the current users id [`fdc21ae`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fdc21aed651e0227ed106f7e377540f5f08c2843) :octocat:
@@ -4808,8 +4856,10 @@ recompiled css and js files
 -  style(app.css): updated css with fresh compilation [`815ab4d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/815ab4d25cf4d4b61b4dceec5b43e872d7e60155) :octocat:
 -  Evidence test file working in a cut back state. Ready for moving to lecturer or admin test files [`59c2a8e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59c2a8ea71202fc4c32a2b58f782713f3a6e5454) :octocat:
 -  Login test for admin user working locally [`e288a7f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e288a7f38424ca29330de7a85d5bd3163920e209) :octocat:
--  Update PermissionsSeeder.php [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
--  Update PermissionsSeeder.php [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
+-  Update PermissionsSeeder.php
+ [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
+-  Update PermissionsSeeder.php
+ [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
 -  updated notes + uploads layout [`64467d0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/64467d0627c9861e290b257df9f53b3df4eead86) :octocat:
 -  Update laravel-dusk-testing.yml [`5af27f7`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5af27f7c6d5c27d5098583168882be8db2bfa2cb) :octocat:
 -  Update resources/views/components/update-student-form.blade.php [`1f35008`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1f3500832700cf1438f56efe3655f4d84fcda60b) :octocat:
@@ -4820,7 +4870,8 @@ recompiled css and js files
 -  dusk password attribute fixed in login form [`902d60b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/902d60b808a7e93a6fa97e8c9fcd0b3306b7560d) :octocat:
 -  fix(databaseseeder.php): correcting error in seeder order [`1b25903`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1b25903414bb52387d825454c321c2c3045fd5a8) :octocat:
 -  Update laravel-security-checks.yml [`0d1d2fe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0d1d2fed4eb6f482d94fd96a1c2e009a7fe4d022) :octocat:
--  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
+-  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php
+ [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
 -  removed event line [`3e85d4e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3e85d4e9c6f8c5bb8dfab366a7581780361352c3) :octocat:
 ## [v1.2.1-beta](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/compare/v1.1.1-beta...v1.2.1-beta) - :calendar:2021-10-20
 Sprint 4 Completion
@@ -4863,12 +4914,14 @@ Sprint 4 Completion
 -  Update .github/workflows/test-http-check.yml [`8c6ae28`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/8c6ae28192586268c5b48c78cef8a32c4bccec44) :octocat:
 -  Update .github/workflows/production-http-check.yml [`e7fc6ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e7fc6eab4fcedafd76b5bed865fe23c9e3c3c6db) :octocat:
 -  debugging node installation - dusk action script [`64f462b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/64f462b4cfc788bce2ca3be441a2b5de835940fe) :octocat:
--  Update app/Http/Controllers/EvidenceController.php [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
+-  Update app/Http/Controllers/EvidenceController.php
+ [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
 -  Bug Fix app/Http/Controllers/EvidenceController.php [`bc357cf`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bc357cfc93cc87b323055e405698161eff47a171) :octocat:
 -  fix(correct cohort controller): error added in last commit - resolved [`aba6059`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/aba605911ed34404a025a007af05329e8d94186a) :octocat:
 -  Bug fix app/Models/Evidence.php [`43f1d5c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/43f1d5c8ebcf5aaf7dde8900b8527682a475ef1f) :octocat:
 -  Update resources/views/pages/viewStudent.blade.php [`9a59cad`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9a59cad5887b8664d491e1dc59dd531c237ad94c) :octocat:
--  Update resources/views/pages/viewStudent.blade.php [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
+-  Update resources/views/pages/viewStudent.blade.php
+ [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
 -  Merge development into github-action-updates [`b4f6dbe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b4f6dbe2c154d4f74cbde3c9dc18859c507ebce2) :octocat:
 -  Merge pull request #200 sprint-4-qa-admin-links [`c5216a2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c5216a2a3251302c1f9a699275a60c008d2706b6) :octocat:
 -  Merge pull request #198 sprint-4-rename-papers-to-courses-frontend [`3554836`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3554836d61677f7c06d46a4301944e26aa1ddd26) :octocat:
@@ -5867,16 +5920,20 @@ Sprint 5 Homepage Layout Update
 -  Evidence test file working in a cut back state. Ready for moving to lecturer or admin test files [`59c2a8e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59c2a8ea71202fc4c32a2b58f782713f3a6e5454) :octocat:
 -  Login test for admin user working locally [`e288a7f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e288a7f38424ca29330de7a85d5bd3163920e209) :octocat:
 -  fix(homepage cohort grid): bug occurred when there is only 1 cohort [`5dd6a0d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5dd6a0dced239e1bd36734c2365a0f8e9773ad6a) :octocat:
--  Update PermissionsSeeder.php [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
+-  Update PermissionsSeeder.php
+ [`c193d12`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c193d1200379716951e3b957e4c3a4287a3c3a1a) :octocat:
 -  fix(students.blade.php): no fall back content for users removed for a studio paper [`b6d5342`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b6d5342a227e0394a7b007066b0f4dd25388a174) :octocat:
--  Update PermissionsSeeder.php [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
+-  Update PermissionsSeeder.php
+ [`0c08c2f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0c08c2fbee07a1d224a095dc55d1326f8e7e9e75) :octocat:
 -  Update laravel-dusk-testing.yml [`5af27f7`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5af27f7c6d5c27d5098583168882be8db2bfa2cb) :octocat:
 -  fix(notes.blade.php): bug occured due to http request not using the current users id [`fdc21ae`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fdc21aed651e0227ed106f7e377540f5f08c2843) :octocat:
--  Update StudentController.php [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
+-  Update StudentController.php
+ [`9d86caa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9d86caadea7382f0934b7471b404295fb6e4a4df) :octocat:
 -  dusk password attribute fixed in login form [`902d60b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/902d60b808a7e93a6fa97e8c9fcd0b3306b7560d) :octocat:
 -  fix(databaseseeder.php): correcting error in seeder order [`1b25903`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1b25903414bb52387d825454c321c2c3045fd5a8) :octocat:
 -  Update laravel-security-checks.yml [`0d1d2fe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/0d1d2fed4eb6f482d94fd96a1c2e009a7fe4d022) :octocat:
--  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
+-  Update database/migrations/2021_09_20_031301_assign_roles_to_users.php
+ [`694b1da`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/694b1dacfb850867c6669c366eaee06e70a5440b) :octocat:
 -  Update tests/Browser/NotesTest.php [`14945d6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/14945d61484a6df41a93ded28f62490251b7e9be) :octocat:
 -  Update tests/Browser/EvidenceTest.php [`53ffe24`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/53ffe248a1e6728ed31ee8adffa52ce637f3daaa) :octocat:
 -  Update tests/Browser/AdminpanelTest.php [`5bf2cd8`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5bf2cd8f8b590ff51665742503a2691e9d64ab33) :octocat:
@@ -5922,12 +5979,14 @@ Sprint 4 Completion
 -  Update .github/workflows/test-http-check.yml [`8c6ae28`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/8c6ae28192586268c5b48c78cef8a32c4bccec44) :octocat:
 -  Update .github/workflows/production-http-check.yml [`e7fc6ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e7fc6eab4fcedafd76b5bed865fe23c9e3c3c6db) :octocat:
 -  debugging node installation - dusk action script [`64f462b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/64f462b4cfc788bce2ca3be441a2b5de835940fe) :octocat:
--  Update app/Http/Controllers/EvidenceController.php [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
+-  Update app/Http/Controllers/EvidenceController.php
+ [`f1a3370`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f1a337020907bfc2405dc5cc6cc4ccdc844389fe) :octocat:
 -  Bug Fix app/Http/Controllers/EvidenceController.php [`bc357cf`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bc357cfc93cc87b323055e405698161eff47a171) :octocat:
 -  fix(correct cohort controller): error added in last commit - resolved [`aba6059`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/aba605911ed34404a025a007af05329e8d94186a) :octocat:
 -  Bug fix app/Models/Evidence.php [`43f1d5c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/43f1d5c8ebcf5aaf7dde8900b8527682a475ef1f) :octocat:
 -  Update resources/views/pages/viewStudent.blade.php [`9a59cad`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/9a59cad5887b8664d491e1dc59dd531c237ad94c) :octocat:
--  Update resources/views/pages/viewStudent.blade.php [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
+-  Update resources/views/pages/viewStudent.blade.php
+ [`01d8b26`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/01d8b2629577fe7b63950ca267dc144b204ea543) :octocat:
 -  Merge development into github-action-updates [`b4f6dbe`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/b4f6dbe2c154d4f74cbde3c9dc18859c507ebce2) :octocat:
 -  Merge pull request #200 sprint-4-qa-admin-links [`c5216a2`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c5216a2a3251302c1f9a699275a60c008d2706b6) :octocat:
 -  Merge pull request #198 sprint-4-rename-papers-to-courses-frontend [`3554836`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3554836d61677f7c06d46a4301944e26aa1ddd26) :octocat:

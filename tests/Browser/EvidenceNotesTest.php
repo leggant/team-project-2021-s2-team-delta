@@ -29,12 +29,9 @@ class EvidenceNotesTest extends DuskTestCase
             'paper_id' => 2, // With paper_id matching the one in cohort above
         ]);
 
-        
         DB::table('users')
             ->where('id', 1)
-            ->update(['paper_id' => 2 
-        ]);
-
+            ->update(['paper_id' => 2]);
 
         $cohort = Cohort::factory()->create([
             'paper_id' => 2, // Studio 1
@@ -98,61 +95,61 @@ class EvidenceNotesTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user)
-        {
-            $browser->loginAs($user)
-                    ->visit('/')
-                    ->assertPathIs('/')
-                    ->click('@dropdown')
-                    ->click('@student_records')
-                    ->assertPathBeginsWith('/students')
-                    ->assertSee('Test')
-                    ->press('@evidence_delete')
-                    ->pause(2000)
-                    ->assertSee('No files found')
-                    ->screenshot('evidence_deletion');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/')
+                ->assertPathIs('/')
+                ->click('@dropdown')
+                ->click('@student_records')
+                ->assertPathBeginsWith('/students')
+                ->assertSee('Test')
+                ->press('@evidence_delete')
+                ->pause(2000)
+                ->assertSee('No files found')
+                ->screenshot('evidence_deletion');
         });
     }
 
-    //test uploads a note then checks the student profile for the upload. 
+    //test uploads a note then checks the student profile for the upload.
     public function testAdminNoteSubmit()
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user)
-        {
-            $browser->loginAs($user)
-                    ->visit('/evidence')
-                    ->pause(2000)
-                    ->assertPathIs('/evidence')
-                    ->assertSee('SAVE NOTE')
-                    ->assertSee('Jim Smith')
-                    ->type('@filelink', 'https://www.google.com')
-                    ->type('@noteinput', 'testing note submissions!')
-                    ->click('@notes_submit')
-                    ->pause(2000)
-                    ->screenshot('note_view');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/evidence')
+                ->pause(2000)
+                ->assertPathIs('/evidence')
+                ->assertSee('SAVE NOTE')
+                ->assertSee('Jim Smith')
+                ->type('@filelink', 'https://www.google.com')
+                ->type('@noteinput', 'testing note submissions!')
+                ->click('@notes_submit')
+                ->pause(2000)
+                ->screenshot('note_view');
         });
     }
 
-    //test goes to the student profile, than deletes a note upload. 
+    //test goes to the student profile, than deletes a note upload.
     public function testAdminNotesDelete()
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use($user)
-        {
-            $browser->loginAs($user)
-                    ->visit('/')
-                    ->assertPathIs('/')
-                    ->click('@dropdown')
-                    ->click('@student_records')
-                    ->assertPathBeginsWith('/students')
-                    ->assertSee('Testing Note Submissions!')
-                    ->press('@notes_delete')
-                    ->pause(2000)
-                    ->assertSee('No notes found')
-                    ->screenshot('note_deletion');
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/')
+                ->assertPathIs('/')
+                ->click('@dropdown')
+                ->click('@student_records')
+                ->assertPathBeginsWith('/students')
+                ->assertSee('Testing Note Submissions!')
+                ->press('@notes_delete')
+                ->pause(2000)
+                ->assertSee('No notes found')
+                ->screenshot('note_deletion');
         });
     }
 }
