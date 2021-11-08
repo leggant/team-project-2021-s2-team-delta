@@ -45,6 +45,9 @@
                 </div>
                 <x-jet-button class="mt-2">Update Student</x-jet-button>
             </form>
+            @if(session('studentupdateerror'))
+                
+            @endif
         </div>
         <div class="mt-4">
             <h3 class="text-3xl">Evidence</h3>

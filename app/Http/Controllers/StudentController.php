@@ -151,7 +151,7 @@ class StudentController extends Controller
             $request->all(),
             $rules,
             $messages
-        )->validateWithBag('studenterror');
+        )->validateWithBag('studentupdateerror');
         
         $upstudent = Student::find($id);
         $upstudent->first_name = $request->first_name;
