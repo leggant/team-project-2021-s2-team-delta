@@ -6,6 +6,7 @@
         xl:grid-cols-8 xl:grid-rows-2 
         lg:grid-cols-4 lg:grid-rows-2
         md:grid-cols-4 md:grid-rows-1
+        xmd:grid-cols-8 xmd:grid-rows-2
         sm:grid-cols-1 sm:grid-rows-6
         xs:px-2">
             <x-jet-input type="text" id="first_name" value="{{ old('first_name') }}" name="first_name"

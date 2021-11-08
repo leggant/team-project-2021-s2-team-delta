@@ -1,7 +1,7 @@
 @can('view students')
 @php $oldcount = 0; @endphp
 @php $newcount = 1; @endphp
-<div class="grid max-w-7xl 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full content-start justify-items-start">
+<div class="grid max-w-7xl 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 md:mx-auto xmd:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 mb-6 mx-auto gap-x-6 gap-y-6 sm:w-full content-start">
     @foreach($user->papers as $up)
     @foreach ($cohorts as $cohort)
     @if($up->pivot->paper_id == $cohort->paper_id)
