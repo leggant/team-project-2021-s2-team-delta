@@ -102,6 +102,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->click('@dropdown')
                 ->click('@student_records')
                 ->assertPathBeginsWith('/students')
+                ->screenshot('evidence_view')
                 ->press('@evidence_delete')
                 ->pause(2000)
                 ->assertSee('No files found')

@@ -2,11 +2,67 @@
 
 ## Commits :heavy_check_mark:
 
+### [`#e5c6282`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/e5c62828fee5210389391cfaebf389ea6013b002) fix(corrected error in hamburger menu): navigation options now available
+
+to mobile users also 
+leggtc1@student.op.ac.nz
+
+### [`#f9f310a`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/f9f310a620bd94541886e3bd910b1f43c2f1925c) refactor(evidence page evidence form validaton): validation errors shown on page 
+leggtc1@student.op.ac.nz
+
+### [`#3aec2c4`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3aec2c494dfaac9661ed0414680a34ba91d4f237) refactor(tailwind classes updated): changes to layout make the site more responsive
+
+notes and evidence page and home page both updated 
+leggtc1@student.op.ac.nz
+
+### [`#49269a3`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/49269a3b3d67c24f56bcb293e3a4a95c9b1aead8) refactor(css updated): smaller screen style changes added 
+leggtc1@student.op.ac.nz
+
+### [`#a29d9f6`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a29d9f6135e3e02be6b5b8c9c8cea45136339e27) refactor(user admin student user list update): refactored the columns for more space
+
+combined student user name, and email into one col making the student username a clickable link to
+open a email or right click and copy the student email address to the clipboard. 
+leggtc1@student.op.ac.nz
+
+### [`#2f1cd86`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/2f1cd863886434558620b9741c008018668b10ea) chore(compiled css): css updated 
+leggtc1@student.op.ac.nz
+
+### [`#15bf35f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/15bf35f95819568bf99bb9876181d60c04a0e822) refactor(css updates + test debugging): altered delete button not detected by dusk
+
+altered css to resolve bug 
+leggtc1@student.op.ac.nz
+
+### [`#c081e2c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c081e2cfbbf7fd7af89f7bdf0179063517583023) fix(student update form validation added): student form validation showing
+
+on student profile page edit form
+
+#208 
+leggtc1@student.op.ac.nz
+
+### [`#92f9fbb`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/92f9fbb2173e05ee17ac9f9fa3e2e25ee8d6dc06) test(dusk test updates): align tests with UI changes 
+leggtc1@student.op.ac.nz
+
+### [`#1cbdcfb`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1cbdcfb8206cd487f72fc398bf6de58d8c9e4873) test(dusk test updates): evidence upload tests
+
+correcting errors resulting from ui changes 
+leggtc1@student.op.ac.nz
+
+### [`#cd8cffa`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/cd8cffa88fa7f771bcfb83675602355657e85d01) test(evidence dusk test update): resolving error in dusk tests 
+leggtc1@student.op.ac.nz
+
+
+
+
+## Commits :heavy_check_mark:
+
 ### [`#68ec732`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/68ec732324d7c4aba884bc5a658a74cc22017d6c) fix(paper selection bug): fix added to prevent user selecting none and studio papers
 
-change in the user update controller method
+change in the user update contoller method
 
 #265 
+LEGGTC1@student.op.ac.nz
+
+### [`#5ea85c0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/5ea85c03d0893a4e98b1235e50abb632780f421a) docs(updated changelog): changelog and Commitlog Updated 
 LEGGTC1@student.op.ac.nz
 
 ### [`#71e367c`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/71e367cdfa0fa058147060cfee681a62243e04bb) refactor(css and js compiled + changelog updated): change log updates 
@@ -110,13 +166,6 @@ is successfully added
 #100 
 leggtc1@student.op.ac.nz
 
-### [`#6a42b34`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/6a42b34b18a17e666bab36faa71e533b1929271c) test(admin back button test): removed from test suite
-
-button removed from the ui
-
-#225 
-leggtc1@student.op.ac.nz
-
 ### [`#081612d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/081612d05761546051cf3e8756266ba3abb84a6f) refactor(checkbox input style change): added a flexbox wrapper div around the is_admin
 
 check box to add space and padding 
@@ -193,6 +242,12 @@ leggtc1@student.op.ac.nz
 Sprint 6 Bug Fixes + Test Suite Updates 
 leggtc1@student.op.ac.nz
 
+### [`#59ad03d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59ad03defd8e6281f4d36b4891f1b37c12e47505) feat(filtered cohort list): new cohort table searchable, filterable
+
+new package installed called powergrid which provide filter ordering functionality. table head can
+be clicked to order results 
+leggtc1@student.op.ac.nz
+
 ### [`#1886928`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/1886928c2293e42e3296deb938851641b15e4d66) refactor(user/student layout updates): updated css and html
 
 changes make user edit, index and enable student pages and components more consitently styled
@@ -210,10 +265,22 @@ leggtc1@student.op.ac.nz
 ### [`#447a642`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/447a642c212662915c333b466f1e67bc04080466) added tests to check if the cohorts page can be reached by an admin and not a regular user 
 scotms2@student.op.ac.nz
 
+### [`#13af27f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/13af27f7b278a1c496908946a69166931a92bef6) changed js a little, got it so the user can only see their cohorts and fixed the move feature as it broke due to the change 
+scotms2@student.op.ac.nz
+
+### [`#a1d54ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a1d54eaba7e5afe31c139582e24e1119477f7bbf) added middleware to stop deactivated users from logging in 
+scotms2@student.op.ac.nz
+
 ### [`#bbd3e5e`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/bbd3e5e2afa79f4900f9e08e94269dbd0beebc67) got it so students are sorted by cohorts on the main page rather than by papers 
 scotms2@student.op.ac.nz
 
 ### [`#3dbce52`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/3dbce5227f92f6d5f8f1d5a4bd222cf90778b5fb) inistal commit for this branch 
+WINTST1@student.op.ac.nz
+
+### [`#c9d82f0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c9d82f01e83483a32bd738c3a49230f95ba39181) created tests for notes and fixed broken test locally 
+WINTST1@student.op.ac.nz
+
+### [`#2066863`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/2066863ffc8b4b219dbb08589e556098cc2da17a) breifly fixed tests, jet-delete-button is overwriting html tags and dusk is unable to locate the buttons beucase of that 
 WINTST1@student.op.ac.nz
 
 ### [`#23f8086`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/23f8086f3be91fc003d730e7cc999fce03e5c356) added more tests for regular users making sure they cant access certain admin pages 
@@ -228,6 +295,16 @@ leggtc1@student.op.ac.nz
 
 ### [`#a4dbe70`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a4dbe707e15ef03f1aa65e67f1499e06caa1136e) added tests to test if the admin can deactivate and activate users 
 scotms2@student.op.ac.nz
+
+### [`#35a4ae0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/35a4ae00e16194c640bbc04076d7f2a086a539f4) added tests that check if a normal user can access the admin panel and if a admin user can view a list of all students 
+scotms2@student.op.ac.nz
+
+### [`#6a42b34`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/6a42b34b18a17e666bab36faa71e533b1929271c) test(admin back button test): removed from test suite
+
+button removed from the ui
+
+#225 
+leggtc1@student.op.ac.nz
 
 ### [`#02887bd`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/02887bd02512c514b03ef4f20ce93732dd0687d5) refactor(deactivated and student list admin pages): layout updates added to bring pages in line
 
@@ -244,7 +321,7 @@ leggtc1@student.op.ac.nz
 Sprint 6 admin tests 
 leggtc1@student.op.ac.nz
 
-### [`#35a4ae0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/35a4ae00e16194c640bbc04076d7f2a086a539f4) added tests that check if a normal user can access the admin panel and if a admin user can view a list of all students 
+### [`#29be194`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/29be194c89cb8e9073d11605d632c0c782449b44) added requested changes + added year to drop downs 
 scotms2@student.op.ac.nz
 
 ### [`#a81cd4b`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a81cd4b1b8c276654ae1c4f027d43dcc58cf3fc1) added dusk tags to fix tests, must of got lost during a merge or something 
@@ -263,31 +340,10 @@ scotms2@student.op.ac.nz
 Test Fixes 
 leggtc1@student.op.ac.nz
 
-### [`#13af27f`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/13af27f7b278a1c496908946a69166931a92bef6) changed js a little, got it so the user can only see their cohorts and fixed the move feature as it broke due to the change 
-scotms2@student.op.ac.nz
-
-### [`#c9d82f0`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/c9d82f01e83483a32bd738c3a49230f95ba39181) created tests for notes and fixed broken test locally 
-WINTST1@student.op.ac.nz
-
-### [`#2066863`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/2066863ffc8b4b219dbb08589e556098cc2da17a) breifly fixed tests, jet-delete-button is overwriting html tags and dusk is unable to locate the buttons beucase of that 
-WINTST1@student.op.ac.nz
-
-### [`#29be194`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/29be194c89cb8e9073d11605d632c0c782449b44) added requested changes + added year to drop downs 
-scotms2@student.op.ac.nz
-
 ### [`#842f232`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/842f23267dfce95a9e3e858f54e70c07e71ca8ce) Merge pull request sprint-6-bug-fixes/development
 
 Bug Fixes + Security Fix 
 leggtc1@student.op.ac.nz
-
-### [`#59ad03d`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/59ad03defd8e6281f4d36b4891f1b37c12e47505) feat(filtered cohort list): new cohort table searchable, filterable
-
-new package installed called powergrid which provide filter ordering functionality. table head can
-be clicked to order results 
-leggtc1@student.op.ac.nz
-
-### [`#a1d54ea`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/a1d54eaba7e5afe31c139582e24e1119477f7bbf) added middleware to stop deactivated users from logging in 
-scotms2@student.op.ac.nz
 
 ### [`#fb8f896`](https://github.com/BIT-Studio-4/team-project-2021-s2-team-delta/commit/fb8f89654cc3343c340bf4328e69996b2e0105f1) added if check around the students so the lecturer can only see the students that are in their class 
 scotms2@student.op.ac.nz
