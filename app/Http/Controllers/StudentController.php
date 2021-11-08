@@ -158,7 +158,7 @@ class StudentController extends Controller
         $upstudent->last_name = $request->last_name;
         $upstudent->username = Str::lower($request->username);
         $upstudent->email = $request->username . '@student.op.ac.nz';
-        $upstudent->github = Str::lower($request->github) ? Str::lower($request->github) : $upstudent->github;
+        $upstudent->github = Str::lower($request->github);
         $upstudent->save();        
         return redirect()->action(
             [StudentController::class, 'show'],

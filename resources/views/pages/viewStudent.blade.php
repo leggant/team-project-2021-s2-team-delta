@@ -23,17 +23,17 @@
                     <x-jet-label for="edit_first_name" class="place-self-center justify-self-start">First Name
                         </x-jet-input>
                         <x-jet-input type="text" id="edit_first_name" name="first_name"
-                            value="{{ $student->first_name }}" required aria-label="Student First Name"></x-jet-input>
+                            value="{{ $student->first_name }}" aria-label="Student First Name"></x-jet-input>
                 </div>
                 <div>
                     <x-jet-label for="edit_last_name" class="place-self-center justify-self-start">Last Name
                     </x-jet-label>
                     <x-jet-input type="text" id="edit_last_name" name="last_name" value="{{ $student->last_name }}"
-                        required placeholder="Student Last Name" aria-label="Student Last Name"></x-jet-input>
+                        placeholder="Student Last Name" aria-label="Student Last Name"></x-jet-input>
                 </div>
                 <div>
                     <x-jet-label for="edit_id" class="place-self-center justify-self-start">User Name</x-jet-label>
-                    <x-jet-input type="text" id="edit_id" name="username" value="{{ $student->username }}" required
+                    <x-jet-input type="text" id="edit_id" name="username" value="{{ $student->username }}"
                         placeholder="Student Username" aria-label="Student Username"></x-jet-input>
                 </div>
                 <div>
@@ -44,8 +44,12 @@
                 </div>
                 <x-jet-button class="mt-2">Update Student</x-jet-button>
             </form>
-            @if(session('studentupdateerror'))
-                
+            @if ($errors->studentupdateerror->any())
+            <ul>
+                @foreach ( $errors->studentupdateerror->all() as $error)
+                    <li class="text-red-500 list-none">{{ $error }}</li>
+                @endforeach
+            </ul>
             @endif
         </div>
         <div class="mt-4 ">
