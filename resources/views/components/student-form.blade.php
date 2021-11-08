@@ -1,9 +1,16 @@
 @can('create students')
     <form action="{{ route('students.store') }}" method="post">
         @csrf
-        <div class="grid grid-cols-8 grid-rows-2 mt-4 gap-4">
+        <div class="grid gap-4 
+        2xl:grid-cols-8 2xl:grid-rows-2 
+        xl:grid-cols-8 xl:grid-rows-2 
+        lg:grid-cols-4 lg:grid-rows-2
+        md:grid-cols-4 md:grid-rows-1
+        sm:grid-cols-1 sm:grid-rows-6
+        xs:px-2">
             <x-jet-input type="text" id="first_name" value="{{ old('first_name') }}" name="first_name"
-                placeholder="Student First Name" required aria-label="Student First Name" class="col-span-2"></x-jet-input>
+                placeholder="Student First Name" required aria-label="Student First Name" 
+                class="col-span-2"></x-jet-input>
             <x-jet-input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" required
                 placeholder="Student Last Name" aria-label="Student Last Name" class="col-span-2"></x-jet-input>
             <x-jet-input type="text" id="id" name="username" value="{{ old('username') }}" required
@@ -11,9 +18,9 @@
             <x-jet-input type="text" id="github" name="github" value="{{ old('github') }}" placeholder="Github Username"
                 aria-label="Github Username" class="col-span-2"></x-jet-input>
             <x-jet-label for="cohort" class="py-1 whitespace-nowrap col-span-2">Pick a Course for the Student</x-jet-label>
-        <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" />
+            <x-student-cohort-select-input :cohorts="$cohorts" :user="$user" />
         </div>
-    <div class="flex gap-x-6 mt-2 items-center">
+    <div class="flex gap-x-6 mt-2 items-center xs:px-2 xl:px-0">
         <x-jet-button>Add New Student</x-jet-button>
         @if (session('status'))
         <div class="alert alert-success">
@@ -22,7 +29,7 @@
         @endif
     </div>
 </form>
-<form action="{{route('enableView')}}" method="GET">
+<form action="{{route('enableView')}}" method="GET" class="xs:px-2 lg:px-0">
     <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
 </form>
 @if ($errors->studenterror->any())
