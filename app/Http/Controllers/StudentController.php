@@ -64,7 +64,7 @@ class StudentController extends Controller
             'first_name.max' => 'First name exceeds 25 character limit',
             'first_name.min' => 'First name must have at least 3 characters',
             'last_name.required' => 'Student last name is required',
-            'last_name.regex' => 'Please use letters, spaces and hyhens only',
+            'last_name.regex' => 'Please use letters, spaces and hyphens only',
             'last_name.max' => 'Last name exceeds 25 character limit',
             'last_name.min' => 'Last name must have at least 3 characters',
         ];
