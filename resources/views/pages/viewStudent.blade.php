@@ -16,7 +16,6 @@
                 @endif
         </div>
         <div>
-            <h3>Edit {{ $student->name }}</h3>
             <form action="{{ route('students.update',  $student->id) }}" method="POST" class="grid grid-cols-2 gap-y-2">
                 @csrf
                 {{ method_field('PUT') }}
@@ -55,15 +54,14 @@
             @foreach($uploads as $file)
             <div class="grid grid-cols-6 mt-3 place-items-start items-center gap-2">
                 <a href="{{ route('evidence.show', $file->id) }}">
-                    <x-jet-button class="h-10 px-5">
-                        {{ $file->title }}
-                    </x-jet-button>
+                    <x-jet-button class="h-10 px-5">Download File</x-jet-button>
                 </a>
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf
                     @method('delete')
                     <button dusk="evidence_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button> 
                 </form>
+                <p class="my-2 col-span-6">{{ $file->title }}</p>
                 @if($file->created_at != $file->updated_at)
                 <p class="leading-relaxed py-1 col-span-4">Updated:
                     {{ $file->updated_at->diffForHumans() }}</p>

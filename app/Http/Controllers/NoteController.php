@@ -29,18 +29,6 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $student = $request->student_id;
-        $rules = [
-            'user_id' => 'required|integer',
-            'student_id' => 'required|integer',
-            'notes' => 'required|string',
-            'filelink' => 'sometimes|url'
-        ];
-        $messages = [
-            'notes.required' => 'Note Content Is Required',
-            'filelink.url' => 'Input Must Be a URL',
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('noteerror');
-        
         Note::create([
             'user_id' => $request->user_id,
             'student_id' => $request->student_id,
