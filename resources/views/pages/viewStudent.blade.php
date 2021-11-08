@@ -48,12 +48,24 @@
                 
             @endif
         </div>
-        <div class="mt-4">
+        <div class="mt-4 ">
             <h3 class="text-3xl">Evidence</h3>
             @if($uploads->count() > 0)
             @foreach($uploads as $file)
-            <div class="grid grid-cols-6 mt-3 place-items-start items-center gap-2">
-                <a href="{{ route('evidence.show', $file->id) }}">
+            <div class="grid grid-cols-6 mt-3 p-3 place-items-start items-center gap-2 bg-white overflow-hidden shadow rounded-lg">
+                <h3 class="mt-1 col-span-6 text-xl capitalize">{{ $file->title }}</h3>
+                @if($file->description)
+                <p class="mt-1 col-span-6 text-lg">Description: {{ $file->description }}</p>
+                @endif
+                @if($file->created_at != $file->updated_at)
+                <p class="leading-relaxed py-1 col-span-2">Updated:
+                    {{ $file->updated_at->diffForHumans() }}</p>
+                @else
+                <p class="leading-relaxed py-1 col-span-2">Created:
+                    {{ date('d-m-Y', strtotime($file->created_at)) }}
+                </p>
+                @endif
+                <a href="{{ route('evidence.show', $file->id) }}" class="col-span-2">
                     <x-jet-button class="h-10 px-5">Download File</x-jet-button>
                 </a>
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
@@ -61,15 +73,6 @@
                     @method('delete')
                     <button dusk="evidence_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button> 
                 </form>
-                <p class="my-2 col-span-6">{{ $file->title }}</p>
-                @if($file->created_at != $file->updated_at)
-                <p class="leading-relaxed py-1 col-span-4">Updated:
-                    {{ $file->updated_at->diffForHumans() }}</p>
-                @else
-                <p class="leading-relaxed py-1 col-span-4">Created:
-                    {{ date('d-m-Y', strtotime($file->created_at)) }}
-                </p>
-                @endif
             </div>
             @endforeach
             @else
@@ -80,15 +83,15 @@
             <h3 class="text-3xl">Notes</h3>
             @if($notes->count() > 0)
             @foreach($notes as $note)
-            <div class="grid grid-rows-2 mt-3 items-center gap-2">
-                <p class="capitalize">{{ $note->notes }}</p>
+            <div class="grid grid-rows-2 p-3 mt-3 items-center gap-2 bg-white overflow-hidden shadow rounded-lg">
+                <h3 class="mt-1 col-span-6 text-xl capitalize">{{ $note->notes }}</h3>
+                <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 <div class="flex gap-2 items-center">
                     <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                         @csrf
                         @method('delete')
                         <button dusk="notes_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button>
                     </form>
-                    <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 </div>
             </div>
             @endforeach

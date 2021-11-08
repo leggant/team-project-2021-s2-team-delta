@@ -69,8 +69,8 @@
                             <form action="{{ route('users.destroy', $users->id) }}" method="POST">
                                 @csrf
                                 {{method_field('DELETE')}}
-                                <x-jet-danger-button dusk="deactivate_{{$users->id}}" type="submit">Deactivate User
-                                </x-jet-danger-button>
+                                <x-delete-button dusk="deactivate_{{$users->id}}">Deactivate User
+                                </x-delete-button>
                             </form>
                             @endif
                         </div>
