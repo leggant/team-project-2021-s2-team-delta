@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
+use Illuminate\Support\Facades\DB;
 class AdminpanelTest extends DuskTestCase
 {
 
