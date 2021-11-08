@@ -2,16 +2,9 @@
     <x-slot name="header">
         <h1 class="text-2xl font-semibold capitalize">{{ $student->name }}</h1>
     </x-slot>
-    <div class="py-6 text-center">
-        <form action="{{ route('home') }}" class="gap-4">
-            <x-jet-button type='submit'>Back</x-jet-button>
-        </form>
-    </div>
-    <div class="max-w-7xl min-w-2xl mx-auto sm:px-8 lg:px-8 mt-8 grid grid-cols-2 gap-6">
-        <div class="col-span-2 xs:px-6">
-            <h2 class="text-3xl mb-3">Contact Details</h2>
-            <x-jet-button class="justify-start self-start">Edit</x-jet-button>
-            <div>
+    <div class="max-w-7xl min-w-2xl mx-auto sm:px-8 lg:px-8 mt-8 grid grid-cols-2 gap-6 pb-8">
+        <div class="grid gap-y-3 content-start">
+            <h2 class="text-3xl">Contact Details</h2>
                 <p>
                     Email: <a class="hover:underline" href="mailto:{{ $student->email }}">{{ $student->email }}</a>
                 </p>
@@ -19,9 +12,9 @@
                 <p>
                     Github: <a class="hover:underline" href="http://github.com/{{ $student->github }}"
                         target="_blank">github.com/{{ $student->github }}</a>
-                </p>
+                    </p>
                 @endif
-            </div>
+                <x-jet-button class="justify-start self-start">Edit</x-jet-button>
         </div>
         <div>
             <h3>Edit {{ $student->name }}</h3>

@@ -9,7 +9,6 @@ use Database\Factories\CohortFactory;
 use Database\Factories\StudentFactory;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Support\Facades\DB;
 
 class LecturerTest extends DuskTestCase
 {
@@ -222,8 +221,7 @@ class LecturerTest extends DuskTestCase
 
     public function testLecturerAddStudent()
     {
-        $cohortid = DB::table('cohorts')
-            ->where('paper_id', 2)
+        $cohortid = Cohort::where('paper_id', 2)
             ->where('semester', 'Semester 1')
             ->where('stream', 'A')
             ->pluck('id');        
@@ -241,9 +239,9 @@ class LecturerTest extends DuskTestCase
                 ->screenshot('9-studentoptions')
                 ->press('ADD NEW STUDENT')
                 ->pause(1000)
-                ->assertPathIs('/students/*')
-                ->screenshot('10-fakestudentprofile')
-                ->assertSee('Userofname@student.op.ac.nz');
+                ->assertPathIs('/')
+                ->screenshot('10-student-added')
+                ->assertSee('BIT Student Admin');
         });
     }
 

@@ -16,17 +16,16 @@ class UserEnableController extends Controller
 
     public function enableUser(Request $request)
     {
-        Validator::make($request->all(), [
-            'selected_users' => 'required',
-        ])->validate();
-
         $users = $request->input('selected_users');
-        if(empty($users))
+        if(!$users)
         {
             return redirect()->back()->with('error', 'No User(s) Selected');
         }
         else
         {
+            Validator::make($request->all(), [
+                'selected_users' => 'required',
+            ])->validate();
             foreach($users as $user)
             {
                 $u = User::find($user);
