@@ -3,7 +3,7 @@
     <x-slot name="header">
         <h1 class="font-semibold">Student Evidence Upload</h1>
     </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6 mt-8 xs:mx-6 grid grid-cols-2 gap-x-6 items-stretch">
+    <div class="max-w-7xl min-w-2xl mx-auto sm:px-8 lg:px-8 mt-8 grid grid-cols-2 gap-x-6 pb-8">
         <div>
             <form action="{{ route('evidence.store') }}" method="post" enctype="multipart/form-data">
                 @csrf

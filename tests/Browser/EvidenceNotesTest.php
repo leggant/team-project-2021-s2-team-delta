@@ -25,7 +25,6 @@ class EvidenceNotesTest extends DuskTestCase
     public function testEvidenceCreateUsableStudent()
     {
         DB::table('user_papers')->insert([
-            //'id' => 4,
             'user_id' => 1, // The id from users table (1 = Admin, 2= Temp A, 3=Temp B)
             'paper_id' => 2, // With paper_id matching the one in cohort above
         ]);
@@ -38,7 +37,6 @@ class EvidenceNotesTest extends DuskTestCase
 
 
         $cohort = Cohort::factory()->create([
-            //'id' => 2,
             'paper_id' => 2, // Studio 1
             'year' => '2021-01-01',
             'semester' => 'Semester 2',
@@ -46,7 +44,6 @@ class EvidenceNotesTest extends DuskTestCase
         ]);
 
         $newstudent = Student::factory()->create([
-            //'id' => 2,
             'first_name' => 'Jim',
             'last_name' => 'Smith',
             'username' => 'Jsmithy',
@@ -91,7 +88,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->click('@evidence_submit')
                 ->pause(2000)
                 ->assertPathBeginsWith('/students')
-                ->assertSee('TEST')
+                ->assertSee('Test')
                 ->screenshot('evidence_view');
         });
     }
@@ -109,7 +106,7 @@ class EvidenceNotesTest extends DuskTestCase
                     ->click('@dropdown')
                     ->click('@student_records')
                     ->assertPathBeginsWith('/students')
-                    ->assertSee('TEST')
+                    ->assertSee('Test')
                     ->press('@evidence_delete')
                     ->pause(2000)
                     ->assertSee('No files found')
