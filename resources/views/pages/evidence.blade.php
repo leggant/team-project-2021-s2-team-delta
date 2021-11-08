@@ -11,7 +11,7 @@
                     <h2 class="lg:col-span-2 text-2xl md:col-span-2 xmd:col-span-2">Student Evidence Uploads</h2>
                     <select id="student" name="student_id" aria-label="Select Student" aria-
                         class='border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'
-                        required aria-multiselectable="false" value="{{ old('student') }}">
+                        aria-multiselectable="false" value="{{ old('student') }}">
                         @foreach ($students as $s)
                             @foreach($user->papers as $up)
                                 @if($up->pivot->paper_id == $s->cohort->papers->id)
@@ -24,10 +24,10 @@
                             @endforeach
                         @endforeach
                     </select>
-                    <x-jet-input type="text" name="title" id="title" dusk="title" value="{{ old('title') }}" required
+                    <x-jet-input type="text" name="title" id="title" dusk="title" value="{{ old('title') }}" 
                         aria-label="Upload Title" aria-placeholder="Enter A Upload Title"
                         placeholder="Enter A Upload Title" class="focus:placeholder-gray-400"></x-jet-input>
-                    <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image"
+                    <x-jet-input type="file" name="filepath" value="{{ old('filepath') }}" id="image" dusk="image"
                         accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple
                         class='w-full border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-xl py-2 px-2 place-self-center lg:col-span-2 md:col-span-1 xmd:col-span-2'>
                     </x-jet-input>
@@ -38,16 +38,16 @@
                     {{-- MULTIPLE ALLOWS MULTIPLE FILES TO BE UPLOADED. CHECK BACKEND CAN HANDLE THIS IN THE HTTP
                     REQUEST --}}
                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                    <x-jet-button dusk="evidence_submit">Upload Files</x-jet-button>
+                    @if ($errors->evidenceerror->any())
+                        <ul class="col-start-1 flex flex-wrap">
+                            @foreach ($errors->evidenceerror->all() as $error)
+                            <li class="text-red-500 list-none font-bold select-none">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <x-jet-button class="col-start-1" dusk="evidence_submit">Upload Files</x-jet-button>
                 </div>
             </form>
-            @if ($errors->evidenceerror->any())
-            <ul>
-                @foreach ($errors->evidenceerror->all() as $error)
-                <li class="text-red-500 list-none">{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
         <form action="{{ route('notes.store') }}" method="post">
             @csrf
             <div
