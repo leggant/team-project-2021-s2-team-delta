@@ -25,10 +25,10 @@
                         @endforeach
                     </select>
                     <x-jet-input type="text" name="title" id="title" dusk="title" value="{{ old('title') }}" 
-                        aria-label="Upload Title" aria-placeholder="Enter A Upload Title"
+                        aria-label="Upload Title" aria-placeholder="Enter A Upload Title" required
                         placeholder="Enter A Upload Title" class="focus:placeholder-gray-400"></x-jet-input>
                     <x-jet-input type="file" name="filepath" value="{{ old('filepath') }}" id="image" dusk="image"
-                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple
+                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple required
                         class='w-full border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-xl py-2 px-2 place-self-center lg:col-span-2 md:col-span-1 xmd:col-span-2'>
                     </x-jet-input>
                     <textarea
@@ -70,7 +70,7 @@
                     <x-jet-label for="filelink" class="text-lg lg:row-start-2 md:col-end-3 sm:row-start-2 xmd:col-start-2 xmd:row-start-2">
                         Optionally Enter A WebLink
                     </x-jet-label>
-                    <x-jet-input type="url" name="filelink" dusk="filelink" placeholder="Enter File URL"
+                    <x-jet-input type="url" name="filelink" dusk="filelink" placeholder="Enter File URL" required
                         aria-label="Enter File URL" aria-placeholder="Enter File URL"
                         class="focus:placeholder-gray-400 lg:col-start-2 lg:col-end-3" value="{{ old('filelink') }}">
                     </x-jet-input>
