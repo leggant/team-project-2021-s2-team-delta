@@ -16,7 +16,7 @@
                     @csrf
                     <x-jet-button dusk="deactivated_list" type="submit">View Deactivated Users</x-jet-button>
                 </form>
-                <form action="{{ route('student-list') }}" method="get" class="mx-auto">
+				<form action="{{ route('student-list') }}" method="get" class="mx-auto">
                     @csrf
                     <x-jet-button dusk="student_list" type="submit">All Students</x-jet-button>
                 </form>
@@ -36,8 +36,10 @@
                 @foreach ($user as $users)
                 @if($users->is_active)
                 <tr>
-                    <td class="border px-4 py-2">{{ $users->name }}</td>
-                    <td class="border px-4 py-2">{{ $users->email }}</td>
+                    <td class="border px-4 py-2 text-center">{{ $users->name }}</td>
+                    <td class="border px-4 py-2 text-center">
+                        <a href="mailto:{{ $users->email }}" class="hover:underline text-center">{{ $users->email }}</a>
+                    </td>
                     <td class="border px-4 py-2">
                         <ul class="whitespace-nowrap flex">
                             @foreach ($users->papers as $paper)
@@ -53,9 +55,9 @@
                     </td>
                     @if ($users->is_admin)
                     <!-- If a user is admin then it'll display yes and if they are not then it'll display no -->
-                    <td class="border px-4 py-2">Administrator</td>
+                    <td class="border px-4 py-2 text-center">Administrator</td>
                     @else
-                    <td class="border px-4 py-2">Lecturer</td>
+                    <td class="border px-4 py-2 text-center">Lecturer</td>
                     @endif
                     <td class="border px-4 py-2">
                         <!-- Form that allows the user to delete a user -->

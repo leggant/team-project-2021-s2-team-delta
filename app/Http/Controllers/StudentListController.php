@@ -15,7 +15,7 @@ class StudentListController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('is_active', 'desc')->get();
+        $students = Student::where('cohort_id' ,'!=', null)->orderBy('is_active', 'desc')->get();
         $cohorts = Cohort::all();
         $groups = $students->groupBy('is_active');
         $user = auth()->user();
