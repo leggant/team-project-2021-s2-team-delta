@@ -16,6 +16,10 @@
                     @csrf
                     <x-jet-button dusk="deactivated_list" type="submit">View Deactivated Users</x-jet-button>
                 </form>
+				<form action="{{ route('student-list') }}" method="get" class="mx-auto">
+                    @csrf
+                    <x-jet-button dusk="student_list" type="submit">All Students</x-jet-button>
+                </form>
             </div>
         </div>
         <table class="max-w-full mx-auto mt-6">
@@ -36,7 +40,7 @@
                     <td class="border px-4 py-2 text-center">
                         <a href="mailto:{{ $users->email }}" class="hover:underline text-center">{{ $users->email }}</a>
                     </td>
-                    <td class="border px-4 py-2 text-center">
+                    <td class="border px-4 py-2">
                         <ul class="whitespace-nowrap flex">
                             @foreach ($users->papers as $paper)
                             @if ($loop->first)
