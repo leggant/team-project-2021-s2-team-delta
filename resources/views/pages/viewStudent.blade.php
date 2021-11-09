@@ -113,7 +113,7 @@
                         aria-label="Upload Title" aria-placeholder="Enter A Upload Title"
                         placeholder="Enter A Upload Title" class="focus:placeholder-gray-400"></x-jet-input>
                     <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image"
-                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple
+                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple required
                         class='w-full border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-xl py-2 px-2 place-self-center'>
                     </x-jet-input>
                     <textarea
