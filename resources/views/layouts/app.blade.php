@@ -18,9 +18,9 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased overflow-x-hidden min-w-lg">
     <x-jet-banner />
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100 min-w-screen">
         @livewire('navigation-menu')
         <!-- Page Heading -->
         @if (isset($header))
@@ -31,7 +31,7 @@
             </header>
         @endif
         <!-- Page Content -->
-        <main>
+        <main class="xs:px-1 sm:px-2 lg:px-4">
             {{ $slot }}
         </main>
     </div>

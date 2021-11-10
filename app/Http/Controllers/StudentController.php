@@ -60,11 +60,11 @@ class StudentController extends Controller
         ];
         $messages = [
             'first_name.required' => 'Student first name is required',
-            'first_name.regex' => 'Please use letters, spaces and hyhens only',
+            'first_name.regex' => 'Please use letters, spaces and hyphens only',
             'first_name.max' => 'First name exceeds 25 character limit',
             'first_name.min' => 'First name must have at least 3 characters',
             'last_name.required' => 'Student last name is required',
-            'last_name.regex' => 'Please use letters, spaces and hyhens only',
+            'last_name.regex' => 'Please use letters, spaces and hyphens only',
             'last_name.max' => 'Last name exceeds 25 character limit',
             'last_name.min' => 'Last name must have at least 3 characters',
         ];
@@ -135,16 +135,14 @@ class StudentController extends Controller
             'last_name' => 'regex:/^[\pL\s\-]+$/u|max:25|min:3',
             'username' => ['required', 'max:10', 'alpha_num', Rule::unique('student')->ignore($id)],
             'github' => ['alpha_dash', 'max:15', 'nullable', Rule::unique('student', 'github')->ignore($id)],
-            'cohort_id' => 'required|integer',
+            'cohort_id' => 'integer',
         ];
 
         $messages = [
-            'first_name.required' => 'Student first name is required',
-            'first_name.alpha' => 'Please use letters only',
+            'first_name.regex' => 'Please use letters, spaces and hyphens only',
             'first_name.max' => 'First name exceeds 25 character limit',
             'first_name.min' => 'First name must have at least 3 characters',
-            'last_name.required' => 'Student last name is required',
-            'last_name.alpha' => 'Please use letters only',
+            'last_name.regex' => 'Please use letters, spaces and hyphens only',
             'last_name.max' => 'Last name exceeds 25 character limit',
             'last_name.min' => 'Last name must have at least 3 characters',            
         ];
@@ -160,9 +158,8 @@ class StudentController extends Controller
         $upstudent->last_name = $request->last_name;
         $upstudent->username = Str::lower($request->username);
         $upstudent->email = $request->username . '@student.op.ac.nz';
-        $upstudent->github = Str::lower($request->github) ? Str::lower($request->github) : $upstudent->github;
-        $upstudent->save();
-
+        $upstudent->github = Str::lower($request->github);
+        $upstudent->save();        
         return redirect()->action(
             [StudentController::class, 'show'],
             ['student' => $id]

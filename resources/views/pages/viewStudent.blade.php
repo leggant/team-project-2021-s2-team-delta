@@ -14,10 +14,8 @@
                         target="_blank">github.com/{{ $student->github }}</a>
                     </p>
                 @endif
-                <x-jet-button class="justify-start self-start">Edit</x-jet-button>
         </div>
         <div>
-            <h3>Edit {{ $student->name }}</h3>
             <form action="{{ route('students.update',  $student->id) }}" method="POST" class="grid grid-cols-2 gap-y-2">
                 @csrf
                 {{ method_field('PUT') }}
@@ -25,17 +23,17 @@
                     <x-jet-label for="edit_first_name" class="place-self-center justify-self-start">First Name
                         </x-jet-input>
                         <x-jet-input type="text" id="edit_first_name" name="first_name"
-                            value="{{ $student->first_name }}" required aria-label="Student First Name"></x-jet-input>
+                            value="{{ $student->first_name }}" aria-label="Student First Name"></x-jet-input>
                 </div>
                 <div>
                     <x-jet-label for="edit_last_name" class="place-self-center justify-self-start">Last Name
                     </x-jet-label>
                     <x-jet-input type="text" id="edit_last_name" name="last_name" value="{{ $student->last_name }}"
-                        required placeholder="Student Last Name" aria-label="Student Last Name"></x-jet-input>
+                        placeholder="Student Last Name" aria-label="Student Last Name"></x-jet-input>
                 </div>
                 <div>
                     <x-jet-label for="edit_id" class="place-self-center justify-self-start">User Name</x-jet-label>
-                    <x-jet-input type="text" id="edit_id" name="username" value="{{ $student->username }}" required
+                    <x-jet-input type="text" id="edit_id" name="username" value="{{ $student->username }}"
                         placeholder="Student Username" aria-label="Student Username"></x-jet-input>
                 </div>
                 <div>
@@ -46,41 +44,39 @@
                 </div>
                 <x-jet-button class="mt-2">Update Student</x-jet-button>
             </form>
-        </div>
-
-        {{-- Display any errors resulting from validation of the student update --}}
-
             @if ($errors->studentupdateerror->any())
-                <ul>
-                    @foreach ( $errors->studentupdateerror->all() as $error)
-                        <li class="text-red-500 list-none">{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <ul>
+                @foreach ( $errors->studentupdateerror->all() as $error)
+                    <li class="text-red-500 list-none">{{ $error }}</li>
+                @endforeach
+            </ul>
             @endif
-
-        <div class="mt-4">
+        </div>
+        <div class="mt-4 ">
             <h3 class="text-3xl">Evidence</h3>
             @if($uploads->count() > 0)
             @foreach($uploads as $file)
-            <div class="grid grid-cols-6 mt-3 place-items-start items-center gap-2">
-                <a href="{{ route('evidence.show', $file->id) }}">
-                    <x-jet-button class="h-10 px-5" dusk="evidence_dwonload">
-                        {{ $file->title }}
-                    </x-jet-button>
+            <div class="grid grid-cols-6 mt-3 p-3 place-items-start items-center gap-2 bg-white overflow-hidden shadow rounded-lg">
+                <h3 class="mt-1 col-span-6 text-xl capitalize">{{ $file->title }}</h3>
+                @if($file->description)
+                <p class="mt-1 col-span-6 text-lg">Description: {{ $file->description }}</p>
+                @endif
+                @if($file->created_at != $file->updated_at)
+                <p class="leading-relaxed py-1 col-span-2">Updated:
+                    {{ $file->updated_at->diffForHumans() }}</p>
+                @else
+                <p class="leading-relaxed py-1 col-span-2">Created:
+                    {{ date('d-m-Y', strtotime($file->created_at)) }}
+                </p>
+                @endif
+                <a href="{{ route('evidence.show', $file->id) }}" class="col-span-2">
+                    <x-jet-button class="h-10 px-5" dusk="evidence_dwonload">Download File</x-jet-button>
                 </a>
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf
                     @method('delete')
-                    <button dusk="evidence_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button> 
+                    <x-delete-button dusk="evidence_delete">Delete</x-delete-button> 
                 </form>
-                @if($file->created_at != $file->updated_at)
-                <p class="leading-relaxed py-1 col-span-4">Updated:
-                    {{ $file->updated_at->diffForHumans() }}</p>
-                @else
-                <p class="leading-relaxed py-1 col-span-4">Created:
-                    {{ date('d-m-Y', strtotime($file->created_at)) }}
-                </p>
-                @endif
             </div>
             @endforeach
             @else
@@ -91,20 +87,15 @@
             <h3 class="text-3xl">Notes</h3>
             @if($notes->count() > 0)
             @foreach($notes as $note)
-            <div class="grid grid-rows-2 mt-3 items-center gap-2">
-                <p class="capitalize">{{ $note->notes }}</p>
+            <div class="grid grid-rows-2 p-3 mt-3 items-center gap-2 bg-white overflow-hidden shadow rounded-lg">
+                <h3 class="mt-1 col-span-6 text-xl capitalize">{{ $note->notes }}</h3>
+                <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 <div class="flex gap-2 items-center">
-                    <form method="#" action="#" class="self-start">
-                        @csrf
-                        @method('put')
-                        <x-jet-button class="h-10 px-5"> Edit </x-jet-button>
-                    </form>
                     <form method="post" action="{{ route('notes.destroy', $note->id) }}">
                         @csrf
                         @method('delete')
                         <button dusk="notes_delete" class="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white">Delete</button>
                     </form>
-                    <p>Created: {{ date('d-m-Y', strtotime($note->created_at)) }}</p>
                 </div>
             </div>
             @endforeach
@@ -122,7 +113,7 @@
                         aria-label="Upload Title" aria-placeholder="Enter A Upload Title"
                         placeholder="Enter A Upload Title" class="focus:placeholder-gray-400"></x-jet-input>
                     <x-jet-input type="file" name="filepath" value="filepath" id="image" dusk="image"
-                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple
+                        accept="image/*,.pdf,.doc,.docx,.md,.html,.zip,.sqlite,.sql,.7zip" multiple required
                         class='w-full border-indigo-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-xl py-2 px-2 place-self-center'>
                     </x-jet-input>
                     <textarea

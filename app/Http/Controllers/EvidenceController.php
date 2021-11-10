@@ -43,23 +43,24 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->student_id;
-        $file = $request->file('filepath')->getClientOriginalName(); // retrieve the original filename
-        $path = $request->file('filepath')->storeAs('uploads/'.$student, $file, 's3'); // file is stored within a folder of the student id in s3 as its orignal name.
-
-        Storage::disk('s3')->setVisibility($path, 'private');
-       
        $rules = [
             'title' => 'required|string|max:50',
             'student_id' => 'required|integer',
             'description' => 'nullable|string',
+            //'originalFileName' => 'required',
         ];
         $messages = [
             'title.required' => 'File/Upload Title Field Is Required',
             'title.max' => 'Max Title Length is 50 Chars',
             'student_id.required' => 'Student Name Must Be Selected',
+            //'originalFileName.required' => 'A File Must Be Selected'
         ];
         $validator = Validator::make($request->all(), $rules, $messages)->validateWithBag('evidenceerror');
+        $student = $request->student_id;
+        $file = $request->file('filepath')->getClientOriginalName(); // retrieve the original filename
+        $path = $request->file('filepath')->storeAs('uploads/'.$student, $file, 's3'); // file is stored within a folder of the student id in s3 as its orignal name.
+
+        Storage::disk('s3')->setVisibility($path, 'private');
 
         $evidence = Evidence::create([
             'title' => $request->title,

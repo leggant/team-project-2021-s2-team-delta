@@ -8,16 +8,10 @@
                     <a id="home" href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
-                    {{-- <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
-                    </a> --}}
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link> --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:ml-6 md:mr-6 xmd:ml-4 xmd:mr-4 sm:flex xmd:whitespace-nowrap">
                     <x-jet-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Students') }}
                     </x-jet-nav-link>
@@ -164,9 +158,22 @@
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
-            {{-- <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link> --}}
+            <x-jet-responsive-nav-link id="students" href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Students') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link id="evidence" href="{{ route('evidence.index') }}" :active="request()->routeIs('evidence.index')">
+                {{ __('Notes + Uploads') }}
+            </x-jet-responsive-nav-link>
+            @role('Super-Admin')
+                @if (Auth::check() && Auth::user()->isAdmin())
+                    <x-jet-responsive-nav-link id="admin" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('User Admin Panel') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link id="cohorts" href="{{ route('cohorts.index') }}" :active="request()->routeIs('cohorts.index')">
+                        {{ __('Cohort Admin Panel') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->
