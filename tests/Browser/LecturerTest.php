@@ -284,17 +284,7 @@ class LecturerTest extends DuskTestCase
                 ->type('#edit_first_name', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
                 ->press('UPDATE STUDENT')
                 ->assertSee('First name exceeds 25 character limit')
-                ->screenshot('25_character_limit')
-
-                //last name validation 
-                ->type('#edit_last_name','1234')
-                ->press('UPDATE STUDENT')
-                ->assertSee('Please use letters, spaces and hyphens only')
-                ->type('#edit_last_name','a')
-                ->assertSee('First name must have at least 3 characters')
-                ->type('#edit_last_name', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-                ->press('UPDATE STUDENT')
-                ->assertSee('First name exceeds 25 character limit');
+                ->screenshot('25_character_limit');
         });
     }
 
