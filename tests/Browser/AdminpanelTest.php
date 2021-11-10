@@ -108,7 +108,7 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
-    public function testEditBackButton()
+    public function testUserEdit()
     {
         $user = User::where('is_admin', 1)->first();
 
@@ -120,10 +120,7 @@ class AdminpanelTest extends DuskTestCase
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
                 ->visit('/users/2/edit')
-                ->assertSee('Update Temp A')
-                ->click('@back')
-                ->assertPathIs('/users')
-                ->assertSee('Current Registered Users');
+                ->assertSee('Update Temp A');
         });
     }
 

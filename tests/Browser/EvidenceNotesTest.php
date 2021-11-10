@@ -99,7 +99,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit('/')
                 ->assertPathIs('/')
-                ->click('@dropdown')
+                ->click('@dropdown_Studio 1')
                 ->click('@student_records')
                 ->assertPathBeginsWith('/students')
                 ->screenshot('evidence_view')
