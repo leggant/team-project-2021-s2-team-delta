@@ -54,8 +54,7 @@ class LecturerTest extends DuskTestCase
                     ->assertSee('Create New User')
                     ->type('#Name', 'Dusk Lecturer')
                     ->type('#Email', 'fake@fakeemail.com')
-                    ->type('#Password', 'SeriousPassword987')
-                    //->check('#Admin')                    
+                    ->type('#Password', 'SeriousPassword987')                  
                     ->screenshot('createdusklecturerinputs')
                     ->press('SUBMIT')
                     ->assertPathIs('/users')
@@ -384,8 +383,6 @@ class LecturerTest extends DuskTestCase
                 ->check('@student_checkboxes5')
                 ->screenshot('selectedStudents')
                 ->press('REMOVE SELECTED')
-                //->click('@remove_students') //for some reason dusk cannot interact with the remove student button and its driving me insane 
-                //->clickAtPoint($x = 1436, $y = 860) //x, y co-ords of remove student button  
                 ->pause(2000)
                 ->click('@dropdown_Studio 2')
                 ->assertDontSee('Sam Smith')
@@ -410,7 +407,6 @@ class LecturerTest extends DuskTestCase
                 ->check('@student_checkboxes5')
                 ->select('cohort', 3)
                 ->click('@activate_students')
-                //->assertSee('Successfully Added Student(s)')
                 ->screenshot('students_confirm_msg')
                 ->visit('/')
                 ->assertPathIs('/')

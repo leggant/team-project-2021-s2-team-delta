@@ -150,8 +150,6 @@ class EvidenceNotesTest extends DuskTestCase
                     ->assertSee('No notes found')
                     ->screenshot('note_deletion');
 
-                    //remove created cohort and student as it overlaps other tests and causes SQL errors
-                    //and I can't be bothered to go through them all and edit the tests to account for that 
                     DB::table('cohorts')
                     ->where('id', 1)
                     ->delete();
