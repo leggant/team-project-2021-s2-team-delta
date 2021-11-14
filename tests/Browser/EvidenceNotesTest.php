@@ -99,7 +99,7 @@ class EvidenceNotesTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit('/')
                 ->assertPathIs('/')
-                ->click('@dropdown')
+                ->click('@dropdown_Studio 1')
                 ->click('@student_records')
                 ->assertPathBeginsWith('/students')
                 ->screenshot('evidence_view')
@@ -136,19 +136,27 @@ class EvidenceNotesTest extends DuskTestCase
     {
         $user = User::where('is_admin', 1)->first();
 
-        $this->browse(function ($browser) use ($user) {
-            $browser
-                ->loginAs($user)
-                ->visit('/')
-                ->assertPathIs('/')
-                ->click('@dropdown')
-                ->click('@student_records')
-                ->assertPathBeginsWith('/students')
-                ->assertSee('Testing Note Submissions!')
-                ->press('@notes_delete')
-                ->pause(2000)
-                ->assertSee('No notes found')
-                ->screenshot('note_deletion');
+        $this->browse(function ($browser) use($user)
+        {
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->assertPathIs('/')
+                    ->click('@dropdown_Studio 1')
+                    ->click('@student_records')
+                    ->assertPathBeginsWith('/students')
+                    ->assertSee('Testing Note Submissions!')
+                    ->press('@notes_delete')
+                    ->pause(2000)
+                    ->assertSee('No notes found')
+                    ->screenshot('note_deletion');
+
+                    DB::table('cohorts')
+                    ->where('id', 1)
+                    ->delete();
+
+                    DB::table('student')
+                    ->where('id', 1)
+                    ->delete();
         });
     }
 }

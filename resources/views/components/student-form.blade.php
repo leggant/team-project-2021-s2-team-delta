@@ -31,7 +31,7 @@
     </div>
 </form>
 <form action="{{route('enableView')}}" method="GET" class="xs:px-2 lg:px-0">
-    <x-jet-button type="submit">Add Exisiting Students</x-jet-button>
+    <x-jet-button type="submit" dusk="go_to_enable_students">Add Exisiting Students</x-jet-button>
 </form>
 @if ($errors->studenterror->any())
     <ul>

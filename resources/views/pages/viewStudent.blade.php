@@ -70,7 +70,7 @@
                 </p>
                 @endif
                 <a href="{{ route('evidence.show', $file->id) }}" class="col-span-2">
-                    <x-jet-button class="h-10 px-5">Download File</x-jet-button>
+                    <x-jet-button class="h-10 px-5" dusk="evidence_download">Download File</x-jet-button>
                 </a>
                 <form method="post" action="{{ route('evidence.destroy', $file->id) }}">
                     @csrf

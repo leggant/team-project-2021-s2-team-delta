@@ -6,15 +6,9 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-
+use Illuminate\Support\Facades\DB;
 class AdminpanelTest extends DuskTestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('migrate:fresh --force');
-        $this->artisan('db:seed');
-    }
 
     public function testFindAdminPage()
     {
@@ -56,13 +50,16 @@ class AdminpanelTest extends DuskTestCase
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
                 ->click('@new_user')
+                ->screenshot('clicknewuser')
                 ->assertSee('Create New User')
-                ->type('Name', 'Test User')
-                ->type('Email', 'testuser@test.com')
-                ->type('Password', 'password')
+                ->type('#Name', 'Test User')
+                ->type('#Email', 'testuser@test.com')
+                ->type('#Password', 'password')
                 ->check('is_admin')
-                ->click('@new_user_submit')
+                ->screenshot('createuseroptions')
+                ->press('SUBMIT')
                 ->assertPathIs('/users')
+                ->screenshot('checkusercreated')
                 ->assertSee('testuser@test.com');
         });
     }
@@ -78,11 +75,13 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
-                ->click('@edit_user_2')
+                ->screenshot('testeditusers')
+                ->visit('/users/2/edit')
                 ->assertSee('Update Temp A')
                 ->check('Admin')
                 ->select('Papers[]', ['2', '3'])
-                ->click('@edit_submit')
+                ->screenshot('useredited')
+                ->press('SUBMIT')
                 ->assertPathIs('/users')
                 ->assertSee('studio-a@op.ac.nz')
                 ->assertSee('Studio 1')
@@ -109,6 +108,22 @@ class AdminpanelTest extends DuskTestCase
         });
     }
 
+    public function testUserEdit()
+    {
+        $user = User::where('is_admin', 1)->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('/users')
+                ->pause(2000)
+                ->assertPathIs('/users')
+                ->assertSee('Current Registered Users')
+                ->visit('/users/2/edit')
+                ->assertSee('Update Temp A');
+        });
+    }
+
     public function testAdminCanDeactivateUsers()
     {
         $user = User::where('is_admin', 1)->first();
@@ -120,8 +135,8 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
-                ->click('@deactivate_2')
-                ->assertDontSee('studio-a@op.ac.nz');
+                ->click('@deactivate_3')
+                ->assertDontSee('studio-b@op.ac.nz');
         });
     }
 
@@ -136,17 +151,21 @@ class AdminpanelTest extends DuskTestCase
                 ->pause(2000)
                 ->assertPathIs('/users')
                 ->assertSee('Current Registered Users')
+                ->pause(2000)
                 ->click('@deactivate_2')
                 ->assertDontSee('studio-a@op.ac.nz')
                 ->click('@deactivated_list')
                 ->assertPathIs('/deactivated-users')
                 ->assertSee('Temp A')
-                ->check('selected_users[]')
+                ->check('@user_2')
+                ->check('@user_3')
+                ->screenshot('x')
                 ->click('@activate')
                 ->assertDontSee('Temp A')
                 ->assertSee('All Users Have Been Activated')
                 ->click('@back')
                 ->assertPathIs('/users')
+                ->assertSee('Temp B')
                 ->assertSee('Temp A');
         });
     }

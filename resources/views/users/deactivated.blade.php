@@ -37,7 +37,7 @@
                         @foreach($users as $user)
                         <tr>
                             <td class="border py-2">
-                                <input type="checkbox" name="selected_users[]" value="{{$user->id}}"
+                                <input type="checkbox" dusk="user_{{ $user->id }}" name="selected_users[]" value="{{$user->id}}"
                                     class="py-2 px-2 hover:cursor-pointer">
                             </td>
                             <td class="border py-2">{{$user->name}}</td>
